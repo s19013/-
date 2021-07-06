@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/mas" />
+            <size android:width="@dimen/mas" android:height="@dimen/mas"/>
+            <stroke
+                android:width="@dimen/waku"
+                android:color="@color/waku" />
+        </shape>
+    </item>
+    <item
+        android:width="@dimen/middle"
+        android:height="@dimen/middle"
+        android:gravity="center"
+        android:drawable="@drawable/koma_green"
+        />
+</layer-list>

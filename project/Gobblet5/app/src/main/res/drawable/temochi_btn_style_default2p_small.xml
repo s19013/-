@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    枠-->
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:left="2dp"
+                android:right="2dp"
+                android:top="2dp"
+                android:bottom="2dp" />
+            <solid android:color="#000000" />
+            <size android:width="100dp" android:height="100dp"/>
+        </shape>
+    </item>
+    <!--    影(上)-->
+    <item>
+        <shape android:shape="rectangle">
+            <padding
+                android:top="4dp" />
+            <solid android:color="@color/shadow_temochi2p" />
+        </shape>
+    </item>
+    <!--    影(左)-->
+    <item>
+        <shape android:shape="rectangle">
+            <padding android:left="4dp" />
+            <solid android:color="@color/shadow_temochi2p" />
+        </shape>
+    </item>
+    <!-- メイン -->
+    <item>
+        <!-- shape:rectangle(=四角形) -->
+        <shape android:shape="rectangle">
+            <solid android:color="@color/temochi2p" />
+        </shape>
+    </item>
+
+    <item
+        android:width="40dp"
+        android:height="40dp"
+        android:gravity="center"
+        android:drawable="@drawable/koma_green"
+        />
+</layer-list>

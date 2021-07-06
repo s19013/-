@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HowToPlayActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ButtonGuidelineV1"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.2"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ButtonGuidelineV3"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.1"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ButtonGuidelineV4"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.9"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ButtonGuidelineH"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/ButtonGuidelineH2"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <Button
+        android:id="@+id/backButton"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:background="@drawable/back_btn_style"
+        android:text="戻る"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonGuidelineH"
+        app:layout_constraintEnd_toStartOf="@+id/ButtonGuidelineV1"
+        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+<!--    <TextView-->
+<!--        android:id="@+id/TutorialText"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:background="@drawable/note"-->
+<!--        android:text="TextView"-->
+<!--        android:textColor="@android:color/black"-->
+<!--        android:textSize="34sp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/ButtonGuidelineV4"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/ButtonGuidelineV3"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/ButtonGuidelineH2"-->
+<!--        app:layout_constraintVertical_bias="1.0" />-->
+
+
+    <fragment
+        android:id="@+id/textFragment"
+        android:name="com.example.gobblet5.TutorialTextFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ButtonGuidelineV4"
+        app:layout_constraintStart_toStartOf="@+id/ButtonGuidelineV3"
+        app:layout_constraintTop_toTopOf="@+id/ButtonGuidelineH2"
+        tools:layout="@layout/fragment_tutorial_text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="mas">#DFDFDF</color>
+    <color name="dark_mas">#B5B5B5</color>
+    <color name="shadow">#8A8A8A</color>
+    <color name="more_shadow">#686868</color>
+    <color name="waku">#0C291B</color>
+    <color name="dark_green">#288056</color>
+    <color name="green">#40CF8C</color>
+    <color name="greenSelected">#00FFE1</color>
+    <color name="dark_red">#7E2626</color>
+    <color name="red">#CF4040</color>
+    <color name="redSelected">#FF7B00</color>
+    <color name="telopBack">#E6E6E6</color>
+    <color name="temochi1p">#FFADAD</color>
+    <color name="temochi2p">#BCFFAD</color>
+    <color name="shadow_temochi1p">#D39090</color>
+    <color name="shadow_temochi2p">#8EBF83</color>
+    <color name="dark_temochi1p">#C58282</color>
+    <color name="dark_temochi2p">#87AF7C</color>
+</resources>
