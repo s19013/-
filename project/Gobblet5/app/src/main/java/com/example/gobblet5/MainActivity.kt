@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
     private lateinit var sp: SoundPool
     private var menuSelectSE = 0
-    private var bgmrooping = false
+    private var bgmlooping = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,28 +57,25 @@ class MainActivity : AppCompatActivity() {
         goPreGameWithComBtn.setOnClickListener{
             playSound("menuSelect")
             val intent = Intent(this,preGameWithComActivity::class.java)
-//            intent.putExtra("bgmrooping",bgmrooping)
             startActivity(intent)
         }
 
         goPreGameWithManBtn.setOnClickListener {
             playSound("menuSelect")
             val intent = Intent(this,preGameWithManActivity::class.java)
-//            intent.putExtra("bgmrooping",bgmrooping)
             startActivity(intent)
         }
 
         goConfigBtn.setOnClickListener {
             playSound("menuSelect")
             val intent = Intent(this,ConfigActivity::class.java)
-//            intent.putExtra("bgmrooping",bgmrooping)
             startActivity(intent)
         }
 
         goTutorialBtn.setOnClickListener {
             playSound("menuSelect")
             val intent = Intent(this,SelectTutorialActivity::class.java)
-//            intent.putExtra("bgmrooping",bgmrooping)
+//            intent.putExtra("bgmlooping",bgmlooping) なんのために書いたのか忘れたけどとりあえず残しておく
             startActivity(intent)
         }
 
@@ -89,7 +86,7 @@ class MainActivity : AppCompatActivity() {
 
 //        if (keyCode==KeyEvent.KEYCODE_CALL
 //                ){ } else{
-//            bgmrooping=false
+//            bgmlooping=false
 //            val intent = Intent(this,BgmService::class.java)
 //            stopService(intent)
 //        }
@@ -107,7 +104,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onUserLeaveHint() {
         super.onUserLeaveHint()
-        bgmrooping=false
+        bgmlooping=false
         val intent = Intent(this,BgmService::class.java)
         stopService(intent)
     }
