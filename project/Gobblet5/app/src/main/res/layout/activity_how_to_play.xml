@@ -69,13 +69,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="1" />
+        app:layout_constraintGuide_percent="0.99" />
 
     <Button
         android:id="@+id/backButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginLeft="10dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/back_btn_style"
@@ -87,43 +87,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
-    <ImageView
-        android:id="@+id/imageView3"
+    <FrameLayout
+        android:id="@+id/containerOfTextFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scaleType="fitXY"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintBottom_toTopOf="@id/guidelineH4"
         app:layout_constraintLeft_toRightOf="@+id/guidelineV1"
         app:layout_constraintRight_toLeftOf="@+id/guidelineV4"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineH2"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH4"
-        app:srcCompat="@drawable/note2" />
-
-    <TextView
-        android:id="@+id/TutorialText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:text="TextViewTextViewTextViewTextViewTextViewTextViewTextViewTextViewTextView"
-        android:textColor="@android:color/black"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV5"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH3"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/guidelineH2"/>
 
 
-    <!--    <fragment-->
-    <!--        android:id="@+id/textFragment"-->
-    <!--        android:name="com.example.gobblet5.TutorialTextFragment"-->
-    <!--        android:layout_width="0dp"-->
-    <!--        android:layout_height="0dp"-->
-    <!--        android:background="@android:color/black"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toStartOf="@+id/ButtonGuidelineV4"-->
-    <!--        app:layout_constraintStart_toStartOf="@+id/ButtonGuidelineV3"-->
-    <!--        app:layout_constraintTop_toTopOf="@+id/ButtonGuidelineH2"-->
-    <!--        tools:layout="@layout/fragment_tutorial_text" />-->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
