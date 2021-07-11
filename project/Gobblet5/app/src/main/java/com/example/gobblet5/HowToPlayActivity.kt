@@ -13,13 +13,19 @@ class HowToPlayActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_how_to_play)
+        //bundle宣言
+        val tutorialText="sample text"
+        val bundle=Bundle()
+        bundle.putString("SampleText",tutorialText)
         //フラグメント生成
         val textFragment = TutorialTextFragment()
+        textFragment.arguments=bundle//フラグメントにargumentsをわたす
         val fragmentManager = this.supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.containerOfTextFragment,textFragment)
             .addToBackStack(null)
             .commit()
+
 
 
     }
