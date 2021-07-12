@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_how_to_play.*
 
 class HowToPlayActivity : AppCompatActivity() {
     private var page =1
-    var tutorialText="sample text"
+    private var tutorialText="sample text"
     //bundle宣言
     val bundle=Bundle()
 
