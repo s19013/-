@@ -9,12 +9,12 @@ import kotlinx.android.synthetic.main.activity_how_to_play.*
 
 class HowToPlayActivity : AppCompatActivity() {
     private var page =1
+    var tutorialText="sample text"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_how_to_play)
-        //bundle宣言
-        val tutorialText="sample text"
+        //bundle宣言,保存
         val bundle=Bundle()
         bundle.putString("SampleText",tutorialText)
         //フラグメント生成
@@ -25,9 +25,6 @@ class HowToPlayActivity : AppCompatActivity() {
         fragmentTransaction.replace(R.id.containerOfTextFragment,textFragment)
             .addToBackStack(null)
             .commit()
-
-
-
     }
 
 
