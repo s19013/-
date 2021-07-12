@@ -9,30 +9,38 @@ import kotlinx.android.synthetic.main.activity_how_to_play.*
 class HowToPlayActivity : AppCompatActivity() {
     private var page =1
     var tutorialText="sample text"
+    //bundle宣言
+    val bundle=Bundle()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_how_to_play)
-        //bundle宣言,保存
-        val bundle=Bundle()
-        bundle.putString("SampleText",tutorialText)
         //フラグメント生成
-        val textFragment = TutorialTextFragment()
-        textFragment.arguments=bundle//フラグメントにargumentsをわたす
-        val fragmentManager = this.supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.TextContainer,textFragment)
-            .addToBackStack(null)
-            .commit()
+//        val textFragment = TutorialTextFragment()
+//        textFragment.arguments=bundle//フラグメントにargumentsをわたす
+//        val fragmentManager = this.supportFragmentManager
+//        val fragmentTransaction = fragmentManager.beginTransaction()
+//        fragmentTransaction.replace(R.id.TextContainer,textFragment)
+//            .addToBackStack(null)
+//            .commit()
 
-        fun changeFragment(){
+        fun changeText(){//テキストをかえる
             when(page){
-                1->bundle.putString("SampleText","page1")
-                2->bundle.putString("SampleText","page2")
-                3->bundle.putString("SampleText","page3")
-                4->bundle.putString("SampleText","page4")
-                5->bundle.putString("SampleText","page5")
+                1->tutorialText="page1"
+                2->tutorialText="page2"
+                3->tutorialText="page3"
+                4->tutorialText="page4"
+                5->tutorialText="page5"
             }
+        }
+
+        fun changeImage(){
+            //comming soon
+        }
+
+        fun changeFragment(){//フラグメントを変える
+            bundle.putString("SampleText",tutorialText)//bundle保存
             val textFragment = TutorialTextFragment()
             textFragment.arguments=bundle//フラグメントにargumentsをわたす
             val fragmentManager = this.supportFragmentManager
@@ -42,21 +50,32 @@ class HowToPlayActivity : AppCompatActivity() {
                 .commit()
         }
 
+        //アクティビティが呼び出されたときに1回呼ぶ
+        changeText()
+        changeImage()
+        changeFragment()
+
         preButton.setOnClickListener {
-            if (page>0){
+            if (page>1){
                 page-=1
-                Log.d("gobblet2","page:${page}")
+                changeText()
+                changeImage()
                 changeFragment()
+                Log.d("gobblet2","page:${page}")
             }
         }
 
         nextButton.setOnClickListener {
             if (page<5){
                 page+=1
-                Log.d("gobblet2","page:${page}")
+                changeText()
+                changeImage()
                 changeFragment()
+                Log.d("gobblet2","page:${page}")
             }
         }
+
+
     }
 
     override fun onStart() {
