@@ -85,22 +85,22 @@
         android:autoSizeTextType="uniform"
         android:background="@drawable/back_btn_style"
         android:text="戻る"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintBottom_toTopOf="@+id/backButtonGuidelineH"
+        app:layout_constraintEnd_toStartOf="@+id/backButtonGuidelineV"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineV3"
+        android:id="@+id/backButtonGuidelineV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH1"
+        android:id="@+id/backButtonGuidelineH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

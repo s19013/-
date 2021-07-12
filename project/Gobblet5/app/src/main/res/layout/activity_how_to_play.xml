@@ -8,14 +8,42 @@
     tools:context=".HowToPlayActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineV1"
+        android:id="@+id/TextContainerGuidelineVs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineV2"
+        android:id="@+id/preButtonGuidelineVs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/preButtonGuidelineVe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/nextButtonGuidelineVs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.65" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/nextButtonGuidelineVe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/imageGuidelineVs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -23,49 +51,56 @@
 
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineV3"
+        android:id="@+id/backButtonGuidelineV"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.2" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineV4"
+        android:id="@+id/TextContainerGuidelineVe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineV5"
+        android:id="@+id/imageGuidelineVe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH1"
+        android:id="@+id/backButtonGuidelineH"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH2"
+        android:id="@+id/buttonGuidelineHs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.725" />
+        app:layout_constraintGuide_percent="0.64" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH3"
+        android:id="@+id/buttonGuidelineHe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
+        app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH4"
+        android:id="@+id/TextContainerGuidelineHs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.72640216" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/TextContainerGuidelineHe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -80,21 +115,46 @@
         android:autoSizeTextType="uniform"
         android:background="@drawable/back_btn_style"
         android:text="戻る"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH1"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintBottom_toTopOf="@+id/backButtonGuidelineH"
+        app:layout_constraintEnd_toStartOf="@+id/backButtonGuidelineV"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
 
+    <Button
+        android:id="@+id/preButton"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/btn_style"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@id/buttonGuidelineHe"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGuidelineHs"
+        app:layout_constraintLeft_toRightOf="@+id/preButtonGuidelineVs"
+        app:layout_constraintRight_toLeftOf="@+id/preButtonGuidelineVe"
+        tools:layout_editor_absoluteX="21dp" />
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/btn_style"
+        android:text="Button"
+        app:layout_constraintBottom_toTopOf="@id/buttonGuidelineHe"
+        app:layout_constraintTop_toBottomOf="@+id/buttonGuidelineHs"
+        app:layout_constraintLeft_toRightOf="@+id/nextButtonGuidelineVs"
+        app:layout_constraintRight_toLeftOf="@+id/nextButtonGuidelineVe"
+        tools:layout_editor_absoluteX="21dp" />
+
     <FrameLayout
-        android:id="@+id/containerOfTextFragment"
+        android:id="@+id/TextContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@id/guidelineH4"
-        app:layout_constraintLeft_toRightOf="@+id/guidelineV1"
-        app:layout_constraintRight_toLeftOf="@+id/guidelineV4"
-        app:layout_constraintTop_toBottomOf="@+id/guidelineH2"/>
+        android:background="@drawable/background_note"
+        app:layout_constraintBottom_toTopOf="@id/TextContainerGuidelineHe"
+        app:layout_constraintLeft_toRightOf="@+id/TextContainerGuidelineVs"
+        app:layout_constraintRight_toLeftOf="@+id/TextContainerGuidelineVe"
+        app:layout_constraintTop_toBottomOf="@+id/TextContainerGuidelineHs" />
 
 
 
