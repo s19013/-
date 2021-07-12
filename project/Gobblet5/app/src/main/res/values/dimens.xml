@@ -13,11 +13,5 @@
     <dimen name="backButtonWidth">50dp</dimen>
     <dimen name="backButtonHeight">25dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="backButtonGuideLineV">0.2</dimen>
-    <dimen name="backButtonGuideLineH">0.08</dimen>
     <dimen name="backButtonMargin">10dp</dimen>
-    <dimen name="TextContainerGuideLineVs">0.05</dimen>
-    <dimen name="TextContainerGuideLineVe">0.95</dimen>
-    <dimen name="TextContainerGuideLineHs">0.72</dimen>
-    <dimen name="TextContainerGuideLineHe">0.99</dimen>
 </resources>
