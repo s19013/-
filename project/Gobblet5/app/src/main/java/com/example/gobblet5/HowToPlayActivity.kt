@@ -16,14 +16,6 @@ class HowToPlayActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_how_to_play)
-        //フラグメント生成
-//        val textFragment = TutorialTextFragment()
-//        textFragment.arguments=bundle//フラグメントにargumentsをわたす
-//        val fragmentManager = this.supportFragmentManager
-//        val fragmentTransaction = fragmentManager.beginTransaction()
-//        fragmentTransaction.replace(R.id.TextContainer,textFragment)
-//            .addToBackStack(null)
-//            .commit()
 
         fun changeText(){//テキストをかえる
             when(page){
@@ -35,12 +27,12 @@ class HowToPlayActivity : AppCompatActivity() {
             }
         }
 
-        fun changeImage(){
+        fun changeImage(){//画像を変える
             //comming soon
         }
 
         fun changeFragment(){//フラグメントを変える
-            bundle.putString("SampleText",tutorialText)//bundle保存
+            bundle.putString("Text",tutorialText)//bundle保存
             val textFragment = TutorialTextFragment()
             textFragment.arguments=bundle//フラグメントにargumentsをわたす
             val fragmentManager = this.supportFragmentManager

@@ -31,7 +31,7 @@ class TutorialTextFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            args = it.getString("SampleText")
+            args = it.getString("Text")
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
