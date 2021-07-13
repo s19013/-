@@ -203,7 +203,7 @@ class GameWithManActivity : AppCompatActivity() {
         buttonTemochiRedBig.setOnClickListener {
             if (turn==1){
                 if (movingSource=="none"||
-                    movingSource==stringTemochiRedBig ||
+                    movingSource==stringTemochiRedBig || //移動元が手持ちの場合のみコマをとりなおせる
                     movingSource==stringTemochiRedMiddle||
                     movingSource==stringTemochiRedSmall){
                     pickupTemochi(stringTemochiRedBig)
