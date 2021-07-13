@@ -105,8 +105,9 @@ class GameWithComActivity : AppCompatActivity() {
     var line4 = mutableListOf<Int>(0, 0, 0, 0)
 
     var judgeMap = mutableMapOf<String, Int>(
-        "lineA" to 0, "lineB" to 0, "lineC" to 0, "lineD" to 0, "line1" to 0, "line2" to 0, "line3" to 0, "line4" to 0,
-        "lineB" to 0, "lineBS" to 0
+        "lineA" to 0, "lineB" to 0, "lineC" to 0, "lineD" to 0,
+        "line1" to 0, "line2" to 0, "line3" to 0, "line4" to 0,
+        "lineS" to 0, "lineBS" to 0
     )
 
 //表示に使う物
