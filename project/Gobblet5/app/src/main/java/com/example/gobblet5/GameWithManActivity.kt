@@ -363,7 +363,8 @@ class GameWithManActivity : AppCompatActivity() {
 
     }
 
-    //ポップアップ
+  ////ポップアップ
+    //結果
     private fun showResaltPopup(){
         resaltPopup = PopupWindow(this@GameWithManActivity)
         // レイアウト設定
@@ -425,7 +426,7 @@ class GameWithManActivity : AppCompatActivity() {
         // 画面中央に表示
         resaltPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
     }
-
+    //設定
     private fun showConfigPopup(){
         configPopup = PopupWindow(this@GameWithManActivity)
         // レイアウト設定
@@ -1402,7 +1403,7 @@ class GameWithManActivity : AppCompatActivity() {
             }
         }
     }
-
+    //音を鳴らす処理
     private fun playSound(status: String){
         if (SE){
             when(status){
