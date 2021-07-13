@@ -187,7 +187,7 @@ class GameWithManActivity : AppCompatActivity() {
 
         //結果ボタン
         resaltButton.visibility=View.INVISIBLE
-//先攻後攻設定
+        //先攻後攻設定
         if (playFirst != 0){
             turn = playFirst
         } else {
@@ -1349,7 +1349,7 @@ class GameWithManActivity : AppCompatActivity() {
         }
     }
 
-    //手持ちボタンを押した時の作業
+    //手持ちボタンを押した時の作業1
     private fun pickupTemochi(name: String){
         var rv = 0
         when(name){
