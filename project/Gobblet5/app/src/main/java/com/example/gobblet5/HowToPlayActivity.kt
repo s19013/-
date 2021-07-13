@@ -17,31 +17,6 @@ class HowToPlayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_how_to_play)
 
-        fun changeText(){//テキストをかえる
-            when(page){
-                1->tutorialText="page1"
-                2->tutorialText="page2"
-                3->tutorialText="page3"
-                4->tutorialText="page4"
-                5->tutorialText="page5"
-            }
-        }
-
-        fun changeImage(){//画像を変える
-            //comming soon
-        }
-
-        fun changeFragment(){//フラグメントを変える
-            bundle.putString("Text",tutorialText)//bundle保存
-            val textFragment = TutorialTextFragment()
-            textFragment.arguments=bundle//フラグメントにargumentsをわたす
-            val fragmentManager = this.supportFragmentManager
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            fragmentTransaction.replace(R.id.TextContainer,textFragment)
-                .addToBackStack(null)
-                .commit()
-        }
-
         //アクティビティが呼び出されたときに1回呼ぶ
         changeText()
         changeImage()
@@ -68,6 +43,30 @@ class HowToPlayActivity : AppCompatActivity() {
         }
 
 
+    }
+    fun changeText(){//テキストをかえる
+        when(page){
+            1->tutorialText="page1"
+            2->tutorialText="page2"
+            3->tutorialText="page3"
+            4->tutorialText="page4"
+            5->tutorialText="page5"
+        }
+    }
+
+    fun changeImage(){//画像を変える
+        //comming soon
+    }
+
+    fun changeFragment(){//フラグメントを変える
+        bundle.putString("Text",tutorialText)//bundle保存
+        val textFragment = TutorialTextFragment()
+        textFragment.arguments=bundle//フラグメントにargumentsをわたす
+        val fragmentManager = this.supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.TextContainer,textFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
 }
