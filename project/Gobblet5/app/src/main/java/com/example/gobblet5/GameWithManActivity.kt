@@ -8,19 +8,15 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.media.AudioAttributes
 import android.media.MediaPlayer
-import kotlin.random.Random
 import android.media.SoundPool
 import android.util.DisplayMetrics
 import android.util.Log
-import android.util.TypedValue
 import android.view.Gravity
-import android.view.KeyEvent
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_game_with_man.*
-import kotlin.math.log
 
 
 class GameWithManActivity : AppCompatActivity() {
@@ -73,13 +69,13 @@ class GameWithManActivity : AppCompatActivity() {
     private val stringD3="D3"
     private val stringD4="D4"
     //手持ち
-    private val temochiRedBig = temochi(3)
-    private val temochiRedMiddle = temochi(2)
-    private val temochiRedSmall = temochi(1)
+    private val temochiRedBig = Temochi(3)
+    private val temochiRedMiddle = Temochi(2)
+    private val temochiRedSmall = Temochi(1)
 
-    private val temochiGreenBig = temochi(3)
-    private val temochiGreenMiddle = temochi(2)
-    private val temochiGreenSmall = temochi(1)
+    private val temochiGreenBig = Temochi(3)
+    private val temochiGreenMiddle = Temochi(2)
+    private val temochiGreenSmall = Temochi(1)
     //マス宣言
     private val A1 = mas("A1")
     private val B1 = mas("B1")

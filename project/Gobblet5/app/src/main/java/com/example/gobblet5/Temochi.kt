@@ -1,12 +1,12 @@
 package com.example.gobblet5
 
-class temochi(val size:Int) {
-    var count:Int=3
+class Temochi(val size:Int) {
+    private var count:Int=3
     fun usePiece(){
         count-=1
     }
 
-    fun puluse(){
+    fun plus(){
         if (count<3)
         count+=1
     }
