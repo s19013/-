@@ -34,7 +34,7 @@ class GameWithManActivity : AppCompatActivity() {
     private var menuSelectSE = 0
     private var cannotDoitSE = 0
     private var gameStartSE = 0
-    //
+    //ゲームに必要なもの
     private var finished = false
     private var winner="none"
     private var turn = 0 //後でちゃんと設定する
@@ -43,7 +43,7 @@ class GameWithManActivity : AppCompatActivity() {
     private var destination = "none"
     private var pickupDone= false
     private var insetDone = false
-    //文字列
+  ////文字列
     //手持ち
     private val stringTemochiRedBig="tRB"
     private val stringTemochiRedMiddle="tRM"
@@ -68,14 +68,16 @@ class GameWithManActivity : AppCompatActivity() {
     private val stringD2="D2"
     private val stringD3="D3"
     private val stringD4="D4"
-    //手持ち
+  ////手持ち
+    //赤
     private val temochiRedBig = Temochi(3)
     private val temochiRedMiddle = Temochi(2)
     private val temochiRedSmall = Temochi(1)
-
+    //緑
     private val temochiGreenBig = Temochi(3)
     private val temochiGreenMiddle = Temochi(2)
     private val temochiGreenSmall = Temochi(1)
+
     //マス宣言
     private val A1 = mas("A1")
     private val B1 = mas("B1")
@@ -98,7 +100,7 @@ class GameWithManActivity : AppCompatActivity() {
     var line2 = mutableListOf<Int>(0, 0, 0, 0)
     var line3 = mutableListOf<Int>(0, 0, 0, 0)
     var line4 = mutableListOf<Int>(0, 0, 0, 0)
-
+    //勝敗を決めるのに使う
     var judgeMap = mutableMapOf<String, Int>(
         "lineA" to 0, "lineB" to 0, "lineC" to 0, "lineD" to 0,
         "line1" to 0, "line2" to 0, "line3" to 0, "line4" to 0,
@@ -154,7 +156,7 @@ class GameWithManActivity : AppCompatActivity() {
             .setAudioAttributes(audioAttributes)
             .setMaxStreams(1)
             .build()
-
+        //使う効果音を準備
         cannotDoitSE=sp.load(this, R.raw.cannotdoit, 1)
         putSE=sp.load(this, R.raw.select_se, 1)
         selectSE = sp.load(this, R.raw.put, 1)
@@ -169,7 +171,7 @@ class GameWithManActivity : AppCompatActivity() {
             bgmlooping=true
             player?.start()
         }
-//表示
+      ////表示する絵
         res=resources
         view=findViewById(R.id.buttonA1)
         masImag = res?.getDrawable(R.drawable.mass)
@@ -182,7 +184,6 @@ class GameWithManActivity : AppCompatActivity() {
         komaGreenBigD = res?.getDrawable(R.drawable.koma_green_big)
         komaGreenMiddleD = res?.getDrawable(R.drawable.koma_green_middle)
         komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
-
 
         //結果ボタン
         resaltButton.visibility=View.INVISIBLE
@@ -198,7 +199,7 @@ class GameWithManActivity : AppCompatActivity() {
         Log.d("gobblet2", "pF:${playFirst}")
         startTurn()
 
-//手持ち
+//手持ちのボタンを触った時
         buttonTemochiRedBig.setOnClickListener {
             if (turn==1){
                 if (movingSource=="none"||
@@ -270,7 +271,7 @@ class GameWithManActivity : AppCompatActivity() {
             }
             else{toastNotyourturn()}
         }
-//マス
+      ////マスを触ったとき
         buttonA1.setOnClickListener {
             if (turn != 0){ pushedMasButton(stringA1) }
             else{toastNotyourturn()}
