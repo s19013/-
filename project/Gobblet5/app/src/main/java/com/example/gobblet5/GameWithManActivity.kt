@@ -201,7 +201,7 @@ class GameWithManActivity : AppCompatActivity() {
 
 //手持ちのボタンを触った時
         buttonTemochiRedBig.setOnClickListener {
-            if (turn==1){
+            if (turn == 1){
                 if (movingSource=="none"||
                     movingSource==stringTemochiRedBig || //移動元が手持ちの場合のみコマをとりなおせる
                     movingSource==stringTemochiRedMiddle||
@@ -273,7 +273,7 @@ class GameWithManActivity : AppCompatActivity() {
         }
       ////マスを触ったとき
         buttonA1.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringA1) }
+            if (turn != 0){ pushedMasButton(stringA1) }//ゲームが終わったらさわれないようにするためにこんなif文を書く
             else{toastNotyourturn()}
         }
 
@@ -544,7 +544,7 @@ class GameWithManActivity : AppCompatActivity() {
 
     //ターン開始の処理
     private fun startTurn(){
-        if (finished){turn=0}
+        if (finished){turn = 0}
         when(turn){
             1 -> {
                 telop1p.setBackgroundColor(Color.rgb(255, 173, 173))
