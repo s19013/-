@@ -976,7 +976,64 @@ class GameWithManActivity : AppCompatActivity() {
         }
     }
 
-    //マスのボタンをおした時の作業
+    //手持ちボタンを押した時の作業1
+    private fun pickupTemochi(name: String){
+        var rv = 0
+        when(name){
+            stringTemochiRedBig -> {
+                rv = temochiRedBig.returnInf()
+//                if (rv != 0) {
+//                    setSMP(rv, stringTemochiRedBig)
+//                    havingDisplay()
+//                    debSMP()
+//                }
+                setSMP(rv, stringTemochiRedBig)
+                havingDisplay()
+                debSMP()
+            }
+            stringTemochiRedMiddle -> {
+                rv = temochiRedMiddle.returnInf()
+                setSMP(rv, stringTemochiRedMiddle)
+                havingDisplay()
+                debSMP()
+            }
+            stringTemochiRedSmall -> {
+                rv = temochiRedSmall.returnInf()
+                setSMP(rv, stringTemochiRedSmall)
+                havingDisplay()
+                debSMP()
+            }
+            stringTemochiGreenBig -> {
+                rv = temochiGreenBig.returnInf()
+                setSMP(rv, stringTemochiGreenBig)
+                havingDisplay()
+                debSMP()
+            }
+            stringTemochiGreenMiddle -> {
+                rv = temochiGreenMiddle.returnInf()
+                setSMP(rv, stringTemochiGreenMiddle)
+                havingDisplay()
+                debSMP()
+            }
+            stringTemochiGreenSmall -> {
+                rv = temochiGreenSmall.returnInf()
+                setSMP(rv, stringTemochiGreenSmall)
+                havingDisplay()
+                debSMP()
+            }
+        }
+    }
+  ////マスのボタンをおした時の作業
+    //一旦ここを通して分岐
+    private fun pushedMasButton(name: String){
+        if (!pickupDone) {//取り出し作業
+            pickup(name)
+        } else{//マスの中に入れる
+            insert(name)
+        }
+    }
+
+    //コマを取り出す
     private fun pickup(name: String){
         when(name){
             stringA1 -> {
@@ -1340,62 +1397,7 @@ class GameWithManActivity : AppCompatActivity() {
         }
     }
 
-    //一旦ここを通して分岐
-    private fun pushedMasButton(name: String){
-        if (!pickupDone) {//取り出し作業
-            pickup(name)
-        } else{//マスの中に入れる
-            insert(name)
-        }
-    }
 
-    //手持ちボタンを押した時の作業1
-    private fun pickupTemochi(name: String){
-        var rv = 0
-        when(name){
-            stringTemochiRedBig -> {
-                rv = temochiRedBig.returnInf()
-//                if (rv != 0) {
-//                    setSMP(rv, stringTemochiRedBig)
-//                    havingDisplay()
-//                    debSMP()
-//                }
-                setSMP(rv, stringTemochiRedBig)
-                havingDisplay()
-                debSMP()
-            }
-            stringTemochiRedMiddle -> {
-                rv = temochiRedMiddle.returnInf()
-                setSMP(rv, stringTemochiRedMiddle)
-                havingDisplay()
-                debSMP()
-            }
-            stringTemochiRedSmall -> {
-                rv = temochiRedSmall.returnInf()
-                setSMP(rv, stringTemochiRedSmall)
-                havingDisplay()
-                debSMP()
-            }
-            stringTemochiGreenBig -> {
-                rv = temochiGreenBig.returnInf()
-                setSMP(rv, stringTemochiGreenBig)
-                havingDisplay()
-                debSMP()
-            }
-            stringTemochiGreenMiddle -> {
-                rv = temochiGreenMiddle.returnInf()
-                setSMP(rv, stringTemochiGreenMiddle)
-                havingDisplay()
-                debSMP()
-            }
-            stringTemochiGreenSmall -> {
-                rv = temochiGreenSmall.returnInf()
-                setSMP(rv, stringTemochiGreenSmall)
-                havingDisplay()
-                debSMP()
-            }
-        }
-    }
     //音を鳴らす処理
     private fun playSound(status: String){
         if (SE){
