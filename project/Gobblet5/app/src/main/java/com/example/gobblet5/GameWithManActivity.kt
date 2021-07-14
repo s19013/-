@@ -562,6 +562,20 @@ class GameWithManActivity : AppCompatActivity() {
     }
 
     //ターン終了時の処理に関すること
+    private fun endTurn() {
+        resetForEnd()
+        resetHavingDisplay()
+        judge()
+        movingSource = "none"
+        destination = "none"
+        size = 0
+        pickupDone = false
+        insetDone = false
+        turn*=-1
+        Log.d("gobblet2", "turnEnd")
+        startTurn()
+    }
+
     private fun resetForEnd() {
         bordDisplay(destination)
         if (movingSource==stringTemochiRedBig||
@@ -621,20 +635,6 @@ class GameWithManActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun endTurn() {
-        resetForEnd()
-        resetHavingDisplay()
-        judge()
-        movingSource = "none"
-        destination = "none"
-        size = 0
-        pickupDone = false
-        insetDone = false
-        turn*=-1
-        Log.d("gobblet2", "turnEnd")
-        startTurn()
     }
 
     //持ちての表示に関する関数
