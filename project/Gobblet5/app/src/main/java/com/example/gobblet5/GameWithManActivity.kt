@@ -1355,51 +1355,44 @@ class GameWithManActivity : AppCompatActivity() {
         when(name){
             stringTemochiRedBig -> {
                 rv = temochiRedBig.returnInf()
-                if (rv != 0) {
-                    setSMP(rv, stringTemochiRedBig)
-                    havingDisplay()
-                    debSMP()
-                }
+//                if (rv != 0) {
+//                    setSMP(rv, stringTemochiRedBig)
+//                    havingDisplay()
+//                    debSMP()
+//                }
+                setSMP(rv, stringTemochiRedBig)
+                havingDisplay()
+                debSMP()
             }
             stringTemochiRedMiddle -> {
                 rv = temochiRedMiddle.returnInf()
-                if (rv != 0) {
-                    setSMP(rv, stringTemochiRedMiddle)
-                    havingDisplay()
-                    debSMP()
-                }
+                setSMP(rv, stringTemochiRedMiddle)
+                havingDisplay()
+                debSMP()
             }
             stringTemochiRedSmall -> {
                 rv = temochiRedSmall.returnInf()
-                if (rv != 0) {
-                    setSMP(rv, stringTemochiRedSmall)
-                    havingDisplay()
-                    debSMP()
-                }
+                setSMP(rv, stringTemochiRedSmall)
+                havingDisplay()
+                debSMP()
             }
             stringTemochiGreenBig -> {
                 rv = temochiGreenBig.returnInf()
-                if (rv != 0) {
-                    setSMP(rv, stringTemochiGreenBig)
-                    havingDisplay()
-                    debSMP()
-                }
+                setSMP(rv, stringTemochiGreenBig)
+                havingDisplay()
+                debSMP()
             }
             stringTemochiGreenMiddle -> {
                 rv = temochiGreenMiddle.returnInf()
-                if (rv != 0) {
-                    setSMP(rv, stringTemochiGreenMiddle)
-                    havingDisplay()
-                    debSMP()
-                }
+                setSMP(rv, stringTemochiGreenMiddle)
+                havingDisplay()
+                debSMP()
             }
             stringTemochiGreenSmall -> {
                 rv = temochiGreenSmall.returnInf()
-                if (rv != 0) {
-                    setSMP(rv, stringTemochiGreenSmall)
-                    havingDisplay()
-                    debSMP()
-                }
+                setSMP(rv, stringTemochiGreenSmall)
+                havingDisplay()
+                debSMP()
             }
         }
     }
