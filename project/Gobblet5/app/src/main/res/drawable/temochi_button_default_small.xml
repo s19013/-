@@ -36,8 +36,8 @@
     </item>
 
     <item
-        android:width="40dp"
-        android:height="40dp"
+        android:width="@dimen/small"
+        android:height="@dimen/small"
         android:gravity="center"
         android:drawable="@drawable/koma_red"
         />
