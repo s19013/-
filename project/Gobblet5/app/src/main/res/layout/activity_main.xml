@@ -74,7 +74,7 @@
             android:background="@drawable/btn_style"
             android:fontFamily="sans-serif-medium"
             android:maxWidth="100dp"
-            android:text="設定" />
+            android:text="@string/text_config" />
 
     </LinearLayout>
 
