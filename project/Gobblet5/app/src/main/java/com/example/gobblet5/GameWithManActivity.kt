@@ -425,12 +425,31 @@ class GameWithManActivity : AppCompatActivity() {
             startActivity(intent)
         }
     }
+
     //設定
     private fun showConfigPopup(){
         configPopup = PopupWindow(this@GameWithManActivity)
         // レイアウト設定
         val popupView: View = layoutInflater.inflate(R.layout.popup_config, null)
         configPopup!!.contentView = popupView
+        // 背景設定
+        configPopup!!.setBackgroundDrawable(resources.getDrawable(R.drawable.popup_background))
+
+        // タップ時に他のViewでキャッチされないための設定
+        configPopup!!.isOutsideTouchable = true
+        configPopup!!.isFocusable = true
+
+        // 表示サイズの設定 今回は画面の半分
+        configPopup!!.setWindowLayoutMode(
+            width.toInt(),
+            WindowManager.LayoutParams.WRAP_CONTENT
+        )
+        configPopup!!.width =  WindowManager.LayoutParams.WRAP_CONTENT*1/2
+        configPopup!!.height = WindowManager.LayoutParams.WRAP_CONTENT*1/2
+
+        // 画面中央に表示
+        configPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
+
         //ラジオボタン初期化
         val RadioSE = popupView.findViewById<RadioGroup>(R.id.SEOnOff)
         when(SE){
@@ -462,9 +481,6 @@ class GameWithManActivity : AppCompatActivity() {
                 R.id.BGMOn->{
                     BGM=true
                     player?.start()
-//                        if (!bgmlooping){
-//
-//                        }
                 }
                 R.id.BGMOff->{
                     BGM=false
@@ -495,31 +511,6 @@ class GameWithManActivity : AppCompatActivity() {
                 configPopup!!.dismiss()
             }
         }
-
-
-        // 背景設定
-        configPopup!!.setBackgroundDrawable(resources.getDrawable(R.drawable.popup_background))
-
-        // タップ時に他のViewでキャッチされないための設定
-        configPopup!!.isOutsideTouchable = true
-        configPopup!!.isFocusable = true
-
-        // 表示サイズの設定 今回は幅300dp
-//            val width =
-//                TypedValue.applyDimension(
-//                    TypedValue.COMPLEX_UNIT_DIP,
-//                    300f,
-//                    resources.displayMetrics
-//                )
-        configPopup!!.setWindowLayoutMode(
-            width.toInt(),
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
-        configPopup!!.width =  WindowManager.LayoutParams.WRAP_CONTENT*1/2
-        configPopup!!.height = WindowManager.LayoutParams.WRAP_CONTENT*1/2
-
-        // 画面中央に表示
-        configPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
     }
 
     //トースト関係
