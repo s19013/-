@@ -366,13 +366,27 @@ class GameWithManActivity : AppCompatActivity() {
   ////ポップアップ
     //結果
     private fun showResaltPopup(){
-        resaltPopup = PopupWindow(this@GameWithManActivity)
-        // レイアウト設定
-        val popupView: View = layoutInflater.inflate(R.layout.popup_resalt, null)
-        resaltPopup!!.contentView = popupView
+      resaltPopup = PopupWindow(this@GameWithManActivity)
+      // レイアウト設定
+      val popupView: View = layoutInflater.inflate(R.layout.popup_resalt, null)
+      resaltPopup!!.contentView = popupView
+      // タップ時に他のViewでキャッチされないための設定
+      resaltPopup!!.isOutsideTouchable = true
+      resaltPopup!!.isFocusable = true
 
-        // 関数設定
-        popupView.findViewById<View>(R.id.backButton).setOnClickListener {
+      // 表示サイズの設定
+      resaltPopup!!.setWindowLayoutMode(
+          width.toInt(),
+          WindowManager.LayoutParams.WRAP_CONTENT
+      )
+      resaltPopup!!.width = WindowManager.LayoutParams.WRAP_CONTENT
+      resaltPopup!!.height = WindowManager.LayoutParams.WRAP_CONTENT
+
+      // 画面中央に表示
+      resaltPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
+
+      //// 関数設定
+      popupView.findViewById<View>(R.id.backButton).setOnClickListener {
             if (resaltPopup!!.isShowing) {
                 val toast =Toast.makeText(this, "", Toast.LENGTH_LONG)
                 val customView = layoutInflater.inflate(R.layout.dammy, null)
@@ -384,47 +398,32 @@ class GameWithManActivity : AppCompatActivity() {
             }
         }
 
-        val resaltImage = popupView.findViewById<ImageView>(R.id.resaltImage)
-        when(winner){
-            "1p" -> resaltImage.setImageResource(R.drawable.win1p)
-            "2p" -> resaltImage.setImageResource(R.drawable.win2p)
-        }
+      val resaltImage = popupView.findViewById<ImageView>(R.id.resaltImage)
+      when(winner){
+          "1p" -> resaltImage.setImageResource(R.drawable.win1p)
+          "2p" -> resaltImage.setImageResource(R.drawable.win2p)
+      }
 
-        popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
+      popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound("cancel")
             val intent = Intent(this, MainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 
-        popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
+      popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
             playSound("gameStart")
             val intent = Intent(this, GameWithManActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 
-        popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
+      popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
             playSound("cancel")
             val intent = Intent(this, preGameWithManActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
-
-        // タップ時に他のViewでキャッチされないための設定
-        resaltPopup!!.isOutsideTouchable = true
-        resaltPopup!!.isFocusable = true
-
-        // 表示サイズの設定
-        resaltPopup!!.setWindowLayoutMode(
-            width.toInt(),
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
-        resaltPopup!!.width = WindowManager.LayoutParams.WRAP_CONTENT
-        resaltPopup!!.height = WindowManager.LayoutParams.WRAP_CONTENT
-
-        // 画面中央に表示
-        resaltPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
     }
     //設定
     private fun showConfigPopup(){
