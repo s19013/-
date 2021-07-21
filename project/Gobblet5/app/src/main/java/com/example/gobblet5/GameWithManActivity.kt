@@ -464,7 +464,7 @@ class GameWithManActivity : AppCompatActivity() {
         }
 
 
-        // 関数設定
+        //// 関数設定
         RadioSE.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.SEOn->{SE=true}
