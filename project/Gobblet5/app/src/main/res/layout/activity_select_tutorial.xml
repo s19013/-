@@ -28,7 +28,7 @@
         android:layout_height="0dp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/btn_style"
-        android:text="@string/HowToControlText"
+        android:text="@string/HowToOperateText"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/ButtonGuidelineH3"
         app:layout_constraintEnd_toStartOf="@+id/ButtonGuidelineV2"

@@ -27,34 +27,34 @@
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <!--    -->
-    <string name="PlayWithComText">コンピューターと対戦</string>
-    <string name="PlayWithManText">友達と対戦</string>
-    <string name="TutorialText">チュートリアル</string>
-    <string name="configText">設定</string>
-    <string name="ResultText">結果</string>
-    <string name="FirstPlayer">先攻</string>
+    <string name="PlayWithComText">Play With Computer</string>
+    <string name="PlayWithManText">Play With Friend</string>
+    <string name="TutorialText">Tutorial</string>
+    <string name="configText">Setting</string>
+    <string name="ResultText">Result</string>
+    <string name="FirstPlayer">PlayFirst</string>
     <string name="player1">1P</string>
     <string name="player2">2P</string>
-    <string name="RandomText">おまかせ</string>
-    <string name="YouText">あなた</string>
+    <string name="RandomText">Random</string>
+    <string name="YouText">You</string>
     <string name="EnemyText">相手</string>
-    <string name="comText">コンピューター</string>
-    <string name="GameStartText">ゲームスタート</string>
+    <string name="comText">Computer</string>
+    <string name="GameStartText">GameStart</string>
     
 
 
-    <string name="BackToGame">ゲームにもどる</string>
-    <string name="BackToTitle">タイトルにもどる</string>
-    <string name="CheckTheBord">ボードを見る</string>
-    <string name="BackToGameSetting">ゲーム設定へもどる</string>
-    <string name="Retry">もう一度遊ぶ</string>
-    <string name="HowToOperateText">操作説明</string>
-    <string name="HowToPlayText">ルール説明</string>
+    <string name="BackToGame">Back To Game</string>
+    <string name="BackToTitle">Back To Title</string>
+    <string name="CheckTheBord">Check The Bord</string>
+    <string name="BackToGameSetting">Back To GameSetting</string>
+    <string name="Retry">Retry</string>
+    <string name="HowToOperateText">How To Operate</string>
+    <string name="HowToPlayText">How To Play</string>
     <!--設定    -->
-    <string name="SEText">効果音</string>
-    <string name="BGMText">音楽</string>
-    <string name="OnText">オン</string>
-    <string name="OffText">オフ</string>
+    <string name="SEText">SoundEffect</string>
+    <string name="BGMText">Music</string>
+    <string name="OnText">ON</string>
+    <string name="OffText">OFF</string>
 
 
 

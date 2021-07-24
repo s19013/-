@@ -35,9 +35,10 @@
             android:layout_marginTop="50dp"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
+            android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:fontFamily="sans-serif-medium"
-            android:text="コンピューターと対戦  "
+            android:text="@string/PlayWithComText"
             android:textColor="@android:color/black" />
 
         <Button
@@ -47,9 +48,10 @@
             android:layout_marginTop="50dp"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
+            android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:fontFamily="sans-serif-medium"
-            android:text="二人で対戦"
+            android:text="@string/PlayWithManText"
             android:textColor="@android:color/black" />
 
         <Button
@@ -59,9 +61,10 @@
             android:layout_marginTop="50dp"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
+            android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:fontFamily="sans-serif-medium"
-            android:text="チュートリアル"
+            android:text="@string/TutorialText"
             android:textColor="@android:color/black" />
 
         <Button
@@ -71,6 +74,7 @@
             android:layout_marginTop="32dp"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
+            android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:fontFamily="sans-serif-medium"
             android:maxWidth="100dp"

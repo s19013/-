@@ -39,6 +39,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
+            android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:text="@string/configText" />
 
@@ -53,6 +54,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
+            android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:text="@string/ResultText" />
     </LinearLayout>

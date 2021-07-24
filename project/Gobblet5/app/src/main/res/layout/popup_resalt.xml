@@ -33,8 +33,9 @@
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
                 android:autoSizeTextType="uniform"
+                android:textAllCaps="false"
                 android:background="@drawable/back_btn_style"
-                android:text="@string/CheckBord" />
+                android:text="@string/CheckTheBord" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -49,6 +50,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="5"
                 android:autoSizeTextType="uniform"
+                android:textAllCaps="false"
                 android:background="@drawable/btn_style"
                 android:text="@string/BackToTitle"
                 android:textColor="@android:color/holo_red_dark" />
@@ -69,6 +71,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
+            android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:text="@string/BackToGameSetting" />
 
@@ -82,6 +85,7 @@
             android:layout_marginBottom="30dp"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
+            android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:text="@string/Retry" />
 

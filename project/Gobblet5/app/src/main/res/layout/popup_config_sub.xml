@@ -88,6 +88,7 @@
             android:layout_marginTop="10dp"
             android:layout_weight="4"
             android:autoSizeTextType="uniform"
+            android:textAllCaps="false"
             android:background="@drawable/back_btn_style"
             android:paddingRight="@dimen/normalPadding"
             android:text="@string/BackToGame" />
@@ -105,6 +106,7 @@
             android:layout_marginRight="10dp"
             android:layout_weight="4"
             android:autoSizeTextType="uniform"
+            android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:paddingRight="@dimen/normalPadding"
             android:text="@string/BackToTitle"
