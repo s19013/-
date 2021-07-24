@@ -40,9 +40,6 @@
     <string name="EnemyText">相手</string>
     <string name="comText">Computer</string>
     <string name="GameStartText">GameStart</string>
-    
-
-
     <string name="BackToGame">Back To Game</string>
     <string name="BackToTitle">Back To Title</string>
     <string name="CheckTheBord">Check The Bord</string>
@@ -55,6 +52,15 @@
     <string name="BGMText">Music</string>
     <string name="OnText">ON</string>
     <string name="OffText">OFF</string>
+    <!--アクティビティ名-->
+    <string name="SettingActivity">Setting</string>
+    <string name="preGameActivity">GameSetting</string>
+    <string name="selectTutorialActivity">Tutorial</string>
+    <string name="HowToOperateActivity">HowToOperate</string>
+    <string name="HowToPlayActivity">HowToPlay</string>
+
+    <!--操作説明    -->
+    <!--ルール説明    -->
 
 
 

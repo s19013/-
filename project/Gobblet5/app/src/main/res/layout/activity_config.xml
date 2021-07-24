@@ -29,6 +29,20 @@
                 android:background="@drawable/back_btn_style"
                 android:text="@string/BackToTitle" />
 
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:autoSizeTextType="uniform"
+                android:text="@string/SettingActivity"
+                android:textColor="@android:color/black" />
+
 
         </LinearLayout>
 
