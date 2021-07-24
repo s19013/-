@@ -32,9 +32,9 @@
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/back_btn_style"
                 android:autoSizeTextType="uniform"
-                android:text="戻る" />
+                android:background="@drawable/back_btn_style"
+                android:text="@string/CheckBord" />
 
             <Space
                 android:layout_width="wrap_content"
@@ -48,10 +48,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="5"
+                android:autoSizeTextType="uniform"
                 android:background="@drawable/btn_style"
-                android:text="ゲームをやめる"
-                android:textColor="@android:color/holo_red_dark"
-                android:autoSizeTextType="uniform" />
+                android:text="@string/BackToTitle"
+                android:textColor="@android:color/holo_red_dark" />
         </LinearLayout>
 
         <ImageView
@@ -70,7 +70,7 @@
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
             android:background="@drawable/btn_style"
-            android:text="ゲーム設定へ" />
+            android:text="@string/BackToGameSetting" />
 
         <Button
             android:id="@+id/retryButtton"
@@ -81,9 +81,9 @@
             android:layout_marginRight="10dp"
             android:layout_marginBottom="30dp"
             android:layout_weight="1"
-            android:background="@drawable/btn_style"
             android:autoSizeTextType="uniform"
-            android:text="もう一回" />
+            android:background="@drawable/btn_style"
+            android:text="@string/Retry" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

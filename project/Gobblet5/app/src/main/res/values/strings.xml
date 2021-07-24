@@ -26,8 +26,36 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <!-- メイン   -->
-    <string name="text_config">設定</string>
+    <!--    -->
+    <string name="configText">設定</string>
+    <string name="ResultText">結果</string>
+    <string name="FirstPlayer">先攻</string>
+    <string name="player1">1P</string>
+    <string name="player2">2P</string>
+    <string name="RandomText">おまかせ</string>
+    <string name="YouText">あなた</string>
+    <string name="EnemyText">相手</string>
+    <string name="comText">コンピューター</string>
+    <string name="GameStartText">ゲームスタート</string>
+    
+
+
+    <string name="BackToGame">ゲームにもどる</string>
+    <string name="BackToTitle">タイトルにもどる</string>
+    <string name="CheckBord">ボードを見る</string>
+    <string name="BackToGameSetting">ゲーム設定へもどる</string>
+    <string name="Retry">もう一度遊ぶ</string>
+    <string name="HowToControlText">操作説明</string>
+    <string name="HowToPlayText">ルール説明</string>
+    <!--設定    -->
+    <string name="SEText">効果音</string>
+    <string name="BGMText">音楽</string>
+    <string name="OnText">オン</string>
+    <string name="OffText">オフ</string>
+
+
+
+
 
 
 </resources>

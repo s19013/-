@@ -40,7 +40,7 @@
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
             android:background="@drawable/btn_style"
-            android:text="設定" />
+            android:text="@string/configText" />
 
         <Space
             android:layout_width="match_parent"
@@ -54,7 +54,7 @@
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
             android:background="@drawable/btn_style"
-            android:text="結果" />
+            android:text="@string/ResultText" />
     </LinearLayout>
 
     <androidx.constraintlayout.widget.Guideline
@@ -98,7 +98,7 @@
         android:paddingRight="20dp"
         android:paddingBottom="4dp"
         android:rotation="180"
-        android:text="2p"
+        android:text="2P"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTemochi2pH3"
         app:layout_constraintEnd_toStartOf="@+id/guidelineTemochi2pV2"
@@ -224,7 +224,7 @@
         android:paddingTop="2dp"
         android:paddingRight="20dp"
         android:paddingBottom="2dp"
-        android:text="1p"
+        android:text="1P"
         android:textColor="@android:color/background_dark"
         app:layout_constraintBottom_toTopOf="@+id/guidelineTemochi1pH1"
         app:layout_constraintEnd_toStartOf="@+id/guidelineTemochi1pV2"

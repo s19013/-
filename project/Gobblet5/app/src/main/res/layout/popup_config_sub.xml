@@ -90,7 +90,7 @@
             android:autoSizeTextType="uniform"
             android:background="@drawable/back_btn_style"
             android:paddingRight="@dimen/normalPadding"
-            android:text="戻る" />
+            android:text="@string/BackToGame" />
 
         <Space
             android:layout_width="0dp"
@@ -107,7 +107,7 @@
             android:autoSizeTextType="uniform"
             android:background="@drawable/btn_style"
             android:paddingRight="@dimen/normalPadding"
-            android:text="ゲームをやめる"
+            android:text="@string/BackToTitle"
             android:textColor="@android:color/holo_red_dark" />
     </LinearLayout>
 
@@ -117,13 +117,12 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:autoSizeTextType="uniform"
-        android:text="効果音"
+        android:text="@string/SEText"
         android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="@id/guidelineH2"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH3"
-        app:layout_constraintStart_toStartOf="@id/guidelineV1"
         app:layout_constraintEnd_toEndOf="@id/guidelineV2"
-        />
+        app:layout_constraintStart_toStartOf="@id/guidelineV1"
+        app:layout_constraintTop_toTopOf="@id/guidelineH2" />
 
     <RadioGroup
         android:id="@+id/SEOnOff"
@@ -143,7 +142,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
-            android:text="ON"
+            android:text="@string/OnText"
             android:textColor="@android:color/black" />
 
         <RadioButton
@@ -152,7 +151,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
-            android:text="OFF"
+            android:text="@string/OffText"
             android:textColor="@android:color/black" />
 
     </RadioGroup>
@@ -163,13 +162,12 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:autoSizeTextType="uniform"
-        android:text="音楽"
+        android:text="@string/BGMText"
         android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="@id/guidelineH5"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH6"
-        app:layout_constraintStart_toStartOf="@id/guidelineV1"
         app:layout_constraintEnd_toEndOf="@id/guidelineV2"
-        />
+        app:layout_constraintStart_toStartOf="@id/guidelineV1"
+        app:layout_constraintTop_toTopOf="@id/guidelineH5" />
 
     <RadioGroup
         android:id="@+id/BGMOnOff"
@@ -189,7 +187,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
-            android:text="ON" />
+            android:text="@string/OnText" />
 
         <RadioButton
             android:id="@+id/BGMOff"
@@ -197,7 +195,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
-            android:text="OFF" />
+            android:text="@string/OffText" />
     </RadioGroup>
 
 

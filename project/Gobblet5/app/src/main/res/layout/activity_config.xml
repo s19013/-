@@ -26,7 +26,7 @@
                 android:layout_height="40dp"
                 android:layout_marginStart="10dp"
                 android:background="@drawable/back_btn_style"
-                android:text="戻る" />
+                android:text="@string/BackToTitle" />
 
 
         </LinearLayout>
@@ -44,7 +44,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="10dp"
-                android:text="効果音"
+                android:text="@string/SEText"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
 
@@ -62,7 +62,7 @@
                     android:layout_height="wrap_content"
 
                     android:layout_weight="1"
-                    android:text="ON"
+                    android:text="@string/OnText"
                     android:textColor="@android:color/black"
                     android:textSize="24sp" />
 
@@ -71,7 +71,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="OFF"
+                    android:text="@string/OffText"
                     android:textColor="@android:color/black"
                     android:textSize="24sp" />
 
@@ -85,7 +85,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
-                android:text="音楽"
+                android:text="@string/BGMText"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
 
@@ -103,7 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ON"
+                    android:text="@string/OnText"
                     android:textSize="24sp" />
 
                 <RadioButton
@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="OFF"
+                    android:text="@string/OffText"
                     android:textSize="24sp" />
             </RadioGroup>
 

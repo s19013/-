@@ -23,7 +23,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
-            android:text="先攻"
+            android:text="@string/FirstPlayer"
             android:textColor="@android:color/black" />
 
         <RadioGroup
@@ -41,7 +41,7 @@
                 android:layout_weight="1"
                 android:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
-                android:text="1p" />
+                android:text="@string/YouText" />
 
             <RadioButton
                 android:id="@+id/Button2p"
@@ -50,7 +50,7 @@
                 android:layout_weight="1"
                 android:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
-                android:text="2p" />
+                android:text="@string/comText" />
 
             <RadioButton
                 android:id="@+id/ButtonRandom"
@@ -59,7 +59,7 @@
                 android:layout_weight="1"
                 android:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
-                android:text="ランダム" />
+                android:text="@string/RandomText" />
         </RadioGroup>
     </LinearLayout>
 
@@ -69,7 +69,7 @@
         android:layout_height="0dp"
         android:autoSizeTextType="uniform"
         android:background="@drawable/btn_style"
-        android:text="ゲームスタート"
+        android:text="@string/GameStartText"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/StartButtonGuidelineHE"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVE"
@@ -84,7 +84,7 @@
         android:layout_marginTop="@dimen/backButtonMargin"
         android:autoSizeTextType="uniform"
         android:background="@drawable/back_btn_style"
-        android:text="戻る"
+        android:text="@string/BackToTitle"
         app:layout_constraintBottom_toTopOf="@+id/backButtonGuidelineH"
         app:layout_constraintEnd_toStartOf="@+id/backButtonGuidelineV"
         app:layout_constraintHorizontal_bias="0.049"
