@@ -430,7 +430,7 @@ class GameWithManActivity : AppCompatActivity() {
     private fun showConfigPopup(){
         configPopup = PopupWindow(this@GameWithManActivity)
         // レイアウト設定
-        val popupView: View = layoutInflater.inflate(R.layout.popup_config, null)
+        val popupView: View = layoutInflater.inflate(R.layout.popup_config_sub, null)
         configPopup!!.contentView = popupView
         // 背景設定
         configPopup!!.setBackgroundDrawable(resources.getDrawable(R.drawable.popup_background))
@@ -440,12 +440,8 @@ class GameWithManActivity : AppCompatActivity() {
         configPopup!!.isFocusable = true
 
         // 表示サイズの設定 今回は画面の半分
-        configPopup!!.setWindowLayoutMode(
-            width.toInt(),
-            WindowManager.LayoutParams.WRAP_CONTENT
-        )
-        configPopup!!.width =  WindowManager.LayoutParams.WRAP_CONTENT*1/2
-        configPopup!!.height = WindowManager.LayoutParams.WRAP_CONTENT*1/2
+        configPopup!!.width  = width*8/10
+        configPopup!!.height = height*4/10
 
         // 画面中央に表示
         configPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
