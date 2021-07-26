@@ -2,10 +2,12 @@ package com.example.gobblet5
 
 import android.content.Intent
 import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import android.media.AudioAttributes
 import android.media.SoundPool
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -20,19 +22,29 @@ class preGameWithManActivity : AppCompatActivity() {
     private var gameStartSE = 0
 
     private var res: Resources? = null
-    private var UturnIcon = res?.getDrawable(R.drawable.ic_uturn)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pre_game_with_man)
 
-
-
-        backButton.post {
-            val width = converPxToDp(backButton.width) // 横幅が返却される
-            val height = converPxToDp(backButton.height)
-            backButton.setCompoundDrawables(UturnIcon,null,null,null)
-        }
+//        backButton.getViewTreeObserver()
+//            .addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
+//                override fun onGlobalLayout() {
+//                    val width = converPxToDp(backButton.width) // 横幅が返却される
+//                    val height = converPxToDp(backButton.height)
+//                    backButton.setCompoundDrawablesWithIntrinsicBounds(UturnIcon, 0, 0, 0)
+//                   backButton.setCompoundDrawables(UturnIcon, null, null, null)
+//                    backButton.getViewTreeObserver().removeOnGlobalLayoutListener(this)
+//                }
+//            })
+        
+//        backButton.post {
+//            val width = converPxToDp(backButton.width)
+//            val height = converPxToDp(backButton.height)
+//
+//            backButton.setCompoundDrawables(UturnIcon,null,null,null)
+//        }
 
         //共有プリファレンス
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
