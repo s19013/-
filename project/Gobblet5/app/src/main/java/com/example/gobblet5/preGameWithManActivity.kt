@@ -1,15 +1,17 @@
 package com.example.gobblet5
 
 import android.content.Intent
+import android.content.res.Resources
 import android.media.AudioAttributes
 import android.media.SoundPool
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_pre_game_with_man.*
+
 
 class preGameWithManActivity : AppCompatActivity() {
     private lateinit var sp: SoundPool
@@ -17,9 +19,20 @@ class preGameWithManActivity : AppCompatActivity() {
     private var menuSelectSE = 0
     private var gameStartSE = 0
 
+    private var res: Resources? = null
+    private var UturnIcon = res?.getDrawable(R.drawable.ic_uturn)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pre_game_with_man)
+
+
+
+        backButton.post {
+            val width = converPxToDp(backButton.width) // 横幅が返却される
+            val height = converPxToDp(backButton.height)
+            backButton.setCompoundDrawables(UturnIcon,null,null,null)
+        }
 
         //共有プリファレンス
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
@@ -82,7 +95,15 @@ class preGameWithManActivity : AppCompatActivity() {
             val intent = Intent(this, GameWithManActivity::class.java)
             startActivity(intent)
         }
+
+
     }
+
+    //pxをdpに変換
+    fun converPxToDp(px: Int): Float {
+        return px / this.getResources().getDisplayMetrics().density
+    }
+
 
     override fun onDestroy() {
         super.onDestroy()
