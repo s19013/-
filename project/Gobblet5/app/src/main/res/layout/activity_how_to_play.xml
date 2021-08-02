@@ -8,42 +8,21 @@
     tools:context=".HowToPlayActivity">
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/TextContainerGuidelineVs"
+        android:id="@+id/backGrandImageGuidelineVs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.05" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/preButtonGuidelineVs"
+        android:id="@+id/backGrandImageGuidelineVe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/preButtonGuidelineVe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.35" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/nextButtonGuidelineVs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.65" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/nextButtonGuidelineVe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.85" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/imageGuidelineVs"
+        android:id="@+id/image_Text_GuidelineVs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -51,21 +30,7 @@
 
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/backButtonGuidelineV"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.18"/>
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/TextContainerGuidelineVe"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/imageGuidelineVe"
+        android:id="@+id/image_Text_GuidelineVe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -93,70 +58,86 @@
         app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/TextContainerGuidelineHs"
+        android:id="@+id/textGuidelineHt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.75"
+        android:orientation="horizontal" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/backGrandImageGuidelineHt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.72" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/TextContainerGuidelineHe"
+        android:id="@+id/backGrandImageGuidelineHb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.99" />
 
-    <Button
-        android:id="@+id/backButton"
+    <TextView
+        android:id="@+id/TutorialText"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/backButtonMargin"
-        android:layout_marginTop="@dimen/backButtonMargin"
-        android:autoSizeTextType="uniform"
-        android:background="@drawable/back_btn_style"
-        android:text="戻る"
-        app:layout_constraintBottom_toTopOf="@+id/backButtonGuidelineH"
-        app:layout_constraintEnd_toStartOf="@+id/backButtonGuidelineV"
-        app:layout_constraintHorizontal_bias="0.049"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/backGrandImageGuidelineHb"
+        app:layout_constraintEnd_toEndOf="@+id/image_Text_GuidelineVe"
+        app:layout_constraintStart_toStartOf="@+id/image_Text_GuidelineVs"
+        app:layout_constraintTop_toTopOf="@+id/textGuidelineHt" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toTopOf="@+id/backGrandImageGuidelineHb"
+        app:layout_constraintEnd_toEndOf="@+id/backGrandImageGuidelineVe"
+        app:layout_constraintStart_toStartOf="@+id/backGrandImageGuidelineVs"
+        app:layout_constraintTop_toTopOf="@+id/backGrandImageGuidelineHt"
+        app:srcCompat="@drawable/note2" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="8"
+        app:layout_constraintBottom_toTopOf="@+id/buttonGuidelineHe"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
+        app:layout_constraintTop_toTopOf="@+id/buttonGuidelineHs">
 
-    <Button
-        android:id="@+id/preButton"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@drawable/btn_style"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@id/buttonGuidelineHe"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGuidelineHs"
-        app:layout_constraintLeft_toRightOf="@+id/preButtonGuidelineVs"
-        app:layout_constraintRight_toLeftOf="@+id/preButtonGuidelineVe"
-        tools:layout_editor_absoluteX="21dp" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
 
-    <Button
-        android:id="@+id/nextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:background="@drawable/btn_style"
-        android:text="Button"
-        app:layout_constraintBottom_toTopOf="@id/buttonGuidelineHe"
-        app:layout_constraintTop_toBottomOf="@+id/buttonGuidelineHs"
-        app:layout_constraintLeft_toRightOf="@+id/nextButtonGuidelineVs"
-        app:layout_constraintRight_toLeftOf="@+id/nextButtonGuidelineVe"
-        tools:layout_editor_absoluteX="21dp" />
+        <Button
+            android:id="@+id/button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Button" />
 
-    <FrameLayout
-        android:id="@+id/TextContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/background_note"
-        app:layout_constraintBottom_toTopOf="@id/TextContainerGuidelineHe"
-        app:layout_constraintLeft_toRightOf="@+id/TextContainerGuidelineVs"
-        app:layout_constraintRight_toLeftOf="@+id/TextContainerGuidelineVe"
-        app:layout_constraintTop_toBottomOf="@+id/TextContainerGuidelineHs" />
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2" />
 
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="Button" />
 
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+    </LinearLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
