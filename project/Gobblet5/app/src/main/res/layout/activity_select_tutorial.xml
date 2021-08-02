@@ -6,54 +6,12 @@
     android:layout_height="match_parent"
     tools:context=".SelectTutorialActivity">
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/backButtonMargin"
-        android:layout_marginTop="@dimen/backButtonMargin"
-        android:autoSizeTextType="uniform"
-        android:background="@drawable/back_btn_style"
-        android:text="@string/BackToTitle"
-        app:layout_constraintBottom_toTopOf="@+id/backButtonGuidelineH"
-        app:layout_constraintEnd_toStartOf="@+id/backButtonGuidelineV"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
-    <Button
-        android:id="@+id/howToControlBtn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
-        android:background="@drawable/btn_style"
-        android:text="@string/HowToOperateText"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonGuidelineH3"
-        app:layout_constraintEnd_toStartOf="@+id/ButtonGuidelineV2"
-        app:layout_constraintStart_toStartOf="@+id/backButtonGuidelineV"
-        app:layout_constraintTop_toTopOf="@+id/guidelineH3" />
-
-    <Button
-        android:id="@+id/howToPlayBtn"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
-        android:background="@drawable/btn_style"
-        android:text="@string/HowToPlayText"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/ButtonGuidelineH5"
-        app:layout_constraintEnd_toStartOf="@+id/ButtonGuidelineV2"
-        app:layout_constraintStart_toStartOf="@+id/backButtonGuidelineV"
-        app:layout_constraintTop_toTopOf="@+id/ButtonGuidelineH4" />
-
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/backButtonGuidelineV"
+        android:id="@+id/ButtonGuidelineV"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.2"
+        app:layout_constraintGuide_percent="0.1"
         />
 
     <androidx.constraintlayout.widget.Guideline
@@ -61,7 +19,7 @@
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.8"
+        app:layout_constraintGuide_percent="0.9"
         />
 
     <androidx.constraintlayout.widget.Guideline
@@ -72,32 +30,69 @@
         app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH3"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:id="@+id/ButtonGuidelineHt"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.15" />
+        app:layout_constraintGuide_percent="0.14"
+        android:orientation="horizontal" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/ButtonGuidelineH3"
-        android:orientation="horizontal"
+        android:id="@+id/ButtonsGuidelineHb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.23" />
+        app:layout_constraintGuide_percent="0.6"
+        android:orientation="horizontal" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/ButtonGuidelineH4"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.30" />
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:weightSum="5"
+        app:layout_constraintBottom_toTopOf="@+id/ButtonsGuidelineHb"
+        app:layout_constraintEnd_toStartOf="@+id/ButtonGuidelineV2"
+        app:layout_constraintStart_toStartOf="@+id/ButtonGuidelineV"
+        app:layout_constraintTop_toTopOf="@+id/ButtonGuidelineHt">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/ButtonGuidelineH5"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.38" />
+        <Button
+            android:id="@+id/howToPlayBtn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/btn_style"
+            android:text="@string/HowToPlayText"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/howToControlBtn"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/btn_style"
+            android:text="@string/HowToOperateText"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="Button" />
+
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
