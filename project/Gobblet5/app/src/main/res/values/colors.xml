@@ -22,4 +22,6 @@
     <color name="dark_temochi1p">#C58282</color>
     <color name="dark_temochi2p">#87AF7C</color>
     <color name="gray_back">#e8e8e8</color>
+    <color name="textBackground">#88FFFFFF</color>
+    <color name="black">#000000</color>
 </resources>
