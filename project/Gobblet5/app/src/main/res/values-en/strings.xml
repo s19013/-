@@ -37,7 +37,7 @@
     <string name="player2">2P</string>
     <string name="RandomText">Random</string>
     <string name="YouText">You</string>
-    <string name="EnemyText">相手</string>
+    <string name="EnemyText">Enemy</string>
     <string name="comText">Computer</string>
     <string name="GameStartText">GameStart</string>
     <string name="BackToGame">Back To Game</string>
@@ -48,7 +48,7 @@
     <string name="HowToOperateText">How To Operate</string>
     <string name="HowToPlayText">How To Play</string>
     <!--設定    -->
-    <string name="SEText">SoundEffect</string>
+    <string name="SEText">Sound Effect</string>
     <string name="BGMText">Music</string>
     <string name="OnText">ON</string>
     <string name="OffText">OFF</string>
@@ -56,8 +56,12 @@
     <string name="SettingActivity">Setting</string>
     <string name="preGameActivity">GameSetting</string>
     <string name="selectTutorialActivity">Tutorial</string>
-    <string name="HowToOperateActivity">HowToOperate</string>
-    <string name="HowToPlayActivity">HowToPlay</string>
+    <string name="HowToOperateActivity">How To Operate</string>
+    <string name="HowToPlayActivity">How To Play</string>
+    <string name="BackToMenu">Back To Menu</string>
+    <string name="HowToSeeActivity">How To See</string>
+    <string name="NextText">Next</string>
+    <string name="PreText">Previous</string>
 
     <!--操作説明    -->
     <!--ルール説明    -->

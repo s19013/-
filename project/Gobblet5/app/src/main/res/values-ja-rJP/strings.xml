@@ -26,11 +26,12 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails
     </string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
-    <!--    -->
+
     <string name="PlayWithComText">コンピューターと対戦</string>
     <string name="PlayWithManText">友達と対戦</string>
     <string name="TutorialText">チュートリアル</string>
     <string name="configText">設定</string>
+
     <string name="ResultText">結果</string>
     <string name="FirstPlayer">先攻</string>
     <string name="player1">1P</string>
@@ -40,13 +41,15 @@
     <string name="EnemyText">相手</string>
     <string name="comText">コンピューター</string>
     <string name="GameStartText">ゲームスタート</string>
-    <string name="BackToGame">ゲームにもどる</string>
-    <string name="BackToTitle">タイトルにもどる</string>
     <string name="CheckTheBord">ボードを見る</string>
-    <string name="BackToGameSetting">ゲーム設定へもどる</string>
     <string name="Retry">もう一度遊ぶ</string>
     <string name="HowToOperateText">操作説明</string>
     <string name="HowToPlayText">ルール説明</string>
+    <!--戻る系    -->
+    <string name="BackToGameSetting">ゲーム設定へもどる</string>
+    <string name="BackToGame">ゲームにもどる</string>
+    <string name="BackToTitle">タイトルにもどる</string>
+    <string name="BackToMenu">メニューに戻る</string>
     <!--設定    -->
     <string name="SEText">効果音</string>
     <string name="BGMText">音楽</string>
@@ -58,8 +61,11 @@
     <string name="selectTutorialActivity">チュートリアルメニュー</string>
     <string name="HowToOperateActivity">操作説明</string>
     <string name="HowToPlayActivity">ルール説明</string>
-
-    <!--操作説明    -->
+    <string name="HowToSeeActivity">画面のみかた</string>
+    <!--説明    -->
+    <string name="NextText">次へ</string>
+    <string name="PreText">前へ</string>
+    <!--操作説明-->
     <!--ルール説明    -->
 
 
