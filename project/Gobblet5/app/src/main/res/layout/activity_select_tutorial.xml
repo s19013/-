@@ -7,11 +7,142 @@
     tools:context=".SelectTutorialActivity">
 
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/etcBoxGuidlineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="105dp"
+        app:layout_constraintGuide_percent="0.02" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/etcBoxGuidlineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="81dp"
+        app:layout_constraintGuide_percent="0.01" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/etcBoxGuidlineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="95dp"
+        app:layout_constraintGuide_percent="0.06" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottonsGuidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="117dp"
+        app:layout_constraintGuide_percent="0.1" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottonsGuidelineEnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="111dp"
+        app:layout_constraintGuide_percent="0.9" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottonsGuidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="148dp"
+        app:layout_constraintGuide_percent="0.16" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/bottonsGuidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="184dp"
+        app:layout_constraintGuide_percent="0.6" />
 
+    <LinearLayout
+        android:id="@+id/etcBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:weightSum="7"
+        app:layout_constraintBottom_toTopOf="@+id/etcBoxGuidlineBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/etcBoxGuidlineStart"
+        app:layout_constraintTop_toTopOf="@+id/etcBoxGuidlineTop">
+
+        <Button
+            android:id="@+id/backButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:autoSizeTextType="uniform"
+            android:background="@drawable/back_btn_style"
+            android:text="@string/BackToTitle"
+            android:textColor="@color/black" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textWhereIsHere"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:autoSizeTextType="uniform"
+            android:background="@color/textBackground"
+            android:gravity="center_horizontal"
+            android:text="@string/TutorialText"
+            android:textColor="@color/black" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottons"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:weightSum="5"
+        app:layout_constraintTop_toTopOf="@+id/bottonsGuidelineTop"
+        app:layout_constraintBottom_toTopOf="@+id/bottonsGuidelineBottom"
+        app:layout_constraintStart_toStartOf="@+id/bottonsGuidelineStart"
+        app:layout_constraintEnd_toEndOf="@+id/bottonsGuidelineEnd"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="45dp">
+
+        <Button
+            android:id="@+id/howToPlayButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:textColor="@color/black"
+            android:background="@drawable/btn_style"
+            android:text="@string/HowToPlayText" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/howToControlButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:autoSizeTextType="uniform"
+            android:textColor="@color/black"
+            android:background="@drawable/btn_style"
+            android:text="@string/HowToOperateText" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
