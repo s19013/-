@@ -79,6 +79,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        debButton.setOnClickListener {
+            val intent = Intent(this,debActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
