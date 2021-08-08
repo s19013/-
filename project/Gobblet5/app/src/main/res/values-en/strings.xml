@@ -62,6 +62,9 @@
     <string name="HowToSeeActivity">How To See</string>
     <string name="NextText">Next</string>
     <string name="PreText">Previous</string>
+    <string name="Small">small</string>
+    <string name="Middle">middle</string>
+    <string name="Big">big</string>
 
     <!--操作説明    -->
     <!--ルール説明    -->
