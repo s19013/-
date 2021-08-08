@@ -37,7 +37,7 @@
     <string name="player2">2P</string>
     <string name="RandomText">Random</string>
     <string name="YouText">You</string>
-    <string name="EnemyText">Enemy</string>
+    <string name="EnemyText">opponent</string>
     <string name="comText">Computer</string>
     <string name="GameStartText">GameStart</string>
     <string name="BackToGame">Back To Game</string>
