@@ -18,7 +18,6 @@ class debActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deb)
 
-        startHowToPlay2Timer()
     }
 
     fun startHowToPlay2Timer(){
@@ -27,7 +26,7 @@ class debActivity : AppCompatActivity() {
             override fun run() {
                 time += millisecond
                 handler.postDelayed(this,millisecond)
-                Log.d("gobblet2", "timer_def:${time}")
+                Log.d("gobbl et2", "timer_def:${time}")
                 if (time==3000L){
                     handler.removeCallbacks(this)
                     time = 0L
