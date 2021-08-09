@@ -60,14 +60,20 @@
     <string name="HowToPlayActivity">How To Play</string>
     <string name="BackToMenu">Back To Menu</string>
     <string name="HowToSeeActivity">How To See</string>
-    <string name="NextText">Next</string>
-    <string name="PreText">Previous</string>
+
+
+
+
+    <!--操作説明    -->
+
+    <!--ルール説明    -->
     <string name="Small">small</string>
     <string name="Middle">middle</string>
     <string name="Big">big</string>
-
-    <!--操作説明    -->
-    <!--ルール説明    -->
+    <string name="NextText">Next</string>
+    <string name="PreText">Previous</string>
+    <string name="EnemyTurn">Opponent&apos;s Trun </string>
+    <string name="YourTurn">Your Trun</string>
 
 
 

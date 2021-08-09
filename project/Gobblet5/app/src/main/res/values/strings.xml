@@ -68,6 +68,8 @@
     <string name="Small">小</string>
     <string name="Middle">中</string>
     <string name="Big">大</string>
+    <string name="EnemyTurn">相手のターン</string>
+    <string name="YourTurn">あなたのターン</string>
     <!--操作説明-->
     <!--ルール説明    -->
 
