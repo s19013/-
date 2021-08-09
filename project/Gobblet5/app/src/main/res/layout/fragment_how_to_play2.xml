@@ -69,7 +69,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:scaleType="fitStart"
+                android:scaleType="fitCenter"
                 android:src="@drawable/vs" />
 
             <ImageView
@@ -85,7 +85,7 @@
             android:id="@+id/smallText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:autoSizeTextType="uniform"
             android:gravity="center_horizontal"
             android:text="@string/Small"
@@ -124,7 +124,7 @@
             android:id="@+id/middleText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:autoSizeTextType="uniform"
             android:gravity="center_horizontal"
             android:text="@string/Middle"
@@ -163,7 +163,7 @@
             android:id="@+id/bigText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.8"
             android:autoSizeTextType="uniform"
             android:gravity="center_horizontal"
             android:text="@string/Big"
