@@ -14,7 +14,6 @@ class HowToPlayFragment2 : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //フラグメントだとタイマー動かない
-
     }
 
     override fun onCreateView(
@@ -23,29 +22,6 @@ class HowToPlayFragment2 : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_how_to_play2, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-    fun visiblSmall(){
-        textView5.text = "aaa"
-//        S1?.visibility = View.VISIBLE
-//        .visibility= View.VISIBLE
-        Log.d("gobblet2", "call")
-
-    }
-
-    fun visiblMiddle(){
-//        middleText.visibility = View.VISIBLE
-//        middle.visibility= View.VISIBLE
-    }
-
-    fun visiblBig(){
-//        bigText.visibility = View.VISIBLE
-//        big.visibility= View.VISIBLE
     }
 
 }

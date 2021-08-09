@@ -25,18 +25,6 @@ class debActivity : AppCompatActivity() {
         val handler = Handler()
         val timer = object :Runnable{
             override fun run() {
-                when(time){
-                    1000L -> {
-                        Log.d("gobblet2", "call")
-                        val fragment = HowToPlayFragment2()
-                        val fragmentManager = supportFragmentManager
-                        val fragmentTransaction  = fragmentManager.beginTransaction()
-                        fragment.visiblSmall()
-                        fragmentTransaction.replace(R.id.fragmentBox,fragment)
-                            .addToBackStack(null)
-                            .commit()
-                    }
-                }
                 time += millisecond
                 handler.postDelayed(this,millisecond)
                 Log.d("gobblet2", "timer_def:${time}")
