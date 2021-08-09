@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_deb.*
-import kotlinx.android.synthetic.main.fragment_how_to_play2.*
 
 
 class debActivity : AppCompatActivity() {
