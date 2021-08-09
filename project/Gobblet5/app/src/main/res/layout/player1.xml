@@ -7,27 +7,56 @@
 
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTemochi2pH1"
+        android:id="@+id/guidelineTemochi1pH1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.7" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTemochi2pH2"
+        android:id="@+id/guidelineTemochi1pH2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.30" />
+        app:layout_constraintGuide_percent="0.9" />
 
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineTemochi2pH2"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineTemochi1pH2"
         app:layout_constraintEnd_toStartOf="@+id/BordGuidelineV2"
         app:layout_constraintStart_toStartOf="@+id/BordGuidelineV1"
-        app:layout_constraintTop_toTopOf="@+id/guidelineTemochi2pH1">
+        app:layout_constraintTop_toTopOf="@+id/guidelineTemochi1pH1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1.2" />
+
+            <TextView
+                android:id="@+id/telop2p"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:autoSizeTextType="uniform"
+                android:background="#E6E6E6"
+                android:gravity="center"
+                android:text="1P"
+                android:textColor="@android:color/black" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,59 +65,24 @@
             android:orientation="horizontal">
 
 
+            <ImageView
+                android:id="@+id/having2p"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/mass" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
+
             <LinearLayout
                 android:id="@+id/Temochi2p"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/buttonTemochiGreenSmall"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="bottom"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/temochi_btn_style2p_small" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2" />
-
-                    <ImageView
-                        android:id="@+id/buttonTemochiGreenMiddle"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="bottom"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/temochi_btn_style2p_middle" />
-
-                    <Space
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.2" />
-
-                    <ImageView
-                        android:id="@+id/buttonTemochiGreenBig"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="bottom"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/temochi_btn_style2p_big" />
-
-                </LinearLayout>
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -104,7 +98,6 @@
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
-                        android:rotation="180"
                         android:text="3"
                         android:textColor="@android:color/black" />
 
@@ -121,7 +114,6 @@
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
-                        android:rotation="180"
                         android:text="3"
                         android:textColor="@android:color/black" />
 
@@ -138,52 +130,59 @@
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
-                        android:rotation="180"
                         android:text="3"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/buttonTemochiGreenSmall"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/temochi_button1p_small" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2" />
+
+                    <ImageView
+                        android:id="@+id/buttonTemochiGreenMiddle"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/temochi_button1p_middle" />
+
+                    <Space
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.2" />
+
+                    <ImageView
+                        android:id="@+id/buttonTemochiGreenBig"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="bottom"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/temochi_button1p_big" />
+
+                </LinearLayout>
+
             </LinearLayout>
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2" />
-
-            <ImageView
-                android:id="@+id/having2p"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:srcCompat="@drawable/mass" />
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.1" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.3"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/telop2p"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:autoSizeTextType="uniform"
-                android:background="#E6E6E6"
-                android:gravity="center"
-                android:rotation="180"
-                android:text="2P"
-                android:textColor="@android:color/black"/>
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1.2" />
         </LinearLayout>
 
     </LinearLayout>
