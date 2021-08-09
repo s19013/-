@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-class howToPlayFragment1 : Fragment() {
+class HowToPlayFragment1 : Fragment() {
 
 
     override fun onCreateView(

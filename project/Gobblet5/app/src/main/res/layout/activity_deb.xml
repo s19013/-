@@ -8,6 +8,7 @@
     tools:context=".debActivity">
 
     <LinearLayout
+        android:id="@+id/backButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -46,16 +47,16 @@
             android:layout_weight="1" />
     </LinearLayout>
 
-    <fragment
-        android:id="@+id/fragment"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:name="com.example.gobblet5.howToPlayFragment1"
+        android:name="com.example.gobblet5.HowToPlayFragment2"
         app:layout_constraintBottom_toTopOf="@+id/guideline10"
         app:layout_constraintEnd_toStartOf="@+id/guideline8"
         app:layout_constraintStart_toStartOf="@+id/guideline9"
         app:layout_constraintTop_toTopOf="@+id/guideline11"
-        tools:layout="@layout/fragment_how_to_play1" />
+         />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
