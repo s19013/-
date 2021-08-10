@@ -23,7 +23,7 @@ class debActivity : AppCompatActivity() {
         val timer = object :Runnable{
             override fun run() {
                 when(time){
-
+                    500L -> {}
                 }
                 time += millisecond
                 handler.postDelayed(this,millisecond)
