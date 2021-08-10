@@ -23,8 +23,31 @@ class debActivity : AppCompatActivity() {
         val timer = object :Runnable{
             override fun run() {
                 when(time){
-                    500L -> {}
-                }
+                    500L -> {
+                        val fragment = HowToPlayFragment3_2()
+                        val fragmentManager = supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(R.id.fragmentBox,fragment)
+                            .addToBackStack(null)
+                            .commit()
+                    }
+                    1000L -> {
+                        val fragment = HowToPlayFragment3_3()
+                        val fragmentManager = supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(R.id.fragmentBox,fragment)
+                            .addToBackStack(null)
+                            .commit()
+                        }
+                    1500L -> {
+                        val fragment = HowToPlayFragment3_4()
+                        val fragmentManager = supportFragmentManager
+                        val fragmentTransaction = fragmentManager.beginTransaction()
+                        fragmentTransaction.replace(R.id.fragmentBox,fragment)
+                            .addToBackStack(null)
+                            .commit()
+                        }
+                    }
                 time += millisecond
                 handler.postDelayed(this,millisecond)
                 Log.d("gobbl et2", "timer_def:${time}")
