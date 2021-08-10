@@ -609,7 +609,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/boy2_upperBody" />
+            android:src="@drawable/boy2_upperbody" />
     </LinearLayout>
 
     <LinearLayout
@@ -627,7 +627,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:src="@drawable/boy2_upperBody" />
+            android:src="@drawable/boy1_upperbody" />
 
         <TextView
             android:id="@+id/textView8"
