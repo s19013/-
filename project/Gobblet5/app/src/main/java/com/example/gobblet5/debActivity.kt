@@ -16,6 +16,8 @@ class debActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deb)
 
+        startHowToPlay3Timer()
+
     }
 
     fun startHowToPlay3Timer(){
@@ -23,7 +25,7 @@ class debActivity : AppCompatActivity() {
         val timer = object :Runnable{
             override fun run() {
                 when(time){
-                    500L -> {
+                    1000L -> {
                         val fragment = HowToPlayFragment3_2()
                         val fragmentManager = supportFragmentManager
                         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -31,7 +33,7 @@ class debActivity : AppCompatActivity() {
                             .addToBackStack(null)
                             .commit()
                     }
-                    1000L -> {
+                    2000L -> {
                         val fragment = HowToPlayFragment3_3()
                         val fragmentManager = supportFragmentManager
                         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -39,7 +41,7 @@ class debActivity : AppCompatActivity() {
                             .addToBackStack(null)
                             .commit()
                         }
-                    1500L -> {
+                    3000L -> {
                         val fragment = HowToPlayFragment3_4()
                         val fragmentManager = supportFragmentManager
                         val fragmentTransaction = fragmentManager.beginTransaction()
@@ -51,7 +53,7 @@ class debActivity : AppCompatActivity() {
                 time += millisecond
                 handler.postDelayed(this,millisecond)
                 Log.d("gobbl et2", "timer_def:${time}")
-                if (time==3000L){
+                if (time==4000L){
                     handler.removeCallbacks(this)
                     time = 0L
                 }
