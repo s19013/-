@@ -67,19 +67,18 @@
     <string name="PreText">前へ</string>
     <!--操作説明-->
     <!--ルール説明    -->
-    <string name="HowToPlayText_Page1">自分と相手で２人のプレイヤーで遊ぶゲームです</string>
-    <string name="HowToPlayText_Page2">小,中,大の大きさの違うコマを持っています</string>
-    <string name="HowToPlayText_Page3">両方のプレイヤーがおたがいにコマをマスに置き合います</string>
-    <string name="HowToPlayText_Page4">縦、横、ナナメの一列を自分のコマを4つ揃えたら勝利です！！</string>
-    <string name="HowToPlayText_Page5">自分のターンには</string>
-    <string name="HowToPlayText_Page6">①　自分のコマをマスに置く</string>
-    <string name="HowToPlayText_Page7">②　マスに置かれている自分のコマを動かす</string>
-    <string name="HowToPlayText_Page8">のうちどちらかを選べます</string>
-    <string name="HowToPlayText_Page9">自分のコマがマスに置かれたコマより大きいコマなら
+    <string name="HowToPlayTutorialText1">自分と相手で２人のプレイヤーで遊ぶゲームです</string>
+    <string name="HowToPlayTutorialText2">小,中,大の大きさの違うコマを持っています</string>
+    <string name="HowToPlayTutorialText3">両方のプレイヤーがおたがいにコマをマスに置き合います</string>
+    <string name="HowToPlayTutorialText4">縦、横、ナナメの一列を自分のコマを4つ揃えたら勝利です！！</string>
+    <string name="HowToPlayTutorialText5">自分のターンには</string>
+    <string name="HowToPlayTutorialText6">①　自分のコマをマスに置く</string>
+    <string name="HowToPlayTutorialText7">②　マスに置かれている自分のコマを動かす</string>
+    <string name="HowToPlayTutorialText8">のうちどちらかを選べます</string>
+    <string name="HowToPlayTutorialText9">自分のコマがマスに置かれたコマより大きいコマなら
                                       \n③　コマを重ねることができます</string>
-    <string name="HowToPlayText_Page10">自分のコマにも､相手のコマにも重ねることができます｡</string>
-    <string name="HowToPlayText_Page11">ただし！相手のコマに重ねられた自分のコマは動かせなくなります</string>
-
+    <string name="HowToPlayTutorialText10">自分のコマにも､相手のコマにも重ねることができます｡</string>
+    <string name="HowToPlayTutorialText11">ただし！相手のコマに重ねられた自分のコマは動かせなくなります</string>
 
 
 </resources>
