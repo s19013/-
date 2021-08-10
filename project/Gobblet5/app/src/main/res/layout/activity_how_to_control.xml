@@ -83,13 +83,6 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.7" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/textGuidelineTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75" />
-
     <LinearLayout
         android:id="@+id/etcBox"
         android:layout_width="0dp"
@@ -121,9 +114,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:gravity="center_horizontal"
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
+            android:gravity="center"
             android:text="@string/HowToOperateText"
             android:textColor="@color/black" />
 
@@ -138,7 +131,6 @@
         android:id="@+id/bottons"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="7dp"
         android:orientation="horizontal"
         android:weightSum="15"
         app:layout_constraintBottom_toTopOf="@+id/bottonsGuidelineBottom"
@@ -171,33 +163,33 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="right"
-            android:textColor="@color/black"
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
-            android:text="1" />
+            android:gravity="right|center_vertical"
+            android:text="1"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/slashText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="center_horizontal"
-            android:textColor="@color/black"
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
-            android:text="/" />
+            android:gravity="center"
+            android:text="/"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/maxPageText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="left"
-            android:textColor="@color/black"
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
-            android:text="10" />
+            android:gravity="left|center_vertical"
+            android:text="10"
+            android:textColor="@color/black" />
 
         <Space
             android:layout_width="0dp"
@@ -209,10 +201,10 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:textColor="@color/black"
             android:autoSizeTextType="uniform"
             android:background="@drawable/btn_style"
-            android:text="@string/NextText" />
+            android:text="@string/NextText"
+            android:textColor="@color/black" />
 
         <Space
             android:layout_width="0dp"
@@ -224,6 +216,7 @@
         android:id="@+id/tutorialTextView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@drawable/note2"
         android:orientation="vertical"
         android:weightSum="10"
         app:layout_constraintBottom_toTopOf="@+id/tutorialTextViewGuidelineBottom"
