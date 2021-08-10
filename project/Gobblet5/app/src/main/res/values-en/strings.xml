@@ -82,10 +82,9 @@
                                      \n3. You can stack pieces on the mass</string>
     <string name="HowToPlayTutorialText10">You can overlay it on your own piece or on the other party\'s piece.</string>
     <string name="HowToPlayTutorialText11">However! You will not be able to move your own piece that is overlaid on the opponent\'s piece.</string>
-
-
-
-
+    <string name="VerticalText">Vertical</string>
+    <string name="HorizontallyText">Horizontally</string>
+    <string name="DiagonallyText">Diagonally</string>
 
 
 </resources>
