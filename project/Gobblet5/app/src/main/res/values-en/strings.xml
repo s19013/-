@@ -62,6 +62,18 @@
     <string name="HowToSeeActivity">How To See</string>
     <string name="NextText">Next</string>
     <string name="PreText">Previous</string>
+    <string name="HowToPlayText_Page1">This game is played by two people</string>
+    <string name="HowToPlayText_Page2">Use small, medium, and large pieces of different sizes</string>
+    <string name="HowToPlayText_Page3">Both players place pieces on each other</string>
+    <string name="HowToPlayText_Page4">If you arrange 4 of your own pieces in a row of vertical, horizontal, and diagonal, you win!</string>
+    <string name="HowToPlayText_Page5">"On my turn "</string>
+    <string name="HowToPlayText_Page6">1. Put your piece on the mass</string>
+    <string name="HowToPlayText_Page7">2. Move your own piece placed in the mass</string>
+    <string name="HowToPlayText_Page8">You can choose from the previous example</string>
+    <string name="HowToPlayText_Page9">If your piece is larger than the piece placed in the mass
+                                     \n3. You can stack pieces on the mass</string>
+    <string name="HowToPlayText_Page10">You can overlay it on your own piece or on the other party\'s piece.</string>
+    <string name="HowToPlayText_Page11">However! You will not be able to move your own piece that is overlaid on the opponent\'s piece.</string>
 
     <!--操作説明    -->
     <!--ルール説明    -->
