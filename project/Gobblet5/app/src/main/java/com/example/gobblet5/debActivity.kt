@@ -18,10 +18,13 @@ class debActivity : AppCompatActivity() {
 
     }
 
-    fun startHowToPlay2Timer(){
+    fun startHowToPlay3Timer(){
         val handler = Handler()
         val timer = object :Runnable{
             override fun run() {
+                when(time){
+
+                }
                 time += millisecond
                 handler.postDelayed(this,millisecond)
                 Log.d("gobbl et2", "timer_def:${time}")
