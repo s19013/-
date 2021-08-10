@@ -37,7 +37,7 @@
     <string name="player2">2P</string>
     <string name="RandomText">Random</string>
     <string name="YouText">You</string>
-    <string name="EnemyText">Enemy</string>
+    <string name="EnemyText">opponent</string>
     <string name="comText">Computer</string>
     <string name="GameStartText">GameStart</string>
     <string name="BackToGame">Back To Game</string>
@@ -60,8 +60,16 @@
     <string name="HowToPlayActivity">How To Play</string>
     <string name="BackToMenu">Back To Menu</string>
     <string name="HowToSeeActivity">How To See</string>
+    <!--操作説明    -->
+
+    <!--ルール説明    -->
+    <string name="Small">small</string>
+    <string name="Middle">middle</string>
+    <string name="Big">big</string>
     <string name="NextText">Next</string>
     <string name="PreText">Previous</string>
+    <string name="EnemyTurn">Opponent\'s Turn </string>
+    <string name="YourTurn">Your Turn</string>
     <string name="HowToPlayTutorialText1">This game is played by two people</string>
     <string name="HowToPlayTutorialText2">Use small, medium, and large pieces of different sizes</string>
     <string name="HowToPlayTutorialText3">Both players place pieces on each other</string>
@@ -74,9 +82,6 @@
                                      \n3. You can stack pieces on the mass</string>
     <string name="HowToPlayTutorialText10">You can overlay it on your own piece or on the other party\'s piece.</string>
     <string name="HowToPlayTutorialText11">However! You will not be able to move your own piece that is overlaid on the opponent\'s piece.</string>
-
-    <!--操作説明    -->
-    <!--ルール説明    -->
 
 
 

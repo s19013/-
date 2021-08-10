@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".HowToPlayActivity"></activity>
+        <activity android:name=".debActivity"></activity>
+        <activity android:name=".HowToPlayActivity" />
         <activity android:name=".HowToControlActivity" />
         <activity android:name=".SelectTutorialActivity" />
         <activity android:name=".GameWithComActivity" />

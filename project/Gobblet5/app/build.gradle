@@ -6,6 +6,16 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    sourceSets{
+        main {
+            res.srcDirs =[
+                    'src/main/res',
+                    'src/main/res/layout/ImgHowToPlay',
+                    'src/main/res/ImgHowToControl'
+            ]
+        }
+    }
+
     defaultConfig {
         applicationId "com.example.gobblet5"
         minSdkVersion 19
