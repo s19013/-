@@ -34,7 +34,7 @@ class HowToPlayFragment7_2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_how_to_play7_2_fragment, container, false)
+        return inflater.inflate(R.layout.fragment_how_to_play7_2, container, false)
     }
 
     companion object {
