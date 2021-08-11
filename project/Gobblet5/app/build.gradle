@@ -12,8 +12,6 @@ android {
                     'src/main/res',
                     'src/main/res/layout/ImgHowToPlay',
                     'src/main/res/layout/ImgHowToControl',
-                    'src/main/java/HowToPlay',
-                    'src/main/java/HowToControlFragment'
             ]
         }
     }
