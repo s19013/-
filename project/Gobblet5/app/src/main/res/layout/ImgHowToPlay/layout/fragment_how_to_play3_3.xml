@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout"
+    android:id="@+id/frameLayout3"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HowToPlayFragment3_1" >
+    tools:context=".HowToPlayFragment.HowToPlayFragment3_3" >
 
     <LinearLayout
         android:id="@+id/player2"
@@ -127,7 +128,7 @@
                         android:background="@drawable/popup_background"
                         android:gravity="center"
                         android:rotation="180"
-                        android:text="3"
+                        android:text="2"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
             </LinearLayout>
@@ -162,7 +163,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:autoSizeTextType="uniform"
-                android:background="#E6E6E6"
+                android:background="#BCFFAD"
                 android:gravity="center"
                 android:rotation="180"
                 android:text="2P"
@@ -199,7 +200,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
-                app:srcCompat="@drawable/mass" />
+                app:srcCompat="@drawable/koma_red_big" />
 
             <ImageView
                 android:id="@+id/buttonB1"
@@ -353,7 +354,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
-                app:srcCompat="@drawable/mass" />
+                app:srcCompat="@drawable/koma_green_big" />
 
 
         </LinearLayout>
@@ -470,7 +471,7 @@
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
-                        android:text="3"
+                        android:text="2"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
 
@@ -601,16 +602,14 @@
             android:gravity="center"
             android:text="@string/EnemyTurn"
             android:textColor="@android:color/black"
-            android:visibility="invisible" />
+            android:visibility="visible" />
 
         <ImageView
-            android:id="@+id/imageView15"
+            android:id="@+id/imageView7"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:src="@drawable/boy2_upperbody" />
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -641,5 +640,6 @@
             android:textColor="@android:color/black"
             android:visibility="invisible" />
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

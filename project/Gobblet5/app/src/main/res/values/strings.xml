@@ -84,6 +84,9 @@
                                       \n③　コマを重ねることができます</string>
     <string name="HowToPlayTutorialText10">自分のコマにも､相手のコマにも重ねることができます｡</string>
     <string name="HowToPlayTutorialText11">ただし！相手のコマに重ねられた自分のコマは動かせなくなります</string>
+    <string name="VerticalText">縦</string>
+    <string name="HorizontallyText">横</string>
+    <string name="DiagonallyText">斜め</string>
 
 
 </resources>

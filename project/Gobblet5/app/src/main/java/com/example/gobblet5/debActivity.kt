@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment3_2
+import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment3_3
+import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment3_4
 
 
 class debActivity : AppCompatActivity() {
@@ -16,7 +19,7 @@ class debActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deb)
 
-        startHowToPlay3Timer()
+
 
     }
 

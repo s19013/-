@@ -11,7 +11,11 @@ android {
             res.srcDirs =[
                     'src/main/res',
                     'src/main/res/layout/ImgHowToPlay',
-                    'src/main/res/ImgHowToControl'
+                    'src/main/res/layout/ImgHowToControl',
+                    'src/main/res/drawable/Player1',
+                    'src/main/res/drawable/Player2',
+                    'src/main/res/drawable/Button',
+
             ]
         }
     }

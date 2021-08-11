@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout5"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameLayout7"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HowToPlayFragment.HowToPlayFragment4" >
+    tools:context=".HowToPlayFragment.HowToPlayFragment6">
 
     <LinearLayout
         android:id="@+id/bord"
@@ -75,14 +74,14 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/koma_red_middle" />
+                app:srcCompat="@drawable/mass" />
 
             <ImageView
                 android:id="@+id/buttonB2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/mass" />
+                app:srcCompat="@drawable/koma_red_middle" />
 
             <ImageView
                 android:id="@+id/buttonC2"
@@ -119,7 +118,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/koma_red_small" />
+                app:srcCompat="@drawable/mass" />
 
             <ImageView
                 android:id="@+id/buttonB3"
@@ -133,7 +132,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/mass" />
+                app:srcCompat="@drawable/koma_red_middle" />
 
             <ImageView
                 android:id="@+id/buttonD3"
@@ -163,7 +162,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:srcCompat="@drawable/koma_red_middle" />
+                app:srcCompat="@drawable/mass" />
 
             <ImageView
                 android:id="@+id/buttonB4"
@@ -185,7 +184,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
-                app:srcCompat="@drawable/mass" />
+                app:srcCompat="@drawable/koma_red_middle" />
 
 
         </LinearLayout>
@@ -232,7 +231,7 @@
         android:layout_height="0dp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
-        android:text="@string/VerticalText"
+        android:text="@string/DiagonallyText"
         android:textColor="@android:color/black"
         app:layout_constraintBottom_toTopOf="@+id/BordGuidelineH1"
         app:layout_constraintEnd_toStartOf="@+id/BordGuidelineV2"
