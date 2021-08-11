@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_deb.*
+import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment3_2
+import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment3_3
+import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment3_4
 
 
 class debActivity : AppCompatActivity() {
