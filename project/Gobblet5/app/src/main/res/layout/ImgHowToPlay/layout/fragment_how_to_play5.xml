@@ -6,7 +6,7 @@
     android:id="@+id/frameLayout6"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HowToPlay5Fragment" >
+    tools:context=".HowToPlayFragment5" >
 
     <LinearLayout
         android:id="@+id/bord"
