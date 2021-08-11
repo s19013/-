@@ -1,3 +1,5 @@
+@file:JvmName("HowToControlFragment1_3Kt")
+
 package com.example.gobblet5
 
 import android.os.Bundle
@@ -13,10 +15,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HowToControlFragment2.newInstance] factory method to
+ * Use the [HowToControlFragment3.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HowToControlFragment2 : Fragment() {
+class HowToControlFragment3 : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,7 +36,7 @@ class HowToControlFragment2 : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_how_to_control2, container, false)
+        return inflater.inflate(R.layout.fragment_how_to_control1_2, container, false)
     }
 
     companion object {
@@ -44,12 +46,12 @@ class HowToControlFragment2 : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment HowToControlFragment2.
+         * @return A new instance of fragment HowToControlFragment3.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            HowToControlFragment2().apply {
+            HowToControlFragment3().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

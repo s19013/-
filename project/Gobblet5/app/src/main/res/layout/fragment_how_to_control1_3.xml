@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frameLayout14"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frameLayout17"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HowToControlFragment1" >
+    tools:context=".HowToControlFragment4">
 
     <LinearLayout
         android:id="@+id/player2"
@@ -200,7 +199,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
-                app:srcCompat="@drawable/mass" />
+                app:srcCompat="@drawable/koma_red_big" />
 
             <ImageView
                 android:id="@+id/buttonB1"
@@ -471,7 +470,7 @@
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
-                        android:text="3"
+                        android:text="2"
                         android:textColor="@android:color/black" />
                 </LinearLayout>
 
@@ -583,44 +582,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/TapGuidelineTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.83" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/TapGuidelineBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/TapGuidelineStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.78" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/TapGuidelineEnd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.95" />
-
-    <ImageView
-        android:id="@+id/imageView17"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:src="@drawable/tap"
-        app:layout_constraintBottom_toTopOf="@+id/TapGuidelineBottom"
-        app:layout_constraintEnd_toStartOf="@+id/TapGuidelineEnd"
-        app:layout_constraintStart_toStartOf="@+id/TapGuidelineStart"
-        app:layout_constraintTop_toTopOf="@+id/TapGuidelineTop" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
