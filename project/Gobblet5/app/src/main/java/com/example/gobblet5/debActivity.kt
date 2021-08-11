@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import kotlinx.android.synthetic.main.activity_deb.*
 
 
 class debActivity : AppCompatActivity() {
@@ -16,7 +17,7 @@ class debActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_deb)
 
-        startHowToPlay3Timer()
+
 
     }
 

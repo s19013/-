@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout18"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HowToControlFragment5">
+    tools:context=".HowToControlFragment2_1">
 
     <LinearLayout
         android:id="@+id/player2"
