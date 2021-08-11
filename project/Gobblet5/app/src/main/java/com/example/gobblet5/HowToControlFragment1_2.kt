@@ -1,4 +1,4 @@
-@file:JvmName("HowToControlFragment1_3Kt")
+//@file:JvmName("HowToControlFragment1_3Kt")
 
 package com.example.gobblet5
 
