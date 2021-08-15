@@ -8,22 +8,9 @@ import android.os.Handler
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment1
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment2
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment3_1
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment3_2
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment3_3
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment3_4
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment4
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment5
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment6
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_1
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_2
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment8_1
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment8_2
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment9_1
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment9_2
+import com.example.gobblet5.HowToPlayFragment.*
 import kotlinx.android.synthetic.main.activity_how_to_play.*
+
 
 
 class HowToPlayActivity : AppCompatActivity() {
@@ -32,11 +19,11 @@ class HowToPlayActivity : AppCompatActivity() {
     //タイマー関係
     private val millisecond:Long=100
     private var time = 0L
+    val handler = Handler()
     //音関係
     private lateinit var sp: SoundPool
     private var cancelSE = 0
     private var pageSE = 0
-    val handler = Handler()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +72,7 @@ class HowToPlayActivity : AppCompatActivity() {
         backButton.setOnClickListener {
             playSound(cancelSE)
             val intent = Intent(this,SelectTutorialActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 
@@ -137,102 +125,75 @@ class HowToPlayActivity : AppCompatActivity() {
     private fun changeImg() {
         when {
             Page == 1 -> {
-                val fragment = HowToPlayFragment1()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment1())
                     .addToBackStack(null)
                     .commit()
             }
             Page == 2 -> {
-                val fragment = HowToPlayFragment2()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
+                handler.removeCallbacks(fragment3)
+                time = 0L
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment2())
                     .addToBackStack(null)
                     .commit()
             }
             Page == 3 -> {
-                val fragment = HowToPlayFragment3_1()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
-                    .addToBackStack(null)
-                    .commit()
-                fragment3()
+                handler.post(fragment3)
             }
             Page == 4 -> {
-                val fragment = HowToPlayFragment4()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
+                handler.removeCallbacks(fragment3)
+                time = 0L
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment4())
                     .addToBackStack(null)
                     .commit()
             }
             Page == 5 -> {
-                val fragment = HowToPlayFragment5()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment5())
                     .addToBackStack(null)
                     .commit()
             }
             Page == 6 -> {
-                val fragment = HowToPlayFragment6()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
+                handler.removeCallbacks(fragment7)
+                time = 0L
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment6())
                     .addToBackStack(null)
                     .commit()
             }
             Page == 7 -> {
-                val fragment = HowToPlayFragment7_1()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
-                    .addToBackStack(null)
-                    .commit()
-                fragment7()
+                handler.post(fragment7)
             }
             Page == 8 -> {
-                val fragment = HowToPlayFragment8_1()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
+                handler.removeCallbacks(fragment7)
+                handler.removeCallbacks(fragment9)
+                time = 0L
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment8_1())
                     .addToBackStack(null)
                     .commit()
-                fragment8()
             }
             Page == 9 -> {
-                val fragment = HowToPlayFragment8_2()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
-                    .addToBackStack(null)
-                    .commit()
+                handler.removeCallbacks(fragment7)
+                time = 0L
+                handler.post(fragment9)
             }
             Page == 10 -> {
-                val fragment = HowToPlayFragment9_1()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
-                    .addToBackStack(null)
-                    .commit()
-                fragment9()
+                handler.post(fragment10)
             }
             Page == 11 -> {
-                val fragment = HowToPlayFragment9_2()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
+                handler.removeCallbacks(fragment10)
+                time = 0L
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment9_2())
                     .addToBackStack(null)
                     .commit()
             }
             Page == 12 -> {
-                val fragment = HowToPlayFragment9_2()
-                val fragmentManager = supportFragmentManager
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg,fragment)
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment9_2())
                     .addToBackStack(null)
                     .commit()
             }
@@ -240,126 +201,129 @@ class HowToPlayActivity : AppCompatActivity() {
 
     }
 
-    private fun fragment3(){
-//        val handler = Handler()
-        val timer = object :Runnable{
-            override fun run() {
-                when(time){
-                    1000L -> {
-                        val fragment = HowToPlayFragment3_2()
-                        val fragmentManager = supportFragmentManager
-                        val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.tutorialImg,fragment)
-                            .addToBackStack(null)
-                            .commit()
-                    }
-                    2000L -> {
-                        val fragment = HowToPlayFragment3_3()
-                        val fragmentManager = supportFragmentManager
-                        val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.tutorialImg,fragment)
-                            .addToBackStack(null)
-                            .commit()
-                    }
-                    3000L -> {
-                        val fragment = HowToPlayFragment3_4()
-                        val fragmentManager = supportFragmentManager
-                        val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.tutorialImg,fragment)
-                            .addToBackStack(null)
-                            .commit()
-
-                    }
+    private val fragment3: Runnable = object : Runnable {
+        override fun run() {
+            when(time){
+                0L ->{
+                    Log.d("gobblet2", "0L call")
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment3_1())
+                        .addToBackStack(null)
+                        .commit()
                 }
-                time += millisecond
-                handler.postDelayed(this,millisecond)
-                Log.d("gobblet2", "timer_def:${time}")
-                if (time==3000L){
-                    handler.removeCallbacks(this)
-                    time = 0L
+                800L -> {
+                    Log.d("gobblet2", "1000L call")
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment3_2())
+                        .addToBackStack(null)
+                        .commit()
+                }
+                1600L -> {
+                    Log.d("gobblet2", "2000L call")
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment3_3())
+                        .addToBackStack(null)
+                        .commit()
+                }
+                2400L -> {
+                    Log.d("gobblet2", "3000L call")
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment3_4())
+                        .addToBackStack(null)
+                        .commit()
+
                 }
             }
-        }
-        handler.post(timer)
-    }
-
-    private fun fragment7(){
-//        val handler = Handler()
-        val timer = object :Runnable{
-            override fun run() {
-                when(time){
-                    1500L -> {
-                        val fragment = HowToPlayFragment7_2()
-                        val fragmentManager = supportFragmentManager
-                        val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.tutorialImg,fragment)
-                            .addToBackStack(null)
-                            .commit()
-                    }
-                }
-                time += millisecond
-                handler.postDelayed(this,millisecond)
-                Log.d("gobblet2", "timer_def:${time}")
-                if (time==2000L){
-                    handler.removeCallbacks(this)
-                    time = 0L
-                }
+            time += millisecond
+            handler.postDelayed(this,millisecond)
+            Log.d("gobblet2", "timer_def:${time}")
+            if (time==2500L){
+                handler.removeCallbacks(this)
+                time = 0L
             }
         }
-        handler.post(timer)
     }
 
-    private fun fragment8(){
-//        val handler = Handler()
-        val timer = object :Runnable{
-            override fun run() {
-                when(time){
-                    1500L -> {
-                        val fragment = HowToPlayFragment8_2()
-                        val fragmentManager = supportFragmentManager
-                        val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.tutorialImg,fragment)
-                            .addToBackStack(null)
-                            .commit()
-                    }
+    private val fragment7: Runnable = object : Runnable{
+        override fun run() {
+            when(time){
+                0L -> {
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment7_1())
+                        .addToBackStack(null)
+                        .commit()
                 }
-                time += millisecond
-                handler.postDelayed(this,millisecond)
-                Log.d("gobblet2", "timer_def:${time}")
-                if (time==2000L){
-                    handler.removeCallbacks(this)
-                    time = 0L
+                800L -> {
+                    val fragment = HowToPlayFragment7_2()
+                    val fragmentManager = supportFragmentManager
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.tutorialImg,fragment)
+                        .addToBackStack(null)
+                        .commit()
                 }
             }
+            time += millisecond
+            handler.postDelayed(this,millisecond)
+            Log.d("gobblet2", "timer_def:${time}")
+            if (time==1000L){
+                handler.removeCallbacks(this)
+                time = 0L
+            }
         }
-        handler.post(timer)
     }
 
-    private fun fragment9(){
-//        val handler = Handler()
-        val timer = object :Runnable{
-            override fun run() {
-                when(time){
-                    1500L -> {
-                        val fragment = HowToPlayFragment9_2()
-                        val fragmentManager = supportFragmentManager
-                        val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.tutorialImg,fragment)
-                            .addToBackStack(null)
-                            .commit()
-                    }
+    private val fragment9: Runnable = object : Runnable{
+        override fun run() {
+            when(time){
+                0L -> {
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment8_1())
+                        .addToBackStack(null)
+                        .commit()
                 }
-                time += millisecond
-                handler.postDelayed(this,millisecond)
-                Log.d("gobblet2", "timer_def:${time}")
-                if (time==2000L){
-                    handler.removeCallbacks(this)
-                    time = 0L
+                800L -> {
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment8_2())
+                        .addToBackStack(null)
+                        .commit()
                 }
             }
+            time += millisecond
+            handler.postDelayed(this,millisecond)
+            Log.d("gobblet2", "timer_def:${time}")
+            if (time==1000L){
+                handler.removeCallbacks(this)
+                time = 0L
+            }
         }
-        handler.post(timer)
     }
+
+    private val fragment10: Runnable = object : Runnable{
+        override fun run() {
+            when(time){
+                0L -> {
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment9_1())
+                        .addToBackStack(null)
+                        .commit()
+                }
+                800L -> {
+                    val fragmentTransaction = supportFragmentManager.beginTransaction()
+                    fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment9_2())
+                        .addToBackStack(null)
+                        .commit()
+                }
+            }
+            time += millisecond
+            handler.postDelayed(this,millisecond)
+            Log.d("gobblet2", "timer_def:${time}")
+            if (time==1000L){
+                handler.removeCallbacks(this)
+                time = 0L
+            }
+        }
+    }
+
 
 }
 

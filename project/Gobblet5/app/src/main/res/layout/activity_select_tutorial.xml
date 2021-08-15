@@ -12,15 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="105dp"
-        app:layout_constraintGuide_percent="0.02" />
+        app:layout_constraintGuide_percent="0.01" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/etcBoxGuidlineTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="81dp"
         app:layout_constraintGuide_percent="0.01" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -28,7 +26,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="95dp"
         app:layout_constraintGuide_percent="0.06" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -36,7 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="117dp"
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -44,7 +40,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="111dp"
         app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -52,7 +47,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="148dp"
         app:layout_constraintGuide_percent="0.16" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -60,7 +54,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="184dp"
         app:layout_constraintGuide_percent="0.6" />
 
     <LinearLayout
@@ -82,6 +75,7 @@
             android:autoSizeTextType="uniform"
             android:background="@drawable/back_btn_style"
             android:text="@string/BackToTitle"
+            android:textAllCaps="false"
             android:textColor="@color/black" />
 
         <Space
@@ -116,8 +110,7 @@
         app:layout_constraintBottom_toTopOf="@+id/bottonsGuidelineBottom"
         app:layout_constraintStart_toStartOf="@+id/bottonsGuidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/bottonsGuidelineEnd"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="45dp">
+        >
 
         <Button
             android:id="@+id/howToPlayButton"
@@ -127,6 +120,7 @@
             android:autoSizeTextType="uniform"
             android:textColor="@color/black"
             android:background="@drawable/btn_style"
+            android:textAllCaps="false"
             android:text="@string/HowToPlayText" />
 
         <Space
@@ -142,6 +136,7 @@
             android:autoSizeTextType="uniform"
             android:textColor="@color/black"
             android:background="@drawable/btn_style"
+            android:textAllCaps="false"
             android:text="@string/HowToOperateText" />
 
     </LinearLayout>

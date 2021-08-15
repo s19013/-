@@ -55,7 +55,7 @@
     <!--アクティビティ名-->
     <string name="SettingActivity">Setting</string>
     <string name="preGameActivity">GameSetting</string>
-    <string name="selectTutorialActivity">Tutorial</string>
+    <string name="selectTutorialActivity">Tutorial menu</string>
     <string name="HowToOperateActivity">How To Operate</string>
     <string name="HowToPlayActivity">How To Play</string>
     <string name="BackToMenu">Back To Menu</string>
@@ -73,12 +73,12 @@
     <string name="VerticalText">Vertical</string>
     <string name="HorizontallyText">Horizontally</string>
     <string name="DiagonallyText">Diagonally</string>
-    <string name="HowToControlTutorialText1_1">Tap the piece you want to move from the three types of pieces you have.\\nMove large piece as an example.</string>
-    <string name="HowToControlTutorialText1_2">Next, tap the square where you want put the pieces.</string>
-    <string name="HowToControlTutorialText1_3">Now you can place the pieces you have to the square.</string>
-    <string name="HowToControlTutorialText2_1">Tap the square where your piece is displayed.\\nTap this square  as an example.</string>
-    <string name="HowToControlTutorialText2_2">Next, tap destination square.</string>
-    <string name="HowToControlTutorialText2_3">Now you can move the pieces .</string>
+    <string name="HowToOperateTutorialText1_1">Tap the piece you want to move from the three types of pieces you have.\\nMove large piece as an example.</string>
+    <string name="HowToOperateTutorialText1_2">Next, tap the square where you want put the pieces.</string>
+    <string name="HowToOperateTutorialText1_3">Now you can place the pieces you have to the square.</string>
+    <string name="HowToOperateTutorialText2_1">Tap the square where your piece is displayed.\\nTap this square  as an example.</string>
+    <string name="HowToOperateTutorialText2_2">Next, tap destination square.</string>
+    <string name="HowToOperateTutorialText2_3">Now you can move the pieces .</string>
     <string name="HowToPlayTutorialText1">This game is played by two people.</string>
     <string name="HowToPlayTutorialText2">Use small, medium, and large pieces of different sizes.</string>
     <string name="HowToPlayTutorialText3">Both players place pieces on the square with each other.</string>
