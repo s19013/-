@@ -92,6 +92,8 @@
     <string name="HowToPlayTutorialText11">You can\'t move piece coverd with other piece without .</string>
     <string name="HowToPlayTutorialText12">The rule explanation is over.</string>
     <string name="BackToHowToOperateMenu">Back To How To OperateMenu</string>
+    <string name="MovePieceFromHandToSquare">Move Piece From Hand To Square</string>
+    <string name="MovePieceFromSquareToSquare">Move Piece From Square To Square</string>
 
 
 </resources>
