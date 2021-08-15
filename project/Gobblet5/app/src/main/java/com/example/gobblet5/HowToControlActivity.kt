@@ -3,8 +3,7 @@ package com.example.gobblet5
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import kotlinx.android.synthetic.main.activity_how_to_control.*
+import kotlinx.android.synthetic.main.activity_how_to_operate.*
 
 class HowToControlActivity : AppCompatActivity() {
     val maxPage = 11
@@ -13,7 +12,7 @@ class HowToControlActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_how_to_control)
+        setContentView(R.layout.activity_how_to_operate)
 
         nextButton.setOnClickListener {
             countUpPage()

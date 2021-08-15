@@ -109,7 +109,6 @@
         app:layout_constraintStart_toStartOf="@+id/etcBoxGuidlineStart"
         app:layout_constraintTop_toTopOf="@+id/etcBoxGuidlineTop">
 
-
         <Button
             android:id="@+id/backButton"
             android:layout_width="0dp"
@@ -118,7 +117,7 @@
             android:background="@drawable/back_btn_style"
             android:textColor="@color/black"
             android:autoSizeTextType="uniform"
-            android:text="@string/BackToMenu" />
+            android:text="@string/BackToTutorialMenu" />
 
         <Space
             android:layout_width="0dp"

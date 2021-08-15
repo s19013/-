@@ -58,14 +58,14 @@
     <string name="selectTutorialActivity">Tutorial menu</string>
     <string name="HowToOperateActivity">How To Operate</string>
     <string name="HowToPlayActivity">How To Play</string>
-    <string name="BackToMenu">Back To Menu</string>
+    <string name="BackToTutorialMenu">Back To TutorialMenu</string>
     <string name="HowToSeeActivity">How To See</string>
     <!--操作説明    -->
 
     <!--ルール説明    -->
     <string name="Small">small</string>
-    <string name="Middle">middle</string>
-    <string name="Big">big</string>
+    <string name="Middle">midium</string>
+    <string name="Big">large</string>
     <string name="NextText">Next</string>
     <string name="PreText">Previous</string>
     <string name="EnemyTurn">Opponent\'s Turn </string>
@@ -91,6 +91,7 @@
     <string name="HowToPlayTutorialText10">You can it on your own piece or on the opponent\'s piece.</string>
     <string name="HowToPlayTutorialText11">You can\'t move piece coverd with other piece without .</string>
     <string name="HowToPlayTutorialText12">The rule explanation is over.</string>
+    <string name="BackToHowToOperateMenu">Back To How To OperateMenu</string>
 
 
 </resources>

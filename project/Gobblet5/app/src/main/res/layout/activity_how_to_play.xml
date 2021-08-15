@@ -119,7 +119,7 @@
             android:background="@drawable/back_btn_style"
             android:textColor="@color/black"
             android:autoSizeTextType="uniform"
-            android:text="@string/BackToMenu" />
+            android:text="@string/BackToTutorialMenu" />
 
         <Space
             android:layout_width="0dp"

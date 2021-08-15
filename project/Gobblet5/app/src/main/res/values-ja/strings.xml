@@ -6,8 +6,8 @@
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="next">次へ</string>
+    <string name="previous">前へ</string>
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
@@ -50,7 +50,7 @@
     <string name="BackToGameSetting">ゲーム設定へもどる</string>
     <string name="BackToGame">ゲームにもどる</string>
     <string name="BackToTitle">タイトルにもどる</string>
-    <string name="BackToMenu">メニューに戻る</string>
+    <string name="BackToTutorialMenu">チュートリアルメニューに戻る</string>
     <!--設定    -->
     <string name="SEText">効果音</string>
     <string name="BGMText">音楽</string>
@@ -94,14 +94,7 @@
     <string name="HowToPlayTutorialText10">自分のコマにも､相手のコマにもかぶせることができます｡</string>
     <string name="HowToPlayTutorialText11">かぶせられたコマはかぶせたコマがどかさないとと動かせません｡</string>
     <string name="HowToPlayTutorialText12">ルール説明を終わります｡</string>
-
-
-
-
-
-
-
-
+    <string name="BackToHowToOperateMenu">操作方法メニューも戻る</string>
 
 
 </resources>

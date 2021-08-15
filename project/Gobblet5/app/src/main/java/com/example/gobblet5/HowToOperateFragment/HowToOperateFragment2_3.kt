@@ -1,4 +1,4 @@
-package com.example.gobblet5.HowToControlFragment
+package com.example.gobblet5.HowToOperateFragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import com.example.gobblet5.R
 
 
-class HowToControlFragment2_1 : Fragment() {
-
+class HowToOperateFragment2_3 : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_how_to_control2_1, container, false)
+        return inflater.inflate(R.layout.fragment_how_to_operate2_3, container, false)
     }
 
 }
