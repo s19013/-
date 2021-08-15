@@ -82,13 +82,15 @@
     <string name="HowToPlayTutorialText1">This game is played by two people.</string>
     <string name="HowToPlayTutorialText2">Use small, medium, and large pieces of different sizes.</string>
     <string name="HowToPlayTutorialText3">Both players place pieces on the square with each other.</string>
-    <string name="HowToPlayTutorialText4">You win if you arrange four of your pieces in a vertical, horizontal, and diagonal row.</string>
-    <string name="HowToPlayTutorialText5">You can move the piece once placed.</string>
-    <string name="HowToPlayTutorialText6">If your piece in your hand is bigger than the piece placed on the square.</string>
-    <string name="HowToPlayTutorialText7">You can cover the piece placed on the bord with it.</string>
-    <string name="HowToPlayTutorialText8">You can it on your own piece or on the opponent\'s piece.</string>
-    <string name="HowToPlayTutorialText9">You can\'t move piece coverd with other piece without .</string>
-    <string name="HowToPlayTutorialText10">The rule explanation is over.</string>
+    <string name="HowToPlayTutorialText4">You win if you arrange four of your pieces in a vertical,</string>
+    <string name="HowToPlayTutorialText5">horizontal, </string>
+    <string name="HowToPlayTutorialText6">and diagonal row.</string>
+    <string name="HowToPlayTutorialText7">You can move the piece once placed.</string>
+    <string name="HowToPlayTutorialText8">If your piece in your hand is bigger than the piece placed on the square.</string>
+    <string name="HowToPlayTutorialText9">You can cover the piece placed on the bord with it.</string>
+    <string name="HowToPlayTutorialText10">You can it on your own piece or on the opponent\'s piece.</string>
+    <string name="HowToPlayTutorialText11">You can\'t move piece coverd with other piece without .</string>
+    <string name="HowToPlayTutorialText12">The rule explanation is over.</string>
 
 
 </resources>
