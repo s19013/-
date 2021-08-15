@@ -50,6 +50,22 @@
         app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/imageGuidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.08" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/imageGuidelineBottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.62" />
+
+
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/etcBoxGuidlineStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -263,5 +279,16 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
     </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/tutorialImg"
+        android:name="com.example.gobblet5.HowToPlayFragment.HowToPlayFragment1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageGuidelineBottom"
+        app:layout_constraintEnd_toStartOf="@+id/imageGuidelineEnd"
+        app:layout_constraintStart_toStartOf="@+id/imageGuidelineStart"
+        app:layout_constraintTop_toTopOf="@+id/imageGuidelineTop"
+        tools:layout="@layout/fragment_how_to_play1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

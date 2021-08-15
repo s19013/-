@@ -14,6 +14,7 @@ import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    //音関係
     private lateinit var sp: SoundPool
     private var menuSelectSE = 0
     private var bgmlooping = false
