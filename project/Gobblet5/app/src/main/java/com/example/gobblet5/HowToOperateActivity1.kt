@@ -3,16 +3,16 @@ package com.example.gobblet5
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_how_to_operate.*
+import kotlinx.android.synthetic.main.activity_how_to_operate1.*
 
-class HowToControlActivity : AppCompatActivity() {
+class HowToOperateActivity1 : AppCompatActivity() {
     val maxPage = 11
     var Page:Int = 1
     //    val img =
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_how_to_operate)
+        setContentView(R.layout.activity_how_to_operate1)
 
         nextButton.setOnClickListener {
             countUpPage()

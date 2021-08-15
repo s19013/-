@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.preference.PreferenceManager
-import kotlinx.android.synthetic.main.activity_select_tutorial.*
 
 
 class SelectTutorialActivity : AppCompatActivity() {
@@ -59,7 +58,7 @@ class SelectTutorialActivity : AppCompatActivity() {
         // 操作説明画面に遷移する処理
         howToControlButton.setOnClickListener {
             playSound(menuSelectSE)
-            val intent = Intent(this, HowToControlActivity::class.java)
+            val intent = Intent(this, HowToOperateActivity1::class.java)
             startActivity(intent)
         }
 

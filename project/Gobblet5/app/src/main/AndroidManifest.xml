@@ -12,7 +12,7 @@
         <activity android:name=".SelectHowToOperateActivity"></activity>
         <activity android:name=".debActivity" />
         <activity android:name=".HowToPlayActivity" />
-        <activity android:name=".HowToControlActivity" />
+        <activity android:name=".HowToOperateActivity1" />
         <activity android:name=".SelectTutorialActivity" />
         <activity android:name=".GameWithComActivity" />
 
