@@ -91,7 +91,7 @@
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
             android:gravity="center_horizontal"
-            android:text="@string/TutorialText"
+            android:text="@string/selectTutorialActivity"
             android:textColor="@color/black" />
 
         <Space

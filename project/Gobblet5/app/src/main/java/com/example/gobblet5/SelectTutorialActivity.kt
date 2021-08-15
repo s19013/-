@@ -6,8 +6,8 @@ import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
 import androidx.preference.PreferenceManager
+import kotlinx.android.synthetic.main.activity_select_tutorial.*
 
 
 class SelectTutorialActivity : AppCompatActivity() {
@@ -19,10 +19,6 @@ class SelectTutorialActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_select_tutorial)
-
-        val howToControlButton = findViewById<Button>(R.id.howToControlButton)
-        val howToPlayButton = findViewById<Button>(R.id.howToPlayButton)
-        val backButton = findViewById<Button>(R.id.backButton)
 
         //共有プリファレンス
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
@@ -58,7 +54,7 @@ class SelectTutorialActivity : AppCompatActivity() {
         // 操作説明画面に遷移する処理
         howToControlButton.setOnClickListener {
             playSound(menuSelectSE)
-            val intent = Intent(this, HowToOperateActivity1::class.java)
+            val intent = Intent(this,SelectHowToOperateActivity::class.java)
             startActivity(intent)
         }
 
@@ -74,6 +70,7 @@ class SelectTutorialActivity : AppCompatActivity() {
             playSound(cancelSE)
             val intent = Intent(this, MainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent) }
+            startActivity(intent)
+        }
     }
 }
