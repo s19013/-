@@ -94,7 +94,7 @@
     <string name="HowToPlayTutorialText10">自分のコマにも､相手のコマにもかぶせることができます｡</string>
     <string name="HowToPlayTutorialText11">かぶせられたコマはかぶせたコマがどかさないとと動かせません｡</string>
     <string name="HowToPlayTutorialText12">ルール説明を終わります｡</string>
-    <string name="BackToHowToOperateMenu">操作方法メニューも戻る</string>
+    <string name="BackToHowToOperateMenu">操作方法メニュー\nに戻る</string>
     <string name="MovePieceFromHandToSquare">手持ちからマスへ</string>
     <string name="MovePieceFromSquareToSquare">置いたコマを動かす</string>
 
