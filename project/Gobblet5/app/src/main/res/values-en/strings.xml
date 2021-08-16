@@ -56,7 +56,7 @@
     <string name="SettingActivity">Setting</string>
     <string name="preGameActivity">GameSetting</string>
     <string name="selectTutorialActivity">Tutorial menu</string>
-    <string name="HowToOperateActivity">How To Operate</string>
+    <string name="HowToOperateMenuActivity">How To OperateMenu</string>
     <string name="HowToPlayActivity">How To Play</string>
     <string name="BackToTutorialMenu">Back To TutorialMenu</string>
     <string name="HowToSeeActivity">How To See</string>

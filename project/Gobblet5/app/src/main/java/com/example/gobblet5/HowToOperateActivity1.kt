@@ -1,48 +1,77 @@
 package com.example.gobblet5
 
 import android.content.Intent
+import android.media.AudioAttributes
+import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.preference.PreferenceManager
+import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment1_1
+import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment1_2
+import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment1_3
 import kotlinx.android.synthetic.main.activity_how_to_operate1.*
 
 class HowToOperateActivity1 : AppCompatActivity() {
-    val maxPage = 11
+    val maxPage = 3
     var Page:Int = 1
-    //    val img =
+    //音関係
+    private lateinit var sp: SoundPool
+    private var cancelSE = 0
+    private var pageSE = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_how_to_operate1)
 
+        //共有プリファレンス
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        var SE =pref.getBoolean("SEOnOff", true)
+        var BGM =pref.getBoolean("BGMOnOff", true)
+
+
+        val audioAttributes = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                .build()
+        } else { TODO("VERSION.SDK_INT < LOLLIPOP") }
+        sp = SoundPool.Builder()
+            .setAudioAttributes(audioAttributes)
+            .setMaxStreams(1)
+            .build()
+
+        cancelSE = sp.load(this, R.raw.cancel, 1)
+        pageSE = sp.load(this,R.raw.page_sound,1)
+
+        fun playSound(status: Int){
+            Log.d("gobblet2", "status:${status}")
+            if (SE){
+                when(status){
+                    cancelSE -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                    pageSE -> sp.play(pageSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                }
+            }
+        }
+
         nextButton.setOnClickListener {
             countUpPage()
+            playSound(pageSE)
         }
 
         preButton.setOnClickListener {
             countDownPage()
+            playSound(pageSE)
         }
 
         backButton.setOnClickListener {
-            val intent = Intent(this,SelectTutorialActivity::class.java)
+            playSound(cancelSE)
+            val intent = Intent(this,SelectHowToOperateActivity::class.java)
             startActivity(intent)
         }
 
         maxPageText.text = maxPage.toString()
-    }
 
-    fun changeText() {
-        when {
-            Page == 1 -> tutorialText.text = getString(R.string.HowToPlayTutorialText1)
-            Page == 2 -> tutorialText.text = getString(R.string.HowToPlayTutorialText2)
-            Page == 3 -> tutorialText.text = getString(R.string.HowToPlayTutorialText3)
-            Page == 4 -> tutorialText.text = getString(R.string.HowToPlayTutorialText4)
-            Page == 5 -> tutorialText.text = getString(R.string.HowToPlayTutorialText5)
-            Page == 6 -> tutorialText.text = getString(R.string.HowToPlayTutorialText6)
-            Page == 7 -> tutorialText.text = getString(R.string.HowToPlayTutorialText7)
-            Page == 8 -> tutorialText.text = getString(R.string.HowToPlayTutorialText8)
-            Page == 9 -> tutorialText.text = getString(R.string.HowToPlayTutorialText9)
-            Page == 10 -> tutorialText.text = getString(R.string.HowToPlayTutorialText10)
-        }
     }
 
     fun countUpPage() {
@@ -65,11 +94,40 @@ class HowToOperateActivity1 : AppCompatActivity() {
         changeCurrentPage()
     }
 
+    fun changeText() {
+        when (Page) {
+            1 -> tutorialText.text = getString(R.string.HowToOperateTutorialText1_1)
+            2 -> tutorialText.text = getString(R.string.HowToOperateTutorialText1_2)
+            3 -> tutorialText.text = getString(R.string.HowToOperateTutorialText1_3)
+        }
+    }
+
     fun changeCurrentPage() {
         currentPageText.text = Page.toString()
     }
 
     fun changeImg() {
+        when(Page) {
+            1 -> {
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg, HowToOperateFragment1_1())
+                    .addToBackStack(null)
+                    .commit()
+            }
+            2 -> {
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg, HowToOperateFragment1_2())
+                    .addToBackStack(null)
+                    .commit()
+            }
+            3 -> {
+                val fragmentTransaction = supportFragmentManager.beginTransaction()
+                fragmentTransaction.replace(R.id.tutorialImg, HowToOperateFragment1_3())
+                    .addToBackStack(null)
+                    .commit()
+            }
+
+        }
 
     }
 

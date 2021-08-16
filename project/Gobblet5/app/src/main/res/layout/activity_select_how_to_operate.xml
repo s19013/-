@@ -90,7 +90,7 @@
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
             android:gravity="center_horizontal"
-            android:text="@string/selectTutorialActivity"
+            android:text="@string/HowToOperateMenuActivity"
             android:textColor="@color/black" />
 
         <Space
@@ -112,7 +112,7 @@
         >
 
         <Button
-            android:id="@+id/howToPlayButton"
+            android:id="@+id/MovePieceFromHandToSquareButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -128,7 +128,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/howToControlButton"
+            android:id="@+id/MovePieceSquareToSquareButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"

@@ -117,7 +117,7 @@
             android:background="@drawable/back_btn_style"
             android:textColor="@color/black"
             android:autoSizeTextType="uniform"
-            android:text="@string/BackToTutorialMenu" />
+            android:text="@string/BackToHowToOperateMenu" />
 
         <Space
             android:layout_width="0dp"
@@ -132,7 +132,7 @@
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
             android:gravity="center"
-            android:text="@string/HowToOperateActivity"
+            android:text="@string/MovePieceFromHandToSquare"
             android:textColor="@color/black" />
 
         <Space
@@ -264,7 +264,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="90"
                 android:textColor="@color/black"
-                android:text="@string/HowToPlayTutorialText1" />
+                android:text="@string/HowToOperateTutorialText1_1" />
 
             <Space
                 android:layout_width="0dp"
@@ -280,13 +280,13 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/tutorialImg"
-        android:name="com.example.gobblet5.HowToPlayFragment.HowToPlayFragment1"
+        android:name="com.example.gobblet5.HowToOperateFragment.HowToOperateFragment1_1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/imageGuidelineBottom"
         app:layout_constraintEnd_toStartOf="@+id/imageGuidelineEnd"
         app:layout_constraintStart_toStartOf="@+id/imageGuidelineStart"
         app:layout_constraintTop_toTopOf="@+id/imageGuidelineTop"
-        tools:layout="@layout/fragment_how_to_play1" />
+        tools:layout="@layout/fragment_how_to_operate1_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

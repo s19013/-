@@ -59,7 +59,7 @@
     <string name="SettingActivity">設定</string>
     <string name="preGameActivity">ゲーム設定</string>
     <string name="selectTutorialActivity">チュートリアルメニュー</string>
-    <string name="HowToOperateActivity">操作説明</string>
+    <string name="HowToOperateMenuActivity">操作説明メニュー</string>
     <string name="HowToPlayActivity">ルール説明</string>
     <string name="HowToSeeActivity">画面のみかた</string>
     <!--説明    -->

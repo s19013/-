@@ -7,7 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.preference.PreferenceManager
-import kotlinx.android.synthetic.main.activity_select_tutorial.*
+import kotlinx.android.synthetic.main.activity_select_how_to_operate.*
+
 
 class SelectHowToOperateActivity : AppCompatActivity() {
     //音関係
@@ -50,21 +51,21 @@ class SelectHowToOperateActivity : AppCompatActivity() {
         }
 
 
-        howToControlButton.setOnClickListener {
+        MovePieceFromHandToSquareButton.setOnClickListener {
             playSound(menuSelectSE)
             val intent = Intent(this, HowToOperateActivity1::class.java)
             startActivity(intent)
         }
 
-        howToPlayButton.setOnClickListener {
+        MovePieceSquareToSquareButton.setOnClickListener {
             playSound(menuSelectSE)
-            val intent = Intent(this, HowToPlayActivity::class.java)
+            val intent = Intent(this, HowToOperateActivity2::class.java)
             startActivity(intent)
         }
 
         backButton.setOnClickListener {
             playSound(cancelSE)
-            val intent = Intent(this, MainActivity::class.java)
+            val intent = Intent(this, SelectTutorialActivity::class.java)
             startActivity(intent)
         }
 
