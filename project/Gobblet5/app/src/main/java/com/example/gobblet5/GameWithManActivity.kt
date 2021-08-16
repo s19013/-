@@ -430,7 +430,7 @@ class GameWithManActivity : AppCompatActivity() {
     private fun showConfigPopup(){
         configPopup = PopupWindow(this@GameWithManActivity)
         // レイアウト設定
-        val popupView: View = layoutInflater.inflate(R.layout.popup_config_sub, null)
+        val popupView: View = layoutInflater.inflate(R.layout.popup_config_sub2, null)
         configPopup!!.contentView = popupView
         // 背景設定
         configPopup!!.setBackgroundDrawable(resources.getDrawable(R.drawable.popup_background))

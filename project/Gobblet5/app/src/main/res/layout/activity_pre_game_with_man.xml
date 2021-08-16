@@ -34,6 +34,11 @@
                 android:layout_weight="2"
                 app:srcCompat="@drawable/ic_uturn" />
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
+
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
@@ -43,6 +48,10 @@
                 android:gravity="center"
                 android:text="@string/BackToTitle"
                 android:textColor="@color/black" />
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
         </LinearLayout>
 
         <Space

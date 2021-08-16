@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/wallpaper"
     tools:context=".ConfigActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -25,81 +26,105 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.15"
-        />
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5"
-        />
+        app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.02"
-        />
+        app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1"
-        />
+        app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideliV3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9"
-        />
+        app:layout_constraintGuide_percent="0.9" />
 
     <LinearLayout
+        android:id="@+id/etcBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/guidelineV1"
         app:layout_constraintTop_toTopOf="@+id/guidelineH1">
 
-        <Button
+        <LinearLayout
             android:id="@+id/backButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:autoSizeTextType="uniform"
+            android:layout_weight="3"
             android:background="@drawable/back_btn_style"
-            android:text="@string/BackToTitle"
-            android:textAllCaps="false" />
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                app:srcCompat="@drawable/ic_uturn" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="@string/BackToTitle"
+                android:textColor="@color/black" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
+        </LinearLayout>
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textWhereIsHere"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:autoSizeTextType="uniform"
-            android:gravity="center_horizontal"
-            android:text="@string/SettingActivity"
-            android:textColor="@android:color/black" />
+            android:background="@color/textBackground"
+            android:gravity="center"
+            android:text="@string/configText"
+            android:textColor="@color/black" />
 
         <Space
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1" />
-
-
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="0dp"
@@ -117,6 +142,7 @@
             android:layout_height="0dp"
             android:layout_weight="2"
             android:autoSizeTextType="uniform"
+            android:background="@color/textBackground"
             android:text="@string/SEText"
             android:textColor="@android:color/black" />
 
@@ -125,6 +151,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
+            android:background="@color/textBackground"
             android:orientation="horizontal">
 
             <RadioButton
@@ -157,16 +184,17 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:text="@string/BGMText"
-            android:textColor="@android:color/black"
             android:autoSizeTextType="uniform"
-            />
+            android:background="@color/textBackground"
+            android:text="@string/BGMText"
+            android:textColor="@android:color/black" />
 
         <RadioGroup
             android:id="@+id/BGMOnOff"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
+            android:background="@color/textBackground"
             android:orientation="horizontal">
 
             <RadioButton
