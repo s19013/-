@@ -8,19 +8,78 @@
     tools:context=".preGameWithComActivity">
 
     <LinearLayout
+        android:id="@+id/etcBox"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/backButtonGuidelineHB"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/backButtonGuidelineHS">
+
+        <LinearLayout
+            android:id="@+id/backButton"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@drawable/back_btn_style"
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                app:srcCompat="@drawable/ic_uturn" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="@string/BackToTitle"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textWhereIsHere"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            android:autoSizeTextType="uniform"
+            android:background="@color/textBackground"
+            android:gravity="center"
+            android:text="@string/preGameActivity"
+            android:textColor="@color/black" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/popup_background"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintBottom_toTopOf="@+id/SelectorGuidelineHB"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVE"
         app:layout_constraintStart_toStartOf="@+id/guidelineVS"
-        app:layout_constraintTop_toTopOf="@+id/guideline6">
+        app:layout_constraintTop_toTopOf="@+id/SelectorGuidelineHT">
 
         <TextView
             android:id="@+id/setFirstGroup"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:autoSizeTextType="uniform"
             android:text="@string/FirstPlayer"
@@ -29,37 +88,42 @@
         <RadioGroup
             android:id="@+id/RadioGroup"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/Button1p"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
 
-                android:layout_weight="1"
+                android:layout_weight="0.9"
                 android:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
                 android:text="@string/YouText" />
 
             <RadioButton
                 android:id="@+id/Button2p"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 android:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
                 android:text="@string/comText" />
 
             <RadioButton
                 android:id="@+id/ButtonRandom"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="0.9"
                 android:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
                 android:text="@string/RandomText" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.05" />
         </RadioGroup>
     </LinearLayout>
 
@@ -76,36 +140,26 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineVS"
         app:layout_constraintTop_toTopOf="@+id/StartButtonGuidelineHS" />
 
-    <Button
-        android:id="@+id/backButton"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginLeft="@dimen/backButtonMargin"
-        android:layout_marginTop="@dimen/backButtonMargin"
-        android:autoSizeTextType="uniform"
-        android:textAllCaps="false"
-        android:background="@drawable/back_btn_style"
-        android:text="@string/BackToTitle"
-        app:layout_constraintBottom_toTopOf="@+id/backButtonGuidelineH"
-        app:layout_constraintEnd_toStartOf="@+id/backButtonGuidelineV"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023" />
-
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/backButtonGuidelineV"
+        android:id="@+id/backButtonGuidelineVS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.02"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/backButtonGuidelineH"
+        android:id="@+id/backButtonGuidelineHS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.08" />
+        app:layout_constraintGuide_percent="0.01" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/backButtonGuidelineHB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.06" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineVS"
@@ -136,14 +190,14 @@
         app:layout_constraintGuide_percent="0.98" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
+        android:id="@+id/SelectorGuidelineHB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
+        android:id="@+id/SelectorGuidelineHT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

@@ -18,8 +18,8 @@ import kotlinx.android.synthetic.main.activity_pre_game_with_man.*
 class preGameWithManActivity : AppCompatActivity() {
     private lateinit var sp: SoundPool
     private var cancelSE = 0
-    private var menuSelectSE = 0
     private var gameStartSE = 0
+    private var radioButtonSE = 0
 
     private var res: Resources? = null
 
@@ -63,15 +63,15 @@ class preGameWithManActivity : AppCompatActivity() {
             .build()
 
         cancelSE = sp.load(this, R.raw.cancel, 1)
-        menuSelectSE = sp.load(this, R.raw.menu_selected, 1)
         gameStartSE = sp.load(this,R.raw.game_start_se,1)
+        radioButtonSE = sp.load(this,R.raw.radio_button,1)
 
-        fun playSound(status: String){
+        fun playSound(status: Int){
             if (SE){
                 when(status){
-                    "cancel" -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                    "menuSelect" -> sp.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                    "gameStart" -> sp.play(gameStartSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                    cancelSE -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                    radioButtonSE -> sp.play(radioButtonSE,1.0f,1.0f,1,0,1.0f)
+                    gameStartSE -> sp.play(gameStartSE, 1.0f, 1.0f, 1, 0, 1.0f)
                 }
             }
         }
@@ -89,21 +89,21 @@ class preGameWithManActivity : AppCompatActivity() {
                 R.id.Button2p->{playFirst= -1}
                 R.id.ButtonRandom->{playFirst=0}
             }
-            playSound("menuSelect")
+            playSound(radioButtonSE)
             val editor=pref.edit()
             editor.putInt("playFirst",playFirst).apply()
             Log.d("gobblet2", "${playFirst}")
         }
 
         backButton.setOnClickListener {
-            playSound("cancel")
+            playSound(cancelSE)
             val intent = Intent(this,MainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 
         gameStartBtn.setOnClickListener {
-            playSound("gameStart")
+            playSound(gameStartSE)
             val intent = Intent(this, GameWithManActivity::class.java)
             startActivity(intent)
         }

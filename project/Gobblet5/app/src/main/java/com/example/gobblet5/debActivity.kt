@@ -29,28 +29,28 @@ class debActivity : AppCompatActivity() {
             override fun run() {
                 when(time){
                     1000L -> {
-                        val fragment = HowToPlayFragment3_2()
-                        val fragmentManager = supportFragmentManager
-                        val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.fragmentBox,fragment)
-                            .addToBackStack(null)
-                            .commit()
+//                        val fragment = HowToPlayFragment3_2()
+//                        val fragmentManager = supportFragmentManager
+//                        val fragmentTransaction = fragmentManager.beginTransaction()
+//                        fragmentTransaction.replace(R.id.fragmentBox,fragment)
+//                            .addToBackStack(null)
+//                            .commit()
                     }
                     2000L -> {
-                        val fragment = HowToPlayFragment3_3()
-                        val fragmentManager = supportFragmentManager
-                        val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.fragmentBox,fragment)
-                            .addToBackStack(null)
-                            .commit()
+//                        val fragment = HowToPlayFragment3_3()
+//                        val fragmentManager = supportFragmentManager
+//                        val fragmentTransaction = fragmentManager.beginTransaction()
+//                        fragmentTransaction.replace(R.id.fragmentBox,fragment)
+//                            .addToBackStack(null)
+//                            .commit()
                         }
                     3000L -> {
-                        val fragment = HowToPlayFragment3_4()
-                        val fragmentManager = supportFragmentManager
-                        val fragmentTransaction = fragmentManager.beginTransaction()
-                        fragmentTransaction.replace(R.id.fragmentBox,fragment)
-                            .addToBackStack(null)
-                            .commit()
+//                        val fragment = HowToPlayFragment3_4()
+//                        val fragmentManager = supportFragmentManager
+//                        val fragmentTransaction = fragmentManager.beginTransaction()
+//                        fragmentTransaction.replace(R.id.fragmentBox,fragment)
+//                            .addToBackStack(null)
+//                            .commit()
                         }
                     }
                 time += millisecond

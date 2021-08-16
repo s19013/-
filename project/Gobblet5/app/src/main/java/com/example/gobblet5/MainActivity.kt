@@ -43,38 +43,38 @@ class MainActivity : AppCompatActivity() {
             .setMaxStreams(1)
             .build()
 
-        menuSelectSE = sp.load(this, R.raw.menu_selected, 1)
+        menuSelectSE = sp.load(this, R.raw.button, 1)
 
-        fun playSound(status: String){
+        fun playSound(status: Int){
             Log.d("gobblet2", "status:${status}")
             if (SE){
                 when(status){
-                    "menuSelect" -> sp.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                    menuSelectSE -> sp.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
                 }
             }
         }
 
 
         goPreGameWithComBtn.setOnClickListener{
-            playSound("menuSelect")
+            playSound(menuSelectSE)
             val intent = Intent(this,preGameWithComActivity::class.java)
             startActivity(intent)
         }
 
         goPreGameWithManBtn.setOnClickListener {
-            playSound("menuSelect")
+            playSound(menuSelectSE)
             val intent = Intent(this,preGameWithManActivity::class.java)
             startActivity(intent)
         }
 
         goConfigBtn.setOnClickListener {
-            playSound("menuSelect")
+            playSound(menuSelectSE)
             val intent = Intent(this,ConfigActivity::class.java)
             startActivity(intent)
         }
 
         goTutorialBtn.setOnClickListener {
-            playSound("menuSelect")
+            playSound(menuSelectSE)
             val intent = Intent(this,SelectTutorialActivity::class.java)
 //            intent.putExtra("bgmlooping",bgmlooping) なんのために書いたのか忘れたけどとりあえず残しておく
             startActivity(intent)

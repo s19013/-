@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ConstraintLayout"
+    android:background="@drawable/wallpaper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HowToPlayActivity">
@@ -64,13 +65,12 @@
         app:layout_constraintGuide_percent="0.62" />
 
 
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/etcBoxGuidlineStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.02" />
+        app:layout_constraintGuide_percent="0.01" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/etcBoxGuidlineTop"
@@ -104,22 +104,38 @@
         android:id="@+id/etcBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:weightSum="7"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/etcBoxGuidlineBottom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/etcBoxGuidlineStart"
         app:layout_constraintTop_toTopOf="@+id/etcBoxGuidlineTop">
 
-
-        <Button
+        <LinearLayout
             android:id="@+id/backButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:background="@drawable/back_btn_style"
-            android:textColor="@color/black"
-            android:autoSizeTextType="uniform"
-            android:text="@string/BackToTutorialMenu" />
+            android:orientation="horizontal">
+
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                app:srcCompat="@drawable/ic_uturn" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="@string/Back"
+                android:textColor="@color/black" />
+        </LinearLayout>
 
         <Space
             android:layout_width="0dp"
@@ -130,18 +146,17 @@
             android:id="@+id/textWhereIsHere"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3"
+            android:layout_weight="4"
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
-            android:gravity="center"
-            android:text="@string/HowToPlayActivity"
+            android:gravity="center_horizontal"
+            android:text="@string/HowToPlayText"
             android:textColor="@color/black" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
-
     </LinearLayout>
 
     <LinearLayout
