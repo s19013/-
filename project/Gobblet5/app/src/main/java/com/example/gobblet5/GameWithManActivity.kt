@@ -34,6 +34,9 @@ class GameWithManActivity : AppCompatActivity() {
     private var menuSelectSE = 0
     private var cannotDoitSE = 0
     private var gameStartSE = 0
+    private var radioButtonSE = 0
+    private var openSE = 0
+    private var closeSE = 0
     //ゲームに必要なもの
     private var finished = false
     private var winner="none"
@@ -145,6 +148,7 @@ class GameWithManActivity : AppCompatActivity() {
         BGM =pref!!.getBoolean("BGMOnOff", true)
         playFirst=pref!!.getInt("playFirst", 1)
 
+
         //soundPool
         val audioAttributes = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes.Builder()
@@ -163,6 +167,8 @@ class GameWithManActivity : AppCompatActivity() {
         cancelSE = sp.load(this, R.raw.cancel, 1)
         menuSelectSE = sp.load(this, R.raw.menu_selected, 1)
         gameStartSE = sp.load(this,R.raw.game_start_se,1)
+        openSE = sp.load(this,R.raw.open,1)
+        closeSE = sp.load(this,R.raw.close,1)
 
         //mediaPlayer
         player=MediaPlayer.create(applicationContext,R.raw.okashi_time)
@@ -354,10 +360,12 @@ class GameWithManActivity : AppCompatActivity() {
 
         // その他
         configButton.setOnClickListener {
+            playSound(openSE)
             showConfigPopup()
         }
 
         resaltButton.setOnClickListener {
+            playSound(openSE)
             showResaltPopup()
         }
 
@@ -393,7 +401,7 @@ class GameWithManActivity : AppCompatActivity() {
                 toast.view = customView
                 toast.setGravity(Gravity.BOTTOM, 0,0 )
                 toast.show()//これで無理やりナビゲーションバーを消す
-                playSound("cancel")
+                playSound(cancelSE)
                 resaltPopup!!.dismiss()
             }
         }
@@ -405,21 +413,21 @@ class GameWithManActivity : AppCompatActivity() {
       }
 
       popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
-            playSound("cancel")
+            playSound(cancelSE)
             val intent = Intent(this, MainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 
       popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
-            playSound("gameStart")
+            playSound(gameStartSE)
             val intent = Intent(this, GameWithManActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 
       popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
-            playSound("cancel")
+          playSound(closeSE)
             val intent = Intent(this, preGameWithManActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
@@ -433,7 +441,7 @@ class GameWithManActivity : AppCompatActivity() {
         val popupView: View = layoutInflater.inflate(R.layout.popup_config_sub2, null)
         configPopup!!.contentView = popupView
         // 背景設定
-        configPopup!!.setBackgroundDrawable(resources.getDrawable(R.drawable.popup_background))
+//        configPopup!!.setBackgroundDrawable(resources.getDrawable(R.drawable.popup_background))
 
         // タップ時に他のViewでキャッチされないための設定
         configPopup!!.isOutsideTouchable = true
@@ -466,7 +474,7 @@ class GameWithManActivity : AppCompatActivity() {
                 R.id.SEOn->{SE=true}
                 R.id.SEOff->{SE=false}
             }
-            playSound("menuSelect")
+            playSound(radioButtonSE)
             val editor=pref!!.edit()
             editor.putBoolean("SEOnOff",SE).apply()
             Log.d("gobblet2", "SE=${SE}")
@@ -483,14 +491,14 @@ class GameWithManActivity : AppCompatActivity() {
                     player?.pause()
                 }
             }
-            playSound("menuSelect")
+            playSound(radioButtonSE)
             val editor= pref!!.edit()
             editor.putBoolean("BGMOnOff",BGM).apply()
             Log.d("gobblet2", "BGM=${BGM}")
         }
 
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
-            playSound("cancel")
+            playSound(cancelSE)
             val intent = Intent(this, MainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
@@ -503,7 +511,7 @@ class GameWithManActivity : AppCompatActivity() {
                 toast.view = customView
                 toast.setGravity(Gravity.BOTTOM, 0,0 )
                 toast.show()//これで無理やりナビゲーションバーを消す
-                playSound("cancel")
+                playSound(closeSE)
                 configPopup!!.dismiss()
             }
         }
@@ -513,19 +521,19 @@ class GameWithManActivity : AppCompatActivity() {
     private fun toastCanNotPickup(){
         val toast = CustomToast.makeText(applicationContext, "そこにあなたの駒はありません", 1000,width,height)
         toast.show()
-        playSound("cannotDoit")
+        playSound(cannotDoitSE)
     }
 
     private fun toastCanNotInsert(){
         val toast = CustomToast.makeText(applicationContext, "そこにあなたの駒は置けません", 1000,width,height)
         toast.show()
-        playSound("cannotDoit")
+        playSound(cannotDoitSE)
     }
 
     private fun toastNotyourturn(){
         val toast = CustomToast.makeText(applicationContext, "あなたのターンではありません", 1000,width,height)
         toast.show()
-        playSound("cannotDoit")
+        playSound(cannotDoitSE)
     }
 
     //ターン開始の処理
@@ -625,7 +633,7 @@ class GameWithManActivity : AppCompatActivity() {
 
     //持ちての表示に関する関数
     private fun havingDisplay(){
-        playSound("select")
+        playSound(selectSE)
         Log.d("gobblet2", "havingDisplay  size=${size},turn=${turn}")
         if (turn == 1){
             view = findViewById(R.id.having1p)
@@ -1385,15 +1393,18 @@ class GameWithManActivity : AppCompatActivity() {
 
 
     //音を鳴らす処理
-    private fun playSound(status: String){
+    private fun playSound(status: Int){
         if (SE){
             when(status){
-                "cannotDoit" -> sp.play(cannotDoitSE, 1.0f, 1.0f, 1, 0, 1.5f)
-                "put" -> sp.play(putSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                "select" -> sp.play(selectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                "cancel" -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                "menuSelect" -> sp.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                "gameStart" -> sp.play(gameStartSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                cannotDoitSE -> sp.play(cannotDoitSE, 1.0f, 1.0f, 1, 0, 1.5f)
+                putSE -> sp.play(putSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                selectSE -> sp.play(selectSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                cancelSE -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                menuSelectSE -> sp.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                gameStartSE -> sp.play(gameStartSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                radioButtonSE -> sp.play(radioButtonSE,1.0f,1.0f,1,0,1.0f)
+                openSE -> sp.play(openSE,1.0f,1.0f,1,0,1.0f)
+                closeSE -> sp.play(closeSE,1.0f,1.0f,1,0,1.0f)
             }
         }
     }
@@ -1410,7 +1421,7 @@ class GameWithManActivity : AppCompatActivity() {
     }
 
     private fun setD(location: String) {
-        playSound("put")
+        playSound(putSE)
         destination = location
         Log.d("gobblet2", "destination:${destination}")
         endTurn()

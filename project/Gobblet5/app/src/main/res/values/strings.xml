@@ -95,6 +95,8 @@
     <string name="MovePieceFromHandToSquare">手持ちからマスへ</string>
     <string name="MovePieceFromSquareToSquare">置いたコマを動かす</string>
     <string name="Back">戻る</string>
+    <string name="Oops">おけないません</string>
+    <string name="dialogText">そこにはおけません</string>
 
 
 </resources>
