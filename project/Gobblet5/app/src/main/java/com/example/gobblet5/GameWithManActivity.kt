@@ -1,7 +1,5 @@
 package com.example.gobblet5
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Resources
@@ -9,12 +7,14 @@ import android.graphics.Color
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.SoundPool
+import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_game_with_man.*
 
@@ -394,18 +394,6 @@ class GameWithManActivity : AppCompatActivity() {
       resaltPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
 
       //// 関数設定
-      popupView.findViewById<View>(R.id.backButton).setOnClickListener {
-            if (resaltPopup!!.isShowing) {
-                val toast =Toast.makeText(this, "", Toast.LENGTH_LONG)
-                val customView = layoutInflater.inflate(R.layout.dammy, null)
-                toast.view = customView
-                toast.setGravity(Gravity.BOTTOM, 0,0 )
-                toast.show()//これで無理やりナビゲーションバーを消す
-                playSound(cancelSE)
-                resaltPopup!!.dismiss()
-            }
-        }
-
       val resaltImage = popupView.findViewById<ImageView>(R.id.resaltImage)
       when(winner){
           "1p" -> resaltImage.setImageResource(R.drawable.win1p)
@@ -427,11 +415,23 @@ class GameWithManActivity : AppCompatActivity() {
         }
 
       popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
-          playSound(closeSE)
+          playSound(cancelSE)
             val intent = Intent(this, preGameWithManActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
+
+      popupView.findViewById<View>(R.id.backButton).setOnClickListener {
+          if (resaltPopup!!.isShowing) {
+              val toast =Toast.makeText(this, "", Toast.LENGTH_LONG)
+              val customView = layoutInflater.inflate(R.layout.dammy, null)
+              toast.view = customView
+              toast.setGravity(Gravity.BOTTOM, 0,0 )
+              toast.show()//これで無理やりナビゲーションバーを消す
+              playSound(closeSE)
+              resaltPopup!!.dismiss()
+          }
+      }
     }
 
     //設定
@@ -506,11 +506,6 @@ class GameWithManActivity : AppCompatActivity() {
 
         popupView.findViewById<View>(R.id.backButton).setOnClickListener {
             if (configPopup!!.isShowing) {
-                val toast =Toast.makeText(this, "", Toast.LENGTH_LONG)
-                val customView = layoutInflater.inflate(R.layout.dammy, null)
-                toast.view = customView
-                toast.setGravity(Gravity.BOTTOM, 0,0 )
-                toast.show()//これで無理やりナビゲーションバーを消す
                 playSound(closeSE)
                 configPopup!!.dismiss()
             }
@@ -1487,29 +1482,42 @@ class GameWithManActivity : AppCompatActivity() {
 
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
-        hideSystemUI()
+        if (hasFocus) hideSystemUI()
     }
 
     private fun hideSystemUI() {
-        val decorView = window.decorView
-        decorView.systemUiVisibility = (
+        // Enables regular immersive mode.
+        // For "lean back" mode, remove SYSTEM_UI_FLAG_IMMERSIVE.
+        // Or for "sticky immersive," replace it with SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+        window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        or View.SYSTEM_UI_FLAG_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                         or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_FULLSCREEN
                 )
+    }
 
-        window.decorView.setOnSystemUiVisibilityChangeListener { visibility ->
-            // Note that system bars will only be "visible" if none of the
-            // LOW_PROFILE, HIDE_NAVIGATION, or FULLSCREEN flags are set.
-            if (visibility and View.SYSTEM_UI_FLAG_FULLSCREEN == 0) {
-                Log.d("debug", "The system bars are visible")
-            } else {
-                Log.d("debug", "The system bars are NOT visible")
-            }
+    private fun showSystemUI() {
+        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (BGM) {
+            player?.start()
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        if (BGM){
+            player?.pause()
+        }
+
     }
 
     override fun onDestroy() {
