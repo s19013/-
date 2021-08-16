@@ -94,6 +94,7 @@
     <string name="BackToHowToOperateMenu">Back To \nHow To OperateMenu</string>
     <string name="MovePieceFromHandToSquare">Move Piece From Hand To Square</string>
     <string name="MovePieceFromSquareToSquare">Move Piece From Square To Square</string>
+    <string name="Back">Back</string>
 
 
 </resources>
