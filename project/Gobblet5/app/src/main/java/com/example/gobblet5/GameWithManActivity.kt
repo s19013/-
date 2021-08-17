@@ -382,7 +382,7 @@ class GameWithManActivity : AppCompatActivity() {
       resaltPopup!!.isFocusable = true
 
       // 表示サイズの設定
-      resaltPopup!!.width  = width*88/10
+      resaltPopup!!.width  = width*8/10
       resaltPopup!!.height = height*8/10
 
       // 画面中央に表示
