@@ -191,8 +191,7 @@ class GameWithManActivity : AppCompatActivity() {
         komaGreenMiddleD = res?.getDrawable(R.drawable.koma_green_middle)
         komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
 
-        //結果ボタン
-        resaltButton.visibility=View.INVISIBLE
+
         //先攻後攻設定
         if (playFirst != 0){
             turn = playFirst
@@ -376,19 +375,15 @@ class GameWithManActivity : AppCompatActivity() {
     private fun showResaltPopup(){
       resaltPopup = PopupWindow(this@GameWithManActivity)
       // レイアウト設定
-      val popupView: View = layoutInflater.inflate(R.layout.popup_resalt, null)
+      val popupView: View = layoutInflater.inflate(R.layout.popup_resalt2, null)
       resaltPopup!!.contentView = popupView
       // タップ時に他のViewでキャッチされないための設定
       resaltPopup!!.isOutsideTouchable = true
       resaltPopup!!.isFocusable = true
 
       // 表示サイズの設定
-      resaltPopup!!.setWindowLayoutMode(
-          width.toInt(),
-          WindowManager.LayoutParams.WRAP_CONTENT
-      )
-      resaltPopup!!.width = WindowManager.LayoutParams.WRAP_CONTENT
-      resaltPopup!!.height = WindowManager.LayoutParams.WRAP_CONTENT
+      resaltPopup!!.width  = width*88/10
+      resaltPopup!!.height = height*8/10
 
       // 画面中央に表示
       resaltPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
