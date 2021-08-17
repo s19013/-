@@ -100,6 +100,7 @@
     <string name="Back">戻る</string>
     <string name="Oops">おけません</string>
     <string name="dialogText">そこにはおけません</string>
+    <string name="QuitGame">ゲームをやめる</string>
 
 
 </resources>

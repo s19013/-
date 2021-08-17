@@ -97,6 +97,7 @@
     <string name="Back">Back</string>
     <string name="Oops">Oops</string>
     <string name="dialogText">You can\'t put there</string>
+    <string name="QuitGame">QuitGame</string>
 
 
 </resources>
