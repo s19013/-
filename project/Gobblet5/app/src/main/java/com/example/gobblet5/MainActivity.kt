@@ -43,10 +43,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-
-
-
         //共有プリファレンス
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
         var SE =pref.getBoolean("SEOnOff", true)
