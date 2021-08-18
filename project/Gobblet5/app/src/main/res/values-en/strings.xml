@@ -89,7 +89,7 @@
     <string name="HowToPlayTutorialText8">If your piece in your hand is bigger than the piece placed on the square.</string>
     <string name="HowToPlayTutorialText9">You can cover the piece placed on the bord with it.</string>
     <string name="HowToPlayTutorialText10">You can it on your own piece or on the opponent\'s piece.</string>
-    <string name="HowToPlayTutorialText11">You can\'t move piece coverd with other piece without .</string>
+    <string name="HowToPlayTutorialText11">You can\'t move piece covered with other piece without .</string>
     <string name="HowToPlayTutorialText12">The rule explanation is over.</string>
     <string name="BackToHowToOperateMenu">Back To \nHow To OperateMenu</string>
     <string name="MovePieceFromHandToSquare">Move Piece From Hand To Square</string>
@@ -97,7 +97,7 @@
     <string name="Back">Back</string>
     <string name="Oops">Oops</string>
     <string name="dialogText">You can\'t put there</string>
-    <string name="QuitGame">QuitGame</string>
+    <string name="QuitGame">Quit Game</string>
 
 
 </resources>
