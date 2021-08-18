@@ -325,7 +325,7 @@
                 android:layout_weight="90"
                 android:text="@string/HowToOperateTutorialText1_1"
                 android:textColor="@color/black"
-                android:textSize="20sp" />
+                android:textSize="@dimen/tutorialText" />
 
             <Space
                 android:layout_width="0dp"

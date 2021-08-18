@@ -15,15 +15,14 @@
     <!--    影(下)-->
     <item>
         <shape android:shape="rectangle">
-            <padding
-                android:bottom="4dp" />
+            <padding android:bottom="@dimen/buttonsShadow" />
             <solid android:color="@color/shadow_temochi1p" />
         </shape>
     </item>
     <!--    影(右)-->
     <item>
         <shape android:shape="rectangle">
-            <padding android:right="4dp" />
+            <padding android:right="@dimen/buttonsShadow" />
             <solid android:color="@color/shadow_temochi1p" />
         </shape>
     </item>

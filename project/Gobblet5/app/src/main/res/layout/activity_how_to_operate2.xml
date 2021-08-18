@@ -324,6 +324,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="90"
                 android:textColor="@color/black"
+                android:textSize="@dimen/tutorialText"
                 android:text="@string/HowToOperateTutorialText2_1" />
 
             <Space

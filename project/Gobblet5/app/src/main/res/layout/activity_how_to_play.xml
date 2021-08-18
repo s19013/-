@@ -325,6 +325,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="90"
                 android:textColor="@color/black"
+                android:textSize="@dimen/tutorialText"
                 android:text="@string/HowToPlayTutorialText1" />
 
             <Space
