@@ -73,10 +73,10 @@
     <string name="VerticalText">縦</string>
     <string name="HorizontallyText">横</string>
     <string name="DiagonallyText">斜め</string>
-    <string name="HowToOperateTutorialText1_1">3種類の手持ちのコマの内動かしたいコマをタップします｡ 例として大きいコマを動かします｡</string>
+    <string name="HowToOperateTutorialText1_1">3種類の手持ちのコマの内動かしたいコマをタップします｡ \n例として大きいコマを動かします｡</string>
     <string name="HowToOperateTutorialText1_2">次に､コマを置きたいマスをタップします｡</string>
     <string name="HowToOperateTutorialText1_3">これで手持ちからマスへコマを置くことができました｡</string>
-    <string name="HowToOperateTutorialText2_1">自分のコマが表示されているマスをタップします｡ 例としてこのマスをタップします｡</string>
+    <string name="HowToOperateTutorialText2_1">自分のコマが表示されているマスをタップします｡ \n例としてこのマスをタップします｡</string>
     <string name="HowToOperateTutorialText2_2">次に移動先のマスをタップします｡</string>
     <string name="HowToOperateTutorialText2_3">これで置いたコマを動かすことができました｡</string>
     <string name="HowToPlayTutorialText1">自分と相手で２人のプレイヤーで遊ぶゲームです｡</string>

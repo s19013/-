@@ -72,7 +72,7 @@
     <string name="EnemyTurn">相手のターン</string>
     <string name="YourTurn">あなたのターン</string>
     <!--操作説明-->
-    <string name="HowToOperateTutorialText1_1">3種類の手持ちのコマの内動かしたいコマをタップします｡ 例として大きいコマを動かします｡</string>
+    <string name="HowToOperateTutorialText1_1">3種類の手持ちのコマの内動かしたいコマをタップします｡\n 例として大きいコマを動かします｡</string>
     <string name="HowToOperateTutorialText1_2">次に､コマを置きたいマスをタップします｡</string>
     <string name="HowToOperateTutorialText1_3">これで手持ちからマスへコマを置くことができました｡</string>
     <string name="HowToOperateTutorialText2_1">自分のコマが表示されているマスをタップします｡\n例としてこのマスをタップします｡</string>

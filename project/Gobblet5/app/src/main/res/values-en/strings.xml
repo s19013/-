@@ -73,10 +73,10 @@
     <string name="VerticalText">Vertical</string>
     <string name="HorizontallyText">Horizontally</string>
     <string name="DiagonallyText">Diagonally</string>
-    <string name="HowToOperateTutorialText1_1">Tap the piece you want to move from the three types of pieces you have.\\nMove large piece as an example.</string>
+    <string name="HowToOperateTutorialText1_1">Tap the piece you want to move \nfrom the three types of pieces you have.\nMove large piece as an example.</string>
     <string name="HowToOperateTutorialText1_2">Next, tap the square where you want put the pieces.</string>
     <string name="HowToOperateTutorialText1_3">Now you can place the pieces you have to the square.</string>
-    <string name="HowToOperateTutorialText2_1">Tap the square where your piece is displayed.\\nTap this square  as an example.</string>
+    <string name="HowToOperateTutorialText2_1">Tap the square where your piece is displayed.\nTap this square  as an example.</string>
     <string name="HowToOperateTutorialText2_2">Next, tap destination square.</string>
     <string name="HowToOperateTutorialText2_3">Now you can move the pieces .</string>
     <string name="HowToPlayTutorialText1">This game is played by two people.</string>
@@ -86,7 +86,7 @@
     <string name="HowToPlayTutorialText5">horizontal, </string>
     <string name="HowToPlayTutorialText6">and diagonal row.</string>
     <string name="HowToPlayTutorialText7">You can move the piece once placed.</string>
-    <string name="HowToPlayTutorialText8">If your piece in your hand is bigger than the piece placed on the square.</string>
+    <string name="HowToPlayTutorialText8">If your piece in your hand is bigger \nthan the piece placed on the square.</string>
     <string name="HowToPlayTutorialText9">You can cover the piece placed on the bord with it.</string>
     <string name="HowToPlayTutorialText10">You can it on your own piece or on the opponent\'s piece.</string>
     <string name="HowToPlayTutorialText11">You can\'t move piece covered with other piece without .</string>
