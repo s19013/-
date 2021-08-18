@@ -24,22 +24,21 @@ class MainActivity : AppCompatActivity() {
     private var menuSelectSE = 0
     private var bgmlooping = false
     //
-    private var res: Resources? = null
-    private var view: ImageView? = null
-    val logoJp = res?.getDrawable(R.drawable.logo_jp)
-    val logoEn = res?.getDrawable(R.drawable.logo_en)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val text =findViewById<View>(R.id.goPreGameWithComBtn)
-        view = findViewById(R.id.logoImg)
+
+        val logo  = findViewById<ImageView>(R.id.logoImg)
+
+
         if (Locale.getDefault().equals(Locale.JAPAN)){
-            view?.setImageDrawable(logoJp)
+            logo.setImageResource(R.drawable.logo_jp)
             Log.d("gobblet2", "jp")
         } else {
-            view?.setImageDrawable(logoEn)
+            logo.setImageResource(R.drawable.logo_en)
             Log.d("gobblet2", "en")
         }
 
