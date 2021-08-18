@@ -383,7 +383,7 @@ class GameWithManActivity : AppCompatActivity() {
 
       // 表示サイズの設定
       resaltPopup!!.width  = width*8/10
-      resaltPopup!!.height = height*8/10
+       resaltPopup!!.height = height*8/10
 
       // 画面中央に表示
       resaltPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
