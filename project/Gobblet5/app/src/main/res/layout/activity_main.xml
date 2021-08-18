@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineH1">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/logoImg"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="3"

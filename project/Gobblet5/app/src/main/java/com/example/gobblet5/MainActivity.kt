@@ -2,7 +2,9 @@ package com.example.gobblet5
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.media.AudioAttributes
+import android.media.Image
 import android.media.SoundPool
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -10,20 +12,40 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.ViewTreeObserver
+import android.widget.ImageView
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
     //音関係
     private lateinit var sp: SoundPool
     private var menuSelectSE = 0
     private var bgmlooping = false
+    //
+    private var res: Resources? = null
+    private var view: ImageView? = null
+    val logoJp = res?.getDrawable(R.drawable.logo_jp)
+    val logoEn = res?.getDrawable(R.drawable.logo_en)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         val text =findViewById<View>(R.id.goPreGameWithComBtn)
+        view = findViewById(R.id.logoImg)
+        if (Locale.getDefault().equals(Locale.JAPAN)){
+            view?.setImageDrawable(logoJp)
+            Log.d("gobblet2", "jp")
+        } else {
+            view?.setImageDrawable(logoEn)
+            Log.d("gobblet2", "en")
+        }
+
+
+
+
 
 
         //共有プリファレンス
