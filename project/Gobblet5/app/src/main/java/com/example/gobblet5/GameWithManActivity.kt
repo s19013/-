@@ -12,7 +12,6 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.view.WindowManager
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
@@ -375,7 +374,7 @@ class GameWithManActivity : AppCompatActivity() {
     private fun showResaltPopup(){
       resaltPopup = PopupWindow(this@GameWithManActivity)
       // レイアウト設定
-      val popupView: View = layoutInflater.inflate(R.layout.popup_resalt2, null)
+      val popupView: View = layoutInflater.inflate(R.layout.popup_resalt, null)
       resaltPopup!!.contentView = popupView
       // タップ時に他のViewでキャッチされないための設定
       resaltPopup!!.isOutsideTouchable = true
@@ -433,10 +432,8 @@ class GameWithManActivity : AppCompatActivity() {
     private fun showConfigPopup(){
         configPopup = PopupWindow(this@GameWithManActivity)
         // レイアウト設定
-        val popupView: View = layoutInflater.inflate(R.layout.popup_config_sub2, null)
+        val popupView: View = layoutInflater.inflate(R.layout.popup_config, null)
         configPopup!!.contentView = popupView
-        // 背景設定
-//        configPopup!!.setBackgroundDrawable(resources.getDrawable(R.drawable.popup_background))
 
         // タップ時に他のViewでキャッチされないための設定
         configPopup!!.isOutsideTouchable = true
