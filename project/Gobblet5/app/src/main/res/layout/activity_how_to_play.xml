@@ -118,6 +118,10 @@
             android:background="@drawable/back_btn_style"
             android:orientation="horizontal">
 
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1" />
 
             <ImageView
                 android:id="@+id/imageView3"
