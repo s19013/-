@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_game_with_man.*
+import java.util.*
 
 
 class GameWithManActivity : AppCompatActivity() {
@@ -391,10 +392,23 @@ class GameWithManActivity : AppCompatActivity() {
 
       //// 関数設定
       val resaltImage = popupView.findViewById<ImageView>(R.id.resaltImage)
-      when(winner){
-          "1p" -> resaltImage.setImageResource(R.drawable.win1p)
-          "2p" -> resaltImage.setImageResource(R.drawable.win2p)
+
+
+      //画像を設定する
+      if (Locale.getDefault().equals(Locale.JAPAN)){
+          when(winner){
+              "1p" -> resaltImage.setImageResource(R.drawable.win1p_jp)
+              "2p" -> resaltImage.setImageResource(R.drawable.win2p_jp)
+          }
+          Log.d("gobblet2", "jp")
+      } else {
+          when(winner){
+              "1p" -> resaltImage.setImageResource(R.drawable.win1p_en)
+              "2p" -> resaltImage.setImageResource(R.drawable.win2p_en)
+          }
+          Log.d("gobblet2", "en")
       }
+
 
       popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
