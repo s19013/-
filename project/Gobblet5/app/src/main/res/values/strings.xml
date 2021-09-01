@@ -96,6 +96,9 @@
     <string name="MovePieceFromSquareToSquare">Move Piece From Square To Square</string>
     <string name="Back">Back</string>
     <string name="Oops">Oops</string>
-    <string name="dialogText">You can\'t put there</string>
+    <string name="cannotInsertDialogText">You can\'t put there</string>
     <string name="QuitGame">Quit Game</string>
+    <string name="cannotPickupDialogText">You can\'n pick up of there</string>
+    <string name="notYourTurnDialogText">Not your turn now</string>
+    <string name="OkText">OK</string>
 </resources>

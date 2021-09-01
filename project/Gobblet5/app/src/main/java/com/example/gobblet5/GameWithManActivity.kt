@@ -1,5 +1,6 @@
 package com.example.gobblet5
 
+import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Resources
@@ -13,6 +14,7 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_game_with_man.*
@@ -506,20 +508,26 @@ class GameWithManActivity : AppCompatActivity() {
 
     //トースト関係
     private fun toastCanNotPickup(){
-        val toast = CustomToast.makeText(applicationContext, "そこにあなたの駒はありません", 1000,width,height)
-        toast.show()
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.cannotPickupDialogText))
+            .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
+            .show()
         playSound(cannotDoitSE)
     }
 
     private fun toastCanNotInsert(){
-        val toast = CustomToast.makeText(applicationContext, "そこにあなたの駒は置けません", 1000,width,height)
-        toast.show()
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.cannotInsertDialogText))
+            .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
+            .show()
         playSound(cannotDoitSE)
     }
 
     private fun toastNotyourturn(){
-        val toast = CustomToast.makeText(applicationContext, "あなたのターンではありません", 1000,width,height)
-        toast.show()
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.notYourTurnDialogText))
+            .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
+            .show()
         playSound(cannotDoitSE)
     }
 
