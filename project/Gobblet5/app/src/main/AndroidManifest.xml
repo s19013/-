@@ -9,27 +9,45 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".HowToOperateActivity2"></activity>
-        <activity android:name=".SelectHowToOperateActivity" />
-        <activity android:name=".debActivity" />
-        <activity android:name=".HowToPlayActivity" />
-        <activity android:name=".HowToOperateActivity1" />
-        <activity android:name=".SelectTutorialActivity" />
-        <activity android:name=".GameWithComActivity" />
-
-        <service
-            android:name=".BgmService"
-            android:enabled="true"
-            android:exported="true" />
-
-        <activity android:name=".GameWithManActivity" />
-        <activity android:name=".preGameWithComActivity" />
-        <activity android:name=".preGameWithManActivity" />
-        <activity android:name=".ConfigActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".HowToOperateActivity2"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SelectHowToOperateActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".debActivity"
+            android:screenOrientation="portrait"
+            />
+        <activity
+            android:name=".HowToPlayActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".HowToOperateActivity1"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SelectTutorialActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".GameWithComActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".GameWithManActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".preGameWithComActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".preGameWithManActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ConfigActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
