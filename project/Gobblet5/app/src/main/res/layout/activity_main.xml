@@ -65,48 +65,108 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <Button
+        <LinearLayout
             android:id="@+id/goPreGameWithComBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:autoSizeTextType="uniform"
             android:background="@drawable/btn_style"
-            android:text="@string/PlayWithComText"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black" />
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="@string/PlayWithComText"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/goPreGameWithManBtn"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+    <LinearLayout
+        android:id="@+id/goPreGameWithManBtn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@drawable/btn_style"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
             android:autoSizeTextType="uniform"
-            android:background="@drawable/btn_style"
+            android:gravity="center"
             android:text="@string/PlayWithManText"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <Button
-            android:id="@+id/goTutorialBtn"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+    <LinearLayout
+        android:id="@+id/goTutorialBtn"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@drawable/btn_style"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
             android:autoSizeTextType="uniform"
-            android:background="@drawable/btn_style"
+            android:gravity="center"
             android:text="@string/TutorialText"
-            android:textAllCaps="false"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
@@ -159,6 +219,12 @@
                     android:autoSizeTextType="uniform"
                     android:text="@string/configText"
                     android:textColor="@color/black" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.1" />
+
             </LinearLayout>
 
             <Space
