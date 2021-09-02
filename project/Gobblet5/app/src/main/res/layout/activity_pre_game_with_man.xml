@@ -36,6 +36,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
                 app:srcCompat="@drawable/ic_uturn" />
 
             <Space
@@ -99,13 +101,13 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.01" />
+                android:layout_weight="0.2" />
 
             <TextView
                 android:id="@+id/setFirstGroup"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="10"
                 android:autoSizeTextType="uniform"
                 android:text="@string/FirstPlayer"
                 android:textColor="@android:color/black" />
