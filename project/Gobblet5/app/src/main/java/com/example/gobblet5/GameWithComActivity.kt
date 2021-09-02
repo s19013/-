@@ -384,8 +384,7 @@ class GameWithComActivity : AppCompatActivity() {
 
         val resaltImage = popupView.findViewById<ImageView>(R.id.resaltImage)
         when(winner){
-            "1p" -> resaltImage.setImageResource(R.drawable.win1p)
-            "2p" -> resaltImage.setImageResource(R.drawable.win2p)
+
         }
 
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {

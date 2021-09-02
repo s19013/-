@@ -140,15 +140,27 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineV2"
         app:layout_constraintTop_toTopOf="@+id/guidelineH3">
 
-        <TextView
-            android:id="@+id/textView2"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
-            android:text="@string/SEText"
-            android:textColor="@android:color/black" />
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.2" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="10"
+                android:autoSizeTextType="uniform"
+                android:text="@string/SEText"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
 
         <RadioGroup
             android:id="@+id/SEOnOff"
@@ -183,15 +195,28 @@
             android:layout_height="0dp"
             android:layout_weight="1" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:background="@color/textBackground"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2" />
+
         <TextView
             android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="10"
             android:autoSizeTextType="uniform"
-            android:background="@color/textBackground"
             android:text="@string/BGMText"
             android:textColor="@android:color/black" />
+
+    </LinearLayout>
 
         <RadioGroup
             android:id="@+id/BGMOnOff"
