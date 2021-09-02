@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <LinearLayout
         android:id="@+id/etcBox"
@@ -84,6 +84,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
                 app:srcCompat="@drawable/ic_uturn" />
 
             <TextView
@@ -124,39 +126,80 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:weightSum="5"
         app:layout_constraintTop_toTopOf="@+id/bottonsGuidelineTop"
         app:layout_constraintBottom_toTopOf="@+id/bottonsGuidelineBottom"
         app:layout_constraintStart_toStartOf="@+id/bottonsGuidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/bottonsGuidelineEnd"
         >
 
-        <Button
+        <LinearLayout
             android:id="@+id/MovePieceFromHandToSquareButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:autoSizeTextType="uniform"
-            android:textColor="@color/black"
             android:background="@drawable/btn_style"
-            android:textAllCaps="false"
-            android:text="@string/MovePieceFromHandToSquare" />
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="@string/MovePieceFromHandToSquare"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+
+        </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <Button
+        <LinearLayout
             android:id="@+id/MovePieceSquareToSquareButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:autoSizeTextType="uniform"
-            android:textColor="@color/black"
             android:background="@drawable/btn_style"
-            android:textAllCaps="false"
-            android:text="@string/MovePieceFromSquareToSquare" />
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="@string/MovePieceFromSquareToSquare"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 
