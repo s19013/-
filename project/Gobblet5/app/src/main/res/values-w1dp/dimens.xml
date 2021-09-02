@@ -14,7 +14,7 @@
     <dimen name="backButtonHeight">25dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="normalPadding">10dp</dimen>
-    <dimen name="buttonsShadow">1dp</dimen>
+    <dimen name="buttonsShadow">2dp</dimen>
     <dimen name="tutorialText">10sp</dimen>
     <dimen name="backToTitle">14sp</dimen>
 </resources>
