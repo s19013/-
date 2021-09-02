@@ -98,7 +98,7 @@
     <string name="Oops">Oops</string>
     <string name="cannotInsertDialogText">You can\'t put there</string>
     <string name="QuitGame">Quit Game</string>
-    <string name="cannotPickupDialogText">You can\'n pick up of there</string>
+    <string name="cannotPickupDialogText">You can\'t pick up of there</string>
     <string name="notYourTurnDialogText">Not your turn now</string>
     <string name="OkText">OK</string>
 </resources>
