@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <LinearLayout
         android:id="@+id/etcBox"
@@ -85,6 +85,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
                 app:srcCompat="@drawable/ic_uturn" />
 
             <Space
@@ -135,39 +137,80 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:weightSum="5"
         app:layout_constraintTop_toTopOf="@+id/bottonsGuidelineTop"
         app:layout_constraintBottom_toTopOf="@+id/bottonsGuidelineBottom"
         app:layout_constraintStart_toStartOf="@+id/bottonsGuidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/bottonsGuidelineEnd"
         >
 
-        <Button
-            android:id="@+id/howToPlayButton"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+    <LinearLayout
+        android:id="@+id/howToPlayButton"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/btn_style"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
             android:autoSizeTextType="uniform"
-            android:textColor="@color/black"
-            android:background="@drawable/btn_style"
-            android:textAllCaps="false"
-            android:text="@string/HowToPlayText" />
+            android:gravity="center"
+            android:text="@string/HowToPlayText"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <Button
+        <LinearLayout
             android:id="@+id/howToControlButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:autoSizeTextType="uniform"
-            android:textColor="@color/black"
             android:background="@drawable/btn_style"
-            android:textAllCaps="false"
-            android:text="@string/HowToOperateText" />
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="20"
+                android:autoSizeTextType="uniform"
+                android:gravity="center"
+                android:text="@string/HowToOperateText"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
