@@ -112,9 +112,10 @@ class GameWithManActivity : AppCompatActivity() {
         "lineS" to 0, "lineBS" to 0
     )
 
-    //表示に使う物
+    //表示に使う物　(箱を用意している状態)
     private var res: Resources? = null
     private var view: ImageView? = null
+    //マス
     private var masImag = res?.getDrawable(R.drawable.mass)
     //駒
     //赤
@@ -125,6 +126,7 @@ class GameWithManActivity : AppCompatActivity() {
     private var komaGreenBigD = res?.getDrawable(R.drawable.koma_green_big)
     private var komaGreenMiddleD = res?.getDrawable(R.drawable.koma_green_middle)
     private var komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
+
     //共有プリファレンス
     private var pref: SharedPreferences? =null
     private var SE =false
@@ -138,50 +140,28 @@ class GameWithManActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_with_man)
 
-        //画面の大きさ
-        val dm = DisplayMetrics()
-        windowManager.defaultDisplay.getRealMetrics(dm)
-        width = dm.widthPixels
-        height = dm.heightPixels
+        //初期化
+        iniFullscrean()
+        iniPreference()
+        iniSoundPool()
+        iniMediaPlayer()
+        startTurn()
 
-        //共有プリファレンス
-        pref = PreferenceManager.getDefaultSharedPreferences(this@GameWithManActivity)
-        SE = pref!!.getBoolean("SEOnOff", true)
-        BGM =pref!!.getBoolean("BGMOnOff", true)
-        playFirst=pref!!.getInt("playFirst", 1)
-
-
-        //soundPool
-        val audioAttributes = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                .build()
-        } else { TODO("VERSION.SDK_INT < LOLLIPOP") }
-        sp = SoundPool.Builder()
-            .setAudioAttributes(audioAttributes)
-            .setMaxStreams(1)
-            .build()
-        //使う効果音を準備
-        cannotDoitSE=sp.load(this, R.raw.cannotdoit, 1)
-        putSE=sp.load(this, R.raw.select_se, 1)
-        selectSE = sp.load(this, R.raw.put, 1)
-        cancelSE = sp.load(this, R.raw.cancel, 1)
-        menuSelectSE = sp.load(this, R.raw.menu_selected, 1)
-        gameStartSE = sp.load(this,R.raw.game_start_se,1)
-        openSE = sp.load(this,R.raw.open,1)
-        closeSE = sp.load(this,R.raw.close,1)
-
-        //mediaPlayer
-        player=MediaPlayer.create(applicationContext,R.raw.okashi_time)
-        player?.isLooping=true
-        if (BGM==true){
-            bgmlooping=true
-            player?.start()
+        //先攻後攻設定
+        if (playFirst != 0){
+            turn = playFirst
+        } else {
+            when((1..2).random()){
+                1 -> {turn = 1}
+                2 -> {turn = -1}
+            }
         }
-      ////表示する絵
+        Log.d("gobblet2", "pF:${playFirst}")
+
+        //表示に使う物(空箱に実物を入れる)
         res=resources
-        view=findViewById(R.id.buttonA1)
+        view=findViewById(R.id.buttonA1) //適当にダミーを入れてるだけ
+        //マス
         masImag = res?.getDrawable(R.drawable.mass)
         //駒
         //赤
@@ -194,17 +174,6 @@ class GameWithManActivity : AppCompatActivity() {
         komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
 
 
-        //先攻後攻設定
-        if (playFirst != 0){
-            turn = playFirst
-        } else {
-            when((1..2).random()){
-                1 -> {turn = 1}
-                2 -> {turn = -1}
-            }
-        }
-        Log.d("gobblet2", "pF:${playFirst}")
-        startTurn()
 
 //手持ちのボタンを触った時
         buttonTemochiRedBig.setOnClickListener {
@@ -1504,6 +1473,58 @@ class GameWithManActivity : AppCompatActivity() {
         Log.d("gobblet2", "line4:${line4}")
         Log.d("gobblet2", "finished:${finished},winner:${winner}")
     }
+
+    //初期化に関する関数
+    private fun iniFullscrean(){
+        //画面の大きさ
+        val dm = DisplayMetrics()
+        windowManager.defaultDisplay.getRealMetrics(dm)
+        width = dm.widthPixels
+        height = dm.heightPixels
+    }
+
+    private fun iniPreference(){
+        //共有プリファレンス
+        pref = PreferenceManager.getDefaultSharedPreferences(this@GameWithManActivity)
+        SE = pref!!.getBoolean("SEOnOff", true)
+        BGM =pref!!.getBoolean("BGMOnOff", true)
+        playFirst=pref!!.getInt("playFirst", 1)
+    }
+
+    private fun iniSoundPool(){
+        //soundPool
+        val audioAttributes = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            AudioAttributes.Builder()
+                .setUsage(AudioAttributes.USAGE_GAME)
+                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                .build()
+        } else { TODO("VERSION.SDK_INT < LOLLIPOP") }
+        sp = SoundPool.Builder()
+            .setAudioAttributes(audioAttributes)
+            .setMaxStreams(1)
+            .build()
+        //使う効果音を準備
+        cannotDoitSE=sp.load(this, R.raw.cannotdoit, 1)
+        putSE=sp.load(this, R.raw.select_se, 1)
+        selectSE = sp.load(this, R.raw.put, 1)
+        cancelSE = sp.load(this, R.raw.cancel, 1)
+        menuSelectSE = sp.load(this, R.raw.menu_selected, 1)
+        gameStartSE = sp.load(this,R.raw.game_start_se,1)
+        openSE = sp.load(this,R.raw.open,1)
+        closeSE = sp.load(this,R.raw.close,1)
+    }
+
+    private fun iniMediaPlayer(){
+        //mediaPlayer
+        player=MediaPlayer.create(applicationContext,R.raw.okashi_time)
+        player?.isLooping=true
+        if (BGM==true){
+            bgmlooping=true
+            player?.start()
+        }
+    }
+
+
 
     //音を鳴らす処理
     private fun playSound(status: Int){
