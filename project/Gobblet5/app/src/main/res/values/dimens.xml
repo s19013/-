@@ -18,4 +18,5 @@
     <dimen name="tutorialText">20sp</dimen>
     <dimen name="backToTitle">14sp</dimen>
     <dimen name="iconScale">0.8</dimen>
+    <dimen name="dammy">0.8</dimen>
 </resources>
