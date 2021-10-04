@@ -578,6 +578,7 @@ class GameWithManActivity : AppCompatActivity() {
     //各マスの描写に関する関数
     private fun bordDisplay(location: String) {
         var box = mutableListOf<Int>(0, 0)
+        //大きさを判断
         fun RedSet(s: Int){
             when (s) {
                 3 -> {
@@ -608,245 +609,150 @@ class GameWithManActivity : AppCompatActivity() {
 
         fun EmpSet(){ view?.setImageDrawable(masImag) }
 
+        //場所を判断
         when (location) {
             stringA1 -> {
                 view = findViewById(R.id.buttonA1)
                 box = A1.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringA2 -> {
                 view = findViewById(R.id.buttonA2)
                 box = A2.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringA3 -> {
                 view = findViewById(R.id.buttonA3)
                 box = A3.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringA4 -> {
                 view = findViewById(R.id.buttonA4)
                 box = A4.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringB1 -> {
                 view = findViewById(R.id.buttonB1)
                 box = B1.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringB2 -> {
                 view = findViewById(R.id.buttonB2)
                 box = B2.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringB3 -> {
                 view = findViewById(R.id.buttonB3)
                 box = B3.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringB4 -> {
                 view = findViewById(R.id.buttonB4)
                 box = B4.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringC1 -> {
                 view = findViewById(R.id.buttonC1)
                 box = C1.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringC2 -> {
                 view = findViewById(R.id.buttonC2)
                 box = C2.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringC3 -> {
                 view = findViewById(R.id.buttonC3)
                 box = C3.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringC4 -> {
                 view = findViewById(R.id.buttonC4)
                 box = C4.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringD1 -> {
                 view = findViewById(R.id.buttonD1)
                 box = D1.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringD2 -> {
                 view = findViewById(R.id.buttonD2)
                 box = D2.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringD3 -> {
                 view = findViewById(R.id.buttonD3)
                 box = D3.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
             stringD4 -> {
                 view = findViewById(R.id.buttonD4)
                 box = D4.funcForDisplay()
                 when (box[1]) {
-                    1 -> {
-                        RedSet(box[0])
-                    }
-                    0 -> {
-                        EmpSet()
-                    }
-                    -1 -> {
-                        GreenSet(box[0])
-                    }
+                    1 -> { RedSet(box[0]) }
+                    0 -> { EmpSet() }
+                    -1 -> { GreenSet(box[0]) }
                 }
             }
         }
@@ -1112,162 +1018,98 @@ class GameWithManActivity : AppCompatActivity() {
         when(name){
             stringA1 -> {
                 when (A1.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringA1)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }//トースト表示でおけないことを知らせる
+                    true -> { setD(stringA1) }
+                    false -> { toastCanNotInsert() }//トースト表示でおけないことを知らせる
                 }
             }
             stringA2 -> {
                 when (A2.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringA2)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringA2) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringA3 -> {
                 when (A3.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringA3)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringA3) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringA4 -> {
                 when (A4.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringA4)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringA4) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringB1 -> {
                 when (B1.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringB1)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringB1) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringB2 -> {
                 when (B2.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringB2)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringB2) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringB3 -> {
                 when (B3.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringB3)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringB3) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringB4 -> {
                 when (B4.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringB4)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringB4) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringC1 -> {
                 when (C1.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringC1)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringC1) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringC2 -> {
                 when (C2.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringC2)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringC2) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringC3 -> {
                 when (C3.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringC3)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringC3) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringC4 -> {
                 when (C4.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringC4)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringC4) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringD1 -> {
                 when (D1.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringD1)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringD1) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringD2 -> {
                 when (D2.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringD2)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringD2) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringD3 -> {
                 when (D3.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringD3)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringD3) }
+                    false -> { toastCanNotInsert() }
                 }
             }
             stringD4 -> {
                 when (D4.mInsert(size, turn)) {
-                    true -> {
-                        setD(stringD4)
-                    }
-                    false -> {
-                        toastCanNotInsert()
-                    }
+                    true -> { setD(stringD4) }
+                    false -> { toastCanNotInsert() }
                 }
             }
         }
