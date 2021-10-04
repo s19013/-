@@ -503,7 +503,7 @@ class GameWithManActivity : AppCompatActivity() {
         }
     }
 
-    //トースト関係
+    //トースト関係(ホントはダイアログだけど面倒だからそのまま使う)
     private fun toastCanNotPickup(){
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.cannotPickupDialogText))
@@ -611,7 +611,6 @@ class GameWithManActivity : AppCompatActivity() {
         when (location) {
             stringA1 -> {
                 view = findViewById(R.id.buttonA1)
-                A1.funcForDisplay()
                 box = A1.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -627,7 +626,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringA2 -> {
                 view = findViewById(R.id.buttonA2)
-                A2.funcForDisplay()
                 box = A2.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -643,7 +641,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringA3 -> {
                 view = findViewById(R.id.buttonA3)
-                A3.funcForDisplay()
                 box = A3.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -659,7 +656,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringA4 -> {
                 view = findViewById(R.id.buttonA4)
-                A4.funcForDisplay()
                 box = A4.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -675,7 +671,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringB1 -> {
                 view = findViewById(R.id.buttonB1)
-                B1.funcForDisplay()
                 box = B1.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -691,7 +686,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringB2 -> {
                 view = findViewById(R.id.buttonB2)
-                B2.funcForDisplay()
                 box = B2.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -707,7 +701,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringB3 -> {
                 view = findViewById(R.id.buttonB3)
-                B3.funcForDisplay()
                 box = B3.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -723,7 +716,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringB4 -> {
                 view = findViewById(R.id.buttonB4)
-                B4.funcForDisplay()
                 box = B4.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -739,7 +731,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringC1 -> {
                 view = findViewById(R.id.buttonC1)
-                C1.funcForDisplay()
                 box = C1.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -755,7 +746,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringC2 -> {
                 view = findViewById(R.id.buttonC2)
-                C2.funcForDisplay()
                 box = C2.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -771,7 +761,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringC3 -> {
                 view = findViewById(R.id.buttonC3)
-                C3.funcForDisplay()
                 box = C3.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -787,7 +776,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringC4 -> {
                 view = findViewById(R.id.buttonC4)
-                C4.funcForDisplay()
                 box = C4.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -803,7 +791,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringD1 -> {
                 view = findViewById(R.id.buttonD1)
-                D1.funcForDisplay()
                 box = D1.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -819,7 +806,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringD2 -> {
                 view = findViewById(R.id.buttonD2)
-                D2.funcForDisplay()
                 box = D2.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -835,7 +821,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringD3 -> {
                 view = findViewById(R.id.buttonD3)
-                D3.funcForDisplay()
                 box = D3.funcForDisplay()
                 when (box[1]) {
                     1 -> {
@@ -851,7 +836,6 @@ class GameWithManActivity : AppCompatActivity() {
             }
             stringD4 -> {
                 view = findViewById(R.id.buttonD4)
-                D4.funcForDisplay()
                 box = D4.funcForDisplay()
                 when (box[1]) {
                     1 -> {
