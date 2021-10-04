@@ -1,6 +1,5 @@
 package com.example.gobblet5
 
-import android.app.Activity
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Resources
@@ -50,12 +49,12 @@ class GameWithManActivity : AppCompatActivity() {
     private var insetDone = false
   ////文字列
     //手持ち
-    private val stringTemochiRedBig="tRB"
-    private val stringTemochiRedMiddle="tRM"
-    private val stringTemochiRedSmall="tRS"
-    private val stringTemochiGreenBig="tGB"
-    private val stringTemochiGreenMiddle="tGM"
-    private val stringTemochiGreenSmall="tGS"
+    private val stringTemochiRedBig="TemochiRedBig"
+    private val stringTemochiRedMiddle="TemochiRedMiddle"
+    private val stringTemochiRedSmall="TemochiRedSmall"
+    private val stringTemochiGreenBig="TemochiGreenBig"
+    private val stringTemochiGreenMiddle="TemochiGreenMiddle"
+    private val stringTemochiGreenSmall="TemochiGreenSmall"
     //マス
     private val stringA1="A1"
     private val stringA2="A2"
@@ -75,31 +74,31 @@ class GameWithManActivity : AppCompatActivity() {
     private val stringD4="D4"
   ////手持ち
     //赤
-    private val temochiRedBig = Temochi(3)
-    private val temochiRedMiddle = Temochi(2)
-    private val temochiRedSmall = Temochi(1)
+    private val temochiRedBig = Temochi(3,"TemochiRedBig")
+    private val temochiRedMiddle = Temochi(2,"TemochiRedMiddle")
+    private val temochiRedSmall = Temochi(1,"TemochiRedSmall")
     //緑
-    private val temochiGreenBig = Temochi(3)
-    private val temochiGreenMiddle = Temochi(2)
-    private val temochiGreenSmall = Temochi(1)
+    private val temochiGreenBig = Temochi(3,"TemochiGreenBig")
+    private val temochiGreenMiddle = Temochi(2,"TemochiGreenMiddle")
+    private val temochiGreenSmall = Temochi(1,"TemochiGreenSmall")
 
     //マス宣言
-    private val A1 = mas("A1")
-    private val B1 = mas("B1")
-    private val C1 = mas("C1")
-    private val D1 = mas("D1")
-    private val A2 = mas("A2")
-    private val B2 = mas("B2")
-    private val C2 = mas("C2")
-    private val D2 = mas("D2")
-    private val A3 = mas("A3")
-    private val B3 = mas("B3")
-    private val C3 = mas("C3")
-    private val D3 = mas("D3")
-    private val A4 = mas("A4")
-    private val B4 = mas("B4")
-    private val C4 = mas("C4")
-    private val D4 = mas("D4")
+    private val A1 = Mas("A1")
+    private val B1 = Mas("B1")
+    private val C1 = Mas("C1")
+    private val D1 = Mas("D1")
+    private val A2 = Mas("A2")
+    private val B2 = Mas("B2")
+    private val C2 = Mas("C2")
+    private val D2 = Mas("D2")
+    private val A3 = Mas("A3")
+    private val B3 = Mas("B3")
+    private val C3 = Mas("C3")
+    private val D3 = Mas("D3")
+    private val A4 = Mas("A4")
+    private val B4 = Mas("B4")
+    private val C4 = Mas("C4")
+    private val D4 = Mas("D4")
     //ライン デバック用
     var line1 = mutableListOf<Int>(0, 0, 0, 0)
     var line2 = mutableListOf<Int>(0, 0, 0, 0)
@@ -747,6 +746,12 @@ class GameWithManActivity : AppCompatActivity() {
     //手持ちボタンを押した時の作業1
     private fun pickupTemochi(name: String){
         var rv = 0
+        fun commonFunc(temochi: Temochi){
+            rv = temochi.returnInf()
+            setSMP(rv, temochi.nameGetter())
+            havingDisplay()
+            debSMP()
+        }
         when(name){
             stringTemochiRedBig -> {
                 rv = temochiRedBig.returnInf()
