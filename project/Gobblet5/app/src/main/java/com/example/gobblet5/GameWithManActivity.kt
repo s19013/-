@@ -145,17 +145,15 @@ class GameWithManActivity : AppCompatActivity() {
         iniPreference()
         iniSoundPool()
         iniMediaPlayer()
-        startTurn()
-
         //先攻後攻設定
-        if (playFirst != 0){
-            turn = playFirst
-        } else {
+        if (playFirst != 0){ turn = playFirst }
+        else {
             when((1..2).random()){
                 1 -> {turn = 1}
                 2 -> {turn = -1}
             }
         }
+        startTurn()
         Log.d("gobblet2", "pF:${playFirst}")
 
         //表示に使う物(空箱に実物を入れる)
@@ -1017,102 +1015,104 @@ class GameWithManActivity : AppCompatActivity() {
     private fun insert(name: String){
         when(name){
             stringA1 -> {
-                when (A1.mInsert(size, turn)) {
-                    true -> { setD(stringA1) }
-                    false -> { toastCanNotInsert() }//トースト表示でおけないことを知らせる
+                if (A1.mInsert(size, turn)) {
+                    setD(stringA1)
+                    return
                 }
             }
             stringA2 -> {
-                when (A2.mInsert(size, turn)) {
-                    true -> { setD(stringA2) }
-                    false -> { toastCanNotInsert() }
+                if (A2.mInsert(size, turn)) {
+                    setD(stringA2)
+                    return
                 }
             }
             stringA3 -> {
-                when (A3.mInsert(size, turn)) {
-                    true -> { setD(stringA3) }
-                    false -> { toastCanNotInsert() }
+                if (A3.mInsert(size, turn)) {
+                    setD(stringA3)
+                    return
                 }
             }
             stringA4 -> {
-                when (A4.mInsert(size, turn)) {
-                    true -> { setD(stringA4) }
-                    false -> { toastCanNotInsert() }
+                if (A4.mInsert(size, turn)) {
+                    setD(stringA4)
+                    return
                 }
             }
             stringB1 -> {
-                when (B1.mInsert(size, turn)) {
-                    true -> { setD(stringB1) }
-                    false -> { toastCanNotInsert() }
+                if (B1.mInsert(size, turn)) {
+                    setD(stringB1)
+                    return
                 }
             }
             stringB2 -> {
-                when (B2.mInsert(size, turn)) {
-                    true -> { setD(stringB2) }
-                    false -> { toastCanNotInsert() }
+                if (B2.mInsert(size, turn)) {
+                    setD(stringB2)
+                    return
                 }
             }
             stringB3 -> {
-                when (B3.mInsert(size, turn)) {
-                    true -> { setD(stringB3) }
-                    false -> { toastCanNotInsert() }
+                if (B3.mInsert(size, turn)) {
+                    setD(stringB3)
+                    return
                 }
             }
             stringB4 -> {
-                when (B4.mInsert(size, turn)) {
-                    true -> { setD(stringB4) }
-                    false -> { toastCanNotInsert() }
+                if (B4.mInsert(size, turn)) {
+                    setD(stringB4)
+                    return
                 }
             }
             stringC1 -> {
-                when (C1.mInsert(size, turn)) {
-                    true -> { setD(stringC1) }
-                    false -> { toastCanNotInsert() }
+                if (C1.mInsert(size, turn)) {
+                    setD(stringC1)
+                    return
                 }
             }
             stringC2 -> {
-                when (C2.mInsert(size, turn)) {
-                    true -> { setD(stringC2) }
-                    false -> { toastCanNotInsert() }
+                if (C2.mInsert(size, turn)) {
+                    setD(stringC2)
+                    return
                 }
             }
             stringC3 -> {
-                when (C3.mInsert(size, turn)) {
-                    true -> { setD(stringC3) }
-                    false -> { toastCanNotInsert() }
+                if (C3.mInsert(size, turn)) {
+                    setD(stringC3)
+                    return
                 }
             }
             stringC4 -> {
-                when (C4.mInsert(size, turn)) {
-                    true -> { setD(stringC4) }
-                    false -> { toastCanNotInsert() }
+                if (C4.mInsert(size, turn)) {
+                    setD(stringC4)
+                    return
                 }
             }
             stringD1 -> {
-                when (D1.mInsert(size, turn)) {
-                    true -> { setD(stringD1) }
-                    false -> { toastCanNotInsert() }
+                if (D1.mInsert(size, turn)) {
+                    setD(stringD1)
+                    return
                 }
             }
             stringD2 -> {
-                when (D2.mInsert(size, turn)) {
-                    true -> { setD(stringD2) }
-                    false -> { toastCanNotInsert() }
+                if (D2.mInsert(size, turn)) {
+                    setD(stringD2)
+                    return
                 }
             }
             stringD3 -> {
-                when (D3.mInsert(size, turn)) {
-                    true -> { setD(stringD3) }
-                    false -> { toastCanNotInsert() }
+                if (D3.mInsert(size, turn)) {
+                    setD(stringD3)
+                    return
                 }
             }
             stringD4 -> {
-                when (D4.mInsert(size, turn)) {
-                    true -> { setD(stringD4) }
-                    false -> { toastCanNotInsert() }
+                if (D4.mInsert(size, turn)) {
+                    setD(stringD4)
+                    return
                 }
             }
         }
+        toastCanNotInsert()//トースト表示でおけないことを知らせる
+
     }
 
     //手持ちやりなおし
