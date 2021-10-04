@@ -534,28 +534,16 @@ class GameWithManActivity : AppCompatActivity() {
         if (turn == 1){
             view = findViewById(R.id.having1p)
             when (size){
-                3 -> {
-                    view?.setImageDrawable(komaRedBigD)
-                }
-                2 -> {
-                    view?.setImageDrawable(komaRedMiddleD)
-                }
-                1 -> {
-                    view?.setImageDrawable(komaRedSmallD)
-                }
+                3 -> { view?.setImageDrawable(komaRedBigD) }
+                2 -> { view?.setImageDrawable(komaRedMiddleD) }
+                1 -> { view?.setImageDrawable(komaRedSmallD) }
             }
         } else if (turn ==-1){
             view = findViewById(R.id.having2p)
             when (size){
-                3 -> {
-                    view?.setImageDrawable(komaGreenBigD)
-                }
-                2 -> {
-                    view?.setImageDrawable(komaGreenMiddleD)
-                }
-                1 -> {
-                    view?.setImageDrawable(komaGreenSmallD)
-                }
+                3 -> { view?.setImageDrawable(komaGreenBigD) }
+                2 -> { view?.setImageDrawable(komaGreenMiddleD) }
+                1 -> { view?.setImageDrawable(komaGreenSmallD) }
             }
         }
     }
@@ -803,6 +791,7 @@ class GameWithManActivity : AppCompatActivity() {
             }
         }
     }
+
   ////マスのボタンをおした時の作業
     //一旦ここを通して分岐
     private fun pushedMasButton(name: String){
@@ -1157,8 +1146,10 @@ class GameWithManActivity : AppCompatActivity() {
         startTurn()
     }
 
+    //移動元が手持ちだったときのリセットしょり?
     private fun resetForEnd() {
         bordDisplay(destination)
+//        var Mas:mas = A1
         if (movingSource==stringTemochiRedBig||
             movingSource==stringTemochiRedMiddle||
             movingSource==stringTemochiRedSmall||
