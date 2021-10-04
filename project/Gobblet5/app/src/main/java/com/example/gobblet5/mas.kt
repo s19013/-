@@ -53,7 +53,7 @@ class mas(val name:String) {
     fun funcForDisplay():MutableList<Int>{
         for (i in 2 downTo 0){
             if (list[i]!=0){
-                return mutableListOf(i+1,list[i])
+                return mutableListOf(i+1,list[i]) //[あった場所､大きさ]
             }
         }
         return mutableListOf(0,0)
