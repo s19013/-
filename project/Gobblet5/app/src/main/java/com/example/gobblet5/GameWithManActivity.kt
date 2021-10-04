@@ -209,8 +209,12 @@ class GameWithManActivity : AppCompatActivity() {
 //手持ちのボタンを触った時
         buttonTemochiRedBig.setOnClickListener {
             if (turn == 1){
-                if (movingSource=="none"||
-                    movingSource==stringTemochiRedBig || //移動元が手持ちの場合のみコマをとりなおせる
+                //movingSourceが同じときやり直しができる
+                if (movingSource == stringTemochiRedBig){
+                    resetTemochi()
+                }
+                //移動元が手持ちの場合のみコマを
+                else if (movingSource=="none"||
                     movingSource==stringTemochiRedMiddle||
                     movingSource==stringTemochiRedSmall){
                     pickupTemochi(stringTemochiRedBig)
@@ -221,9 +225,11 @@ class GameWithManActivity : AppCompatActivity() {
 
         buttonTemochiRedMiddle.setOnClickListener {
             if (turn == 1){
-                if (movingSource=="none"||
+                if (movingSource==stringTemochiRedMiddle){
+                    resetTemochi()
+                }
+                else if (movingSource=="none"||
                     movingSource==stringTemochiRedBig ||
-                    movingSource==stringTemochiRedMiddle||
                     movingSource==stringTemochiRedSmall){
                     pickupTemochi(stringTemochiRedMiddle)
                 }
@@ -233,10 +239,12 @@ class GameWithManActivity : AppCompatActivity() {
 
         buttonTemochiRedSmall.setOnClickListener {
             if (turn == 1){
-                if (movingSource=="none"||
+                if (movingSource==stringTemochiRedSmall){
+                    resetTemochi()
+                }
+                else if (movingSource=="none"||
                     movingSource==stringTemochiRedBig ||
-                    movingSource==stringTemochiRedMiddle||
-                    movingSource==stringTemochiRedSmall){
+                    movingSource==stringTemochiRedMiddle){
                     pickupTemochi(stringTemochiRedSmall)
                 }
             }
@@ -245,8 +253,10 @@ class GameWithManActivity : AppCompatActivity() {
 
         buttonTemochiGreenBig.setOnClickListener {
             if (turn == -1){
-                if (movingSource=="none"||
-                    movingSource==stringTemochiGreenBig ||
+                if (movingSource==stringTemochiGreenBig){
+                    resetTemochi()
+                }
+                else if (movingSource=="none"||
                     movingSource==stringTemochiGreenMiddle||
                     movingSource==stringTemochiGreenSmall) {
                     pickupTemochi(stringTemochiGreenBig)
@@ -257,9 +267,11 @@ class GameWithManActivity : AppCompatActivity() {
 
         buttonTemochiGreenMiddle.setOnClickListener {
             if (turn == -1){
-                if (movingSource=="none"||
+                if (movingSource==stringTemochiGreenMiddle){
+                    resetTemochi()
+                }
+                else if (movingSource=="none"||
                     movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenMiddle||
                     movingSource==stringTemochiGreenSmall){
                     pickupTemochi(stringTemochiGreenMiddle)
                 }
@@ -269,10 +281,12 @@ class GameWithManActivity : AppCompatActivity() {
 
         buttonTemochiGreenSmall.setOnClickListener {
             if (turn == -1){
-                if (movingSource=="none"||
+                if (movingSource==stringTemochiGreenSmall){
+                    resetTemochi()
+                }
+                else if (movingSource=="none"||
                     movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenMiddle||
-                    movingSource==stringTemochiGreenSmall){
+                    movingSource==stringTemochiGreenMiddle){
                     pickupTemochi(stringTemochiGreenSmall)
                 }
             }
@@ -373,7 +387,7 @@ class GameWithManActivity : AppCompatActivity() {
     }
 
   ////ポップアップ
-    //結果
+    //結果ポップアップ
     private fun showResaltPopup(){
       resaltPopup = PopupWindow(this@GameWithManActivity)
       // レイアウト設定
@@ -444,7 +458,7 @@ class GameWithManActivity : AppCompatActivity() {
       }
     }
 
-    //設定
+    //設定ポップアップ
     private fun showConfigPopup(){
         configPopup = PopupWindow(this@GameWithManActivity)
         // レイアウト設定
@@ -545,102 +559,8 @@ class GameWithManActivity : AppCompatActivity() {
         playSound(cannotDoitSE)
     }
 
-    //ターン開始の処理
-    private fun startTurn(){
-        if (finished){turn = 0}
-        when(turn){
-            1 -> {
-                telop1p.setBackgroundColor(Color.rgb(255, 173, 173))
-                telop2p.setBackgroundColor(Color.rgb(230, 230, 230))
-            }
-            -1 -> {
-                telop1p.setBackgroundColor(Color.rgb(230, 230, 230))
-                telop2p.setBackgroundColor(Color.rgb(188, 255, 173))
-            }
-            0 -> {
-                telop1p.setBackgroundColor(Color.rgb(230, 230, 230))
-                telop2p.setBackgroundColor(Color.rgb(230, 230, 230))
-            }
-        }
-    }
-
-    //ターン終了時の処理に関すること
-    private fun endTurn() {
-        resetForEnd()
-        resetHavingDisplay()
-        judge()
-        movingSource = "none"
-        destination = "none"
-        size = 0
-        pickupDone = false
-        insetDone = false
-        turn*=-1
-        Log.d("gobblet2", "turnEnd")
-        startTurn()
-    }
-
-    private fun resetForEnd() {
-        bordDisplay(destination)
-        if (movingSource==stringTemochiRedBig||
-            movingSource==stringTemochiRedMiddle||
-            movingSource==stringTemochiRedSmall||
-            movingSource==stringTemochiGreenBig||
-            movingSource==stringTemochiGreenMiddle||
-            movingSource==stringTemochiGreenSmall){
-            when (movingSource) {//移動元を正しく表示する
-                stringTemochiRedBig -> {
-                    temochiRedBig.usePiece()
-                    textTemochiRedBig.text = "${temochiRedBig.returnCount()}"
-                    if (temochiRedBig.returnInf() == 0) {
-                        buttonTemochiRedBig.visibility = View.INVISIBLE
-                        textTemochiRedBig.visibility = View.INVISIBLE
-                    }
-                }
-                stringTemochiRedMiddle -> {
-                    temochiRedMiddle.usePiece()
-                    textTemochiRedMiddle.text = "${temochiRedMiddle.returnCount()}"
-                    if (temochiRedMiddle.returnInf() == 0) {
-                        buttonTemochiRedMiddle.visibility = View.INVISIBLE
-                        textTemochiRedMiddle.visibility = View.INVISIBLE
-                    }
-                }
-                stringTemochiRedSmall -> {
-                    temochiRedSmall.usePiece()
-                    textTemochiRedSmall.text = "${temochiRedSmall.returnCount()}"
-                    if (temochiRedSmall.returnInf() == 0) {
-                        buttonTemochiRedSmall.visibility = View.INVISIBLE
-                        textTemochiRedSmall.visibility = View.INVISIBLE
-                    }
-                }
-                stringTemochiGreenBig -> {
-                    temochiGreenBig.usePiece()
-                    textTemochiGreenBig.text = "${temochiGreenBig.returnCount()}"
-                    if (temochiGreenBig.returnInf() == 0) {
-                        buttonTemochiGreenBig.visibility = View.INVISIBLE
-                        textTemochiGreenBig.visibility = View.INVISIBLE
-                    }
-                }
-                stringTemochiGreenMiddle -> {
-                    temochiGreenMiddle.usePiece()
-                    textTemochiGreenMiddle.text = "${temochiGreenMiddle.returnCount()}"
-                    if (temochiGreenMiddle.returnInf() == 0) {
-                        buttonTemochiGreenMiddle.visibility = View.INVISIBLE
-                        textTemochiGreenMiddle.visibility = View.INVISIBLE
-                    }
-                }
-                stringTemochiGreenSmall -> {
-                    temochiGreenSmall.usePiece()
-                    textTemochiGreenSmall.text = "${temochiGreenSmall.returnCount()}"
-                    if (temochiGreenSmall.returnInf() == 0) {
-                        buttonTemochiGreenSmall.visibility = View.INVISIBLE
-                        textTemochiGreenSmall.visibility = View.INVISIBLE
-                    }
-                }
-            }
-        }
-    }
-
     //持ちての表示に関する関数
+      //持ちてのコマを表示
     private fun havingDisplay(){
         playSound(selectSE)
         Log.d("gobblet2", "havingDisplay  size=${size},turn=${turn}")
@@ -672,7 +592,7 @@ class GameWithManActivity : AppCompatActivity() {
             }
         }
     }
-
+      //持ちてのコマをなにも持ってない状態にもどす
     private fun resetHavingDisplay(){
         when(turn){
             1 -> {
@@ -1400,20 +1320,105 @@ class GameWithManActivity : AppCompatActivity() {
         }
     }
 
+    //手持ちやりなおし
+    private fun resetTemochi(){
+        Log.d("gobblet2", "resetTemochi")
+        resetSMP()
+        resetHavingDisplay()
+        debSMP()
+    }
 
-    //音を鳴らす処理
-    private fun playSound(status: Int){
-        if (SE){
-            when(status){
-                cannotDoitSE -> sp.play(cannotDoitSE, 1.0f, 1.0f, 1, 0, 1.5f)
-                putSE -> sp.play(putSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                selectSE -> sp.play(selectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                cancelSE -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                menuSelectSE -> sp.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                gameStartSE -> sp.play(gameStartSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                radioButtonSE -> sp.play(radioButtonSE,1.0f,1.0f,1,0,1.0f)
-                openSE -> sp.play(openSE,1.0f,1.0f,1,0,1.0f)
-                closeSE -> sp.play(closeSE,1.0f,1.0f,1,0,1.0f)
+    //ターン開始の処理
+    private fun startTurn(){
+        if (finished){turn = 0}
+        when(turn){
+            1 -> {
+                telop1p.setBackgroundColor(Color.rgb(255, 173, 173))
+                telop2p.setBackgroundColor(Color.rgb(230, 230, 230))
+            }
+            -1 -> {
+                telop1p.setBackgroundColor(Color.rgb(230, 230, 230))
+                telop2p.setBackgroundColor(Color.rgb(188, 255, 173))
+            }
+            0 -> {
+                telop1p.setBackgroundColor(Color.rgb(230, 230, 230))
+                telop2p.setBackgroundColor(Color.rgb(230, 230, 230))
+            }
+        }
+    }
+
+    //ターン終了時の処理に関すること
+    private fun endTurn() {
+        resetForEnd()
+        resetHavingDisplay()
+        judge()
+        movingSource = "none"
+        destination = "none"
+        size = 0
+        pickupDone = false
+        insetDone = false
+        turn*=-1
+        Log.d("gobblet2", "turnEnd")
+        startTurn()
+    }
+
+    private fun resetForEnd() {
+        bordDisplay(destination)
+        if (movingSource==stringTemochiRedBig||
+            movingSource==stringTemochiRedMiddle||
+            movingSource==stringTemochiRedSmall||
+            movingSource==stringTemochiGreenBig||
+            movingSource==stringTemochiGreenMiddle||
+            movingSource==stringTemochiGreenSmall){
+            when (movingSource) {//移動元を正しく表示する
+                stringTemochiRedBig -> {
+                    temochiRedBig.usePiece()
+                    textTemochiRedBig.text = "${temochiRedBig.returnCount()}"
+                    if (temochiRedBig.returnInf() == 0) {
+                        buttonTemochiRedBig.visibility = View.INVISIBLE
+                        textTemochiRedBig.visibility = View.INVISIBLE
+                    }
+                }
+                stringTemochiRedMiddle -> {
+                    temochiRedMiddle.usePiece()
+                    textTemochiRedMiddle.text = "${temochiRedMiddle.returnCount()}"
+                    if (temochiRedMiddle.returnInf() == 0) {
+                        buttonTemochiRedMiddle.visibility = View.INVISIBLE
+                        textTemochiRedMiddle.visibility = View.INVISIBLE
+                    }
+                }
+                stringTemochiRedSmall -> {
+                    temochiRedSmall.usePiece()
+                    textTemochiRedSmall.text = "${temochiRedSmall.returnCount()}"
+                    if (temochiRedSmall.returnInf() == 0) {
+                        buttonTemochiRedSmall.visibility = View.INVISIBLE
+                        textTemochiRedSmall.visibility = View.INVISIBLE
+                    }
+                }
+                stringTemochiGreenBig -> {
+                    temochiGreenBig.usePiece()
+                    textTemochiGreenBig.text = "${temochiGreenBig.returnCount()}"
+                    if (temochiGreenBig.returnInf() == 0) {
+                        buttonTemochiGreenBig.visibility = View.INVISIBLE
+                        textTemochiGreenBig.visibility = View.INVISIBLE
+                    }
+                }
+                stringTemochiGreenMiddle -> {
+                    temochiGreenMiddle.usePiece()
+                    textTemochiGreenMiddle.text = "${temochiGreenMiddle.returnCount()}"
+                    if (temochiGreenMiddle.returnInf() == 0) {
+                        buttonTemochiGreenMiddle.visibility = View.INVISIBLE
+                        textTemochiGreenMiddle.visibility = View.INVISIBLE
+                    }
+                }
+                stringTemochiGreenSmall -> {
+                    temochiGreenSmall.usePiece()
+                    textTemochiGreenSmall.text = "${temochiGreenSmall.returnCount()}"
+                    if (temochiGreenSmall.returnInf() == 0) {
+                        buttonTemochiGreenSmall.visibility = View.INVISIBLE
+                        textTemochiGreenSmall.visibility = View.INVISIBLE
+                    }
+                }
             }
         }
     }
@@ -1421,6 +1426,12 @@ class GameWithManActivity : AppCompatActivity() {
     private fun debSMP(){
         Log.d("gobblet2", "")
         Log.d("gobblet2", "size:${size}, movingSource:${movingSource}, pickupDone:${pickupDone}")
+    }
+
+    private fun resetSMP(){
+        size=0
+        movingSource="none"
+        pickupDone=false
     }
 
     private fun setSMP(s: Int, m: String){
@@ -1494,6 +1505,24 @@ class GameWithManActivity : AppCompatActivity() {
         Log.d("gobblet2", "finished:${finished},winner:${winner}")
     }
 
+    //音を鳴らす処理
+    private fun playSound(status: Int){
+        if (SE){
+            when(status){
+                cannotDoitSE -> sp.play(cannotDoitSE, 1.0f, 1.0f, 1, 0, 1.5f)
+                putSE -> sp.play(putSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                selectSE -> sp.play(selectSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                cancelSE -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                menuSelectSE -> sp.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                gameStartSE -> sp.play(gameStartSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                radioButtonSE -> sp.play(radioButtonSE,1.0f,1.0f,1,0,1.0f)
+                openSE -> sp.play(openSE,1.0f,1.0f,1,0,1.0f)
+                closeSE -> sp.play(closeSE,1.0f,1.0f,1,0,1.0f)
+            }
+        }
+    }
+
+//    全画面表示に関すること
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) hideSystemUI()
@@ -1515,7 +1544,7 @@ class GameWithManActivity : AppCompatActivity() {
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
     }
-
+//ライフサイクル
     override fun onResume() {
         super.onResume()
         if (BGM) {
