@@ -745,55 +745,18 @@ class GameWithManActivity : AppCompatActivity() {
 
     //手持ちボタンを押した時の作業1
     private fun pickupTemochi(name: String){
-        var rv = 0
         fun commonFunc(temochi: Temochi){
-            rv = temochi.returnInf()
-            setSMP(rv, temochi.nameGetter())
+            setSMP(temochi.returnInf(), temochi.nameGetter())
             havingDisplay()
             debSMP()
         }
         when(name){
-            stringTemochiRedBig -> {
-                rv = temochiRedBig.returnInf()
-//                if (rv != 0) {
-//                    setSMP(rv, stringTemochiRedBig)
-//                    havingDisplay()
-//                    debSMP()
-//                }
-                setSMP(rv, stringTemochiRedBig)
-                havingDisplay()
-                debSMP()
-            }
-            stringTemochiRedMiddle -> {
-                rv = temochiRedMiddle.returnInf()
-                setSMP(rv, stringTemochiRedMiddle)
-                havingDisplay()
-                debSMP()
-            }
-            stringTemochiRedSmall -> {
-                rv = temochiRedSmall.returnInf()
-                setSMP(rv, stringTemochiRedSmall)
-                havingDisplay()
-                debSMP()
-            }
-            stringTemochiGreenBig -> {
-                rv = temochiGreenBig.returnInf()
-                setSMP(rv, stringTemochiGreenBig)
-                havingDisplay()
-                debSMP()
-            }
-            stringTemochiGreenMiddle -> {
-                rv = temochiGreenMiddle.returnInf()
-                setSMP(rv, stringTemochiGreenMiddle)
-                havingDisplay()
-                debSMP()
-            }
-            stringTemochiGreenSmall -> {
-                rv = temochiGreenSmall.returnInf()
-                setSMP(rv, stringTemochiGreenSmall)
-                havingDisplay()
-                debSMP()
-            }
+            stringTemochiRedBig -> { commonFunc(temochiRedBig) }
+            stringTemochiRedMiddle -> { commonFunc(temochiRedMiddle) }
+            stringTemochiRedSmall -> { commonFunc(temochiRedSmall) }
+            stringTemochiGreenBig -> { commonFunc(temochiGreenBig) }
+            stringTemochiGreenMiddle -> { commonFunc(temochiGreenMiddle) }
+            stringTemochiGreenSmall -> { commonFunc(temochiGreenSmall) }
         }
     }
 
