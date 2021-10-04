@@ -3,7 +3,7 @@ package com.example.gobblet5
 import android.util.Log
 
 
-class mas(val name:String) {
+class Mas(val name:String) {
     var list= mutableListOf<Int>(0,0,0)
 
     fun mPickup(turn:Int):Int{
