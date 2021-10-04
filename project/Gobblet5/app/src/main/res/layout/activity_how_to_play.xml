@@ -128,8 +128,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:scaleX="@dimen/iconScale"
+                android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_uturn" />
 
             <TextView
@@ -194,8 +194,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:scaleX="@dimen/iconScale"
+                android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_l_arrow" />
 
             <Space
@@ -286,8 +286,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:scaleX="@dimen/iconScale"
+                android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_r_arrow" />
 
         </LinearLayout>
@@ -357,8 +357,10 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/imageGuidelineBottom"
         app:layout_constraintEnd_toStartOf="@+id/imageGuidelineEnd"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imageGuidelineStart"
         app:layout_constraintTop_toTopOf="@+id/imageGuidelineTop"
+        app:layout_constraintVertical_bias="1.0"
         tools:layout="@layout/fragment_how_to_play1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

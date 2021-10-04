@@ -36,8 +36,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
-                android:scaleX="0.8"
-                android:scaleY="0.8"
+                android:scaleX="@dimen/iconScale"
+                android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_uturn" />
 
             <Space
