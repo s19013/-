@@ -3,8 +3,12 @@ package com.example.gobblet5
 import android.util.Log
 
 
-class Mas(val name:String) {
+class Mas(private val name:String) {
     var list= mutableListOf<Int>(0,0,0)
+
+    fun nameGetter():String{
+        return name
+    }
 
     fun mPickup(turn:Int):Int{
         when(list.lastIndexOf(turn)){
