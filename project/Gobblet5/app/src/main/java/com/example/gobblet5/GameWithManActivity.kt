@@ -566,29 +566,17 @@ class GameWithManActivity : AppCompatActivity() {
         //大きさを判断
         fun RedSet(s: Int){
             when (s) {
-                3 -> {
-                    view?.setImageDrawable(komaRedBigD)
-                }
-                2 -> {
-                    view?.setImageDrawable(komaRedMiddleD)
-                }
-                1 -> {
-                    view?.setImageDrawable(komaRedSmallD)
-                }
+                3 -> { view?.setImageDrawable(komaRedBigD) }
+                2 -> { view?.setImageDrawable(komaRedMiddleD) }
+                1 -> { view?.setImageDrawable(komaRedSmallD) }
             }
         }
 
         fun GreenSet(s: Int){
             when (s) {
-                3 -> {
-                    view?.setImageDrawable(komaGreenBigD)
-                }
-                2 -> {
-                    view?.setImageDrawable(komaGreenMiddleD)
-                }
-                1 -> {
-                    view?.setImageDrawable(komaGreenSmallD)
-                }
+                3 -> { view?.setImageDrawable(komaGreenBigD) }
+                2 -> { view?.setImageDrawable(komaGreenMiddleD) }
+                1 -> { view?.setImageDrawable(komaGreenSmallD) }
             }
         }
 
@@ -599,147 +587,73 @@ class GameWithManActivity : AppCompatActivity() {
             stringA1 -> {
                 view = findViewById(R.id.buttonA1)
                 box = A1.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringA2 -> {
                 view = findViewById(R.id.buttonA2)
                 box = A2.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringA3 -> {
                 view = findViewById(R.id.buttonA3)
                 box = A3.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringA4 -> {
                 view = findViewById(R.id.buttonA4)
                 box = A4.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringB1 -> {
                 view = findViewById(R.id.buttonB1)
                 box = B1.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringB2 -> {
                 view = findViewById(R.id.buttonB2)
                 box = B2.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringB3 -> {
                 view = findViewById(R.id.buttonB3)
                 box = B3.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringB4 -> {
                 view = findViewById(R.id.buttonB4)
                 box = B4.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringC1 -> {
                 view = findViewById(R.id.buttonC1)
                 box = C1.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringC2 -> {
                 view = findViewById(R.id.buttonC2)
                 box = C2.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringC3 -> {
                 view = findViewById(R.id.buttonC3)
                 box = C3.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringC4 -> {
                 view = findViewById(R.id.buttonC4)
                 box = C4.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringD1 -> {
                 view = findViewById(R.id.buttonD1)
                 box = D1.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringD2 -> {
                 view = findViewById(R.id.buttonD2)
                 box = D2.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringD3 -> {
                 view = findViewById(R.id.buttonD3)
                 box = D3.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
             stringD4 -> {
                 view = findViewById(R.id.buttonD4)
                 box = D4.funcForDisplay()
-                when (box[1]) {
-                    1 -> { RedSet(box[0]) }
-                    0 -> { EmpSet() }
-                    -1 -> { GreenSet(box[0]) }
-                }
             }
+        }
+        //色を判断
+        when (box[1]) {
+            1 -> { RedSet(box[0]) }
+            0 -> { EmpSet() }
+            -1 -> { GreenSet(box[0]) }
         }
     }
 
@@ -772,195 +686,124 @@ class GameWithManActivity : AppCompatActivity() {
 
     //コマを取り出す
     private fun pickup(name: String){
+        fun commonFunc(mas: Mas){
+            setSMP(mas.mPickup(turn), mas.nameGetter())
+            debSMP()
+            havingDisplay()
+            mas.resetList(size)
+            bordDisplay(mas.nameGetter())
+            judge()//ここでしたが相手のコマで一列そろってしまったときは相手のかちにする
+        }
+
         when(name){
             stringA1 -> {
                 if (A1.mPickup(turn) != 0) {
-                    setSMP(A1.mPickup(turn), stringA1)
-                    debSMP()
-                    havingDisplay()
-                    A1.resetList(size)
-                    bordDisplay(stringA1)
-                    judge()//ここでしたが相手のこまで一列そろってしまったときも相手のかちにする
+                    commonFunc(A1)
                 } else {
                     toastCanNotPickup()
                 }//取り出せるものが無い時の動き
             }
             stringA2 -> {
                 if (A2.mPickup(turn) != 0) {
-                    setSMP(A2.mPickup(turn), stringA2)
-                    debSMP()
-                    havingDisplay()
-                    A2.resetList(size)
-                    bordDisplay(stringA2)
-                    judge()
+                    commonFunc(A2)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringA3 -> {
                 if (A3.mPickup(turn) != 0) {
-                    setSMP(A3.mPickup(turn), stringA3)
-                    debSMP()
-                    havingDisplay()
-                    A3.resetList(size)
-                    bordDisplay(stringA3)
-                    judge()
+                    commonFunc(A3)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringA4 -> {
                 if (A4.mPickup(turn) != 0) {
-                    setSMP(A4.mPickup(turn), stringA4)
-                    debSMP()
-                    havingDisplay()
-                    A4.resetList(size)
-                    bordDisplay(stringA4)
-                    judge()
+                    commonFunc(A4)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringB1 -> {
                 if (B1.mPickup(turn) != 0) {
-                    setSMP(B1.mPickup(turn), stringB1)
-                    debSMP()
-                    havingDisplay()
-                    B1.resetList(size)
-                    bordDisplay(stringB1)
-                    judge()
+                    commonFunc(B1)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringB2 -> {
                 if (B2.mPickup(turn) != 0) {
-                    setSMP(B2.mPickup(turn), stringB2)
-                    debSMP()
-                    havingDisplay()
-                    B2.resetList(size)
-                    bordDisplay(stringB2)
-                    judge()
+                    commonFunc(B2)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringB3 -> {
                 if (B3.mPickup(turn) != 0) {
-                    setSMP(B3.mPickup(turn), stringB3)
-                    debSMP()
-                    havingDisplay()
-                    B3.resetList(size)
-                    bordDisplay(stringB3)
-                    judge()
+                    commonFunc(B3)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringB4 -> {
                 if (B4.mPickup(turn) != 0) {
-                    setSMP(B4.mPickup(turn), stringB4)
-                    debSMP()
-                    havingDisplay()
-                    B4.resetList(size)
-                    bordDisplay(stringB4)
-                    judge()
+                    commonFunc(B4)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringC1 -> {
                 if (C1.mPickup(turn) != 0) {
-                    setSMP(C1.mPickup(turn), stringC1)
-                    debSMP()
-                    havingDisplay()
-                    C1.resetList(size)
-                    bordDisplay(stringC1)
-                    judge()
+                    commonFunc(C1)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringC2 -> {
                 if (C2.mPickup(turn) != 0) {
-                    setSMP(C2.mPickup(turn), stringC2)
-                    debSMP()
-                    havingDisplay()
-                    C2.resetList(size)
-                    bordDisplay(stringC2)
-                    judge()
+                    commonFunc(C2)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringC3 -> {
                 if (C3.mPickup(turn) != 0) {
-                    setSMP(C3.mPickup(turn), stringC3)
-                    debSMP()
-                    havingDisplay()
-                    C3.resetList(size)
-                    bordDisplay(stringC3)
-                    judge()
+                    commonFunc(C3)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringC4 -> {
                 if (C4.mPickup(turn) != 0) {
-                    setSMP(C4.mPickup(turn), stringC4)
-                    debSMP()
-                    havingDisplay()
-                    C4.resetList(size)
-                    bordDisplay(stringC4)
-                    judge()
+                    commonFunc(C4)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringD1 -> {
                 if (D1.mPickup(turn) != 0) {
-                    setSMP(D1.mPickup(turn), stringD1)
-                    debSMP()
-                    havingDisplay()
-                    D1.resetList(size)
-                    bordDisplay(stringD1)
-                    judge()
+                    commonFunc(D1)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringD2 -> {
                 if (D2.mPickup(turn) != 0) {
-                    setSMP(D2.mPickup(turn), stringD2)
-                    debSMP()
-                    havingDisplay()
-                    D2.resetList(size)
-                    bordDisplay(stringD2)
-                    judge()
+                    commonFunc(D2)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringD3 -> {
                 if (D3.mPickup(turn) != 0) {
-                    setSMP(D3.mPickup(turn), stringD3)
-                    debSMP()
-                    havingDisplay()
-                    D3.resetList(size)
-                    bordDisplay(stringD3)
-                    judge()
+                    commonFunc(D3)
                 } else {
                     toastCanNotPickup()
                 }
             }
             stringD4 -> {
                 if (D4.mPickup(turn) != 0) {
-                    setSMP(D4.mPickup(turn), stringD4)
-                    debSMP()
-                    havingDisplay()
-                    D4.resetList(size)
-                    bordDisplay(stringD4)
-                    judge()
+                    commonFunc(D4)
                 } else {
                     toastCanNotPickup()
                 }
