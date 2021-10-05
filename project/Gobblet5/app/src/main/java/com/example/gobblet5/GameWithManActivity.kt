@@ -381,13 +381,13 @@ class GameWithManActivity : AppCompatActivity() {
               "1p" -> resaltImage.setImageResource(R.drawable.win1p_jp)
               "2p" -> resaltImage.setImageResource(R.drawable.win2p_jp)
           }
-          Log.d("gobblet2", "jp")
+          Log.d("gobblet2", "lang:jp")
       } else {
           when(winner){
               "1p" -> resaltImage.setImageResource(R.drawable.win1p_en)
               "2p" -> resaltImage.setImageResource(R.drawable.win2p_en)
           }
-          Log.d("gobblet2", "en")
+          Log.d("gobblet2", "lang:en")
       }
 
 
@@ -466,7 +466,7 @@ class GameWithManActivity : AppCompatActivity() {
             playSound(radioButtonSE)
             val editor=pref!!.edit()
             editor.putBoolean("SEOnOff",SE).apply()
-            Log.d("gobblet2", "SE=${SE}")
+            //Log.d("gobblet2", "SE=${SE}")
         }
 
         RadioBGM.setOnCheckedChangeListener { group, checkedId ->
@@ -483,7 +483,7 @@ class GameWithManActivity : AppCompatActivity() {
             playSound(radioButtonSE)
             val editor= pref!!.edit()
             editor.putBoolean("BGMOnOff",BGM).apply()
-            Log.d("gobblet2", "BGM=${BGM}")
+            //Log.d("gobblet2", "BGM=${BGM}")
         }
 
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
@@ -678,10 +678,17 @@ class GameWithManActivity : AppCompatActivity() {
   ////マスのボタンをおした時の作業
     //一旦ここを通して分岐
     private fun pushedMasButton(mas: Mas){
-        if (!pickupDone) {//取り出し作業
+        //取り出し作業
+        if (!pickupDone) {
             pickup(mas.nameGetter())
-        } else{//マスの中に入れる
-            insert(mas.nameGetter())
+            return
+        }
+        //マスの中に入れる
+        insert(mas.nameGetter())
+        if(pickupDone == true && movingSource == mas.nameGetter()){
+            resetMas(mas.nameGetter()) //やり直し
+        } else{
+            endTurn() //ターン終了作業に移る
         }
     }
 
@@ -814,6 +821,7 @@ class GameWithManActivity : AppCompatActivity() {
 
     //駒を入れる
     private fun insert(name: String){
+        val insertMas = A1 //ただのダミー
         when(name){
             stringA1 -> {
                 if (A1.mInsert(size, turn)) {
@@ -918,17 +926,17 @@ class GameWithManActivity : AppCompatActivity() {
 
     //手持ちやりなおし
     private fun resetTemochi(){
-        Log.d("gobblet2", "resetTemochi")
         resetSMP()
         resetHavingDisplay()
         debSMP()
     }
 
     //マスやり直し
-    private fun resetMas(){
-        Log.d("gobblet2", "mas")
+    private fun resetMas(masName:String){
+        bordDisplay(masName)
         resetSMP()
         resetHavingDisplay()
+        debjudge()
 
     }
 
@@ -969,7 +977,6 @@ class GameWithManActivity : AppCompatActivity() {
     //移動元が手持ちだったときのリセットしょり?
     private fun resetForEnd() {
         bordDisplay(destination)
-//        var Mas:mas = A1
         if (movingSource==stringTemochiRedBig||
             movingSource==stringTemochiRedMiddle||
             movingSource==stringTemochiRedSmall||
@@ -1034,23 +1041,27 @@ class GameWithManActivity : AppCompatActivity() {
         Log.d("gobblet2", "size:${size}, movingSource:${movingSource}, pickupDone:${pickupDone}")
     }
 
-    private fun resetSMP(){
-        size=0
-        movingSource="none"
-        pickupDone=false
-    }
-
     private fun setSMP(s: Int, m: String){
         size=s
         movingSource=m
         pickupDone=true
     }
 
+    private fun resetSMP(){
+        size=0
+        movingSource="none"
+        pickupDone=false
+    }
+
     private fun setD(location: String) {
         playSound(putSE)
         destination = location
         Log.d("gobblet2", "destination:${destination}")
-        endTurn()
+    }
+
+    private fun resetD(){
+        destination = "none"
+        Log.d("gobblet2", "destination:${destination}")
     }
 
     private fun judge(){
