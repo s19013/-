@@ -688,6 +688,7 @@ class GameWithManActivity : AppCompatActivity() {
         if(pickupDone == true && movingSource == mas.nameGetter()){
             resetMas(mas.nameGetter()) //やり直し
         } else{
+            bordDisplay(destination)//コマの移動先を再描画
             endTurn() //ターン終了作業に移る
         }
     }
@@ -964,11 +965,8 @@ class GameWithManActivity : AppCompatActivity() {
         resetForEnd()
         resetHavingDisplay()
         judge()
-        movingSource = "none"
-        destination = "none"
-        size = 0
-        pickupDone = false
-        insetDone = false
+        resetSMP()
+        resetD()
         turn*=-1
         Log.d("gobblet2", "turnEnd")
         startTurn()
@@ -976,61 +974,53 @@ class GameWithManActivity : AppCompatActivity() {
 
     //移動元が手持ちだったときのリセットしょり?
     private fun resetForEnd() {
-        bordDisplay(destination)
-        if (movingSource==stringTemochiRedBig||
-            movingSource==stringTemochiRedMiddle||
-            movingSource==stringTemochiRedSmall||
-            movingSource==stringTemochiGreenBig||
-            movingSource==stringTemochiGreenMiddle||
-            movingSource==stringTemochiGreenSmall){
-            when (movingSource) {//移動元を正しく表示する
-                stringTemochiRedBig -> {
-                    temochiRedBig.usePiece()
-                    textTemochiRedBig.text = "${temochiRedBig.returnCount()}"
-                    if (temochiRedBig.returnInf() == 0) {
-                        buttonTemochiRedBig.visibility = View.INVISIBLE
-                        textTemochiRedBig.visibility = View.INVISIBLE
-                    }
+        when (movingSource) {//移動元を正しく表示する
+            stringTemochiRedBig -> {
+                temochiRedBig.usePiece()
+                textTemochiRedBig.text = "${temochiRedBig.returnCount()}"
+                if (temochiRedBig.returnInf() == 0) {
+                    buttonTemochiRedBig.visibility = View.INVISIBLE
+                    textTemochiRedBig.visibility = View.INVISIBLE
                 }
-                stringTemochiRedMiddle -> {
-                    temochiRedMiddle.usePiece()
-                    textTemochiRedMiddle.text = "${temochiRedMiddle.returnCount()}"
-                    if (temochiRedMiddle.returnInf() == 0) {
-                        buttonTemochiRedMiddle.visibility = View.INVISIBLE
-                        textTemochiRedMiddle.visibility = View.INVISIBLE
-                    }
+            }
+            stringTemochiRedMiddle -> {
+                temochiRedMiddle.usePiece()
+                textTemochiRedMiddle.text = "${temochiRedMiddle.returnCount()}"
+                if (temochiRedMiddle.returnInf() == 0) {
+                    buttonTemochiRedMiddle.visibility = View.INVISIBLE
+                    textTemochiRedMiddle.visibility = View.INVISIBLE
                 }
-                stringTemochiRedSmall -> {
-                    temochiRedSmall.usePiece()
-                    textTemochiRedSmall.text = "${temochiRedSmall.returnCount()}"
-                    if (temochiRedSmall.returnInf() == 0) {
-                        buttonTemochiRedSmall.visibility = View.INVISIBLE
-                        textTemochiRedSmall.visibility = View.INVISIBLE
-                    }
+            }
+            stringTemochiRedSmall -> {
+                temochiRedSmall.usePiece()
+                textTemochiRedSmall.text = "${temochiRedSmall.returnCount()}"
+                if (temochiRedSmall.returnInf() == 0) {
+                    buttonTemochiRedSmall.visibility = View.INVISIBLE
+                    textTemochiRedSmall.visibility = View.INVISIBLE
                 }
-                stringTemochiGreenBig -> {
-                    temochiGreenBig.usePiece()
-                    textTemochiGreenBig.text = "${temochiGreenBig.returnCount()}"
-                    if (temochiGreenBig.returnInf() == 0) {
-                        buttonTemochiGreenBig.visibility = View.INVISIBLE
-                        textTemochiGreenBig.visibility = View.INVISIBLE
-                    }
+            }
+            stringTemochiGreenBig -> {
+                temochiGreenBig.usePiece()
+                textTemochiGreenBig.text = "${temochiGreenBig.returnCount()}"
+                if (temochiGreenBig.returnInf() == 0) {
+                    buttonTemochiGreenBig.visibility = View.INVISIBLE
+                    textTemochiGreenBig.visibility = View.INVISIBLE
                 }
-                stringTemochiGreenMiddle -> {
-                    temochiGreenMiddle.usePiece()
-                    textTemochiGreenMiddle.text = "${temochiGreenMiddle.returnCount()}"
-                    if (temochiGreenMiddle.returnInf() == 0) {
-                        buttonTemochiGreenMiddle.visibility = View.INVISIBLE
-                        textTemochiGreenMiddle.visibility = View.INVISIBLE
-                    }
+            }
+            stringTemochiGreenMiddle -> {
+                temochiGreenMiddle.usePiece()
+                textTemochiGreenMiddle.text = "${temochiGreenMiddle.returnCount()}"
+                if (temochiGreenMiddle.returnInf() == 0) {
+                    buttonTemochiGreenMiddle.visibility = View.INVISIBLE
+                    textTemochiGreenMiddle.visibility = View.INVISIBLE
                 }
-                stringTemochiGreenSmall -> {
-                    temochiGreenSmall.usePiece()
-                    textTemochiGreenSmall.text = "${temochiGreenSmall.returnCount()}"
-                    if (temochiGreenSmall.returnInf() == 0) {
-                        buttonTemochiGreenSmall.visibility = View.INVISIBLE
-                        textTemochiGreenSmall.visibility = View.INVISIBLE
-                    }
+            }
+            stringTemochiGreenSmall -> {
+                temochiGreenSmall.usePiece()
+                textTemochiGreenSmall.text = "${temochiGreenSmall.returnCount()}"
+                if (temochiGreenSmall.returnInf() == 0) {
+                    buttonTemochiGreenSmall.visibility = View.INVISIBLE
+                    textTemochiGreenSmall.visibility = View.INVISIBLE
                 }
             }
         }
