@@ -526,8 +526,8 @@ class GameWithManActivity : AppCompatActivity() {
         playSound(cannotDoitSE)
     }
 
-    //持ちての表示に関する関数
-      //持ちてのコマを表示
+  ////持ちての表示に関する関数
+    //持ちてのコマを表示
     private fun havingDisplay(){
         playSound(selectSE)
         Log.d("gobblet2", "havingDisplay  size=${size},turn=${turn}")
@@ -547,7 +547,7 @@ class GameWithManActivity : AppCompatActivity() {
             }
         }
     }
-      //持ちてのコマをなにも持ってない状態にもどす
+    //持ちてのコマをなにも持ってない状態にもどす
     private fun resetHavingDisplay(){
         when(turn){
             1 -> {
