@@ -260,82 +260,83 @@ class GameWithManActivity : AppCompatActivity() {
         }
       ////マスを触ったとき
         buttonA1.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringA1) }//ゲームが終わったらさわれないようにするためにこんなif文を書く
+            //ゲームが終わったらさわれないようにする,相手のターン中に触れないようにするためにこんなif文を書く
+            if (turn != 0){ pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
             else{toastNotyourturn()}
         }
 
         buttonA2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringA2) }
+            if (turn != 0){ pushedMasButton(A2) }
             else{toastNotyourturn()}
         }
 
         buttonA3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringA3) }
+            if (turn != 0){ pushedMasButton(A3) }
             else{toastNotyourturn()}
         }
 
         buttonA4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringA4) }
+            if (turn != 0){ pushedMasButton(A4) }
             else{toastNotyourturn()}
         }
 
         buttonB1.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringB1) }
+            if (turn != 0){ pushedMasButton(B1) }
             else{toastNotyourturn()}
         }
 
         buttonB2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringB2) }
+            if (turn != 0){ pushedMasButton(B2) }
             else{toastNotyourturn()}
         }
 
         buttonB3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringB3) }
+            if (turn != 0){ pushedMasButton(B3) }
             else{toastNotyourturn()}
         }
 
         buttonB4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringB4) }
+            if (turn != 0){ pushedMasButton(B4) }
             else{toastNotyourturn()}
         }
 
         buttonC1.setOnClickListener {
-            if (turn != 0){pushedMasButton(stringC1) }
+            if (turn != 0){pushedMasButton(C1) }
             else{toastNotyourturn()}
         }
 
         buttonC2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringC2) }
+            if (turn != 0){ pushedMasButton(C2) }
             else{toastNotyourturn()}
         }
 
         buttonC3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringC3) }
+            if (turn != 0){ pushedMasButton(C3) }
             else{toastNotyourturn()}
         }
 
         buttonC4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringC4) }
+            if (turn != 0){ pushedMasButton(C4) }
             else{toastNotyourturn()}
         }
 
         buttonD1.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringD1) }
+            if (turn != 0){ pushedMasButton(D1) }
             else{toastNotyourturn()}
         }
 
         buttonD2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringD2) }
+            if (turn != 0){ pushedMasButton(D2) }
             else{toastNotyourturn()}
         }
 
         buttonD3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringD3) }
+            if (turn != 0){ pushedMasButton(D3) }
             else{toastNotyourturn()}
         }
 
         buttonD4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(stringD4) }
+            if (turn != 0){ pushedMasButton(D4) }
             else{toastNotyourturn()}
         }
 
@@ -676,11 +677,11 @@ class GameWithManActivity : AppCompatActivity() {
 
   ////マスのボタンをおした時の作業
     //一旦ここを通して分岐
-    private fun pushedMasButton(name: String){
+    private fun pushedMasButton(mas: Mas){
         if (!pickupDone) {//取り出し作業
-            pickup(name)
+            pickup(mas.nameGetter())
         } else{//マスの中に入れる
-            insert(name)
+            insert(mas.nameGetter())
         }
     }
 
@@ -921,6 +922,14 @@ class GameWithManActivity : AppCompatActivity() {
         resetSMP()
         resetHavingDisplay()
         debSMP()
+    }
+
+    //マスやり直し
+    private fun resetMas(){
+        Log.d("gobblet2", "mas")
+        resetSMP()
+        resetHavingDisplay()
+
     }
 
     //ターン開始の処理
