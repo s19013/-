@@ -43,10 +43,6 @@ class Mas(private val name:String) {
         list[size-1]=0
     }
 
-    fun returnName():String{
-        return name
-    }
-
     fun returnLastElement():Int{
         for (i in 2 downTo 0){
             if (list[i]!=0){ return list[i] }
