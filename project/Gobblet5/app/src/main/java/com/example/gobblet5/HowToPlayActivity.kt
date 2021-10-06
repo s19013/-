@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 import com.example.gobblet5.HowToPlayFragment.*
 import kotlinx.android.synthetic.main.activity_how_to_play.*
-
+import java.util.*
 
 
 class HowToPlayActivity : AppCompatActivity() {
@@ -20,6 +20,7 @@ class HowToPlayActivity : AppCompatActivity() {
     private val millisecond:Long=100
     private var time = 0L
     val handler = Handler()
+    private var nowDoingTimerID = 0
     //音関係
     private lateinit var sp: SoundPool
     private var cancelSE = 0
@@ -50,7 +51,6 @@ class HowToPlayActivity : AppCompatActivity() {
         pageSE = sp.load(this,R.raw.page_sound,1)
 
         fun playSound(status: Int){
-            Log.d("gobblet2", "status:${status}")
             if (SE){
                 when(status){
                      cancelSE -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
@@ -140,6 +140,7 @@ class HowToPlayActivity : AppCompatActivity() {
             }
             Page == 3 -> {
                 handler.post(fragment3)
+                nowDoingTimerID = 3
             }
             Page == 4 -> {
                 handler.removeCallbacks(fragment3)
@@ -165,6 +166,7 @@ class HowToPlayActivity : AppCompatActivity() {
             }
             Page == 7 -> {
                 handler.post(fragment7)
+                nowDoingTimerID = 7
             }
             Page == 8 -> {
                 handler.removeCallbacks(fragment7)
@@ -179,9 +181,13 @@ class HowToPlayActivity : AppCompatActivity() {
                 handler.removeCallbacks(fragment7)
                 time = 0L
                 handler.post(fragment9)
+                nowDoingTimerID = 9
             }
             Page == 10 -> {
+                handler.removeCallbacks(fragment9)
+                time = 0L
                 handler.post(fragment10)
+                nowDoingTimerID = 9
             }
             Page == 11 -> {
                 handler.removeCallbacks(fragment10)
@@ -240,6 +246,7 @@ class HowToPlayActivity : AppCompatActivity() {
             if (time==2500L){
                 handler.removeCallbacks(this)
                 time = 0L
+                nowDoingTimerID = 0
             }
         }
     }
@@ -268,6 +275,7 @@ class HowToPlayActivity : AppCompatActivity() {
             if (time==1000L){
                 handler.removeCallbacks(this)
                 time = 0L
+                nowDoingTimerID = 0
             }
         }
     }
@@ -294,6 +302,7 @@ class HowToPlayActivity : AppCompatActivity() {
             if (time==1000L){
                 handler.removeCallbacks(this)
                 time = 0L
+                nowDoingTimerID = 0
             }
         }
     }
@@ -320,8 +329,35 @@ class HowToPlayActivity : AppCompatActivity() {
             if (time==1000L){
                 handler.removeCallbacks(this)
                 time = 0L
+                nowDoingTimerID = 0
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        when (nowDoingTimerID){
+            3 -> handler.post(fragment3)
+            7 -> handler.post(fragment7)
+            9 -> handler.post(fragment9)
+            10 -> handler.post(fragment10)
+        }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(fragment3)
+        handler.removeCallbacks(fragment7)
+        handler.removeCallbacks(fragment9)
+        handler.removeCallbacks(fragment10)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(fragment3)
+        handler.removeCallbacks(fragment7)
+        handler.removeCallbacks(fragment9)
+        handler.removeCallbacks(fragment10)
     }
 
 
