@@ -22,7 +22,7 @@ import java.util.*
 
 class GameWithManActivity : AppCompatActivity() {
     //mp
-    var player: MediaPlayer?=null
+    var mediaPlayer: MediaPlayer?=null
     var bgmlooping = false
     //popup
     private var configPopup:PopupWindow?=null
@@ -473,11 +473,11 @@ class GameWithManActivity : AppCompatActivity() {
             when(checkedId){
                 R.id.BGMOn->{
                     BGM=true
-                    player?.start()
+                    mediaPlayer?.start()
                 }
                 R.id.BGMOff->{
                     BGM=false
-                    player?.pause()
+                    mediaPlayer?.pause()
                 }
             }
             playSound(radioButtonSE)
@@ -1154,11 +1154,11 @@ class GameWithManActivity : AppCompatActivity() {
 
     private fun iniMediaPlayer(){
         //mediaPlayer
-        player=MediaPlayer.create(applicationContext,R.raw.okashi_time)
-        player?.isLooping=true
+        mediaPlayer=MediaPlayer.create(applicationContext,R.raw.okashi_time)
+        mediaPlayer?.isLooping=true
         if (BGM==true){
             bgmlooping=true
-            player?.start()
+            mediaPlayer?.start()
         }
     }
 
@@ -1207,14 +1207,14 @@ class GameWithManActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (BGM) {
-            player?.start()
+            mediaPlayer?.start()
         }
     }
 
     override fun onPause() {
         super.onPause()
         if (BGM){
-            player?.pause()
+            mediaPlayer?.pause()
         }
 
     }
@@ -1222,7 +1222,7 @@ class GameWithManActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         sp.release()
-        player?.release()
-        player=null
+        mediaPlayer?.release()
+        mediaPlayer=null
     }
 }
