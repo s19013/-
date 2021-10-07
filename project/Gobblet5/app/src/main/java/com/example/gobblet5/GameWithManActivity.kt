@@ -23,35 +23,6 @@ import java.util.*
 
 
 class GameWithManActivity : AppCompatActivity() {
-    //popup
-    private var configPopup:PopupWindow?=null
-    private var resultPopup:PopupWindow?=null
-
-    //mp
-    private var mediaPlayer: MediaPlayer?=null
-    private var bgmLooping = false
-
-    //soundPool
-    private var sp: SoundPool? = null
-    private var putSE=0
-    private var selectSE = 0
-    private var cancelSE = 0
-    private var menuSelectSE = 0
-    private var cannotDoItSE = 0
-    private var gameStartSE = 0
-    private var radioButtonSE = 0
-    private var openSE = 0
-    private var closeSE = 0
-    //ゲームに必要なもの
-    private var turn = 0 //後でちゃんと設定する
-    private var size = 0
-    private var winner : String?=null
-    private var movingSource : String? = null
-    private var destination : String? = null
-    private var finished = false
-    private var pickupDone= false
-    private var insetDone = false
-
     ////手持ち宣言
     //赤
     private val temochiRedBig = Temochi(3,"TemochiRedBig")
@@ -80,7 +51,7 @@ class GameWithManActivity : AppCompatActivity() {
     private val C4 = Mas("C4")
     private val D4 = Mas("D4")
 
-  ////文字列
+    ////文字列
     //手持ち
     private val stringTemochiRedBig=temochiRedBig.nameGetter()
     private val stringTemochiRedMiddle=temochiRedMiddle.nameGetter()
@@ -105,6 +76,35 @@ class GameWithManActivity : AppCompatActivity() {
     private val stringD2=D2.nameGetter()
     private val stringD3=D3.nameGetter()
     private val stringD4=D4.nameGetter()
+
+    //popup
+    private var configPopup:PopupWindow?=null
+    private var resultPopup:PopupWindow?=null
+
+    //mp
+    private var mediaPlayer: MediaPlayer?=null
+    private var bgmLooping = false
+
+    //soundPool
+    private var sp: SoundPool? = null
+    private var putSE=0
+    private var selectSE = 0
+    private var cancelSE = 0
+    private var menuSelectSE = 0
+    private var cannotDoItSE = 0
+    private var gameStartSE = 0
+    private var radioButtonSE = 0
+    private var openSE = 0
+    private var closeSE = 0
+    //ゲームに必要なもの
+    private var turn = 0 //後でちゃんと設定する
+    private var size = 0
+    private var winner : String?=null
+    private var movingSource : String? = null
+    private var destination : String? = null
+    private var finished = false
+    private var pickupDone= false
+    private var insetDone = false
 
     //ライン デバック用
     private var line1 = mutableListOf(0, 0, 0, 0)
