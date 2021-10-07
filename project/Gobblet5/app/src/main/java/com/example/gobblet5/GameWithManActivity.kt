@@ -43,12 +43,12 @@ class GameWithManActivity : AppCompatActivity() {
     private var openSE = 0
     private var closeSE = 0
     //ゲームに必要なもの
-    private var finished = false
-    private var winner="none"
     private var turn = 0 //後でちゃんと設定する
     private var size = 0
+    private var winner="none"
     private var movingSource = "none"
     private var destination = "none"
+    private var finished = false
     private var pickupDone= false
     private var insetDone = false
 
