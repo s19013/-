@@ -32,7 +32,7 @@ class GameWithManActivity : AppCompatActivity() {
     private var bgmLooping = false
 
     //soundPool
-    private lateinit var sp: SoundPool
+    private var sp: SoundPool? = null
     private var putSE=0
     private var selectSE = 0
     private var cancelSE = 0
@@ -1133,14 +1133,14 @@ class GameWithManActivity : AppCompatActivity() {
             .setMaxStreams(1)
             .build()
         //使う効果音を準備
-        cannotDoItSE=sp.load(this, R.raw.cannotdoit, 1)
-        putSE=sp.load(this, R.raw.select_se, 1)
-        selectSE = sp.load(this, R.raw.put, 1)
-        cancelSE = sp.load(this, R.raw.cancel, 1)
-        menuSelectSE = sp.load(this, R.raw.menu_selected, 1)
-        gameStartSE = sp.load(this,R.raw.game_start_se,1)
-        openSE = sp.load(this,R.raw.open,1)
-        closeSE = sp.load(this,R.raw.close,1)
+        cannotDoItSE= sp!!.load(this, R.raw.cannotdoit, 1)
+        putSE= sp!!.load(this, R.raw.select_se, 1)
+        selectSE = sp!!.load(this, R.raw.put, 1)
+        cancelSE = sp!!.load(this, R.raw.cancel, 1)
+        menuSelectSE = sp!!.load(this, R.raw.menu_selected, 1)
+        gameStartSE = sp!!.load(this,R.raw.game_start_se,1)
+        openSE = sp!!.load(this,R.raw.open,1)
+        closeSE = sp!!.load(this,R.raw.close,1)
     }
 
     private fun iniMediaPlayer(){
@@ -1177,15 +1177,15 @@ class GameWithManActivity : AppCompatActivity() {
     private fun playSound(status: Int){
         if (SE){
             when(status){
-                cannotDoItSE -> sp.play(cannotDoItSE, 1.0f, 1.0f, 1, 0, 1.5f)
-                putSE -> sp.play(putSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                selectSE -> sp.play(selectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                cancelSE -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                menuSelectSE -> sp.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                gameStartSE -> sp.play(gameStartSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                radioButtonSE -> sp.play(radioButtonSE,1.0f,1.0f,1,0,1.0f)
-                openSE -> sp.play(openSE,1.0f,1.0f,1,0,1.0f)
-                closeSE -> sp.play(closeSE,1.0f,1.0f,1,0,1.0f)
+                cannotDoItSE -> sp!!.play(cannotDoItSE, 1.0f, 1.0f, 1, 0, 1.5f)
+                putSE -> sp!!.play(putSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                selectSE -> sp!!.play(selectSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                cancelSE -> sp!!.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                menuSelectSE -> sp!!.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                gameStartSE -> sp!!.play(gameStartSE, 1.0f, 1.0f, 1, 0, 1.0f)
+                radioButtonSE -> sp!!.play(radioButtonSE,1.0f,1.0f,1,0,1.0f)
+                openSE -> sp!!.play(openSE,1.0f,1.0f,1,0,1.0f)
+                closeSE -> sp!!.play(closeSE,1.0f,1.0f,1,0,1.0f)
             }
         }
     }
@@ -1230,7 +1230,7 @@ class GameWithManActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        sp.release()
+        sp!!.release()
         mediaPlayer?.release()
         mediaPlayer=null
     }
