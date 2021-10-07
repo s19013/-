@@ -507,6 +507,7 @@ class GameWithManActivity : AppCompatActivity() {
             .setTitle(getString(R.string.cannotInsertDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
+        Log.d("gobblet2", "can't insert called")
         playSound(cannotDoItSE)
     }
 
@@ -676,10 +677,16 @@ class GameWithManActivity : AppCompatActivity() {
             return
         }
         //マスの中に入れる
-        insert(mas.nameGetter())
+        val returnValue =  insert(mas.nameGetter())
         if(pickupDone && movingSource == mas.nameGetter()){
-            resetMas(mas.nameGetter()) //やり直し
-        } else{
+            resetMas(mas.nameGetter()) //考え直し
+//            Log.d("gobblet2", "thinkAgain")
+        } else if(!returnValue) {
+            //ルール上指定した場所にコマを入れられなかった場合
+            //特に何もしなくて良い
+//            Log.d("gobblet2", "youCan'tPutHere")
+        }
+        else{
             bordDisplay(destination)//コマの移動先を再描画
             endTurn() //ターン終了作業に移る
         }
@@ -813,107 +820,107 @@ class GameWithManActivity : AppCompatActivity() {
     }
 
     //駒を入れる
-    private fun insert(name: String){
+    private fun insert(name: String):Boolean{
         when(name){
             stringA1 -> {
                 if (A1.mInsert(size, turn)) {
                     setD(stringA1)
-                    return
+                    return true
                 }
             }
             stringA2 -> {
                 if (A2.mInsert(size, turn)) {
                     setD(stringA2)
-                    return
+                    return true
                 }
             }
             stringA3 -> {
                 if (A3.mInsert(size, turn)) {
                     setD(stringA3)
-                    return
+                    return true
                 }
             }
             stringA4 -> {
                 if (A4.mInsert(size, turn)) {
                     setD(stringA4)
-                    return
+                    return true
                 }
             }
             stringB1 -> {
                 if (B1.mInsert(size, turn)) {
                     setD(stringB1)
-                    return
+                    return true
                 }
             }
             stringB2 -> {
                 if (B2.mInsert(size, turn)) {
                     setD(stringB2)
-                    return
+                    return true
                 }
             }
             stringB3 -> {
                 if (B3.mInsert(size, turn)) {
                     setD(stringB3)
-                    return
+                    return true
                 }
             }
             stringB4 -> {
                 if (B4.mInsert(size, turn)) {
                     setD(stringB4)
-                    return
+                    return true
                 }
             }
             stringC1 -> {
                 if (C1.mInsert(size, turn)) {
                     setD(stringC1)
-                    return
+                    return true
                 }
             }
             stringC2 -> {
                 if (C2.mInsert(size, turn)) {
                     setD(stringC2)
-                    return
+                    return true
                 }
             }
             stringC3 -> {
                 if (C3.mInsert(size, turn)) {
                     setD(stringC3)
-                    return
+                    return true
                 }
             }
             stringC4 -> {
                 if (C4.mInsert(size, turn)) {
                     setD(stringC4)
-                    return
+                    return true
                 }
             }
             stringD1 -> {
                 if (D1.mInsert(size, turn)) {
                     setD(stringD1)
-                    return
+                    return true
                 }
             }
             stringD2 -> {
                 if (D2.mInsert(size, turn)) {
                     setD(stringD2)
-                    return
+                    return true
                 }
             }
             stringD3 -> {
                 if (D3.mInsert(size, turn)) {
                     setD(stringD3)
-                    return
+                    return true
                 }
             }
             stringD4 -> {
                 if (D4.mInsert(size, turn)) {
                     setD(stringD4)
-                    return
+                    return true
                 }
             }
         }
         toastCanNotInsert()//トースト表示でおけないことを知らせる
-
+        return false
     }
 
     //手持ちやりなおし
