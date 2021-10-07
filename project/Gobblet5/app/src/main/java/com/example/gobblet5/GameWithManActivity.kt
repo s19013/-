@@ -1,9 +1,11 @@
 package com.example.gobblet5
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.SoundPool
@@ -23,19 +25,19 @@ import java.util.*
 class GameWithManActivity : AppCompatActivity() {
     //popup
     private var configPopup:PopupWindow?=null
-    private var resaltPopup:PopupWindow?=null
+    private var resultPopup:PopupWindow?=null
 
     //mp
-    var mediaPlayer: MediaPlayer?=null
-    var bgmlooping = false
+    private var mediaPlayer: MediaPlayer?=null
+    private var bgmLooping = false
 
-    //soundpool
+    //soundPool
     private lateinit var sp: SoundPool
     private var putSE=0
     private var selectSE = 0
     private var cancelSE = 0
     private var menuSelectSE = 0
-    private var cannotDoitSE = 0
+    private var cannotDoItSE = 0
     private var gameStartSE = 0
     private var radioButtonSE = 0
     private var openSE = 0
@@ -105,12 +107,12 @@ class GameWithManActivity : AppCompatActivity() {
     private val stringD4=D4.nameGetter()
 
     //ライン デバック用
-    var line1 = mutableListOf<Int>(0, 0, 0, 0)
-    var line2 = mutableListOf<Int>(0, 0, 0, 0)
-    var line3 = mutableListOf<Int>(0, 0, 0, 0)
-    var line4 = mutableListOf<Int>(0, 0, 0, 0)
+    private var line1 = mutableListOf(0, 0, 0, 0)
+    private var line2 = mutableListOf(0, 0, 0, 0)
+    private var line3 = mutableListOf(0, 0, 0, 0)
+    private var line4 = mutableListOf(0, 0, 0, 0)
     //勝敗を決めるのに使う
-    var judgeMap = mutableMapOf<String, Int>(
+    private var judgeMap = mutableMapOf(
         "lineA" to 0, "lineB" to 0, "lineC" to 0, "lineD" to 0,
         "line1" to 0, "line2" to 0, "line3" to 0, "line4" to 0,
         "lineS" to 0, "lineBS" to 0
@@ -120,16 +122,16 @@ class GameWithManActivity : AppCompatActivity() {
     private var res: Resources? = null
     private var view: ImageView? = null
     //マス
-    private var masImag = res?.getDrawable(R.drawable.mass)
+    private var masImag:Drawable? = null
     //駒
     //赤
-    private var komaRedBigD = res?.getDrawable(R.drawable.koma_red_big)
-    private var komaRedMiddleD = res?.getDrawable(R.drawable.koma_red_middle)
-    private var komaRedSmallD = res?.getDrawable(R.drawable.koma_red_small)
+    private var komaRedBigD:Drawable? = null
+    private var komaRedMiddleD:Drawable? = null
+    private var komaRedSmallD:Drawable? = null
     //緑
-    private var komaGreenBigD = res?.getDrawable(R.drawable.koma_green_big)
-    private var komaGreenMiddleD = res?.getDrawable(R.drawable.koma_green_middle)
-    private var komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
+    private var komaGreenBigD:Drawable? = null
+    private var komaGreenMiddleD:Drawable? = null
+    private var komaGreenSmallD:Drawable? = null
 
     //共有プリファレンス
     private var pref: SharedPreferences? =null
@@ -145,10 +147,11 @@ class GameWithManActivity : AppCompatActivity() {
         setContentView(R.layout.activity_game_with_man)
 
         //初期化
-        iniFullscrean()
+        iniFullscreen()
         iniPreference()
         iniSoundPool()
         iniMediaPlayer()
+        iniDrawable()
         //先攻後攻設定
         if (playFirst != 0){ turn = playFirst }
         else {
@@ -160,20 +163,7 @@ class GameWithManActivity : AppCompatActivity() {
         startTurn()
         Log.d("gobblet2", "pF:${playFirst}")
 
-        //表示に使う物(空箱に実物を入れる)
-        res=resources
-        view=findViewById(R.id.buttonA1) //適当にダミーを入れてるだけ
-        //マス
-        masImag = res?.getDrawable(R.drawable.mass)
-        //駒
-        //赤
-        komaRedBigD = res?.getDrawable(R.drawable.koma_red_big)
-        komaRedMiddleD = res?.getDrawable(R.drawable.koma_red_middle)
-        komaRedSmallD = res?.getDrawable(R.drawable.koma_red_small)
-        //緑
-        komaGreenBigD = res?.getDrawable(R.drawable.koma_green_big)
-        komaGreenMiddleD = res?.getDrawable(R.drawable.koma_green_middle)
-        komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
+
 
 
 
@@ -191,7 +181,7 @@ class GameWithManActivity : AppCompatActivity() {
                     pickupTemochi(stringTemochiRedBig)
                 }
             }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonTemochiRedMiddle.setOnClickListener {
@@ -205,7 +195,7 @@ class GameWithManActivity : AppCompatActivity() {
                     pickupTemochi(stringTemochiRedMiddle)
                 }
             }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonTemochiRedSmall.setOnClickListener {
@@ -219,7 +209,7 @@ class GameWithManActivity : AppCompatActivity() {
                     pickupTemochi(stringTemochiRedSmall)
                 }
             }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonTemochiGreenBig.setOnClickListener {
@@ -233,7 +223,7 @@ class GameWithManActivity : AppCompatActivity() {
                     pickupTemochi(stringTemochiGreenBig)
                 }
             }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonTemochiGreenMiddle.setOnClickListener {
@@ -247,7 +237,7 @@ class GameWithManActivity : AppCompatActivity() {
                     pickupTemochi(stringTemochiGreenMiddle)
                 }
             }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonTemochiGreenSmall.setOnClickListener {
@@ -261,88 +251,88 @@ class GameWithManActivity : AppCompatActivity() {
                     pickupTemochi(stringTemochiGreenSmall)
                 }
             }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
       ////マスを触ったとき
         buttonA1.setOnClickListener {
             //ゲームが終わったらさわれないようにする,相手のターン中に触れないようにするためにこんなif文を書く
             if (turn != 0){ pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonA2.setOnClickListener {
             if (turn != 0){ pushedMasButton(A2) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonA3.setOnClickListener {
             if (turn != 0){ pushedMasButton(A3) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonA4.setOnClickListener {
             if (turn != 0){ pushedMasButton(A4) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonB1.setOnClickListener {
             if (turn != 0){ pushedMasButton(B1) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonB2.setOnClickListener {
             if (turn != 0){ pushedMasButton(B2) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonB3.setOnClickListener {
             if (turn != 0){ pushedMasButton(B3) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonB4.setOnClickListener {
             if (turn != 0){ pushedMasButton(B4) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonC1.setOnClickListener {
             if (turn != 0){pushedMasButton(C1) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonC2.setOnClickListener {
             if (turn != 0){ pushedMasButton(C2) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonC3.setOnClickListener {
             if (turn != 0){ pushedMasButton(C3) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonC4.setOnClickListener {
             if (turn != 0){ pushedMasButton(C4) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonD1.setOnClickListener {
             if (turn != 0){ pushedMasButton(D1) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonD2.setOnClickListener {
             if (turn != 0){ pushedMasButton(D2) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonD3.setOnClickListener {
             if (turn != 0){ pushedMasButton(D3) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         buttonD4.setOnClickListener {
             if (turn != 0){ pushedMasButton(D4) }
-            else{toastNotyourturn()}
+            else{toastNotYourTurn()}
         }
 
         // その他
@@ -353,44 +343,44 @@ class GameWithManActivity : AppCompatActivity() {
 
         resaltButton.setOnClickListener {
             playSound(openSE)
-            showResaltPopup()
+            showResultPopup()
         }
 
     }
 
   ////ポップアップ
     //結果ポップアップ
-    private fun showResaltPopup(){
-      resaltPopup = PopupWindow(this@GameWithManActivity)
+    private fun showResultPopup(){
+      resultPopup = PopupWindow(this@GameWithManActivity)
       // レイアウト設定
       val popupView: View = layoutInflater.inflate(R.layout.popup_resalt, null)
-      resaltPopup!!.contentView = popupView
+      resultPopup!!.contentView = popupView
       // タップ時に他のViewでキャッチされないための設定
-      resaltPopup!!.isOutsideTouchable = true
-      resaltPopup!!.isFocusable = true
+      resultPopup!!.isOutsideTouchable = true
+      resultPopup!!.isFocusable = true
 
       // 表示サイズの設定
-      resaltPopup!!.width  = width*8/10
-       resaltPopup!!.height = height*8/10
+      resultPopup!!.width  = width*8/10
+       resultPopup!!.height = height*8/10
 
       // 画面中央に表示
-      resaltPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
+      resultPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
 
       //// 関数設定
-      val resaltImage = popupView.findViewById<ImageView>(R.id.resaltImage)
+      val resultImage = popupView.findViewById<ImageView>(R.id.resaltImage)
 
 
       //画像を設定する
       if (Locale.getDefault().equals(Locale.JAPAN)){
           when(winner){
-              "1p" -> resaltImage.setImageResource(R.drawable.win1p_jp)
-              "2p" -> resaltImage.setImageResource(R.drawable.win2p_jp)
+              "1p" -> resultImage.setImageResource(R.drawable.win1p_jp)
+              "2p" -> resultImage.setImageResource(R.drawable.win2p_jp)
           }
           Log.d("gobblet2", "lang:jp")
       } else {
           when(winner){
-              "1p" -> resaltImage.setImageResource(R.drawable.win1p_en)
-              "2p" -> resaltImage.setImageResource(R.drawable.win2p_en)
+              "1p" -> resultImage.setImageResource(R.drawable.win1p_en)
+              "2p" -> resultImage.setImageResource(R.drawable.win2p_en)
           }
           Log.d("gobblet2", "lang:en")
       }
@@ -418,14 +408,14 @@ class GameWithManActivity : AppCompatActivity() {
         }
 
       popupView.findViewById<View>(R.id.backButton).setOnClickListener {
-          if (resaltPopup!!.isShowing) {
+          if (resultPopup!!.isShowing) {
               val toast =Toast.makeText(this, "", Toast.LENGTH_LONG)
               val customView = layoutInflater.inflate(R.layout.dammy, null)
               toast.view = customView
               toast.setGravity(Gravity.BOTTOM, 0,0 )
               toast.show()//これで無理やりナビゲーションバーを消す
               playSound(closeSE)
-              resaltPopup!!.dismiss()
+              resultPopup!!.dismiss()
           }
       }
     }
@@ -449,13 +439,13 @@ class GameWithManActivity : AppCompatActivity() {
         configPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
 
         //ラジオボタン初期化
-        val RadioSE = popupView.findViewById<RadioGroup>(R.id.SEOnOff)
+        val radioSE = popupView.findViewById<RadioGroup>(R.id.SEOnOff)
         when(SE){
             true -> {popupView.findViewById<RadioButton>(R.id.SEOn).isChecked = true}
             false -> {popupView.findViewById<RadioButton>(R.id.SEOff).isChecked = true}
         }
 
-        val RadioBGM = popupView.findViewById<RadioGroup>(R.id.BGMOnOff)
+        val radioBGM = popupView.findViewById<RadioGroup>(R.id.BGMOnOff)
         when(BGM){
             true -> {popupView.findViewById<RadioButton>(R.id.BGMOn).isChecked = true}
             false -> {popupView.findViewById<RadioButton>(R.id.BGMOff).isChecked = true}
@@ -463,7 +453,7 @@ class GameWithManActivity : AppCompatActivity() {
 
 
         //// 関数設定
-        RadioSE.setOnCheckedChangeListener { group, checkedId ->
+        radioSE.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.SEOn->{SE=true}
                 R.id.SEOff->{SE=false}
@@ -474,7 +464,7 @@ class GameWithManActivity : AppCompatActivity() {
             //Log.d("gobblet2", "SE=${SE}")
         }
 
-        RadioBGM.setOnCheckedChangeListener { group, checkedId ->
+        radioBGM.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
                 R.id.BGMOn->{
                     BGM=true
@@ -512,7 +502,7 @@ class GameWithManActivity : AppCompatActivity() {
             .setTitle(getString(R.string.cannotPickupDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
-        playSound(cannotDoitSE)
+        playSound(cannotDoItSE)
     }
 
     private fun toastCanNotInsert(){
@@ -520,15 +510,15 @@ class GameWithManActivity : AppCompatActivity() {
             .setTitle(getString(R.string.cannotInsertDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
-        playSound(cannotDoitSE)
+        playSound(cannotDoItSE)
     }
 
-    private fun toastNotyourturn(){
+    private fun toastNotYourTurn(){
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.notYourTurnDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
-        playSound(cannotDoitSE)
+        playSound(cannotDoItSE)
     }
 
   ////持ちての表示に関する関数
@@ -568,9 +558,9 @@ class GameWithManActivity : AppCompatActivity() {
 
     //各マスの描写に関する関数
     private fun bordDisplay(location: String) {
-        var box = mutableListOf<Int>(0, 0)
+        var box = mutableListOf(0, 0)
         //大きさを判断
-        fun RedSet(s: Int){
+        fun redSet(s: Int){
             when (s) {
                 3 -> { view?.setImageDrawable(komaRedBigD) }
                 2 -> { view?.setImageDrawable(komaRedMiddleD) }
@@ -578,7 +568,7 @@ class GameWithManActivity : AppCompatActivity() {
             }
         }
 
-        fun GreenSet(s: Int){
+        fun greenSet(s: Int){
             when (s) {
                 3 -> { view?.setImageDrawable(komaGreenBigD) }
                 2 -> { view?.setImageDrawable(komaGreenMiddleD) }
@@ -586,7 +576,7 @@ class GameWithManActivity : AppCompatActivity() {
             }
         }
 
-        fun EmpSet(){ view?.setImageDrawable(masImag) }
+        fun empSet(){ view?.setImageDrawable(masImag) }
 
         //場所を判断
         when (location) {
@@ -657,9 +647,9 @@ class GameWithManActivity : AppCompatActivity() {
         }
         //色を判断
         when (box[1]) {
-            1 -> { RedSet(box[0]) }
-            0 -> { EmpSet() }
-            -1 -> { GreenSet(box[0]) }
+            1 -> { redSet(box[0]) }
+            0 -> { empSet() }
+            -1 -> { greenSet(box[0]) }
         }
     }
 
@@ -690,7 +680,7 @@ class GameWithManActivity : AppCompatActivity() {
         }
         //マスの中に入れる
         insert(mas.nameGetter())
-        if(pickupDone == true && movingSource == mas.nameGetter()){
+        if(pickupDone && movingSource == mas.nameGetter()){
             resetMas(mas.nameGetter()) //やり直し
         } else{
             bordDisplay(destination)//コマの移動先を再描画
@@ -827,7 +817,6 @@ class GameWithManActivity : AppCompatActivity() {
 
     //駒を入れる
     private fun insert(name: String){
-        val insertMas = A1 //ただのダミー
         when(name){
             stringA1 -> {
                 if (A1.mInsert(size, turn)) {
@@ -942,7 +931,7 @@ class GameWithManActivity : AppCompatActivity() {
         bordDisplay(masName)
         resetSMP()
         resetHavingDisplay()
-        debjudge()
+        debJudge()
 
     }
 
@@ -1083,13 +1072,13 @@ class GameWithManActivity : AppCompatActivity() {
 
         if (finished){
             resaltButton.visibility=View.VISIBLE
-            showResaltPopup()
+            showResultPopup()
         }
 
-        debjudge()
+        debJudge()
     }
 
-    private fun debjudge(){
+    private fun debJudge(){
         Log.d("gobblet2", "")
 
         line1[0]=A1.returnLastElement()
@@ -1118,7 +1107,7 @@ class GameWithManActivity : AppCompatActivity() {
     }
 
     //初期化に関する関数
-    private fun iniFullscrean(){
+    private fun iniFullscreen(){
         //画面の大きさ
         val dm = DisplayMetrics()
         windowManager.defaultDisplay.getRealMetrics(dm)
@@ -1147,7 +1136,7 @@ class GameWithManActivity : AppCompatActivity() {
             .setMaxStreams(1)
             .build()
         //使う効果音を準備
-        cannotDoitSE=sp.load(this, R.raw.cannotdoit, 1)
+        cannotDoItSE=sp.load(this, R.raw.cannotdoit, 1)
         putSE=sp.load(this, R.raw.select_se, 1)
         selectSE = sp.load(this, R.raw.put, 1)
         cancelSE = sp.load(this, R.raw.cancel, 1)
@@ -1161,10 +1150,28 @@ class GameWithManActivity : AppCompatActivity() {
         //mediaPlayer
         mediaPlayer=MediaPlayer.create(applicationContext,R.raw.okashi_time)
         mediaPlayer?.isLooping=true
-        if (BGM==true){
-            bgmlooping=true
+        if (BGM){
+            bgmLooping=true
             mediaPlayer?.start()
         }
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    private fun iniDrawable(){
+        //表示に使う物(空箱に実物を入れる)
+        res=resources
+        view=findViewById(R.id.buttonA1) //適当にダミーを入れてるだけ
+        //マス
+        masImag = res?.getDrawable(R.drawable.mass)
+        //駒
+        //赤
+        komaRedBigD = res?.getDrawable(R.drawable.koma_red_big)
+        komaRedMiddleD = res?.getDrawable(R.drawable.koma_red_middle)
+        komaRedSmallD = res?.getDrawable(R.drawable.koma_red_small)
+        //緑
+        komaGreenBigD = res?.getDrawable(R.drawable.koma_green_big)
+        komaGreenMiddleD = res?.getDrawable(R.drawable.koma_green_middle)
+        komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
     }
 
 
@@ -1173,7 +1180,7 @@ class GameWithManActivity : AppCompatActivity() {
     private fun playSound(status: Int){
         if (SE){
             when(status){
-                cannotDoitSE -> sp.play(cannotDoitSE, 1.0f, 1.0f, 1, 0, 1.5f)
+                cannotDoItSE -> sp.play(cannotDoItSE, 1.0f, 1.0f, 1, 0, 1.5f)
                 putSE -> sp.play(putSE, 1.0f, 1.0f, 1, 0, 1.0f)
                 selectSE -> sp.play(selectSE, 1.0f, 1.0f, 1, 0, 1.0f)
                 cancelSE -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
