@@ -45,9 +45,9 @@ class GameWithManActivity : AppCompatActivity() {
     //ゲームに必要なもの
     private var turn = 0 //後でちゃんと設定する
     private var size = 0
-    private var winner="none"
-    private var movingSource = "none"
-    private var destination = "none"
+    private var winner : String?=null
+    private var movingSource : String? = null
+    private var destination : String? = null
     private var finished = false
     private var pickupDone= false
     private var insetDone = false
@@ -175,7 +175,7 @@ class GameWithManActivity : AppCompatActivity() {
                     resetTemochi()
                 }
                 //移動元が手持ちの場合のみコマを
-                else if (movingSource=="none"||
+                else if (movingSource== null ||
                     movingSource==stringTemochiRedMiddle||
                     movingSource==stringTemochiRedSmall){
                     pickupTemochi(stringTemochiRedBig)
@@ -189,7 +189,7 @@ class GameWithManActivity : AppCompatActivity() {
                 if (movingSource==stringTemochiRedMiddle){
                     resetTemochi()
                 }
-                else if (movingSource=="none"||
+                else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
                     movingSource==stringTemochiRedSmall){
                     pickupTemochi(stringTemochiRedMiddle)
@@ -203,7 +203,7 @@ class GameWithManActivity : AppCompatActivity() {
                 if (movingSource==stringTemochiRedSmall){
                     resetTemochi()
                 }
-                else if (movingSource=="none"||
+                else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
                     movingSource==stringTemochiRedMiddle){
                     pickupTemochi(stringTemochiRedSmall)
@@ -217,7 +217,7 @@ class GameWithManActivity : AppCompatActivity() {
                 if (movingSource==stringTemochiGreenBig){
                     resetTemochi()
                 }
-                else if (movingSource=="none"||
+                else if (movingSource== null ||
                     movingSource==stringTemochiGreenMiddle||
                     movingSource==stringTemochiGreenSmall) {
                     pickupTemochi(stringTemochiGreenBig)
@@ -231,7 +231,7 @@ class GameWithManActivity : AppCompatActivity() {
                 if (movingSource==stringTemochiGreenMiddle){
                     resetTemochi()
                 }
-                else if (movingSource=="none"||
+                else if (movingSource== null ||
                     movingSource==stringTemochiGreenBig ||
                     movingSource==stringTemochiGreenSmall){
                     pickupTemochi(stringTemochiGreenMiddle)
@@ -245,7 +245,7 @@ class GameWithManActivity : AppCompatActivity() {
                 if (movingSource==stringTemochiGreenSmall){
                     resetTemochi()
                 }
-                else if (movingSource=="none"||
+                else if (movingSource==null||
                     movingSource==stringTemochiGreenBig ||
                     movingSource==stringTemochiGreenMiddle){
                     pickupTemochi(stringTemochiGreenSmall)
@@ -555,7 +555,7 @@ class GameWithManActivity : AppCompatActivity() {
     }
 
     //各マスの描写に関する関数
-    private fun bordDisplay(location: String) {
+    private fun bordDisplay(location: String?) {
         var box = mutableListOf(0, 0)
         //大きさを判断
         fun redSet(s: Int){
@@ -1037,7 +1037,7 @@ class GameWithManActivity : AppCompatActivity() {
 
     private fun resetSMP(){
         size=0
-        movingSource="none"
+        movingSource=null
         pickupDone=false
     }
 
@@ -1048,7 +1048,7 @@ class GameWithManActivity : AppCompatActivity() {
     }
 
     private fun resetD(){
-        destination = "none"
+        destination = null
         Log.d("gobblet2", "destination:${destination}")
     }
 
