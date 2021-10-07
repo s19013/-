@@ -350,6 +350,7 @@ class GameWithManActivity : AppCompatActivity() {
 
   ////ポップアップ
     //結果ポップアップ
+    @SuppressLint("InflateParams")
     private fun showResultPopup(){
       resultPopup = PopupWindow(this@GameWithManActivity)
       // レイアウト設定
@@ -387,33 +388,28 @@ class GameWithManActivity : AppCompatActivity() {
 
 
       popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
-            playSound(cancelSE)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
+           playSound(cancelSE)
+           val intent = Intent(this, MainActivity::class.java)
+           intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+           startActivity(intent)
         }
 
       popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
-            playSound(gameStartSE)
-            val intent = Intent(this, GameWithManActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
+           playSound(gameStartSE)
+           val intent = Intent(this, GameWithManActivity::class.java)
+           intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+           startActivity(intent)
         }
 
       popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
           playSound(cancelSE)
-            val intent = Intent(this, preGameWithManActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
+          val intent = Intent(this, preGameWithManActivity::class.java)
+          intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+          startActivity(intent)
         }
 
       popupView.findViewById<View>(R.id.backButton).setOnClickListener {
           if (resultPopup!!.isShowing) {
-              val toast =Toast.makeText(this, "", Toast.LENGTH_LONG)
-              val customView = layoutInflater.inflate(R.layout.dammy, null)
-              toast.view = customView
-              toast.setGravity(Gravity.BOTTOM, 0,0 )
-              toast.show()//これで無理やりナビゲーションバーを消す
               playSound(closeSE)
               resultPopup!!.dismiss()
           }
@@ -421,6 +417,7 @@ class GameWithManActivity : AppCompatActivity() {
     }
 
     //設定ポップアップ
+    @SuppressLint("InflateParams")
     private fun showConfigPopup(){
         configPopup = PopupWindow(this@GameWithManActivity)
         // レイアウト設定
@@ -484,7 +481,7 @@ class GameWithManActivity : AppCompatActivity() {
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
             val intent = Intent(this, MainActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
 
