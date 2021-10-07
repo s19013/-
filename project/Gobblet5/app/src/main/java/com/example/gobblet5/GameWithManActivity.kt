@@ -21,12 +21,14 @@ import java.util.*
 
 
 class GameWithManActivity : AppCompatActivity() {
-    //mp
-    var mediaPlayer: MediaPlayer?=null
-    var bgmlooping = false
     //popup
     private var configPopup:PopupWindow?=null
     private var resaltPopup:PopupWindow?=null
+
+    //mp
+    var mediaPlayer: MediaPlayer?=null
+    var bgmlooping = false
+
     //soundpool
     private lateinit var sp: SoundPool
     private var putSE=0
@@ -47,32 +49,8 @@ class GameWithManActivity : AppCompatActivity() {
     private var destination = "none"
     private var pickupDone= false
     private var insetDone = false
-  ////文字列
-    //手持ち
-    private val stringTemochiRedBig="TemochiRedBig"
-    private val stringTemochiRedMiddle="TemochiRedMiddle"
-    private val stringTemochiRedSmall="TemochiRedSmall"
-    private val stringTemochiGreenBig="TemochiGreenBig"
-    private val stringTemochiGreenMiddle="TemochiGreenMiddle"
-    private val stringTemochiGreenSmall="TemochiGreenSmall"
-    //マス
-    private val stringA1="A1"
-    private val stringA2="A2"
-    private val stringA3="A3"
-    private val stringA4="A4"
-    private val stringB1="B1"
-    private val stringB2="B2"
-    private val stringB3="B3"
-    private val stringB4="B4"
-    private val stringC1="C1"
-    private val stringC2="C2"
-    private val stringC3="C3"
-    private val stringC4="C4"
-    private val stringD1="D1"
-    private val stringD2="D2"
-    private val stringD3="D3"
-    private val stringD4="D4"
-  ////手持ち
+
+    ////手持ち宣言
     //赤
     private val temochiRedBig = Temochi(3,"TemochiRedBig")
     private val temochiRedMiddle = Temochi(2,"TemochiRedMiddle")
@@ -99,6 +77,33 @@ class GameWithManActivity : AppCompatActivity() {
     private val B4 = Mas("B4")
     private val C4 = Mas("C4")
     private val D4 = Mas("D4")
+
+  ////文字列
+    //手持ち
+    private val stringTemochiRedBig=temochiRedBig.nameGetter()
+    private val stringTemochiRedMiddle=temochiRedMiddle.nameGetter()
+    private val stringTemochiRedSmall=temochiRedSmall.nameGetter()
+    private val stringTemochiGreenBig=temochiGreenBig.nameGetter()
+    private val stringTemochiGreenMiddle=temochiGreenMiddle.nameGetter()
+    private val stringTemochiGreenSmall=temochiGreenSmall.nameGetter()
+    //マス
+    private val stringA1=A1.nameGetter()
+    private val stringA2=A2.nameGetter()
+    private val stringA3=A3.nameGetter()
+    private val stringA4=A4.nameGetter()
+    private val stringB1=B1.nameGetter()
+    private val stringB2=B2.nameGetter()
+    private val stringB3=B3.nameGetter()
+    private val stringB4=B4.nameGetter()
+    private val stringC1=C1.nameGetter()
+    private val stringC2=C2.nameGetter()
+    private val stringC3=C3.nameGetter()
+    private val stringC4=C4.nameGetter()
+    private val stringD1=D1.nameGetter()
+    private val stringD2=D2.nameGetter()
+    private val stringD3=D3.nameGetter()
+    private val stringD4=D4.nameGetter()
+
     //ライン デバック用
     var line1 = mutableListOf<Int>(0, 0, 0, 0)
     var line2 = mutableListOf<Int>(0, 0, 0, 0)
