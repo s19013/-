@@ -4,10 +4,23 @@ import android.util.Log
 
 
 class Mas(private val name:String) {
-    var list= mutableListOf<Int>(0,0,0)
+    var list= mutableListOf<Int>(0,0,0) // [小､中､大]
+    var score = 0 //コンピューターが使う評価値みたいなもの
 
     fun nameGetter():String{
         return name
+    }
+
+    fun scoreGetter():Int{
+        return score
+    }
+
+    fun scoreAdd(arg:Int){ //スコアに引数の値を足す
+        score+=arg
+    }
+
+    fun scoreSub(arg: Int){
+        score-=arg
     }
 
     fun mPickup(turn:Int):Int{
@@ -19,7 +32,6 @@ class Mas(private val name:String) {
         }
         return 0
     }
-
 
     fun mInsert(size:Int,turn: Int):Boolean{
         when(size){
@@ -39,21 +51,25 @@ class Mas(private val name:String) {
         return true
     }
 
-    fun resetList(size: Int){
+    fun returnLastElement():Int{
+        for (i in 2 downTo 0){
+            if (list[i]!=0){ return list[i] } //後ろからコマがあるかどうか調べる
+        }
+        return 0 //マスの中に何もなかったら0と返す
+    }
+
+    fun resetList(size: Int){ //取り出して空にする
         list[size-1]=0
     }
 
-    fun returnLastElement():Int{
-        for (i in 2 downTo 0){
-            if (list[i]!=0){ return list[i] }
-        }
-        return 0
+    fun resetScore(){ //スコアを0に戻す
+        score = 0
     }
 
     fun funcForDisplay():MutableList<Int>{
         for (i in 2 downTo 0){
             if (list[i]!=0){
-                return mutableListOf(i+1,list[i]) //[あった場所､大きさ]
+                return mutableListOf(i+1,list[i]) //[大きさ､1pのか2pのか]
             }
         }
         return mutableListOf(0,0)
@@ -63,6 +79,6 @@ class Mas(private val name:String) {
 //        return list
 //    }
     fun debugDisplay(){
-        Log.d("gobblet2","list:${list}")
+        Log.d("gobblet2","list:[${list[0]},${list[1]},${list[2]}]")
     }
 }
