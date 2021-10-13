@@ -19,10 +19,6 @@ class Mas(private val name:String) {
         score+=arg
     }
 
-    fun scoreSub(arg: Int){
-        score-=arg
-    }
-
     fun mPickup(turn:Int):Int{
         when(list.lastIndexOf(turn)){
             0-> if (list[1]==0 && list[2]==0){ return 1}

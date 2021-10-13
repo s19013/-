@@ -161,6 +161,7 @@ class GameWithComActivity : AppCompatActivity() {
         iniMediaPlayer()
         iniDrawable()
         com.iniLines(comLine1,comLine2,comLine3,comLine4)
+
         //先攻後攻設定
         if (playFirst != 0){ turn = playFirst }
         else {
@@ -355,177 +356,6 @@ class GameWithComActivity : AppCompatActivity() {
             showResultPopup()
         }
 
-    }
-
-    ////ポップアップ
-    //結果ポップアップ
-    @SuppressLint("InflateParams")
-    private fun showResultPopup(){
-        resultPopup = PopupWindow(this@GameWithComActivity)
-        // レイアウト設定
-        val popupView: View = layoutInflater.inflate(R.layout.popup_resalt, null)
-        resultPopup!!.contentView = popupView
-        // タップ時に他のViewでキャッチされないための設定
-        resultPopup!!.isOutsideTouchable = true
-        resultPopup!!.isFocusable = true
-
-        // 表示サイズの設定
-        resultPopup!!.width  = width*8/10
-        resultPopup!!.height = height*8/10
-
-        // 画面中央に表示
-        resultPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
-
-        //// 関数設定
-        val resultImage = popupView.findViewById<ImageView>(R.id.resaltImage)
-
-
-        //画像を設定する
-        if (Locale.getDefault().equals(Locale.JAPAN)){
-            when(winner){
-                "1p" -> resultImage.setImageResource(R.drawable.win1p_jp)
-                "2p" -> resultImage.setImageResource(R.drawable.win2p_jp)
-            }
-            Log.d("gobblet2", "lang:jp")
-        } else {
-            when(winner){
-                "1p" -> resultImage.setImageResource(R.drawable.win1p_en)
-                "2p" -> resultImage.setImageResource(R.drawable.win2p_en)
-            }
-            Log.d("gobblet2", "lang:en")
-        }
-
-
-        popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
-            playSound(cancelSE)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-        }
-
-        popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
-            playSound(gameStartSE)
-            val intent = Intent(this, GameWithComActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-        }
-
-        popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
-            playSound(cancelSE)
-            val intent = Intent(this, preGameWithComActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-        }
-
-        popupView.findViewById<View>(R.id.backButton).setOnClickListener {
-            if (resultPopup!!.isShowing) {
-                playSound(closeSE)
-                resultPopup!!.dismiss()
-            }
-        }
-    }
-
-    //設定ポップアップ
-    @SuppressLint("InflateParams")
-    private fun showConfigPopup(){
-        configPopup = PopupWindow(this@GameWithComActivity)
-        // レイアウト設定
-        val popupView: View = layoutInflater.inflate(R.layout.popup_config, null)
-        configPopup!!.contentView = popupView
-
-        // タップ時に他のViewでキャッチされないための設定
-        configPopup!!.isOutsideTouchable = true
-        configPopup!!.isFocusable = true
-
-        // 表示サイズの設定 今回は画面の半分
-        configPopup!!.width  = width*8/10
-        configPopup!!.height = height*4/10
-
-        // 画面中央に表示
-        configPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
-
-        //ラジオボタン初期化
-        val radioSE = popupView.findViewById<RadioGroup>(R.id.SEOnOff)
-        when(SE){
-            true -> {popupView.findViewById<RadioButton>(R.id.SEOn).isChecked = true}
-            false -> {popupView.findViewById<RadioButton>(R.id.SEOff).isChecked = true}
-        }
-
-        val radioBGM = popupView.findViewById<RadioGroup>(R.id.BGMOnOff)
-        when(BGM){
-            true -> {popupView.findViewById<RadioButton>(R.id.BGMOn).isChecked = true}
-            false -> {popupView.findViewById<RadioButton>(R.id.BGMOff).isChecked = true}
-        }
-
-
-        //// 関数設定
-        radioSE.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId){
-                R.id.SEOn->{SE=true}
-                R.id.SEOff->{SE=false}
-            }
-            playSound(radioButtonSE)
-            val editor=pref!!.edit()
-            editor.putBoolean("SEOnOff",SE).apply()
-            //Log.d("gobblet2", "SE=${SE}")
-        }
-
-        radioBGM.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId){
-                R.id.BGMOn->{
-                    BGM=true
-                    mediaPlayer?.start()
-                }
-                R.id.BGMOff->{
-                    BGM=false
-                    mediaPlayer?.pause()
-                }
-            }
-            playSound(radioButtonSE)
-            val editor= pref!!.edit()
-            editor.putBoolean("BGMOnOff",BGM).apply()
-            //Log.d("gobblet2", "BGM=${BGM}")
-        }
-
-        popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
-            playSound(cancelSE)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-        }
-
-        popupView.findViewById<View>(R.id.backButton).setOnClickListener {
-            if (configPopup!!.isShowing) {
-                playSound(closeSE)
-                configPopup!!.dismiss()
-            }
-        }
-    }
-
-    //トースト関係(ホントはダイアログだけど面倒だからそのまま使う)
-    private fun toastCanNotPickup(){
-        AlertDialog.Builder(this)
-            .setTitle(getString(R.string.cannotPickupDialogText))
-            .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
-            .show()
-        playSound(cannotDoItSE)
-    }
-
-    private fun toastCanNotInsert(){
-        AlertDialog.Builder(this)
-            .setTitle(getString(R.string.cannotInsertDialogText))
-            .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
-            .show()
-        Log.d("gobblet2", "can't insert called")
-        playSound(cannotDoItSE)
-    }
-
-    private fun toastNotYourTurn(){
-        AlertDialog.Builder(this)
-            .setTitle(getString(R.string.notYourTurnDialogText))
-            .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
-            .show()
-        playSound(cannotDoItSE)
     }
 
     ////持ちての表示に関する関数
@@ -957,7 +787,7 @@ class GameWithComActivity : AppCompatActivity() {
                 telop2p.setBackgroundColor(Color.rgb(230, 230, 230))
             }
             -1 -> {
-
+                startCom()
                 telop1p.setBackgroundColor(Color.rgb(230, 230, 230))
                 telop2p.setBackgroundColor(Color.rgb(188, 255, 173))
             }
@@ -1120,6 +950,190 @@ class GameWithComActivity : AppCompatActivity() {
         Log.d("gobblet2", "line3:${line3}")
         Log.d("gobblet2", "line4:${line4}")
         Log.d("gobblet2", "finished:${finished},winner:${winner}")
+    }
+
+    //コンピューター関係
+    fun iniCom(){}
+
+    fun startCom(){
+        com.checkEmptyMas()
+        com.checkWhatIsInTheMas()
+        com.checkEnemyReach()
+        com.checkComReach()
+        com.debScore()
+        com.resetScore() //仮でここにおいておく
+
+    }
+
+    ////ポップアップ
+    //結果ポップアップ
+    @SuppressLint("InflateParams")
+    private fun showResultPopup(){
+        resultPopup = PopupWindow(this@GameWithComActivity)
+        // レイアウト設定
+        val popupView: View = layoutInflater.inflate(R.layout.popup_resalt, null)
+        resultPopup!!.contentView = popupView
+        // タップ時に他のViewでキャッチされないための設定
+        resultPopup!!.isOutsideTouchable = true
+        resultPopup!!.isFocusable = true
+
+        // 表示サイズの設定
+        resultPopup!!.width  = width*8/10
+        resultPopup!!.height = height*8/10
+
+        // 画面中央に表示
+        resultPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
+
+        //// 関数設定
+        val resultImage = popupView.findViewById<ImageView>(R.id.resaltImage)
+
+
+        //画像を設定する
+        if (Locale.getDefault().equals(Locale.JAPAN)){
+            when(winner){
+                "1p" -> resultImage.setImageResource(R.drawable.win1p_jp)
+                "2p" -> resultImage.setImageResource(R.drawable.win2p_jp)
+            }
+            Log.d("gobblet2", "lang:jp")
+        } else {
+            when(winner){
+                "1p" -> resultImage.setImageResource(R.drawable.win1p_en)
+                "2p" -> resultImage.setImageResource(R.drawable.win2p_en)
+            }
+            Log.d("gobblet2", "lang:en")
+        }
+
+
+        popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
+            playSound(cancelSE)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+        }
+
+        popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
+            playSound(gameStartSE)
+            val intent = Intent(this, GameWithComActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+        }
+
+        popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
+            playSound(cancelSE)
+            val intent = Intent(this, preGameWithComActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+        }
+
+        popupView.findViewById<View>(R.id.backButton).setOnClickListener {
+            if (resultPopup!!.isShowing) {
+                playSound(closeSE)
+                resultPopup!!.dismiss()
+            }
+        }
+    }
+
+    //設定ポップアップ
+    @SuppressLint("InflateParams")
+    private fun showConfigPopup(){
+        configPopup = PopupWindow(this@GameWithComActivity)
+        // レイアウト設定
+        val popupView: View = layoutInflater.inflate(R.layout.popup_config, null)
+        configPopup!!.contentView = popupView
+
+        // タップ時に他のViewでキャッチされないための設定
+        configPopup!!.isOutsideTouchable = true
+        configPopup!!.isFocusable = true
+
+        // 表示サイズの設定 今回は画面の半分
+        configPopup!!.width  = width*8/10
+        configPopup!!.height = height*4/10
+
+        // 画面中央に表示
+        configPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
+
+        //ラジオボタン初期化
+        val radioSE = popupView.findViewById<RadioGroup>(R.id.SEOnOff)
+        when(SE){
+            true -> {popupView.findViewById<RadioButton>(R.id.SEOn).isChecked = true}
+            false -> {popupView.findViewById<RadioButton>(R.id.SEOff).isChecked = true}
+        }
+
+        val radioBGM = popupView.findViewById<RadioGroup>(R.id.BGMOnOff)
+        when(BGM){
+            true -> {popupView.findViewById<RadioButton>(R.id.BGMOn).isChecked = true}
+            false -> {popupView.findViewById<RadioButton>(R.id.BGMOff).isChecked = true}
+        }
+
+
+        //// 関数設定
+        radioSE.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                R.id.SEOn->{SE=true}
+                R.id.SEOff->{SE=false}
+            }
+            playSound(radioButtonSE)
+            val editor=pref!!.edit()
+            editor.putBoolean("SEOnOff",SE).apply()
+            //Log.d("gobblet2", "SE=${SE}")
+        }
+
+        radioBGM.setOnCheckedChangeListener { group, checkedId ->
+            when(checkedId){
+                R.id.BGMOn->{
+                    BGM=true
+                    mediaPlayer?.start()
+                }
+                R.id.BGMOff->{
+                    BGM=false
+                    mediaPlayer?.pause()
+                }
+            }
+            playSound(radioButtonSE)
+            val editor= pref!!.edit()
+            editor.putBoolean("BGMOnOff",BGM).apply()
+            //Log.d("gobblet2", "BGM=${BGM}")
+        }
+
+        popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
+            playSound(cancelSE)
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+        }
+
+        popupView.findViewById<View>(R.id.backButton).setOnClickListener {
+            if (configPopup!!.isShowing) {
+                playSound(closeSE)
+                configPopup!!.dismiss()
+            }
+        }
+    }
+
+    //トースト関係(ホントはダイアログだけど面倒だからそのまま使う)
+    private fun toastCanNotPickup(){
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.cannotPickupDialogText))
+            .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
+            .show()
+        playSound(cannotDoItSE)
+    }
+
+    private fun toastCanNotInsert(){
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.cannotInsertDialogText))
+            .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
+            .show()
+        Log.d("gobblet2", "can't insert called")
+        playSound(cannotDoItSE)
+    }
+
+    private fun toastNotYourTurn(){
+        AlertDialog.Builder(this)
+            .setTitle(getString(R.string.notYourTurnDialogText))
+            .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
+            .show()
+        playSound(cannotDoItSE)
     }
 
     //初期化に関する関数
