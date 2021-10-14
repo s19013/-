@@ -49,7 +49,9 @@ class Mas(private val name:String) {
 
     fun returnLastElement():Int{
         for (i in 2 downTo 0){
-            if (list[i]!=0){ return list[i] } //後ろからコマがあるかどうか調べる
+            //後ろからコマがあるかどうか調べる
+            //とにかくこのマスの中にコマがあるか
+            if (list[i]!=0){ return list[i] }
         }
         return 0 //マスの中に何もなかったら0と返す
     }

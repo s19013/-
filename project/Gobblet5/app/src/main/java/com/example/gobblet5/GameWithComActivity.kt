@@ -114,11 +114,7 @@ class GameWithComActivity : AppCompatActivity() {
     private var line2 = mutableListOf(0, 0, 0, 0)
     private var line3 = mutableListOf(0, 0, 0, 0)
     private var line4 = mutableListOf(0, 0, 0, 0)
-    //コンピューターにわたすよう?
-    private var comLine1 = mutableListOf<Mas>(A1, B1, C1, D1)
-    private var comLine2 = mutableListOf<Mas>(A2, B2, C2, D2)
-    private var comLine3 = mutableListOf<Mas>(A3, B3, C3, D3)
-    private var comLine4 = mutableListOf<Mas>(A4, B4, C4, D4)
+
     //勝敗を決めるのに使う
     private var judgeMap = mutableMapOf(
         "lineA" to 0, "lineB" to 0, "lineC" to 0, "lineD" to 0,
@@ -160,7 +156,8 @@ class GameWithComActivity : AppCompatActivity() {
         iniSoundPool()
         iniMediaPlayer()
         iniDrawable()
-        com.iniLines(comLine1,comLine2,comLine3,comLine4)
+        iniCom()
+
 
         //先攻後攻設定
         if (playFirst != 0){ turn = playFirst }
@@ -953,15 +950,36 @@ class GameWithComActivity : AppCompatActivity() {
     }
 
     //コンピューター関係
-    fun iniCom(){}
+    fun iniCom(){
+        //コンピューターにわたすよう?
+
+        com.iniLines(
+            mutableListOf<Mas>(A1, B1, C1, D1),//l1
+            mutableListOf<Mas>(A2, B2, C2, D2),//l2
+            mutableListOf<Mas>(A3, B3, C3, D3),//l3
+            mutableListOf<Mas>(A4, B4, C4, D4),//l4
+            mutableListOf<Mas>(A1, A2, A3, A4),//lA
+            mutableListOf<Mas>(B1, B2, B3, B4),//lB
+            mutableListOf<Mas>(C1, C2, C3, C4),//lC
+            mutableListOf<Mas>(D1, D2, D3, D4),//lD
+            mutableListOf<Mas>(A1, B2, C3, D4),//lS
+            mutableListOf<Mas>(A4, B3, C2, D1),//lBS
+        )
+        com.iniConcatLine()
+    }
 
     fun startCom(){
+        //com.debBord()
         com.checkEmptyMas()
         com.checkWhatIsInTheMas()
+        com.judge()
         com.checkEnemyReach()
         com.checkComReach()
         com.debScore()
+        com.checkmate()
         com.resetScore() //仮でここにおいておく
+        com.resetLists()
+
 
     }
 
