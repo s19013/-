@@ -21,6 +21,7 @@ class Com {
     private val stringLineBS="LBS"
 
     //
+    private var isFirstTurn = true
     private var temochiBig:Temochi? = null
     private var temochiMiddle:Temochi? = null
     private var temochiSmall:Temochi? = null
@@ -44,14 +45,6 @@ class Com {
     private var judgeList:MutableList<Int> = mutableListOf(0,0,0,0,0,0,0,0,0,0)
     private var nameList:MutableList<String> = mutableListOf(stringLine1,stringLine2,stringLine3,stringLine4,
         stringLineA,stringLineB,stringLineC,stringLineD,stringLineS,stringLineBS)
-    //[1,2,3,4,A,B,C,D,s,bs]
-
-//    private var judgeList:MutableList<ScoreOfLine> = mutableListOf(
-//        ScoreOfLine("LA"),ScoreOfLine("LB"),ScoreOfLine("LC"),ScoreOfLine("LD"),
-//        ScoreOfLine("L1"),ScoreOfLine("L2"),ScoreOfLine("L3"),ScoreOfLine("L4"),
-//        ScoreOfLine("LS"),ScoreOfLine("LBS")
-//    )
-    //これでリーチになりそうなものをしらべる?(マップは使えないのでリストを使う)
 
     //マスが空かどうかしらべる
     fun checkEmptyMas() {
@@ -121,25 +114,7 @@ class Com {
         counter(lineBS)
     }
 
-    //人間にリーチがかかってないか調べる
-    fun checkEnemyReach(){
-        for(value in 0 until judgeList.size){
-            if (judgeList[value] == 3){
-                EnemyReachList.add(nameList[value])
-            }
-        }
-    }
-
-    //コンピューターにリーチがかかってないか調べる
-    fun checkComReach(){
-        for(value in 0 until judgeList.size){
-            if (judgeList[value] == -3){
-                //ComReachList.add(nameList[value])
-            }
-        }
-    }
-
-    //止めをさせる場所を探す
+    //コンピューターにリーチがかかってないか調べる(止めをさせる場所を探す)
     fun checkmate(){
         //最後の決めてとなる場所を探す,そしてそこに入れられるかを探す
         fun commonFunc(line:Line){
@@ -185,7 +160,7 @@ class Com {
         return rv[0]
     }
 
-    //相手の勝利を阻止する
+    //人間にリーチがかかってないか調べる(相手の勝利を阻止する)
     fun blockCheckmate(){
         ////どこに入れれば防げるか探す
         fun commonFunc(line:Line){
@@ -225,8 +200,47 @@ class Com {
         }
     }
 
+    //最初のターンの定石を実行
+    fun firstTurn(){
+        val randomNum = (0..3).random()
+        when(randomNum){
+            0 ->{} //b2に置く
+            1 ->{} //b3に置く
+            2 ->{} //c2に置く
+            3 ->{} //c3に置く
+        }
+    }
 
-    
+    //大きさを決定する
+    fun ChooseASize(){
+
+    }
+
+    //場所を決める
+    fun ChooseAlocation(){
+
+    }
+
+    //一番評価値が大きい場所を選ぶ
+    fun biggestScore(){
+        var selected :Mas? = line1.list[0] //適当にA1をデフォルトとする
+        var biggestScore = 0
+
+        fun commonFunc(line:Line){
+            for (mas in line.list){
+                if (mas.scoreGetter() > biggestScore){
+                    biggestScore = mas.scoreGetter()
+                    selected = mas
+                }
+            }
+        }
+
+        commonFunc(line1)
+        commonFunc(line2)
+        commonFunc(line3)
+        commonFunc(line4)
+
+    }
 
     fun judge(){
         for(i in 0..3){
