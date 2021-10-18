@@ -975,6 +975,7 @@ class GameWithComActivity : AppCompatActivity() {
         com.judge()
         com.reachChecker()
         com.checkmate()
+        com.blockCheckmate()
         com.debScore()
         com.resetScore() //仮でここにおいておく
         com.resetLists()
