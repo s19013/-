@@ -15,7 +15,7 @@ class Mas(private val name:String) {
         return score
     }
 
-    fun scoreAdd(arg:Int){ //スコアに引数の値を足す
+    fun addScore(arg:Int){ //スコアに引数の値を足す
         score+=arg
     }
 
