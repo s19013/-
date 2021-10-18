@@ -142,8 +142,7 @@ class Com {
     //止めをさせる場所を探す
     fun checkmate(){
         //最後の決めてとなる場所を探す,そしてそこに入れられるかを探す
-        fun commonFunc(line:Line){ 
-            Log.d("gobblet2Com","line:${line.nameGetter()}")
+        fun commonFunc(line:Line){
             var finalTarget:Mas? = null
             //ここからどのマスがまだ自分のマスでないかを教える?
             for (i in line.list){
@@ -190,26 +189,27 @@ class Com {
     fun blockCheckmate(){
         ////どこに入れれば防げるか探す
         fun commonFunc(line:Line){
-            Log.d("gobblet2Com","line:${line.nameGetter()}")
-            var finalTarget:Mas? = null
+            var target:Mas? = null
             //ここからどのマスがまだ自分のマスでないかを教える?
             for (i in line.list){
-                if (i.returnLastElement() != -1){
-                    finalTarget=i
+                if (i.returnLastElement() != 1){
+                    target=i
                     //あとは大きさがわかれば良い
                     break
                 }
             }
 
-            if (finalTarget != null){//コマをおけば勝てるところに相手の大きいコマがおいてないか調べる
-                when(howBigEnemysPiece(finalTarget)){
-                    3 -> {finalTarget.addScore(-100)}//諦めること指す
-                    else -> {finalTarget.addScore(200)}//評価値を入れる
+            if (target != null){//コマをおけば勝てるところに相手の大きいコマがおいてないか調べる
+                when(howBigEnemysPiece(target)){
+                    3 -> {target.addScore(-100)}//諦めること指す
+                    2 -> {target.addScore(82)}//中くらいのコマ
+                    1 -> {target.addScore(81)}//小さいコマ
+                    0 -> {target.addScore(100)}//何もおいていない
                 }
             }
-            Log.d("gobblet2Com","finalTarget:${finalTarget?.nameGetter()}")
+            Log.d("gobblet2Com","blocktarget:${target?.nameGetter()}")
         }
-        for (value in ComReachList){
+        for (value in EnemyReachList){
             when(value){
                 stringLine1 -> {commonFunc(line1)}
                 stringLine2 -> {commonFunc(line2)}
