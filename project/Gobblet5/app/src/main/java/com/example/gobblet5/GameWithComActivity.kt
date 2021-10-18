@@ -973,10 +973,9 @@ class GameWithComActivity : AppCompatActivity() {
         com.checkEmptyMas()
         com.checkWhatIsInTheMas()
         com.judge()
-        com.checkEnemyReach()
-        com.checkComReach()
-        com.debScore()
+        com.reachChecker()
         com.checkmate()
+        com.debScore()
         com.resetScore() //仮でここにおいておく
         com.resetLists()
 
