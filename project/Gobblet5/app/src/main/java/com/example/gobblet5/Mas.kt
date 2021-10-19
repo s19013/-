@@ -68,8 +68,8 @@ class Mas(private val name:String) {
         for (i in 2 downTo 0){
             if (list[i]!=0){
                 return mutableListOf(i+1,list[i]) //[大きさ､1pのか2pのか]
-            }
-        }
+            } //大きさ 小:1 中:2 大:3
+        } //1p:1 2p:-1
         return mutableListOf(0,0)
     }
 
