@@ -46,6 +46,74 @@ class Com {
     private var nameList:MutableList<String> = mutableListOf(stringLine1,stringLine2,stringLine3,stringLine4,
         stringLineA,stringLineB,stringLineC,stringLineD,stringLineS,stringLineBS)
 
+//評価値関係?
+    //コマの周りを調べる(今は空白の部分だけ)
+    fun checkEachMas(){
+        //自分の場合
+        fun inTheCaseOfM1(){}
+        //例としてA1の場合だけを考える
+        //まず自分自身のなかが空かどうか調べる
+        if (bord[0][0].returnLastElement() == 0){ }
+
+        //縦
+        for (y in 1..3){
+            Log.d("gobblet2Com","nowChecking:bord[0][${y}]")
+            val rv = bord[0][y].funcForDisplay()
+            Log.d("gobblet2Com","rv:[${rv[0]},${rv[1]}]")
+            if (rv[1] == 0){continue} //なにもはいってなかった時はスキップ
+            //自分のコマが入っていた場合
+            if (rv[1] == -1){
+                Log.d("gobblet2Com","縦　rv[1] == -1")
+                when(rv[0]){
+                    1->{bord[0][0].addScore(20)} //小
+                    2->{bord[0][0].addScore(30)} //中
+                    3->{bord[0][0].addScore(40)} //大
+                }
+            }
+            //相手のコマが入っていた場合
+            if (rv[1] == 1){
+                Log.d("gobblet2Com","縦　rv[1] == 1")
+                when(rv[0]){
+                    1->{bord[0][0].addScore(-20)} //小
+                    2->{bord[0][0].addScore(-30)} //中
+                    3->{bord[0][0].addScore(-40)} //大
+                }
+            }
+        }
+    //横
+    for (x in 1..3){
+        Log.d("gobblet2Com","nowChecking:bord[${x}][0]")
+        val rv = bord[x][0].funcForDisplay()
+        if (rv[1] == 0){continue} //
+        //自分のコマが入っていた場合
+        if (rv[1] == -1){
+            Log.d("gobblet2Com","横　rv[1] == -1")
+            when(rv[0]){
+                1->{bord[0][0].addScore(20)} //小
+                2->{bord[0][0].addScore(30)} //中
+                3->{bord[0][0].addScore(40)} //大
+            }
+        }
+        //相手のコマが入っていた場合
+        if (rv[1] == 1){
+            Log.d("gobblet2Com","横　rv[1] == 1")
+            when(rv[0]){
+                1->{bord[0][0].addScore(-20)} //小
+                2->{bord[0][0].addScore(-30)} //中
+                3->{bord[0][0].addScore(-40)} //大
+            }
+        }
+    }
+
+    //斜めはlineS,lineBSの場合のみ調べる
+
+//        for (step in 0..3){
+//            for (line in 0..3){
+//
+//            }
+//        }
+    }
+
     //マスが空かどうかしらべる
     fun checkEmptyMas() {
         fun commonFunc(line: Line){
@@ -115,7 +183,7 @@ class Com {
     }
 
     //コンピューターにリーチがかかってないか調べる(止めをさせる場所を探す)
-    fun checkmate(){
+    fun checkCanIcheckmate(){
         //最後の決めてとなる場所を探す,そしてそこに入れられるかを探す
         fun commonFunc(line:Line){
             var finalTarget:Mas? = null
@@ -132,7 +200,7 @@ class Com {
             if (finalTarget != null){
                 when(howBigEnemysPiece(finalTarget)){
                     3 -> {finalTarget.addScore(-100)}//諦めること指す
-                    else -> {finalTarget.addScore(200)}//評価値を入れる
+                    else -> {finalTarget.addScore(500)}//評価値を入れる
                 }
             }
             Log.d("gobblet2Com","finalTarget:${finalTarget?.nameGetter()}")
@@ -154,18 +222,12 @@ class Com {
         }
     }
 
-    //敵のコマの大きさを調べる
-    fun howBigEnemysPiece(mas:Mas):Int{
-        val rv = mas.funcForDisplay()
-        return rv[0]
-    }
-
     //人間にリーチがかかってないか調べる(相手の勝利を阻止する)
-    fun blockCheckmate(){
+    fun checkCanIBlockCheckmate(){
         ////どこに入れれば防げるか探す
         fun commonFunc(line:Line){
             var target:Mas? = null
-            //ここからどのマスがまだ自分のマスでないかを教える?
+            //ここからどのマスがまだ相手のマスでないかを教える?
             for (i in line.list){
                 if (i.returnLastElement() != 1){
                     target=i
@@ -174,12 +236,12 @@ class Com {
                 }
             }
 
-            if (target != null){//コマをおけば勝てるところに相手の大きいコマがおいてないか調べる
+            if (target != null){//コマをおけば防げるところに相手の大きいコマがおいてないか調べる
                 when(howBigEnemysPiece(target)){
                     3 -> {target.addScore(-100)}//諦めること指す
-                    2 -> {target.addScore(82)}//中くらいのコマ
-                    1 -> {target.addScore(81)}//小さいコマ
-                    0 -> {target.addScore(100)}//何もおいていない
+                    2 -> {target.addScore(81)}//中くらいのコマ
+                    1 -> {target.addScore(82)}//小さいコマ
+                    0 -> {target.addScore(200)}//何もおいていない
                 }
             }
             Log.d("gobblet2Com","blocktarget:${target?.nameGetter()}")
@@ -198,6 +260,12 @@ class Com {
                 stringLineBS -> {commonFunc(lineBS)}
             }
         }
+    }
+
+    //敵のコマの大きさを調べる
+    fun howBigEnemysPiece(mas:Mas):Int{
+        val rv = mas.funcForDisplay()
+        return rv[0]
     }
 
     //最初のターンの定石を実行
@@ -242,6 +310,11 @@ class Com {
 
     }
 
+    //うごかしてはいけないコマを探す
+    fun whichPieceSholdDonNotMove(){
+
+    }
+
     fun judge(){
         for(i in 0..3){
             judgeList[0] += bord[0][i].returnLastElement()
@@ -274,7 +347,7 @@ class Com {
             judgeList[9] += bord[i][i].returnLastElement()
         }
     }
-
+//リセット関係
     fun resetScore(){
         //すべてのマスクラスの評価値を0にする
         for (l in line1.list){
@@ -299,7 +372,7 @@ class Com {
         EnemyReachList.clear()
         ComReachList.clear()
     }
-
+//初期化関係
     fun iniConcatLine(){ //一旦関数にしないとエラーになるので関数化
 //        lineAllAtOnce.addAll(line1)
 //        lineAllAtOnce.addAll(line2)
@@ -327,7 +400,7 @@ class Com {
         this.lineS.listSetter(lineS)
         this.lineBS.listSetter(lineBS)
     }
-
+//デバック関係
     fun deb(){
         Log.d("gobblet2Com","list1:{${bord[0][0].funcForDisplay()},${bord[0][1].funcForDisplay()},${bord[0][2].funcForDisplay()},${bord[0][0].funcForDisplay()}}")
         Log.d("gobblet2Com","list2:{${bord[1][0].funcForDisplay()},${bord[1][1].funcForDisplay()},${bord[1][2].funcForDisplay()},${bord[1][3].funcForDisplay()}}")
@@ -354,6 +427,10 @@ class Com {
         Log.d("gobblet2Com","[${bord[2][0].nameGetter()},${bord[2][1].nameGetter()},${bord[2][2].nameGetter()},${bord[2][3].nameGetter()}]")
         Log.d("gobblet2Com","[${bord[3][0].nameGetter()},${bord[3][1].nameGetter()},${bord[3][2].nameGetter()},${bord[3][3].nameGetter()}]")
 
+    }
+
+    fun deblist(){
+        Log.d("gobblet2Com","[]")
     }
 
 }
