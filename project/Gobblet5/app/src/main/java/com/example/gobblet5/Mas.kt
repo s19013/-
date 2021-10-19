@@ -3,17 +3,17 @@ package com.example.gobblet5
 import android.util.Log
 
 
-class Mas(private val name:String, private val myVerticalValue: Int, private val myHorizontalValue: Int) {
+class Mas(private val name:String, private val myValueOfX: Int, private val myValueOfY: Int) {
     var list= mutableListOf<Int>(0,0,0) // [小､中､大]
     var score = 0 //コンピューターが使う評価値みたいなもの
 
-    fun nameGetter():String{
-        return name
-    }
+    fun nameGetter():String{ return name }
 
-    fun scoreGetter():Int{
-        return score
-    }
+    fun scoreGetter():Int{ return score }
+
+    fun myValueOfX():Int{return myValueOfX}
+
+    fun myValueOfY():Int{return myValueOfY}
 
     fun addScore(arg:Int){ //スコアに引数の値を足す
         score+=arg
