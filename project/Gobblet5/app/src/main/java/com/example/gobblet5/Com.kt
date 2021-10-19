@@ -49,70 +49,143 @@ class Com {
 //評価値関係?
     //コマの周りを調べる(今は空白の部分だけ)
     fun checkEachMas(){
-        //自分の場合
-        fun inTheCaseOfM1(){}
-        //例としてA1の場合だけを考える
-        //まず自分自身のなかが空かどうか調べる
-        if (bord[0][0].returnLastElement() == 0){ }
+        var mas:Mas? =null
+        for (y in 0..3){
+            for (x in 0..3){
+                mas=bord[x][y]
+                //まず自分自身のなかが空かどうか調べる
+                if (mas.returnLastElement() != 0){continue}
+                checkVertical(mas)  //縦
+                checkHorizontal(mas)//横
+                if (lineS.list.contains(mas)){ checkSlash(mas) } //左からの斜め
+                if (lineBS.list.contains(mas)){checkBackSlash(mas)}
+            }
+        }
+    }
 
-        //縦
-        for (y in 1..3){
-            Log.d("gobblet2Com","nowChecking:bord[0][${y}]")
-            val rv = bord[0][y].funcForDisplay()
+    //そのマスの縦のラインを調べる
+    fun checkVertical(mas: Mas){
+        //まずはどこか調べ
+        val x=mas.myValueOfX()//xの値を固定
+        val refY=mas.myValueOfY()
+        for (y in 0..3){
+            val rv = bord[y][x].funcForDisplay()
             Log.d("gobblet2Com","rv:[${rv[0]},${rv[1]}]")
+            if (y==refY){continue}//自分自身を調べようとしたらスキップ
             if (rv[1] == 0){continue} //なにもはいってなかった時はスキップ
             //自分のコマが入っていた場合
             if (rv[1] == -1){
                 Log.d("gobblet2Com","縦　rv[1] == -1")
-                when(rv[0]){
-                    1->{bord[0][0].addScore(20)} //小
-                    2->{bord[0][0].addScore(30)} //中
-                    3->{bord[0][0].addScore(40)} //大
-                }
+                inTheCaseOfM1(rv[0],mas)
             }
             //相手のコマが入っていた場合
             if (rv[1] == 1){
                 Log.d("gobblet2Com","縦　rv[1] == 1")
-                when(rv[0]){
-                    1->{bord[0][0].addScore(-20)} //小
-                    2->{bord[0][0].addScore(-30)} //中
-                    3->{bord[0][0].addScore(-40)} //大
-                }
-            }
-        }
-    //横
-    for (x in 1..3){
-        Log.d("gobblet2Com","nowChecking:bord[${x}][0]")
-        val rv = bord[x][0].funcForDisplay()
-        if (rv[1] == 0){continue} //
-        //自分のコマが入っていた場合
-        if (rv[1] == -1){
-            Log.d("gobblet2Com","横　rv[1] == -1")
-            when(rv[0]){
-                1->{bord[0][0].addScore(20)} //小
-                2->{bord[0][0].addScore(30)} //中
-                3->{bord[0][0].addScore(40)} //大
-            }
-        }
-        //相手のコマが入っていた場合
-        if (rv[1] == 1){
-            Log.d("gobblet2Com","横　rv[1] == 1")
-            when(rv[0]){
-                1->{bord[0][0].addScore(-20)} //小
-                2->{bord[0][0].addScore(-30)} //中
-                3->{bord[0][0].addScore(-40)} //大
+                inTheCaseOfP1(rv[0],mas)
             }
         }
     }
+
+    //そのマスの横のラインを調べる
+    fun checkHorizontal(mas: Mas){
+        //まずはどこか調べ
+        val y=mas.myValueOfX()//yの値を固定
+        val refX=mas.myValueOfY()
+        for (x in 0..3){
+            val rv = bord[y][x].funcForDisplay()
+            Log.d("gobblet2Com","rv:[${rv[0]},${rv[1]}]")
+            if (x==refX){continue}//自分自身を調べようとしたらスキップ
+            if (rv[1] == 0){continue} //なにもはいってなかった時はスキップ
+            //自分のコマが入っていた場合
+            if (rv[1] == -1){
+                Log.d("gobblet2Com","横　rv[1] == -1")
+                inTheCaseOfM1(rv[0],mas)
+            }
+            //相手のコマが入っていた場合
+            if (rv[1] == 1){
+                Log.d("gobblet2Com","横　rv[1] == 1")
+                inTheCaseOfP1(rv[0],mas)
+            }
+        }
+    }
+
+    fun checkSlash(mas: Mas){
+        val refX=mas.myValueOfY()
+        for (n in 0..3){
+            val rv = bord[n][n].funcForDisplay()
+            if (n==refX){continue}//自分自身を調べようとしたらスキップ
+            if (rv[1] == 0){continue} //
+            //自分のコマが入っていた場合
+            if (rv[1] == -1){
+                Log.d("gobblet2Com","左斜め　rv[1] == -1")
+                inTheCaseOfM1(rv[0],mas)
+            }
+            //相手のコマが入っていた場合
+            if (rv[1] == 1){
+                Log.d("gobblet2Com","左斜め　rv[1] == 1")
+                inTheCaseOfP1(rv[0],mas)
+            }
+        }
+    }
+
+    fun checkBackSlash(mas:Mas){
+        val refX=mas.myValueOfY()
+        for (n in 0..3){
+            val rv = bord[3-n][n].funcForDisplay()
+            if (n==refX){continue}//自分自身を調べようとしたらスキップ
+            if (rv[1] == 0){continue} //
+            //自分のコマが入っていた場合
+            if (rv[1] == -1){
+                Log.d("gobblet2Com","右斜め　rv[1] == -1")
+                inTheCaseOfM1(rv[0],mas)
+            }
+            //相手のコマが入っていた場合
+            if (rv[1] == 1){
+                Log.d("gobblet2Com","右斜め　rv[1] == 1")
+                inTheCaseOfP1(rv[0],mas)
+            }
+        }
+    }
+
+    //周りををしらべている時に自分のコマがあった時の処理
+    fun inTheCaseOfM1(size:Int,mas: Mas){
+        when(size){
+            1->{
+                mas.addScore(20)
+                Log.d("gobblet2Com","${mas.nameGetter()} add:20")
+            } //小
+            2->{
+                mas.addScore(30)
+                Log.d("gobblet2Com","${mas.nameGetter()} add:30")
+            } //中
+            3->{
+                mas.addScore(40)
+                Log.d("gobblet2Com","${mas.nameGetter()} add:40")
+            } //大
+        }
+    }
+
+    //周りををしらべている時に相手のコマがあった時の処理
+    fun inTheCaseOfP1(size:Int,mas: Mas){
+        when(size){
+            1->{
+                mas.addScore(-20)
+                Log.d("gobblet2Com","${mas.nameGetter()} add:-20")
+            } //小
+            2->{
+                mas.addScore(-30)
+                Log.d("gobblet2Com","${mas.nameGetter()} add:-30")
+            } //中
+            3->{
+                mas.addScore(-40)
+                Log.d("gobblet2Com","${mas.nameGetter()} add:-40")
+            } //大
+        }
+    }
+
+
 
     //斜めはlineS,lineBSの場合のみ調べる
-
-//        for (step in 0..3){
-//            for (line in 0..3){
-//
-//            }
-//        }
-    }
 
     //マスが空かどうかしらべる
     fun checkEmptyMas() {
