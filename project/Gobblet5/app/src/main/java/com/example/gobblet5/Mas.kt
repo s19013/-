@@ -3,7 +3,7 @@ package com.example.gobblet5
 import android.util.Log
 
 
-class Mas(private val name:String) {
+class Mas(private val name:String, private val myVerticalValue: Int, private val myHorizontalValue: Int) {
     var list= mutableListOf<Int>(0,0,0) // [小､中､大]
     var score = 0 //コンピューターが使う評価値みたいなもの
 
