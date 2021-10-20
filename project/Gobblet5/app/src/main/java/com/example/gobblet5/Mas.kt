@@ -11,9 +11,9 @@ class Mas(private val name:String, private val myValueOfY: Int, private val myVa
 
     fun scoreGetter():Int{ return score }
 
-    fun myValueOfX():Int{return myValueOfX}
+    fun myValueOfXGetter():Int{return myValueOfX}
 
-    fun myValueOfY():Int{return myValueOfY}
+    fun myValueOfYGetter():Int{return myValueOfY}
 
     fun addScore(arg:Int){ //スコアに引数の値を足す
         score+=arg
