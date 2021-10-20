@@ -52,115 +52,139 @@ class Com {
         var mas:Mas? =null
         for (y in 0..3){
             for (x in 0..3){
-                mas=bord[x][y]
+                mas=bord[y][x]
                 //まず自分自身のなかが空かどうか調べる
-                if (mas.returnLastElement() != 0){continue}
+                if (mas.returnLastElement() != 0){continue} //なにか入っていたら飛ばす
                 checkVertical(mas)  //縦
                 checkHorizontal(mas)//横
-                if (lineS.list.contains(mas)){ checkSlash(mas) } //左からの斜め
-                if (lineBS.list.contains(mas)){checkBackSlash(mas)}
+                if (lineS.list.contains(mas)){checkSlash(mas)} //左からの斜め
+                if (lineBS.list.contains(mas)){checkBackSlash(mas)}//右からの斜め
             }
         }
     }
 
     //そのマスの縦のラインを調べる
     fun checkVertical(mas: Mas){
+        Log.d("gobblet2Com","${mas.nameGetter()}からみた縦 bord[${mas.myValueOfYGetter()}][${mas.myValueOfXGetter()}]")
         //まずはどこか調べ
-        val x=mas.myValueOfX()//xの値を固定
-        val refY=mas.myValueOfY()
+        val x=mas.myValueOfXGetter()//xの値を固定
+        val refY=mas.myValueOfYGetter()
         for (y in 0..3){
-            val rv = bord[y][x].funcForDisplay()
-            Log.d("gobblet2Com","rv:[${rv[0]},${rv[1]}]")
             if (y==refY){continue}//自分自身を調べようとしたらスキップ
-            if (rv[1] == 0){continue} //なにもはいってなかった時はスキップ
-            //自分のコマが入っていた場合
-            if (rv[1] == -1){
-                Log.d("gobblet2Com","縦　rv[1] == -1")
-                inTheCaseOfM1(rv[0],mas)
-            }
-            //相手のコマが入っていた場合
-            if (rv[1] == 1){
-                Log.d("gobblet2Com","縦　rv[1] == 1")
-                inTheCaseOfP1(rv[0],mas)
+            val rv = bord[y][x].funcForDisplay()
+
+            //1つ1つのマスの中を調べる
+            when(rv[1]){
+                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時はスキップ
+                -1 -> {
+                //自分のコマが入っていた場合
+                    Log.d("gobblet2Com","${bord[y][x].nameGetter()}に緑")
+                    inTheCaseOfM1(rv[0],mas)
+                }
+                 1 -> {
+                     //相手のコマが入っていた場合
+                     Log.d("gobblet2Com","${bord[y][x].nameGetter()}に赤")
+                     inTheCaseOfP1(rv[0],mas)
+                 }
             }
         }
     }
 
     //そのマスの横のラインを調べる
     fun checkHorizontal(mas: Mas){
+        Log.d("gobblet2Com","${mas.nameGetter()}からみた横 bord[${mas.myValueOfYGetter()}][${mas.myValueOfXGetter()}]")
         //まずはどこか調べ
-        val y=mas.myValueOfX()//yの値を固定
-        val refX=mas.myValueOfY()
+        val y=mas.myValueOfYGetter()//yの値を固定
+        val refX=mas.myValueOfXGetter()
+
+        //1つ1つのマスの中を調べる
         for (x in 0..3){
-            val rv = bord[y][x].funcForDisplay()
-            Log.d("gobblet2Com","rv:[${rv[0]},${rv[1]}]")
             if (x==refX){continue}//自分自身を調べようとしたらスキップ
-            if (rv[1] == 0){continue} //なにもはいってなかった時はスキップ
-            //自分のコマが入っていた場合
-            if (rv[1] == -1){
-                Log.d("gobblet2Com","横　rv[1] == -1")
-                inTheCaseOfM1(rv[0],mas)
-            }
-            //相手のコマが入っていた場合
-            if (rv[1] == 1){
-                Log.d("gobblet2Com","横　rv[1] == 1")
-                inTheCaseOfP1(rv[0],mas)
+            val rv = bord[y][x].funcForDisplay()
+            when(rv[1]){
+                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時はスキップ
+                -1 -> {
+                    //自分のコマが入っていた場合
+                    Log.d("gobblet2Com","${bord[y][x].nameGetter()}に緑")
+                    inTheCaseOfM1(rv[0],mas)
+                 }
+                 1 -> {
+                     //相手のコマが入っていた場合
+                     Log.d("gobblet2Com","${bord[y][x].nameGetter()}に赤")
+                     inTheCaseOfP1(rv[0],mas)
+                 }
             }
         }
     }
 
+    //そのマスの左斜めのラインを調べる
     fun checkSlash(mas: Mas){
-        val refX=mas.myValueOfY()
+        Log.d("gobblet2Com","${mas.nameGetter()}からみた左斜め bord[${mas.myValueOfYGetter()}][${mas.myValueOfXGetter()}]")
+        val refX=mas.myValueOfYGetter()
         for (n in 0..3){
-            val rv = bord[n][n].funcForDisplay()
             if (n==refX){continue}//自分自身を調べようとしたらスキップ
-            if (rv[1] == 0){continue} //
-            //自分のコマが入っていた場合
-            if (rv[1] == -1){
-                Log.d("gobblet2Com","左斜め　rv[1] == -1")
-                inTheCaseOfM1(rv[0],mas)
-            }
-            //相手のコマが入っていた場合
-            if (rv[1] == 1){
-                Log.d("gobblet2Com","左斜め　rv[1] == 1")
-                inTheCaseOfP1(rv[0],mas)
+            val rv = bord[n][n].funcForDisplay()
+            
+            //1つ1つのマスの中を調べる
+            when(rv[1]){
+                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時はスキップ
+                -1 -> {
+                    //自分のコマが入っていた場合
+                    Log.d("gobblet2Com","${bord[n][n].nameGetter()}に緑")
+                    inTheCaseOfM1(rv[0],mas)
+                }
+                 1 -> {
+                     //相手のコマが入っていた場合
+                     Log.d("gobblet2Com","${bord[n][n].nameGetter()}に赤")
+                     inTheCaseOfP1(rv[0],mas)
+                 }
             }
         }
     }
 
+    //そのマスの右斜めのラインを調べる
     fun checkBackSlash(mas:Mas){
-        val refX=mas.myValueOfY()
+        Log.d("gobblet2Com","${mas.nameGetter()}から右斜め bord[${mas.myValueOfYGetter()}][${mas.myValueOfXGetter()}]")
+        val refX=mas.myValueOfYGetter()
         for (n in 0..3){
-            val rv = bord[3-n][n].funcForDisplay()
             if (n==refX){continue}//自分自身を調べようとしたらスキップ
-            if (rv[1] == 0){continue} //
-            //自分のコマが入っていた場合
-            if (rv[1] == -1){
-                Log.d("gobblet2Com","右斜め　rv[1] == -1")
-                inTheCaseOfM1(rv[0],mas)
-            }
-            //相手のコマが入っていた場合
-            if (rv[1] == 1){
-                Log.d("gobblet2Com","右斜め　rv[1] == 1")
-                inTheCaseOfP1(rv[0],mas)
+            val rv = bord[3-n][n].funcForDisplay()
+            
+            when(rv[1]){
+                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時はスキップ
+                -1 -> {
+                    //自分のコマが入っていた場合
+                    Log.d("gobblet2Com","${bord[3-n][n].nameGetter()}に緑")
+                    inTheCaseOfM1(rv[0],mas) 
+                 }
+                 1-> {
+                     //相手のコマが入っていた場合
+                     Log.d("gobblet2Com","${bord[3-n][n].nameGetter()}に赤")
+                     inTheCaseOfP1(rv[0],mas)
+                 }
             }
         }
+    }
+    
+    fun inTheCaseOfEmp(mas:Mas){
+        mas.addScore(20)
+        Log.d("gobblet2Com","${mas.nameGetter()} add:20")
     }
 
     //周りををしらべている時に自分のコマがあった時の処理
     fun inTheCaseOfM1(size:Int,mas: Mas){
         when(size){
             1->{
-                mas.addScore(20)
-                Log.d("gobblet2Com","${mas.nameGetter()} add:20")
-            } //小
-            2->{
-                mas.addScore(30)
-                Log.d("gobblet2Com","${mas.nameGetter()} add:30")
-            } //中
-            3->{
                 mas.addScore(40)
                 Log.d("gobblet2Com","${mas.nameGetter()} add:40")
+            } //小
+            2->{
+                mas.addScore(60)
+                Log.d("gobblet2Com","${mas.nameGetter()} add:60")
+            } //中
+            3->{
+                mas.addScore(80)
+                Log.d("gobblet2Com","${mas.nameGetter()} add:80")
             } //大
         }
     }
@@ -182,6 +206,8 @@ class Com {
             } //大
         }
     }
+    
+    
 
 
 
@@ -314,7 +340,7 @@ class Com {
                     3 -> {target.addScore(-100)}//諦めること指す
                     2 -> {target.addScore(81)}//中くらいのコマ
                     1 -> {target.addScore(82)}//小さいコマ
-                    0 -> {target.addScore(200)}//何もおいていない
+                    0 -> {target.addScore(400)}//何もおいていない
                 }
             }
             Log.d("gobblet2Com","blocktarget:${target?.nameGetter()}")
@@ -499,7 +525,6 @@ class Com {
         Log.d("gobblet2Com","[${bord[1][0].nameGetter()},${bord[1][1].nameGetter()},${bord[1][2].nameGetter()},${bord[1][3].nameGetter()}]")
         Log.d("gobblet2Com","[${bord[2][0].nameGetter()},${bord[2][1].nameGetter()},${bord[2][2].nameGetter()},${bord[2][3].nameGetter()}]")
         Log.d("gobblet2Com","[${bord[3][0].nameGetter()},${bord[3][1].nameGetter()},${bord[3][2].nameGetter()},${bord[3][3].nameGetter()}]")
-
     }
 
     fun deblist(){
@@ -507,3 +532,5 @@ class Com {
     }
 
 }
+
+//Log.d("gobblet2Com","now checking ${bord[y][x].nameGetter()}")
