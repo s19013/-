@@ -966,12 +966,11 @@ class GameWithComActivity : AppCompatActivity() {
             mutableListOf<Mas>(A4, B3, C2, D1),//lBS
         )
         com.iniConcatLine()
-        com.debBord()
     }
 
     fun startCom(){
         //com.debBord()
-        com.checkEmptyMas()
+        //com.checkEmptyMas()
         com.checkWhatIsInTheMas()
         com.checkEachMas()
         com.reachChecker()
