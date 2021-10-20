@@ -492,7 +492,7 @@ class GameWithComActivity : AppCompatActivity() {
         fun commonFunc(temochi: Temochi){
             setSMP(temochi.returnInf(), temochi.nameGetter())
             havingDisplay()
-            debSMP()
+//            debSMP()
         }
         when(name){
             stringTemochiRedBig -> { commonFunc(temochiRedBig) }
@@ -532,7 +532,7 @@ class GameWithComActivity : AppCompatActivity() {
     private fun pickup(name: String){
         fun commonFunc(mas: Mas){
             setSMP(mas.mPickup(turn), mas.nameGetter())
-            debSMP()
+//            debSMP()
             havingDisplay()
             mas.resetList(size)
             bordDisplay(mas.nameGetter())
@@ -763,7 +763,7 @@ class GameWithComActivity : AppCompatActivity() {
     private fun resetTemochi(){
         resetSMP()
         resetHavingDisplay()
-        debSMP()
+//        debSMP()
     }
 
     //マスやり直し
@@ -966,6 +966,7 @@ class GameWithComActivity : AppCompatActivity() {
             mutableListOf<Mas>(A4, B3, C2, D1),//lBS
         )
         com.iniConcatLine()
+        com.debBord()
     }
 
     fun startCom(){
