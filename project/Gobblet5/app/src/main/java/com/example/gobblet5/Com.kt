@@ -57,6 +57,8 @@ class Com {
                 if (mas.returnLastElement() != 0){continue} //なにか入っていたら飛ばす
                 checkVertical(mas)  //縦
                 checkHorizontal(mas)//横
+
+                //斜めはlineS,lineBSにそのコマが入っている場合のみ調べる
                 if (lineS.list.contains(mas)){checkSlash(mas)} //左からの斜め
                 if (lineBS.list.contains(mas)){checkBackSlash(mas)}//右からの斜め
             }
@@ -75,7 +77,7 @@ class Com {
 
             //1つ1つのマスの中を調べる
             when(rv[1]){
-                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時はスキップ
+                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時
                 -1 -> {
                 //自分のコマが入っていた場合
                     Log.d("gobblet2Com","${bord[y][x].nameGetter()}に緑")
@@ -102,7 +104,7 @@ class Com {
             if (x==refX){continue}//自分自身を調べようとしたらスキップ
             val rv = bord[y][x].funcForDisplay()
             when(rv[1]){
-                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時はスキップ
+                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時
                 -1 -> {
                     //自分のコマが入っていた場合
                     Log.d("gobblet2Com","${bord[y][x].nameGetter()}に緑")
@@ -127,7 +129,7 @@ class Com {
             
             //1つ1つのマスの中を調べる
             when(rv[1]){
-                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時はスキップ
+                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時
                 -1 -> {
                     //自分のコマが入っていた場合
                     Log.d("gobblet2Com","${bord[n][n].nameGetter()}に緑")
@@ -151,7 +153,7 @@ class Com {
             val rv = bord[3-n][n].funcForDisplay()
             
             when(rv[1]){
-                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時はスキップ
+                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時
                 -1 -> {
                     //自分のコマが入っていた場合
                     Log.d("gobblet2Com","${bord[3-n][n].nameGetter()}に緑")
@@ -167,8 +169,8 @@ class Com {
     }
     
     fun inTheCaseOfEmp(mas:Mas){
-        mas.addScore(20)
-        Log.d("gobblet2Com","${mas.nameGetter()} add:20")
+        mas.addScore(10)
+        Log.d("gobblet2Com","${mas.nameGetter()} add:10")
     }
 
     //周りををしらべている時に自分のコマがあった時の処理
@@ -206,12 +208,6 @@ class Com {
             } //大
         }
     }
-    
-    
-
-
-
-    //斜めはlineS,lineBSの場合のみ調べる
 
     //マスが空かどうかしらべる
     fun checkEmptyMas() {
@@ -411,6 +407,11 @@ class Com {
 
     //うごかしてはいけないコマを探す
     fun whichPieceSholdDonNotMove(){
+
+    }
+
+    //動かしても特に問題ないコマを探す
+    fun whichPieceIsUnnecessary(){
 
     }
 
