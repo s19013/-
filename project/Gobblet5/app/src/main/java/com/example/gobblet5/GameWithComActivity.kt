@@ -966,6 +966,7 @@ class GameWithComActivity : AppCompatActivity() {
             mutableListOf<Mas>(A4, B3, C2, D1),//lBS
         )
         com.iniConcatLine()
+        com.iniTemochi(temochiGreenBig,temochiGreenMiddle,temochiGreenSmall)
     }
 
     fun startCom(){
@@ -977,6 +978,7 @@ class GameWithComActivity : AppCompatActivity() {
         com.checkCanIcheckmate()
         com.checkCanIBlockCheckmate()
         com.judge()
+        com.biggestScore()
         com.debScore()
         com.resetScore() //仮でここにおいておく
         com.resetLists()
