@@ -3,7 +3,7 @@ package com.example.gobblet5
 import android.util.Log
 
 class Line(private val name:String) {
-    var list:MutableList<Mas> = mutableListOf()
+    private var list:MutableList<Mas> = mutableListOf()
 
     fun nameGetter():String{
         return name

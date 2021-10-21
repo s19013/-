@@ -66,8 +66,8 @@ class Com {
                 checkHorizontal(mas)//横
 
                 //斜めはlineS,lineBSにそのコマが入っている場合のみ調べる
-                if (lineS.list.contains(mas)){checkSlash(mas)} //左からの斜め
-                if (lineBS.list.contains(mas)){checkBackSlash(mas)}//右からの斜め
+                if (lineS.listGetter().contains(mas)){checkSlash(mas)} //左からの斜め
+                if (lineBS.listGetter().contains(mas)){checkBackSlash(mas)}//右からの斜め
             }
         }
     }
@@ -75,7 +75,8 @@ class Com {
     //うごかしてはいけないコマを探す
     fun whichPieceSholdDonNotMove(){
         //列に自分以外全部敵コマの時は絶対に動かさない
-
+        //敵3,自分1のラインを探す
+        //そのラインうち自分のコマがおいてあるマスをリストに入れる
     }
 
     //動かしても特に問題ないコマを探す
@@ -195,7 +196,7 @@ class Com {
     //マスが空かどうかしらべる
     fun checkEmptyMas() {
         fun commonFunc(line: Line){
-            for (L in line.list) {
+            for (L in line.listGetter()) {
                 if (L.returnLastElement() == 0) {
                     L.addScore(10) //マスの中が空だったら評価値10を加える
                 }
@@ -211,7 +212,7 @@ class Com {
     //各マスに何が入っているのかしらべて評価値をつける
     fun checkWhatIsInTheMas(){
         fun commonFunc(line: Line){
-            for (mas in line.list){
+            for (mas in line.listGetter()){
                 val rv = mas.funcForDisplay() //帰り値を入れる箱を用意する
                 when{
                     rv[0] == 3 -> {mas.addScore(-50)}//相手の大コマか自分の大コマが置かれている
@@ -233,7 +234,7 @@ class Com {
         fun counter(line: Line){
             var countM1 = 0
             var countP1 = 0
-            for (i in line.list){ // -1,1の個数をそれぞれ数える
+            for (i in line.listGetter()){ // -1,1の個数をそれぞれ数える
                 when(i.returnLastElement()) {
                     -1 -> {countM1 += 1}
                     1 -> {countP1 += 1}
@@ -260,7 +261,7 @@ class Com {
         fun commonFunc(line:Line){
             var finalTarget:Mas? = null
             //ここからどのマスがまだ自分のマスでないかを教える?
-            for (i in line.list){
+            for (i in line.listGetter()){
                 if (i.returnLastElement() != -1){
                     finalTarget=i
                     //あとは大きさがわかれば良い
@@ -300,7 +301,7 @@ class Com {
         fun commonFunc(line:Line){
             var target:Mas? = null
             //ここからどのマスがまだ相手のマスでないかを教える?
-            for (i in line.list){
+            for (i in line.listGetter()){
                 if (i.returnLastElement() != 1){
                     target=i
                     //あとは大きさがわかれば良い
@@ -363,11 +364,11 @@ class Com {
 
     //一番評価値が大きい場所を選ぶ
     fun biggestScore(){
-        var selected :Mas? = line1.list[0] //適当にA1をデフォルトとする
+        var selected :Mas? = line1.listGetter()[0] //適当にA1をデフォルトとする
         var biggestScore = 0
 
         fun commonFunc(line:Line){
-            for (mas in line.list){
+            for (mas in line.listGetter()){
                 if (mas.scoreGetter() > biggestScore){ //基準より大きかった場合
                     candidateList.clear() //リストをリセット
                     candidateList.add(mas) //候補リストに追加
@@ -422,16 +423,16 @@ class Com {
 //リセット関係
     fun resetScore(){
         //すべてのマスクラスの評価値を0にする
-        for (l in line1.list){
+        for (l in line1.listGetter()){
             l.resetScore()
         }
-        for (l in line2.list){
+        for (l in line2.listGetter()){
             l.resetScore()
         }
-        for (l in line3.list){
+        for (l in line3.listGetter()){
             l.resetScore()
         }
-        for (l in line4.list){
+        for (l in line4.listGetter()){
             l.resetScore()
         }
 
@@ -474,10 +475,10 @@ class Com {
         lineAllAtOnce.add(lineS)
         lineAllAtOnce.add(lineBS)
 
-        bord.add(line1.list)
-        bord.add(line2.list)
-        bord.add(line3.list)
-        bord.add(line4.list)
+        bord.add(line1.listGetter())
+        bord.add(line2.listGetter())
+        bord.add(line3.listGetter())
+        bord.add(line4.listGetter())
     }
 
     fun iniTemochi(b:Temochi,m:Temochi,s:Temochi){
