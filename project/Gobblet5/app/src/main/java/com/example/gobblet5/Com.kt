@@ -21,6 +21,8 @@ class Com {
     private val stringLineBS="LBS"
 
     //
+    var destination :Mas? = null //どこに置くか決めた
+    var movingSource:String? = null
     private var turnCount = 0 //自分のターンが回ってきた回数
     private var isFirstTurn = true
     private var P1Count = 0
@@ -57,41 +59,12 @@ class Com {
     //コマの周りを調べる(今は空白の部分だけ)
     fun checkEachMas(){
         for (line in lineAllAtOnce){
-            checkVertical(line)
+            funcForCheckEachMas(line)
         }
-//        var mas:Mas? =null
-//        for (y in 0..3){
-//            for (x in 0..3){
-//                mas=bord[y][x]
-//                val rv = mas.funcForDisplay()
-//                //まず自分自身のなかが空かどうか調べる
-//                if (rv[0] == 3 || rv[1] == -1){continue} //大きいコマか自分のコマが入っていたら飛ばす
-//                checkVertical(mas)  //縦
-//                checkHorizontal(mas)//横
-//
-//                //斜めはlineS,lineBSにそのコマが入っている場合のみ調べる
-//                if (lineS.listGetter().contains(mas)){checkSlash(mas)} //左からの斜め
-//                if (lineBS.listGetter().contains(mas)){checkBackSlash(mas)}//右からの斜め
-//            }
-//        }
     }
 
-    //うごかしてはいけないコマを探す
-    fun whichPieceSholdDonNotMove(){
-        //列に自分以外全部敵コマの時は絶対に動かさない
-        //敵3,自分1のラインを探す
-        //そのラインうち自分のコマがおいてあるマスをリストに入れる
-    }
-
-    //動かしても特に問題ないコマを探す
-    fun whichPieceIsUnnecessary(){
-
-    }
-
-    //そのマスの縦のラインを調べる
-    fun checkVertical(line: Line){
-//        Log.d("gobblet2Com","${mas.nameGetter()}からみた縦 bord[${mas.myValueOfYGetter()}][${mas.myValueOfXGetter()}]")
-        //まずはどこか調べ
+    //ラインごとに分けて各マスに評価値を入れる
+    fun funcForCheckEachMas(line: Line){
         var standard:Mas? =null
         var thisLine= line.listGetter()
 
@@ -107,25 +80,21 @@ class Com {
         }
 
 
-      //基準のマスに相手のコマが入っていた場合
-      fun standardIsP1(){
-          for (mas in thisLine){
-              val rv = mas.funcForDisplay()
-              if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
-              if (standard!!.funcForDisplay()[0] == 3) {continue}
+        //基準のマスに相手のコマが入っていた､もしくは何も入ってなかった場合
+        fun standardIsP1(){
+            for (mas in thisLine){
+                val rv = mas.funcForDisplay()
+                if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
+                if (standard!!.funcForDisplay()[0] == 3) {continue}
 
-              //周りの各マスを調べて
-              //基準にしたマスに評価値を入れる
-              when(rv[1]){
-                  0 -> {inTheCaseOfEmp(standard!!)}//なにもはいってなかった時
-                  -1 -> { inTheCaseOfM1(rv[0],standard!!) }//自分のコマが入っていた場合
-                  1 -> { inTheCaseOfP1(rv[0],standard!!) }//相手のコマが入っていた場合
-              }
-          }
-        }
-
-        fun f3(){
-
+                //周りの各マスを調べて
+                //基準にしたマスに評価値を入れる
+                when(rv[1]){
+                    0 -> {inTheCaseOfEmp(standard!!)}//なにもはいってなかった時
+                    -1 -> { inTheCaseOfM1(rv[0],standard!!) }//自分のコマが入っていた場合
+                    1 -> { inTheCaseOfP1(rv[0],standard!!) }//相手のコマが入っていた場合
+                }
+            }
         }
 
         for (i in 0..3){
@@ -140,66 +109,9 @@ class Com {
                 0 ->{standardIsP1()}
             }
         }
+
     //Log.d("gobblet2Com","${bord[y][x].nameGetter()}に緑")
     //Log.d("gobblet2Com","${bord[y][x].nameGetter()}に赤")
-    }
-
-    //そのマスの横のラインを調べる
-    fun checkHorizontal(mas: Mas){
-//        Log.d("gobblet2Com","${mas.nameGetter()}からみた横 bord[${mas.myValueOfYGetter()}][${mas.myValueOfXGetter()}]")
-        //まずはどこか調べ
-        val y=mas.myValueOfYGetter()//yの値を固定
-        val refX=mas.myValueOfXGetter()
-
-        //1つ1つのマスの中を調べる
-        for (x in 0..3){
-            if (x==refX){continue}//自分自身を調べようとしたらスキップ
-            val rv = bord[y][x].funcForDisplay()
-            when(rv[1]){
-                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時
-                -1 -> { inTheCaseOfM1(rv[0],mas) }//自分のコマが入っていた場合
-                 1 -> { inTheCaseOfP1(rv[0],mas) } //相手のコマが入っていた場合
-            }
-            //                    Log.d("gobblet2Com","${bord[y][x].nameGetter()}に緑")
-            //                     Log.d("gobblet2Com","${bord[y][x].nameGetter()}に赤")
-        }
-    }
-
-    //そのマスの左斜めのラインを調べる
-    fun checkSlash(mas: Mas){
-//        Log.d("gobblet2Com","${mas.nameGetter()}からみた左斜め bord[${mas.myValueOfYGetter()}][${mas.myValueOfXGetter()}]")
-        val refX=mas.myValueOfYGetter()
-        for (n in 0..3){
-            if (n==refX){continue}//自分自身を調べようとしたらスキップ
-            val rv = bord[n][n].funcForDisplay()
-            
-            //1つ1つのマスの中を調べる
-            when(rv[1]){
-                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時
-                -1 -> { inTheCaseOfM1(rv[0],mas) } //自分のコマが入っていた場合
-                 1 -> { inTheCaseOfP1(rv[0],mas) } //相手のコマが入っていた場合
-            }
-//                    Log.d("gobblet2Com","${bord[n][n].nameGetter()}に緑")
-//                     Log.d("gobblet2Com","${bord[n][n].nameGetter()}に赤")
-        }
-    }
-
-    //そのマスの右斜めのラインを調べる
-    fun checkBackSlash(mas:Mas){
-//        Log.d("gobblet2Com","${mas.nameGetter()}から右斜め bord[${mas.myValueOfYGetter()}][${mas.myValueOfXGetter()}]")
-        val refX=mas.myValueOfYGetter()
-        for (n in 0..3){
-            if (n==refX){continue}//自分自身を調べようとしたらスキップ
-            val rv = bord[3-n][n].funcForDisplay()
-            
-            when(rv[1]){
-                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時
-                -1 -> { inTheCaseOfM1(rv[0],mas) } //自分のコマが入っていた場合
-                 1-> { inTheCaseOfP1(rv[0],mas) } //相手のコマが入っていた場合
-            }
-//                    Log.d("gobblet2Com","${bord[3-n][n].nameGetter()}に緑")
-//                     Log.d("gobblet2Com","${bord[3-n][n].nameGetter()}に赤")
-        }
     }
     
     fun inTheCaseOfEmp(mas:Mas){
@@ -224,7 +136,7 @@ class Com {
         P1Count+=1
         when(size){
             1->{ mas.addScore(-20) } //小
-            2->{ mas.addScore(-50) } //中
+            2->{ mas.addScore(-40) } //中
             3->{ mas.addScore(-80) } //大
         }
 //                Log.d("gobblet2Com","${mas.nameGetter()} add:-20")
@@ -303,7 +215,6 @@ class Com {
             for (i in line.listGetter()){
                 if (i.returnLastElement() != -1){
                     finalTarget=i
-                    //あとは大きさがわかれば良い
                     break
                 }
             }
@@ -311,10 +222,13 @@ class Com {
             //コマをおけば勝てるところに相手の大きいコマがおいてないか調べる
             if (finalTarget != null){
                 when(howBigEnemysPiece(finalTarget)){
-                    3 -> {finalTarget.addScore(-100)}//諦めること指す
-                    else -> {finalTarget.addScore(500)}//評価値を入れる
+                    3 -> {finalTarget.addScore(-300)}//諦めること指す
+                    2 -> {finalTarget.addScore(300) }//中コマが入っていた
+                    1 -> {finalTarget.addScore(500) }//小コマが入っていた
+                    0 -> {finalTarget.addScore(1000)}//空だった
                 }
             }
+//            destination = finalTarget
             Log.d("gobblet2Com","finalTarget:${finalTarget?.nameGetter()}")
         }
         
@@ -355,6 +269,7 @@ class Com {
                     1 -> {target.addScore(82)}//小さいコマ
                     0 -> {target.addScore(400)}//何もおいていない
                 }
+                //destination=target
             }
             Log.d("gobblet2Com","blocktarget:${target?.nameGetter()}")
         }
@@ -376,19 +291,24 @@ class Com {
 
     //敵のコマの大きさを調べる
     fun howBigEnemysPiece(mas:Mas):Int{
-        val rv = mas.funcForDisplay()
-        return rv[0]
+        return mas.funcForDisplay()[0]
     }
 
     //最初のターンの定石を実行
     fun firstTurn(){
         val randomNum = (0..3).random()
         when(randomNum){
-            0 ->{} //b2に置く
-            1 ->{} //b3に置く
-            2 ->{} //c2に置く
-            3 ->{} //c3に置く
+            0 ->{ destination=lineB.listGetter()[1] } //b2に置く
+            1 ->{ destination=lineB.listGetter()[2] } //b3に置く
+            2 ->{ destination=lineC.listGetter()[1]} //c2に置く
+            3 ->{ destination=lineC.listGetter()[2]} //c3に置く
         }
+        movingSource= temochiBig?.nameGetter()
+    }
+
+    //2ターン目の定石
+    fun secondTurn(){
+
     }
 
     //大きさを決定する
@@ -401,11 +321,43 @@ class Com {
 
     }
 
+    //取り出す場所を決める
+    fun ChoosePickup(){
+
+    }
+
+    fun start(){
+        turnCount+=1
+        reachChecker()
+        //自分にリーチがかかっていた
+        if (comReachList.size!=0){
+            checkCanIcheckmate()
+            ChoosePickup()
+            return
+        }
+        //相手にリーチがかかっていた
+        if (enemyReachList.size!=0){
+            checkCanIBlockCheckmate()
+            ChoosePickup()
+            return
+        }
+        if (turnCount==1){
+            firstTurn()
+            return
+        }
+        if (turnCount==2){
+
+        }
+
+
+
+    }
+
+
+
     //一番評価値が大きい場所を選ぶ
     fun biggestScore(){
-        var selected :Mas? = line1.listGetter()[0] //適当にA1をデフォルトとする
         var biggestScore = 0
-
         fun commonFunc(line:Line){
             for (mas in line.listGetter()){
                 if (mas.scoreGetter() > biggestScore){ //基準より大きかった場合
@@ -423,8 +375,8 @@ class Com {
             commonFunc(lineAllAtOnce[i])
         }
 
-        selected = candidateList[(0 until  candidateList.size).random()] //候補リストから適当に場所を選ぶ
-        Log.d("gobblet2Com","selected:${selected?.nameGetter()}")
+        destination = candidateList[(0 until  candidateList.size).random()] //候補リストから適当に場所を選ぶ
+        Log.d("gobblet2Com","destination:${destination?.nameGetter()}")
     }
 
     fun judge(){
@@ -458,6 +410,14 @@ class Com {
         for(i in 0..3){
             judgeList[9] += bord[i][i].returnLastElement()
         }
+    }
+
+    fun destinationGetter(): Mas? {
+        return destination
+    }
+
+    fun movingSourceGetter():String?{
+        return movingSource
     }
 //リセット関係
     fun resetScore(){
