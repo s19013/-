@@ -51,25 +51,29 @@ class Com {
         stringLineA,stringLineB,stringLineC,stringLineD,stringLineS,stringLineBS)
 
     private var debCandidateList= mutableListOf<String>()
+    private var debDoNotMoveList= mutableListOf<String>()
 
 //評価値関係?
     //コマの周りを調べる(今は空白の部分だけ)
     fun checkEachMas(){
-        var mas:Mas? =null
-        for (y in 0..3){
-            for (x in 0..3){
-                mas=bord[y][x]
-                val rv = mas.funcForDisplay()
-                //まず自分自身のなかが空かどうか調べる
-                if (rv[0] == 3 || rv[1] == -1){continue} //大きいコマか自分のコマが入っていたら飛ばす
-                checkVertical(mas)  //縦
-                checkHorizontal(mas)//横
-
-                //斜めはlineS,lineBSにそのコマが入っている場合のみ調べる
-                if (lineS.listGetter().contains(mas)){checkSlash(mas)} //左からの斜め
-                if (lineBS.listGetter().contains(mas)){checkBackSlash(mas)}//右からの斜め
-            }
+        for (line in lineAllAtOnce){
+            checkVertical(line)
         }
+//        var mas:Mas? =null
+//        for (y in 0..3){
+//            for (x in 0..3){
+//                mas=bord[y][x]
+//                val rv = mas.funcForDisplay()
+//                //まず自分自身のなかが空かどうか調べる
+//                if (rv[0] == 3 || rv[1] == -1){continue} //大きいコマか自分のコマが入っていたら飛ばす
+//                checkVertical(mas)  //縦
+//                checkHorizontal(mas)//横
+//
+//                //斜めはlineS,lineBSにそのコマが入っている場合のみ調べる
+//                if (lineS.listGetter().contains(mas)){checkSlash(mas)} //左からの斜め
+//                if (lineBS.listGetter().contains(mas)){checkBackSlash(mas)}//右からの斜め
+//            }
+//        }
     }
 
     //うごかしてはいけないコマを探す
@@ -85,24 +89,59 @@ class Com {
     }
 
     //そのマスの縦のラインを調べる
-    fun checkVertical(mas: Mas){
+    fun checkVertical(line: Line){
 //        Log.d("gobblet2Com","${mas.nameGetter()}からみた縦 bord[${mas.myValueOfYGetter()}][${mas.myValueOfXGetter()}]")
         //まずはどこか調べ
-        val x=mas.myValueOfXGetter()//xの値を固定
-        val refY=mas.myValueOfYGetter()
-        for (y in 0..3){
-            if (y==refY){continue}//自分自身を調べようとしたらスキップ
-            val rv = bord[y][x].funcForDisplay()
+        var standard:Mas? =null
+        var thisLine= line.listGetter()
 
-            //1つ1つのマスの中を調べる
-            when(rv[1]){
-                 0 -> {inTheCaseOfEmp(mas)}//なにもはいってなかった時
-                -1 -> { inTheCaseOfM1(rv[0],mas) }//自分のコマが入っていた場合
-                 1 -> { inTheCaseOfP1(rv[0],mas) }//相手のコマが入っていた場合
+        //基準のマスに自分のコマが入っていた場合
+        fun standardIsM1(){
+            var countP1=0 //相手のコマの数を数える
+            //そのラインの各ますについて調べる
+            for (mas in thisLine){
+                if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
+                if (mas.returnLastElement() == 1){ countP1 +=1 }
+                if (countP1 == 3){doNotMoveList.add(standard!!) }
             }
-//                    Log.d("gobblet2Com","${bord[y][x].nameGetter()}に緑")
-//                     Log.d("gobblet2Com","${bord[y][x].nameGetter()}に赤")
         }
+
+
+      //基準のマスに相手のコマが入っていた場合
+      fun standardIsP1(){
+          for (mas in thisLine){
+              val rv = mas.funcForDisplay()
+              if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
+              if (standard!!.funcForDisplay()[0] == 3) {continue}
+
+              //周りの各マスを調べて
+              //基準にしたマスに評価値を入れる
+              when(rv[1]){
+                  0 -> {inTheCaseOfEmp(standard!!)}//なにもはいってなかった時
+                  -1 -> { inTheCaseOfM1(rv[0],standard!!) }//自分のコマが入っていた場合
+                  1 -> { inTheCaseOfP1(rv[0],standard!!) }//相手のコマが入っていた場合
+              }
+          }
+        }
+
+        fun f3(){
+
+        }
+
+        for (i in 0..3){
+            standard=line.listGetter()[i]
+            //そのラインの中での基準を決める
+            //基準はA1,B1,C1と変わって行く
+
+            //基準となったマスに何が入っているかによってすることが違う
+            when(standard.funcForDisplay()[1]){
+                -1 ->{standardIsM1()}
+                1 ->{standardIsP1()}
+                0 ->{standardIsP1()}
+            }
+        }
+    //Log.d("gobblet2Com","${bord[y][x].nameGetter()}に緑")
+    //Log.d("gobblet2Com","${bord[y][x].nameGetter()}に赤")
     }
 
     //そのマスの横のラインを調べる
@@ -164,7 +203,7 @@ class Com {
     }
     
     fun inTheCaseOfEmp(mas:Mas){
-        mas.addScore(10)
+        mas.addScore(20)
 //        Log.d("gobblet2Com","${mas.nameGetter()} add:10")
     }
 
@@ -185,8 +224,8 @@ class Com {
         P1Count+=1
         when(size){
             1->{ mas.addScore(-20) } //小
-            2->{ mas.addScore(-30) } //中
-            3->{ mas.addScore(-50) } //大
+            2->{ mas.addScore(-50) } //中
+            3->{ mas.addScore(-80) } //大
         }
 //                Log.d("gobblet2Com","${mas.nameGetter()} add:-20")
 //                Log.d("gobblet2Com","${mas.nameGetter()} add:-30")
@@ -445,6 +484,7 @@ class Com {
         enemyReachList.clear()
         comReachList.clear()
         candidateList.clear()
+        doNotMoveList.clear()
     }
 
 //初期化関係
@@ -506,6 +546,7 @@ class Com {
         Log.d("gobblet2Com","enemyReachList:${enemyReachList}")
         debC()
         Log.d("gobblet2Com","candidateList:${debCandidateList}")
+        Log.d("gobblet2Com","DoNotMoveList:${debDoNotMoveList}")
         Log.d("gobblet2Com"," ")
     }
 
@@ -513,6 +554,10 @@ class Com {
         debCandidateList.clear()
         for (i in candidateList){
             debCandidateList.add(i.nameGetter())
+        }
+        debDoNotMoveList.clear()
+        for (i in doNotMoveList){
+            debDoNotMoveList.add(i.nameGetter())
         }
     }
 
