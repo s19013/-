@@ -3,7 +3,8 @@ package com.example.gobblet5
 import android.os.Bundle
 import android.graphics.Color
 import android.util.Log
-import kotlinx.android.synthetic.main.activity_game_with_man.*
+import android.view.View
+import kotlinx.android.synthetic.main.activity_game_with_com.*
 
 class GameWithComActivity : GameBaseClass() {
     //コンピューター宣言
@@ -39,7 +40,7 @@ class GameWithComActivity : GameBaseClass() {
 
 
 //手持ちのボタンを触った時
-        buttonTemochiRedBig.setOnClickListener {
+        buttonTemochiRedBig!!.setOnClickListener {
             if (turn == 1){
                 //movingSourceが同じときやり直しができる
                 if (movingSource == stringTemochiRedBig){
@@ -55,7 +56,7 @@ class GameWithComActivity : GameBaseClass() {
             else{toastNotYourTurn()}
         }
 
-        buttonTemochiRedMiddle.setOnClickListener {
+        buttonTemochiRedMiddle!!.setOnClickListener {
             if (turn == 1){
                 if (movingSource==stringTemochiRedMiddle){
                     resetTemochi()
@@ -69,7 +70,7 @@ class GameWithComActivity : GameBaseClass() {
             else{toastNotYourTurn()}
         }
 
-        buttonTemochiRedSmall.setOnClickListener {
+        buttonTemochiRedSmall!!.setOnClickListener {
             if (turn == 1){
                 if (movingSource==stringTemochiRedSmall){
                     resetTemochi()
@@ -83,7 +84,7 @@ class GameWithComActivity : GameBaseClass() {
             else{toastNotYourTurn()}
         }
 
-        buttonTemochiGreenBig.setOnClickListener {
+        buttonTemochiGreenBig!!.setOnClickListener {
             if (turn == -1){
                 if (movingSource==stringTemochiGreenBig){
                     resetTemochi()
@@ -97,7 +98,7 @@ class GameWithComActivity : GameBaseClass() {
             else{toastNotYourTurn()}
         }
 
-        buttonTemochiGreenMiddle.setOnClickListener {
+        buttonTemochiGreenMiddle!!.setOnClickListener {
             if (turn == -1){
                 if (movingSource==stringTemochiGreenMiddle){
                     resetTemochi()
@@ -111,7 +112,7 @@ class GameWithComActivity : GameBaseClass() {
             else{toastNotYourTurn()}
         }
 
-        buttonTemochiGreenSmall.setOnClickListener {
+        buttonTemochiGreenSmall!!.setOnClickListener {
             if (turn == -1){
                 if (movingSource==stringTemochiGreenSmall){
                     resetTemochi()
@@ -212,7 +213,7 @@ class GameWithComActivity : GameBaseClass() {
             showConfigPopup()
         }
 
-        resaltButton.setOnClickListener {
+        resaltButton!!.setOnClickListener {
             playSound(openSE)
             showResultPopup()
         }
@@ -275,5 +276,23 @@ class GameWithComActivity : GameBaseClass() {
         }
     }
 
+    override fun iniView() {
+        val activity: View = layoutInflater.inflate(R.layout.activity_game_with_com, null)
+        //テキスト
+        textTemochiRedBig=findViewById(R.id.textTemochiRedBig)
+        textTemochiRedMiddle=findViewById(R.id.textTemochiRedMiddle)
+        textTemochiRedSmall=findViewById(R.id.textTemochiRedSmall)
+        textTemochiGreenBig=findViewById(R.id.textTemochiGreenBig)
+        textTemochiGreenMiddle=findViewById(R.id.textTemochiGreenMiddle)
+        textTemochiGreenSmall=findViewById(R.id.textTemochiGreenSmall)
 
+        //一部ボタン
+        buttonTemochiRedBig=findViewById(R.id.buttonTemochiRedBig)
+        buttonTemochiRedMiddle=findViewById(R.id.buttonTemochiRedMiddle)
+        buttonTemochiRedSmall=findViewById(R.id.buttonTemochiRedSmall)
+        buttonTemochiGreenBig=findViewById(R.id.buttonTemochiGreenBig)
+        buttonTemochiGreenMiddle=findViewById(R.id.buttonTemochiGreenMiddle)
+        buttonTemochiGreenSmall=findViewById(R.id.buttonTemochiGreenSmall)
+        resaltButton=findViewById(R.id.resaltButton)
+    }
 }

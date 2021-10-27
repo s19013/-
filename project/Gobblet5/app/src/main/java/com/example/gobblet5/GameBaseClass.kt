@@ -12,17 +12,16 @@ import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
 import android.view.View
-import android.widget.ImageView
-import android.widget.PopupWindow
-import android.widget.RadioButton
-import android.widget.RadioGroup
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import kotlinx.android.synthetic.main.activity_game_with_man.*
+//import kotlinx.android.synthetic.main.activity_game_with_man.*
 import java.util.*
 
 open class GameBaseClass : AppCompatActivity() {
+    //open var className = GameBaseClass()
+
     ////手持ち宣言
     //赤
     protected val temochiRedBig = Temochi(3,"TemochiRedBig")
@@ -133,6 +132,23 @@ open class GameBaseClass : AppCompatActivity() {
     protected var komaGreenBigD: Drawable? = null
     protected var komaGreenMiddleD: Drawable? = null
     protected var komaGreenSmallD: Drawable? = null
+
+    //テキスト
+    protected var textTemochiRedBig:TextView?=null
+    protected var textTemochiRedMiddle:TextView?=null
+    protected var textTemochiRedSmall:TextView?=null
+    protected var textTemochiGreenBig:TextView?=null
+    protected var textTemochiGreenMiddle:TextView?=null
+    protected var textTemochiGreenSmall:TextView?=null
+
+    //一部ボタン
+    protected var buttonTemochiRedBig:View?=null
+    protected var buttonTemochiRedMiddle:View?=null
+    protected var buttonTemochiRedSmall:View?=null
+    protected var buttonTemochiGreenBig:View?=null
+    protected var buttonTemochiGreenMiddle:View?=null
+    protected var buttonTemochiGreenSmall:View?=null
+    protected var resaltButton:View?=null
 
     //共有プリファレンス
     protected var pref: SharedPreferences? =null
@@ -563,6 +579,7 @@ open class GameBaseClass : AppCompatActivity() {
 
     }
 
+    //ターン開始の処理
     //オーバーライドする
     open fun startTurn(){}
 
@@ -583,50 +600,50 @@ open class GameBaseClass : AppCompatActivity() {
         when (movingSource) {//移動元を正しく表示する
             stringTemochiRedBig -> {
                 temochiRedBig.usePiece()
-                textTemochiRedBig.text = "${temochiRedBig.returnCount()}"
+                textTemochiRedBig!!.text = "${temochiRedBig.returnCount()}"
                 if (temochiRedBig.returnInf() == 0) {
-                    buttonTemochiRedBig.visibility = View.INVISIBLE
-                    textTemochiRedBig.visibility = View.INVISIBLE
+                    buttonTemochiRedBig!!.visibility = View.INVISIBLE
+                    textTemochiRedBig!!.visibility = View.INVISIBLE
                 }
             }
             stringTemochiRedMiddle -> {
                 temochiRedMiddle.usePiece()
-                textTemochiRedMiddle.text = "${temochiRedMiddle.returnCount()}"
+                textTemochiRedMiddle!!.text = "${temochiRedMiddle.returnCount()}"
                 if (temochiRedMiddle.returnInf() == 0) {
-                    buttonTemochiRedMiddle.visibility = View.INVISIBLE
-                    textTemochiRedMiddle.visibility = View.INVISIBLE
+                    buttonTemochiRedMiddle!!.visibility = View.INVISIBLE
+                    textTemochiRedMiddle!!.visibility = View.INVISIBLE
                 }
             }
             stringTemochiRedSmall -> {
                 temochiRedSmall.usePiece()
-                textTemochiRedSmall.text = "${temochiRedSmall.returnCount()}"
+                textTemochiRedSmall!!.text = "${temochiRedSmall.returnCount()}"
                 if (temochiRedSmall.returnInf() == 0) {
-                    buttonTemochiRedSmall.visibility = View.INVISIBLE
-                    textTemochiRedSmall.visibility = View.INVISIBLE
+                    buttonTemochiRedSmall!!.visibility = View.INVISIBLE
+                    textTemochiRedSmall!!.visibility = View.INVISIBLE
                 }
             }
             stringTemochiGreenBig -> {
                 temochiGreenBig.usePiece()
-                textTemochiGreenBig.text = "${temochiGreenBig.returnCount()}"
+                textTemochiGreenBig!!.text = "${temochiGreenBig.returnCount()}"
                 if (temochiGreenBig.returnInf() == 0) {
-                    buttonTemochiGreenBig.visibility = View.INVISIBLE
-                    textTemochiGreenBig.visibility = View.INVISIBLE
+                    buttonTemochiGreenBig!!.visibility = View.INVISIBLE
+                    textTemochiGreenBig!!.visibility = View.INVISIBLE
                 }
             }
             stringTemochiGreenMiddle -> {
                 temochiGreenMiddle.usePiece()
-                textTemochiGreenMiddle.text = "${temochiGreenMiddle.returnCount()}"
+                textTemochiGreenMiddle!!.text = "${temochiGreenMiddle.returnCount()}"
                 if (temochiGreenMiddle.returnInf() == 0) {
-                    buttonTemochiGreenMiddle.visibility = View.INVISIBLE
-                    textTemochiGreenMiddle.visibility = View.INVISIBLE
+                    buttonTemochiGreenMiddle!!.visibility = View.INVISIBLE
+                    textTemochiGreenMiddle!!.visibility = View.INVISIBLE
                 }
             }
             stringTemochiGreenSmall -> {
                 temochiGreenSmall.usePiece()
-                textTemochiGreenSmall.text = "${temochiGreenSmall.returnCount()}"
+                textTemochiGreenSmall!!.text = "${temochiGreenSmall.returnCount()}"
                 if (temochiGreenSmall.returnInf() == 0) {
-                    buttonTemochiGreenSmall.visibility = View.INVISIBLE
-                    textTemochiGreenSmall.visibility = View.INVISIBLE
+                    buttonTemochiGreenSmall!!.visibility = View.INVISIBLE
+                    textTemochiGreenSmall!!.visibility = View.INVISIBLE
                 }
             }
         }
@@ -685,7 +702,7 @@ open class GameBaseClass : AppCompatActivity() {
         }
 
         if (finished){
-            resaltButton.visibility= View.VISIBLE
+            resaltButton!!.visibility= View.VISIBLE
             showResultPopup()
         }
 
@@ -957,7 +974,12 @@ open class GameBaseClass : AppCompatActivity() {
         komaGreenBigD = res?.getDrawable(R.drawable.koma_green_big)
         komaGreenMiddleD = res?.getDrawable(R.drawable.koma_green_middle)
         komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
+
     }
+
+    open fun iniView(){}
+
+
 
     //音を鳴らす処理
     protected fun playSound(status: Int){
