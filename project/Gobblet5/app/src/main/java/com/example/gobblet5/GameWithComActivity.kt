@@ -22,6 +22,7 @@ class GameWithComActivity : GameBaseClass() {
         iniMediaPlayer()
         iniDrawable()
         iniCom()
+        iniView()
 
 
         //先攻後攻設定
@@ -277,7 +278,6 @@ class GameWithComActivity : GameBaseClass() {
     }
 
     override fun iniView() {
-        val activity: View = layoutInflater.inflate(R.layout.activity_game_with_com, null)
         //テキスト
         textTemochiRedBig=findViewById(R.id.textTemochiRedBig)
         textTemochiRedMiddle=findViewById(R.id.textTemochiRedMiddle)

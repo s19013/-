@@ -958,6 +958,8 @@ open class GameBaseClass : AppCompatActivity() {
         }
     }
 
+
+
     @SuppressLint("UseCompatLoadingForDrawables")
     protected fun iniDrawable(){
         //表示に使う物(空箱に実物を入れる)
@@ -977,6 +979,7 @@ open class GameBaseClass : AppCompatActivity() {
 
     }
 
+    //viewを取得?
     open fun iniView(){}
 
 
