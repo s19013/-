@@ -958,6 +958,17 @@ open class GameBaseClass : AppCompatActivity() {
         }
     }
 
+    //先攻後攻設定
+    protected fun iniWhichIsFirst(){
+        if (playFirst != 0){ turn = playFirst }
+        else {
+            when((1..2).random()){
+                1 -> {turn = 1}
+                2 -> {turn = -1}
+            }
+        }
+    }
+
 
 
     @SuppressLint("UseCompatLoadingForDrawables")

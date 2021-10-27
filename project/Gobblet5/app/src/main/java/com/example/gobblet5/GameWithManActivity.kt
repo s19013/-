@@ -35,16 +35,9 @@ class GameWithManActivity : GameBaseClass() {
         iniSoundPool()
         iniMediaPlayer()
         iniDrawable()
+        iniWhichIsFirst()
         iniView()
 
-        //先攻後攻設定
-        if (playFirst != 0){ turn = playFirst }
-        else {
-            when((1..2).random()){
-                1 -> {turn = 1}
-                2 -> {turn = -1}
-            }
-        }
         startTurn()
         Log.d("gobblet2", "pF:${playFirst}")
 
