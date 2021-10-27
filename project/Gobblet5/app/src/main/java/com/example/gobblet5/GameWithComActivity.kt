@@ -148,7 +148,7 @@ class GameWithComActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game_with_man)
+        setContentView(R.layout.activity_game_with_com)
 
         //初期化
         iniFullscreen()
