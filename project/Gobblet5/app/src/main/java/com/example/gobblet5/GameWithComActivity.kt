@@ -238,13 +238,17 @@ class GameWithComActivity : GameBaseClass() {
     fun startCom(){
         //com.debBord()
         //com.checkEmptyMas()
-        com.checkWhatIsInTheMas()
-        com.checkEachMas()
         com.reachChecker()
+        com.checkWhatIsInTheMas()
         com.checkCanIcheckmate()
         com.checkCanIBlockCheckmate()
-        com.judge()
+        com.checkEachMas()
+        //com.sortMasList()
+
+        //com.judge()
+
         com.biggestScore()
+
         com.debScore()
         com.resetScore() //仮でここにおいておく
         com.resetLists()
