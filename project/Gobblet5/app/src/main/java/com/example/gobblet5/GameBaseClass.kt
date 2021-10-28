@@ -909,6 +909,18 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //初期化に関する関数
+
+    //標準的な初期化処理
+    protected fun iniStandard(){
+        iniFullscreen()
+        iniPreference()
+        iniSoundPool()
+        iniMediaPlayer()
+        iniDrawable()
+        iniWhichIsFirst()
+        iniView()
+    }
+
     protected fun iniFullscreen(){
         //画面の大きさ
         val dm = DisplayMetrics()
@@ -968,8 +980,6 @@ open class GameBaseClass : AppCompatActivity() {
             }
         }
     }
-
-
 
     @SuppressLint("UseCompatLoadingForDrawables")
     protected fun iniDrawable(){
