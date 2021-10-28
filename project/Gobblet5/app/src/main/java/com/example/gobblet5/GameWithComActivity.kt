@@ -16,16 +16,12 @@ class GameWithComActivity : GameBaseClass() {
         setContentView(R.layout.activity_game_with_com)
 
         //初期化
-        iniFullscreen()
-        iniPreference()
-        iniSoundPool()
-        iniMediaPlayer()
-        iniDrawable()
-        iniWhichIsFirst()
-        iniView()
-
+        //共通な初期化
+        iniStandard()
+        //コンピューターの初期化
         iniCom()
 
+        //ゲームを始める
         startTurn()
         Log.d("gobblet2", "pF:${playFirst}")
 
@@ -34,6 +30,7 @@ class GameWithComActivity : GameBaseClass() {
 
 
 //手持ちのボタンを触った時
+        //1p手持ち
         buttonTemochiRedBig!!.setOnClickListener {
             if (turn == 1){
                 //movingSourceが同じときやり直しができる
@@ -78,6 +75,7 @@ class GameWithComActivity : GameBaseClass() {
             else{toastNotYourTurn()}
         }
 
+        //2p手持ち
         buttonTemochiGreenBig!!.setOnClickListener {
             if (turn == -1){
                 if (movingSource==stringTemochiGreenBig){
@@ -119,6 +117,8 @@ class GameWithComActivity : GameBaseClass() {
             }
             else{toastNotYourTurn()}
         }
+
+
         ////マスを触ったとき
         buttonA1.setOnClickListener {
             //ゲームが終わったらさわれないようにする,相手のターン中に触れないようにするためにこんなif文を書く
@@ -269,6 +269,9 @@ class GameWithComActivity : GameBaseClass() {
             }
         }
     }
+
+
+    //このアクティビティ内のviewを取得?
 
     override fun iniView() {
         //テキスト

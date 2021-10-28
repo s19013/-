@@ -30,14 +30,10 @@ class GameWithManActivity : GameBaseClass() {
         setContentView(R.layout.activity_game_with_man)
 
         //初期化
-        iniFullscreen()
-        iniPreference()
-        iniSoundPool()
-        iniMediaPlayer()
-        iniDrawable()
-        iniWhichIsFirst()
-        iniView()
+        //共通な初期化
+        iniStandard()
 
+        //ゲームを始める
         startTurn()
         Log.d("gobblet2", "pF:${playFirst}")
 
