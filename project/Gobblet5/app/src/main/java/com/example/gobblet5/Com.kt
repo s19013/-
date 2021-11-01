@@ -85,6 +85,9 @@ class Com {
     private var debMasInTheGreenMiddlePiece:MutableList<String> = mutableListOf()
     private var debMasInTheGreenSmallPiece:MutableList<String> = mutableListOf()
     private var debMasList = mutableListOf<String>()
+    private var debMostBiggestScore:MutableList<String> = mutableListOf() //一番大きいスコア
+    private var debSecondBiggestScore:MutableList<String> = mutableListOf() //二番目
+    private var debThirdBiggestScore:MutableList<String> = mutableListOf() //3番目
 
 //評価値関係?
     //コマの周りを調べる(今は空白の部分だけ)
@@ -357,6 +360,7 @@ class Com {
         return false
     }
 
+    //ボード上に動かせる大きなコマはないか探す
     fun findOtherBigPiece(line: Line):Mas{
         val list = line.listGetter()
         val etc = masInTheGreenBigPiece.minus(list)
@@ -380,58 +384,155 @@ class Com {
         movingSource=temochiBig?.nameGetter()
     }
 
+
+    //一番評価値が大きい場所を選ぶ
+    fun biggestScore(){
+        var biggestScore = 0
+        fun commonFunc(line:Line){
+            for (mas in line.listGetter()){
+                if (mas.scoreGetter() > biggestScore){ //基準より大きかった場合
+                    thirdBiggestScore=secondBiggestScore //3番目に上書き
+                    secondBiggestScore=mostBiggestScore //2番めに上書き
+                    mostBiggestScore.clear()
+                    mostBiggestScore.add(mas) //一番大きいリストに追加
+                    biggestScore = mas.scoreGetter() //基準を設定し直す
+                } else if (mas.scoreGetter() == biggestScore){
+                    mostBiggestScore.add(mas) //候補リストに追加
+                }
+            }
+        }
+
+        for (i in 0..3){
+            commonFunc(lineAllAtOnce[i])
+        }
+        Log.d("gobblet2Com","destination:${destination?.nameGetter()}")
+    }
+
     //大きさを決定する
     fun chooseASize(){
 
     }
 
-    //場所を決める
-    fun chooseAlocation(){
+    //起き場所を決める
+    fun chooseLocation(){
         var errorCount =0
         var success = false
-        var tentative:Mas? = null
+        var tentative:Mas? = null //仮の候補
+        //一番大きい評価値のマスから選んで行く
         while (true){
             if (errorCount>=mostBiggestScore.size){ break } //候補がなくなったらループから抜ける
-            tentative = mostBiggestScore[(0 until candidateList.size).random()]
-            if (!choosePickup(tentative)){
+            destination = mostBiggestScore[(0 until candidateList.size).random()]
+            if (!choosePickup(destination)){
                 errorCount+=1  //指定した場所におけなかったら他のこうほを探す
             } else break //おけるなら置く作業に進む
         }
-
-        if (!success){}
-        if (!success){}
-
-
-
-        destination = candidateList[(0 until candidateList.size).random()] //置き場所を決める
-
+        //一番大きい評価値のマスから選べなかった場合
+        //二番目に大きい評価値のマスから選んで行く
+        if (!success){
+            errorCount = 0
+            while (true){
+                if (errorCount>=secondBiggestScore.size){ break } //候補がなくなったらループから抜ける
+                destination = secondBiggestScore[(0 until candidateList.size).random()]
+                if (!choosePickup(destination)){
+                    errorCount+=1  //指定した場所におけなかったら他のこうほを探す
+                } else break //おけるなら置く作業に進む
+            }
+        }
+        //二番目に大きい評価値のマスから選べなかった場合
+        //三番目に大きい評価値のマスから選んで行く
+        if (!success){
+            while (true){
+                if (errorCount>=thirdBiggestScore.size){ break } //候補がなくなったらループから抜ける
+                destination = thirdBiggestScore[(0 until candidateList.size).random()]
+                if (!choosePickup(destination)){
+                    errorCount+=1  //指定した場所におけなかったら他のこうほを探す
+                } else break //おけるなら置く作業に進む
+            }
+        }
     }
 
     //取り出す場所を決める
     //その前に色々検証?
     fun choosePickup(mas: Mas?):Boolean{
-        //おこうとしているところにおけるようなコマがあるか検証
+        //移動先におけるコマがあるか検証
         when(destination?.funcForDisplay()?.get(0)){
-            3 ->{return false}
+            3 ->{return false} //そもそも大きいコマはどうやっても置けないかえら諦める
             2 ->{
-                if (temochiBig?.returnCount() != 0){
-                    movingSource = temochiBig?.nameGetter() //手持ちからだせるならだす
-                    return true
-                } else {
-                    val box = masInTheGreenBigPiece.minus(doNotMoveList) //動かせる大きいコマがあるか調べる
-                    if (box.size !=0){
-                        //一つでも動かせるならそこにする
-                        movingSource= box[0].nameGetter()
-                        return true
-                    } else{return false} //だめならだめと返す
-                }
+                //中コマなら大きいコマのみおけるから大きいコマを取り出せるか調べる
+                return pickUpBigPiece(mas)
             }
             1 -> {
-                //後で作る
+                //小さいコマなら中コマか大コマを取り出せるかしらべる
+                //中コマ->大コマと探す
+                if (pickUpMiddlePiece(mas)){ return true }
+                else  { return pickUpBigPiece(mas) }
+            }
+            0 -> {
+                //空いているなら何でも入れられる
+                //中コマ->大コマ->小コマと探す
+                return when {
+                    pickUpMiddlePiece(mas) -> { true }
+                    pickUpBigPiece(mas) -> { true }
+                    else -> { pickUpSmallPiece(mas) }
+                }
             }
         }
         return false
     }
+
+    //大コマを取り出す関数
+    fun pickUpBigPiece(mas: Mas?):Boolean{
+    //true:取り出せる
+    //false:取り出せない
+        if (temochiBig?.returnCount() != 0){
+            movingSource = temochiBig?.nameGetter() //手持ちからだせるなら手持ちを移動元にする
+            return true
+        } else {
+            val box = masInTheGreenBigPiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
+            if (box.isNotEmpty()){
+                //一つでも動かせるならそれを移動元にする
+                movingSource= box[0].nameGetter()
+                return true
+            } else{return false} //だめならだめと返す
+        }
+    }
+    
+    //中コマを取り出す関数
+    fun pickUpMiddlePiece(mas: Mas?):Boolean{
+        //true:取り出せる
+        //false:取り出せない
+        if (temochiMiddle?.returnCount() != 0){
+            movingSource = temochiMiddle?.nameGetter() //手持ちからだせるなら手持ちを移動元にする
+            return true
+        } else {
+            val box = masInTheGreenMiddlePiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
+            if (box.isNotEmpty()){
+                //一つでも動かせるならそれを移動元にする
+                movingSource= box[0].nameGetter()
+                return true
+            } else{return false} //だめならだめと返す
+        }
+    }
+
+    //小さいコマを取り出す関数
+    fun pickUpSmallPiece(mas: Mas?):Boolean{
+        //true:取り出せる
+        //false:取り出せない
+        if (temochiSmall?.returnCount() != 0){
+            movingSource = temochiSmall?.nameGetter() //手持ちからだせるなら手持ちを移動元にする
+            return true
+        } else {
+            val box = masInTheGreenSmallPiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
+            if (box.isNotEmpty()){
+                //一つでも動かせるならそれを移動元にする
+                movingSource= box[0].nameGetter()
+                return true
+            } else{return false} //だめならだめと返す
+        }
+    }
+    
+
+
 
     fun start(){
         turnCount+=1
@@ -459,34 +560,9 @@ class Com {
 
     }
 
-
-
-    //一番評価値が大きい場所を選ぶ
-    fun biggestScore(){
-        var biggestScore = 0
-        fun commonFunc(line:Line){
-            for (mas in line.listGetter()){
-                if (mas.scoreGetter() > biggestScore){ //基準より大きかった場合
-                    thirdBiggestScore=secondBiggestScore //3番目に上書き
-                    secondBiggestScore=mostBiggestScore //2番めに上書き
-                    mostBiggestScore.clear()
-                    mostBiggestScore.add(mas) //一番大きいリストに追加
-                    biggestScore = mas.scoreGetter() //基準を設定し直す
-                } else if (mas.scoreGetter() == biggestScore){
-                    mostBiggestScore.add(mas) //候補リストに追加
-                }
-            }
-        }
-
-        candidateList.clear()
-        for (i in 0..3){
-            commonFunc(lineAllAtOnce[i])
-        }
-        Log.d("gobblet2Com","destination:${destination?.nameGetter()}")
-    }
-
     //リストにスコアをいれていく
     //最後に大きい順にソート
+    //ソート順だとある程度決まった場所しかとらないので面白くない
     fun sortMasList(){
         val comparator:Comparator<Mas> = compareBy<Mas> { it.scoreGetter() }
         masList.sortWith(comparator)
@@ -642,14 +718,26 @@ class Com {
     }
 
     fun debC(){
-        debCandidateList.clear()
-        debDoNotMoveList.clear()
-        debComReachList.clear()
-        debhumanReachList.clear()
-        debMasInTheGreenBigPiece.clear()
-        debMasInTheGreenMiddlePiece.clear()
-        debMasInTheGreenSmallPiece.clear()
-        debMasList.clear()
+        val debList = mutableListOf(
+            debCandidateList,debDoNotMoveList,
+            debComReachList, debhumanReachList,
+            debMasInTheGreenBigPiece, debMasInTheGreenMiddlePiece, debMasInTheGreenSmallPiece,
+            debMasList,
+            debMostBiggestScore, debSecondBiggestScore, debThirdBiggestScore
+            )
+
+        val List = mutableListOf(
+            candidateList,doNotMoveList,
+            comReachList, humanReachList,
+            masInTheGreenBigPiece, masInTheGreenMiddlePiece, masInTheGreenSmallPiece,
+            masList,
+            mostBiggestScore, secondBiggestScore, thirdBiggestScore
+        )
+
+        for (l in debList){
+            l.clear()
+        }
+
         for (i in candidateList){ debCandidateList.add(i.nameGetter()) }
         for (i in doNotMoveList){ debDoNotMoveList.add(i.nameGetter()) }
         for (i in comReachList){ debComReachList.add(i.nameGetter()) }
@@ -658,6 +746,10 @@ class Com {
         for (i in masInTheGreenMiddlePiece){ debMasInTheGreenMiddlePiece.add(i.nameGetter()) }
         for (i in masInTheGreenSmallPiece){ debMasInTheGreenSmallPiece.add(i.nameGetter()) }
         for (i in masList){debMasList.add(i.nameGetter())}
+
+        for (i in mostBiggestScore){debMostBiggestScore.add(i.nameGetter())}
+        for (i in secondBiggestScore){debSecondBiggestScore.add(i.nameGetter())}
+        for (i in thirdBiggestScore){debThirdBiggestScore.add(i.nameGetter())}
         
     }
 
