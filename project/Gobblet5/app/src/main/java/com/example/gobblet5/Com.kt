@@ -387,30 +387,50 @@ class Com {
 
     //場所を決める
     fun chooseAlocation(){
-        //var tentative:Mas? = null
+        var errorCount =0
+        var success = false
+        var tentative:Mas? = null
+        while (true){
+            if (errorCount>=mostBiggestScore.size){ break } //候補がなくなったらループから抜ける
+            tentative = mostBiggestScore[(0 until candidateList.size).random()]
+            if (!choosePickup(tentative)){
+                errorCount+=1  //指定した場所におけなかったら他のこうほを探す
+            } else break //おけるなら置く作業に進む
+        }
+
+        if (!success){}
+        if (!success){}
+
+
+
         destination = candidateList[(0 until candidateList.size).random()] //置き場所を決める
-        choosePickup(destination)
+
     }
 
     //取り出す場所を決める
     //その前に色々検証?
-    fun choosePickup(mas: Mas?){
+    fun choosePickup(mas: Mas?):Boolean{
+        //おこうとしているところにおけるようなコマがあるか検証
         when(destination?.funcForDisplay()?.get(0)){
-            3 ->{}
+            3 ->{return false}
             2 ->{
                 if (temochiBig?.returnCount() != 0){
-                    movingSource = temochiBig?.nameGetter()
+                    movingSource = temochiBig?.nameGetter() //手持ちからだせるならだす
+                    return true
                 } else {
                     val box = masInTheGreenBigPiece.minus(doNotMoveList) //動かせる大きいコマがあるか調べる
                     if (box.size !=0){
-                        //一つでも動かせるなら
-
-                    }
+                        //一つでも動かせるならそこにする
+                        movingSource= box[0].nameGetter()
+                        return true
+                    } else{return false} //だめならだめと返す
                 }
-
+            }
+            1 -> {
+                //後で作る
             }
         }
-
+        return false
     }
 
     fun start(){
@@ -447,11 +467,13 @@ class Com {
         fun commonFunc(line:Line){
             for (mas in line.listGetter()){
                 if (mas.scoreGetter() > biggestScore){ //基準より大きかった場合
-                    candidateList.clear() //リストをリセット
-                    candidateList.add(mas) //候補リストに追加
+                    thirdBiggestScore=secondBiggestScore //3番目に上書き
+                    secondBiggestScore=mostBiggestScore //2番めに上書き
+                    mostBiggestScore.clear()
+                    mostBiggestScore.add(mas) //一番大きいリストに追加
                     biggestScore = mas.scoreGetter() //基準を設定し直す
                 } else if (mas.scoreGetter() == biggestScore){
-                    candidateList.add(mas) //候補リストに追加
+                    mostBiggestScore.add(mas) //候補リストに追加
                 }
             }
         }
