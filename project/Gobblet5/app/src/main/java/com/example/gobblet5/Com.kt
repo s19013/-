@@ -21,7 +21,7 @@ class Com {
     private val stringLineBS="LBS"
 
     private val comPiece=-1
-    private val enemyPiece = 1
+    private val humanPiece = 1
 
     private val bigPiece=3
     private val middlePiece=2
@@ -68,7 +68,7 @@ class Com {
     private var doNotMoveList:MutableList<Mas> = mutableListOf() //動かしては行けないコマを管理
     private var unnecessaryList:MutableList<String> = mutableListOf() //うごかしても問題ないコマを管理
     private var candidateList:MutableList<Mas> = mutableListOf() //コマを入れる候補を管理するリスト
-    private var enemyReachList:MutableList<Line> = mutableListOf() //敵にリーチがかかっているラインを管理するリスト
+    private var humanReachList:MutableList<Line> = mutableListOf() //敵にリーチがかかっているラインを管理するリスト
     private var comReachList:MutableList<Line> = mutableListOf() //自分にリーチがかかっているラインを管理するリスト
     private var bord:MutableList<MutableList<Mas>> = mutableListOf() //[縦列][横列]　例:B3 -> [2][1]
     private var lineAllAtOnce:MutableList<Line> = mutableListOf() //すべてのラインクラスに対して色々やる時に使うリスト
@@ -78,7 +78,7 @@ class Com {
 
     //デバッグ用
     private var debComReachList = mutableListOf<String>()
-    private var debEnemyReachList = mutableListOf<String>()
+    private var debhumanReachList = mutableListOf<String>()
     private var debCandidateList= mutableListOf<String>()
     private var debDoNotMoveList= mutableListOf<String>()
     private var debMasInTheGreenBigPiece:MutableList<String> = mutableListOf()
@@ -232,7 +232,7 @@ class Com {
                     1 -> {countP1 += 1}
                 }
                 if (countP1 >=3){
-                    enemyReachList.add(line)
+                    humanReachList.add(line)
                     return
                 } //1が3つ以上なら敵がリーチ
                 if (countM1 >=3){
@@ -265,7 +265,7 @@ class Com {
 
             //コマをおけば勝てるところに相手の大きいコマがおいてないか調べる
             if (finalTarget != null){
-                when(howBigEnemysPiece(finalTarget)){
+                when(howBighumansPiece(finalTarget)){
                     3 -> { finalTarget.addScore(-300) }//諦めること指す
                     2 -> {
                         //中コマが入っていた
@@ -321,7 +321,7 @@ class Com {
             }
 
             if (target != null){//コマをおけば防げるところに相手の大きいコマがおいてないか調べる
-                when(howBigEnemysPiece(target)){
+                when(howBighumansPiece(target)){
                     3 -> {target.addScore(-300)}//諦めること指す
                     2 -> {target.addScore(81) }//中くらいのコマ
                     1 -> {target.addScore(82)}//小さいコマ
@@ -332,12 +332,12 @@ class Com {
             //Log.d("gobblet2Com","blocktarget:${target?.nameGetter()}")
         }
 
-        for (value in enemyReachList){ commonFunc(value) }
+        for (value in humanReachList){ commonFunc(value) }
 
     }
 
     //敵のコマの大きさを調べる
-    fun howBigEnemysPiece(mas:Mas):Int{
+    fun howBighumansPiece(mas:Mas):Int{
         return mas.funcForDisplay()[0]
     }
 
@@ -439,7 +439,7 @@ class Com {
         //自分にリーチがかかっていた
         if (comReachList.size!=0){ if (checkCanIcheckmate()){return} }
         //相手にリーチがかかっていた
-        if (enemyReachList.size!=0){ checkCanIBlockCheckmate() }
+        if (humanReachList.size!=0){ checkCanIBlockCheckmate() }
         //1ターン目
         if (turnCount==1){
             firstTurn()
@@ -556,7 +556,7 @@ class Com {
         for (i in 0..9){
             judgeList[i] = 0
         }
-        enemyReachList.clear()
+        humanReachList.clear()
         comReachList.clear()
         candidateList.clear()
         doNotMoveList.clear()
@@ -629,7 +629,7 @@ class Com {
         Log.d("gobblet2Com"," ")
         Log.d("gobblet2Com","judgeList:${judgeList}")
         Log.d("gobblet2Com","comReachList:${debComReachList}")
-        Log.d("gobblet2Com","enemyReachList:${debEnemyReachList}")
+        Log.d("gobblet2Com","humanReachList:${debhumanReachList}")
         debC()
         Log.d("gobblet2Com","debMasList:${debMasList}")
         Log.d("gobblet2Com","candidateList:${debCandidateList}")
@@ -645,7 +645,7 @@ class Com {
         debCandidateList.clear()
         debDoNotMoveList.clear()
         debComReachList.clear()
-        debEnemyReachList.clear()
+        debhumanReachList.clear()
         debMasInTheGreenBigPiece.clear()
         debMasInTheGreenMiddlePiece.clear()
         debMasInTheGreenSmallPiece.clear()
@@ -653,7 +653,7 @@ class Com {
         for (i in candidateList){ debCandidateList.add(i.nameGetter()) }
         for (i in doNotMoveList){ debDoNotMoveList.add(i.nameGetter()) }
         for (i in comReachList){ debComReachList.add(i.nameGetter()) }
-        for (i in enemyReachList){ debEnemyReachList.add(i.nameGetter()) }
+        for (i in humanReachList){ debhumanReachList.add(i.nameGetter()) }
         for (i in masInTheGreenBigPiece){ debMasInTheGreenBigPiece.add(i.nameGetter()) }
         for (i in masInTheGreenMiddlePiece){ debMasInTheGreenMiddlePiece.add(i.nameGetter()) }
         for (i in masInTheGreenSmallPiece){ debMasInTheGreenSmallPiece.add(i.nameGetter()) }
