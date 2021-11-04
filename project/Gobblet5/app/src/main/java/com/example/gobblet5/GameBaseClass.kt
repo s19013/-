@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.SoundPool
+import android.os.Handler
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
@@ -20,8 +21,6 @@ import androidx.preference.PreferenceManager
 import java.util.*
 
 open class GameBaseClass : AppCompatActivity() {
-    //open var className = GameBaseClass()
-
     ////手持ち宣言
     //赤
     protected val temochiRedBig = Temochi(3,"TemochiRedBig")

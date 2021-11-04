@@ -1,8 +1,11 @@
 package com.example.gobblet5
 
 import android.os.Build
+import android.os.Handler
 import android.util.Log
 import androidx.annotation.RequiresApi
+import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_1
+import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_2
 import org.jetbrains.annotations.NotNull
 import java.util.stream.Collectors
 import java.util.stream.Stream
@@ -92,6 +95,7 @@ class Com {
     private var debmostBiggestScoreList:MutableList<String> = mutableListOf() //一番大きいスコア
     private var debsecondBiggestScoreList:MutableList<String> = mutableListOf() //二番目
     private var debthirdBiggestScoreList:MutableList<String> = mutableListOf() //3番目
+
 
 
 ////リーチ系=------
@@ -631,12 +635,41 @@ class Com {
 
     //最初のターンの定石を実行
     fun firstTurn(){
-        val randomNum = (0..3).random()
-        when(randomNum){
-            0 ->{ destination=lineB.listGetter()[1] } //b2に置く
-            1 ->{ destination=lineB.listGetter()[2] } //b3に置く
-            2 ->{ destination=lineC.listGetter()[1] } //c2に置く
-            3 ->{ destination=lineC.listGetter()[2] } //c3に置く
+        while (true){
+            val randomNum = (0..3).random()
+            when(randomNum){
+                0 ->{
+                    //b2に置く
+                    if (lineB.listGetter()[1].returnLastElement() != 1){
+                        destination=lineB.listGetter()[1]
+                        break
+                    }
+                }
+                1 ->{
+                    //b3に置く
+                    if (lineB.listGetter()[2].returnLastElement() != 1){
+                        destination=lineB.listGetter()[2]
+                        break
+                    }
+                }
+                2 ->{
+                    //c2に置く
+                    if (lineC.listGetter()[1].returnLastElement() != 1){
+                        destination=lineC.listGetter()[1]
+                        break
+                    }
+                }
+                3 ->{
+                    //c3に置く
+                    if (lineC.listGetter()[2].returnLastElement() != 1){
+                        destination=lineC.listGetter()[2]
+                        break
+                    }
+                }
+            }
+            //すでにプレイヤーがコマをおいていたらやり直し
+            //空いているところを見つけるまでずっと探す
+
         }
         movingSource= temochiBig
     }
@@ -828,7 +861,14 @@ class Com {
         Log.d("gobblet2Com","DoNotMoveList:${debDoNotMoveList}")
         Log.d("gobblet2Com","debMasInTheGreenBigPiece:${debMasInTheGreenBigPiece}")
         Log.d("gobblet2Com"," ")
-        Log.d("gobblet2Com","movingSource:${movingSource}")
+        if (movingSource is Mas){
+            val m:Mas= movingSource as Mas
+            Log.d("gobblet2Com","movingSource:${m.nameGetter()}")
+        }
+        if (movingSource is Temochi){
+            val m:Temochi= movingSource as Temochi
+            Log.d("gobblet2Com","movingSource:${m.nameGetter()}")
+        }
         Log.d("gobblet2Com","destination:${destination?.nameGetter()}")
         Log.d("gobblet2Com","--------------------------------")
 

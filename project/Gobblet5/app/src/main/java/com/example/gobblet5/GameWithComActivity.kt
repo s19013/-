@@ -2,13 +2,22 @@ package com.example.gobblet5
 
 import android.os.Bundle
 import android.graphics.Color
+import android.os.Handler
 import android.util.Log
 import android.view.View
+import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_1
+import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_2
 import kotlinx.android.synthetic.main.activity_game_with_com.*
 
 class GameWithComActivity : GameBaseClass() {
     //コンピューター宣言
     val com:Com=Com()
+
+    //タイマー関係
+    protected val millisecond:Long=100
+    protected var time = 0L
+    protected val handler = Handler()
+    protected var nowDoingTimerID = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -238,7 +247,8 @@ class GameWithComActivity : GameBaseClass() {
     fun startCom(){
         com.start()
         pickUpCom()
-        insertCom()
+        nowDoingTimerID = 1
+        handler.post(insertTimer)
         com.debScore()
         resetCom()
 
@@ -263,7 +273,6 @@ class GameWithComActivity : GameBaseClass() {
 
     fun insertCom(){
         pushedMasButton(com.destinationGetter()!!)
-
     }
 
     fun resetCom(){
@@ -291,7 +300,6 @@ class GameWithComActivity : GameBaseClass() {
         }
     }
 
-
     //このアクティビティ内のviewを取得?
 
     override fun iniView() {
@@ -311,5 +319,38 @@ class GameWithComActivity : GameBaseClass() {
         buttonTemochiGreenMiddle=findViewById(R.id.buttonTemochiGreenMiddle)
         buttonTemochiGreenSmall=findViewById(R.id.buttonTemochiGreenSmall)
         resaltButton=findViewById(R.id.resaltButton)
+    }
+
+    private val insertTimer: Runnable = object : Runnable{
+        override fun run() {
+            time += millisecond
+            handler.postDelayed(this,millisecond)
+            if (time>1000L){
+                insertCom()
+                handler.removeCallbacks(this)
+                time = 0L
+                nowDoingTimerID = 0
+            }
+        }
+    }
+
+    //タイマー再開
+    override fun onResume() {
+        super.onResume()
+        when (nowDoingTimerID){
+            1 -> handler.post(insertTimer)
+        }
+    }
+
+    //タイマーを止める
+    override fun onPause() {
+        super.onPause()
+        handler.removeCallbacks(insertTimer)
+    }
+
+    //タイマーを止める
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(insertTimer)
     }
 }
