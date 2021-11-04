@@ -292,20 +292,27 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //手持ちボタンを押した時の作業1
-    protected fun pickupTemochi(name: String){
+    protected fun pickupTemochi(temochi: Temochi){
+        setSMP(temochi.returnInf(), temochi.nameGetter())
+        havingDisplay()
+
+
         fun commonFunc(temochi: Temochi){
             setSMP(temochi.returnInf(), temochi.nameGetter())
             havingDisplay()
-//            debSMP()
+            debSMP()
         }
-        when(name){
-            stringTemochiRedBig -> { commonFunc(temochiRedBig) }
-            stringTemochiRedMiddle -> { commonFunc(temochiRedMiddle) }
-            stringTemochiRedSmall -> { commonFunc(temochiRedSmall) }
-            stringTemochiGreenBig -> { commonFunc(temochiGreenBig) }
-            stringTemochiGreenMiddle -> { commonFunc(temochiGreenMiddle) }
-            stringTemochiGreenSmall -> { commonFunc(temochiGreenSmall) }
-        }
+
+
+
+//        when(name){
+//            stringTemochiRedBig -> { commonFunc(temochiRedBig) }
+//            stringTemochiRedMiddle -> { commonFunc(temochiRedMiddle) }
+//            stringTemochiRedSmall -> { commonFunc(temochiRedSmall) }
+//            stringTemochiGreenBig -> { commonFunc(temochiGreenBig) }
+//            stringTemochiGreenMiddle -> { commonFunc(temochiGreenMiddle) }
+//            stringTemochiGreenSmall -> { commonFunc(temochiGreenSmall) }
+//        }
     }
 
     ////マスのボタンをおした時の作業
@@ -334,9 +341,11 @@ open class GameBaseClass : AppCompatActivity() {
 
     //コマを取り出す
     protected fun pickup(name: String){
+        Log.d("gobblet2","pickup")
+
         fun commonFunc(mas: Mas){
             setSMP(mas.mPickup(turn), mas.nameGetter())
-//            debSMP()
+            debSMP()
             havingDisplay()
             mas.resetList(size)
             bordDisplay(mas.nameGetter())
@@ -461,6 +470,8 @@ open class GameBaseClass : AppCompatActivity() {
 
     //駒を入れる
     protected fun insert(name: String):Boolean{
+        Log.d("gobblet2"," ")
+        Log.d("gobblet2","name:${name}")
         when(name){
             stringA1 -> {
                 if (A1.mInsert(size, turn)) {
@@ -567,7 +578,7 @@ open class GameBaseClass : AppCompatActivity() {
     protected fun resetTemochi(){
         resetSMP()
         resetHavingDisplay()
-//        debSMP()
+        debSMP()
     }
 
     //マスやり直し

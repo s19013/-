@@ -47,7 +47,7 @@ class Com {
 
     //
     var destination :Mas? = null //移動先
-    var movingSource:String? = null //移動元
+    var movingSource:Any? = null //移動元
     var size = 0 //強制的に動かすコマの大きさを決める時に使う
 
     //var target:Mas? = null //防いだり止めを指すのに使う
@@ -125,28 +125,28 @@ class Com {
 
     fun UseBigPieceInSpecialCase(line: Line){
         //手持ちに大きいこまがあったらそれを使う
-        if (temochiBig?.returnCount() != 0){ movingSource=temochiBig?.nameGetter() }
+        if (temochiBig?.returnCount() != 0){ movingSource=temochiBig }
         else{
             //ライン上に無い大きいコマを探す
-            movingSource =findOtherBigPiece(line).nameGetter()
+            movingSource =findOtherBigPiece(line)
         }
     }
 
     fun UseMiddlePieceInSpecialCase(line: Line){
         //手持ちに中コマがあったらそれを使う
-        if (temochiMiddle?.returnCount() != 0){ movingSource=temochiMiddle?.nameGetter() }
+        if (temochiMiddle?.returnCount() != 0){ movingSource=temochiMiddle }
         else{
             //ライン上に無い中コマを探す
-            movingSource =findOtherMiddlePiece(line).nameGetter()
+            movingSource =findOtherMiddlePiece(line)
         }
     }
 
     fun UseSmallPieceInSpecialCase(line: Line){
         //手持ちに中コマがあったらそれを使う
-        if (temochiSmall?.returnCount() != 0){ movingSource=temochiSmall?.nameGetter() }
+        if (temochiSmall?.returnCount() != 0){ movingSource=temochiSmall }
         else{
             //ライン上に無い中コマを探す
-            movingSource =findOtherSmallPiece(line).nameGetter()
+            movingSource =findOtherSmallPiece(line)
         }
     }
 
@@ -578,7 +578,7 @@ class Com {
     //true:取り出せる
     //false:取り出せない
         if (temochiBig?.returnCount() != 0){
-            movingSource = temochiBig?.nameGetter() //手持ちからだせるなら手持ちを移動元にする
+            movingSource = temochiBig //手持ちからだせるなら手持ちを移動元にする
             Log.d("gobblet2Com","pickupFromTemochi")
             return true
         } else {
@@ -586,7 +586,7 @@ class Com {
             Log.d("gobblet2Com","boxSize${box.size}")
             if (box.isNotEmpty()){
                 //一つでも動かせるならそれを移動元にする
-                movingSource= box[(box.indices).random()].nameGetter()
+                movingSource= box[(box.indices).random()]
                 Log.d("gobblet2Com","pickupFrom${movingSource}")
                 return true
             } else{
@@ -600,13 +600,13 @@ class Com {
         //true:取り出せる
         //false:取り出せない
         if (temochiMiddle?.returnCount() != 0){
-            movingSource = temochiMiddle?.nameGetter() //手持ちからだせるなら手持ちを移動元にする
+            movingSource = temochiMiddle //手持ちからだせるなら手持ちを移動元にする
             return true
         } else {
             val box = masInTheGreenMiddlePiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
             if (box.isNotEmpty()){
                 //一つでも動かせるならそれを移動元にする
-                movingSource= box[(box.indices).random()].nameGetter()
+                movingSource= box[(box.indices).random()]
                 return true
             } else{return false} //だめならだめと返す
         }
@@ -617,13 +617,13 @@ class Com {
         //true:取り出せる
         //false:取り出せない
         if (temochiSmall?.returnCount() != 0){
-            movingSource = temochiSmall?.nameGetter() //手持ちからだせるなら手持ちを移動元にする
+            movingSource = temochiSmall //手持ちからだせるなら手持ちを移動元にする
             return true
         } else {
             val box = masInTheGreenSmallPiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
             if (box.isNotEmpty()){
                 //一つでも動かせるならそれを移動元にする
-                movingSource= box[(box.indices).random()].nameGetter()
+                movingSource= box[(box.indices).random()]
                 return true
             } else{return false} //だめならだめと返す
         }
@@ -638,16 +638,19 @@ class Com {
             2 ->{ destination=lineC.listGetter()[1] } //c2に置く
             3 ->{ destination=lineC.listGetter()[2] } //c3に置く
         }
-        movingSource= temochiBig?.nameGetter()
+        movingSource= temochiBig
     }
 
     //2ターン目の定石
     fun secondTurn(){
-        movingSource=temochiBig?.nameGetter()
+        movingSource=temochiBig
 
     }
 
     fun start(){
+
+
+
         turnCount+=1
         //1ターン目
         if (turnCount==1){
@@ -713,11 +716,11 @@ class Com {
         }
     }
 
-    fun destinationGetter(): Mas? {
+    fun destinationGetter(): Mas?{
         return destination
     }
 
-    fun movingSourceGetter():String?{
+    fun movingSourceGetter():Any?{
         return movingSource
     }
 

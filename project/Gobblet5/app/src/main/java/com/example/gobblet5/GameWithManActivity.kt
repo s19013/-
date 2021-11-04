@@ -52,7 +52,7 @@ class GameWithManActivity : GameBaseClass() {
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedMiddle||
                     movingSource==stringTemochiRedSmall){
-                    pickupTemochi(stringTemochiRedBig)
+                    pickupTemochi(temochiRedBig)
                 }
             }
             else{toastNotYourTurn()}
@@ -66,7 +66,7 @@ class GameWithManActivity : GameBaseClass() {
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
                     movingSource==stringTemochiRedSmall){
-                    pickupTemochi(stringTemochiRedMiddle)
+                    pickupTemochi(temochiRedMiddle)
                 }
             }
             else{toastNotYourTurn()}
@@ -80,7 +80,7 @@ class GameWithManActivity : GameBaseClass() {
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
                     movingSource==stringTemochiRedMiddle){
-                    pickupTemochi(stringTemochiRedSmall)
+                    pickupTemochi(temochiRedSmall)
                 }
             }
             else{toastNotYourTurn()}
@@ -94,7 +94,7 @@ class GameWithManActivity : GameBaseClass() {
                 else if (movingSource== null ||
                     movingSource==stringTemochiGreenMiddle||
                     movingSource==stringTemochiGreenSmall) {
-                    pickupTemochi(stringTemochiGreenBig)
+                    pickupTemochi(temochiGreenBig)
                 }
             }
             else{toastNotYourTurn()}
@@ -108,7 +108,7 @@ class GameWithManActivity : GameBaseClass() {
                 else if (movingSource== null ||
                     movingSource==stringTemochiGreenBig ||
                     movingSource==stringTemochiGreenSmall){
-                    pickupTemochi(stringTemochiGreenMiddle)
+                    pickupTemochi(temochiGreenMiddle)
                 }
             }
             else{toastNotYourTurn()}
@@ -122,7 +122,7 @@ class GameWithManActivity : GameBaseClass() {
                 else if (movingSource==null||
                     movingSource==stringTemochiGreenBig ||
                     movingSource==stringTemochiGreenMiddle){
-                    pickupTemochi(stringTemochiGreenSmall)
+                    pickupTemochi(temochiGreenSmall)
                 }
             }
             else{toastNotYourTurn()}

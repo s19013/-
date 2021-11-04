@@ -41,7 +41,7 @@ class GameWithComActivity : GameBaseClass() {
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedMiddle||
                     movingSource==stringTemochiRedSmall){
-                    pickupTemochi(stringTemochiRedBig)
+                    pickupTemochi(temochiRedBig)
                 }
             }
             else{toastNotYourTurn()}
@@ -55,7 +55,7 @@ class GameWithComActivity : GameBaseClass() {
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
                     movingSource==stringTemochiRedSmall){
-                    pickupTemochi(stringTemochiRedMiddle)
+                    pickupTemochi(temochiRedMiddle)
                 }
             }
             else{toastNotYourTurn()}
@@ -69,7 +69,7 @@ class GameWithComActivity : GameBaseClass() {
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
                     movingSource==stringTemochiRedMiddle){
-                    pickupTemochi(stringTemochiRedSmall)
+                    pickupTemochi(temochiRedSmall)
                 }
             }
             else{toastNotYourTurn()}
@@ -84,7 +84,7 @@ class GameWithComActivity : GameBaseClass() {
                 else if (movingSource== null ||
                     movingSource==stringTemochiGreenMiddle||
                     movingSource==stringTemochiGreenSmall) {
-                    pickupTemochi(stringTemochiGreenBig)
+                    pickupTemochi(temochiGreenBig)
                 }
             }
             else{toastNotYourTurn()}
@@ -98,7 +98,7 @@ class GameWithComActivity : GameBaseClass() {
                 else if (movingSource== null ||
                     movingSource==stringTemochiGreenBig ||
                     movingSource==stringTemochiGreenSmall){
-                    pickupTemochi(stringTemochiGreenMiddle)
+                    pickupTemochi(temochiGreenMiddle)
                 }
             }
             else{toastNotYourTurn()}
@@ -112,7 +112,7 @@ class GameWithComActivity : GameBaseClass() {
                 else if (movingSource==null||
                     movingSource==stringTemochiGreenBig ||
                     movingSource==stringTemochiGreenMiddle){
-                    pickupTemochi(stringTemochiGreenSmall)
+                    pickupTemochi(temochiGreenSmall)
                 }
             }
             else{toastNotYourTurn()}
@@ -237,23 +237,32 @@ class GameWithComActivity : GameBaseClass() {
 
     fun startCom(){
         com.start()
+        pickUpCom()
+        insertCom()
         com.debScore()
         resetCom()
 
 
-//        //com.debBord()
-//        //com.checkEmptyMas()
-//        com.reachChecker()
-//        com.checkWhatIsInTheMas()
-//        com.checkCanIcheckmate()
-//        com.checkCanIBlockCheckmate()
-//        com.checkEachMas()
-//        //com.sortMasList()
-//
-//        //com.judge()
-//
-//        com.biggestScore()
-//
+
+    }
+
+    fun pickUpCom(){
+        val rv = com.movingSourceGetter()
+
+        when{
+            //移動元がマスだった場合
+            rv is Mas     -> {
+                pushedMasButton(rv)
+            }
+            //移動元が手持ちだった場合
+            rv is Temochi -> {
+                pickupTemochi(rv)
+            }
+        }
+    }
+
+    fun insertCom(){
+        pushedMasButton(com.destinationGetter()!!)
 
     }
 
