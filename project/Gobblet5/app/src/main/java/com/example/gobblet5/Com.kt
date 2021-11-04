@@ -659,11 +659,7 @@ class Com {
         if (comReachList.isNotEmpty()){ checkCanIcheckmate() }
         //相手にリーチがかかっていた
         if (humanReachList.isNotEmpty()){ checkCanIBlockCheckmate() }
-        //2ターン目
-//        if (turnCount==2){
-//            secondTurn()
-//            return
-//        }
+
         standardProcessing()
     }
 
