@@ -4,8 +4,8 @@ import android.util.Log
 
 
 class Mas(private val name:String, private val myValueOfY: Int, private val myValueOfX: Int) {
-    var list= mutableListOf<Int>(0,0,0) // [小､中､大]
-    var score = 0 //コンピューターが使う評価値みたいなもの
+    private var list= mutableListOf<Int>(0,0,0) // [小､中､大]
+    private var score = 0 //コンピューターが使う評価値みたいなもの
 
     fun nameGetter():String{ return name }
 
