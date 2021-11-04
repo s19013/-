@@ -294,24 +294,6 @@ open class GameBaseClass : AppCompatActivity() {
     protected fun pickupTemochi(temochi: Temochi){
         setSMP(temochi.returnInf(), temochi.nameGetter())
         havingDisplay()
-
-
-        fun commonFunc(temochi: Temochi){
-            setSMP(temochi.returnInf(), temochi.nameGetter())
-            havingDisplay()
-            debSMP()
-        }
-
-
-
-//        when(name){
-//            stringTemochiRedBig -> { commonFunc(temochiRedBig) }
-//            stringTemochiRedMiddle -> { commonFunc(temochiRedMiddle) }
-//            stringTemochiRedSmall -> { commonFunc(temochiRedSmall) }
-//            stringTemochiGreenBig -> { commonFunc(temochiGreenBig) }
-//            stringTemochiGreenMiddle -> { commonFunc(temochiGreenMiddle) }
-//            stringTemochiGreenSmall -> { commonFunc(temochiGreenSmall) }
-//        }
     }
 
     ////マスのボタンをおした時の作業
@@ -324,14 +306,8 @@ open class GameBaseClass : AppCompatActivity() {
         }
         //マスの中に入れる
         val returnValue =  insert(mas.nameGetter())
-        if(pickupDone && movingSource == mas.nameGetter()){
-            resetMas(mas.nameGetter()) //考え直し
-//            Log.d("gobblet2", "thinkAgain")
-        } else if(!returnValue) {
-            //ルール上指定した場所にコマを入れられなかった場合
-            //特に何もしなくて良い
-//            Log.d("gobblet2", "youCan'tPutHere")
-        }
+        if(pickupDone && movingSource == mas.nameGetter()){ resetMas(mas.nameGetter()) } //考え直し
+        else if(!returnValue) { } //ルール上指定した場所にコマを入れられなかった場合 特に何もしなくて良い
         else{
             bordDisplay(destination)//コマの移動先を再描画
             endTurn() //ターン終了作業に移る
@@ -340,7 +316,6 @@ open class GameBaseClass : AppCompatActivity() {
 
     //コマを取り出す
     protected fun pickup(name: String){
-        Log.d("gobblet2","pickup")
 
         fun commonFunc(mas: Mas){
             setSMP(mas.mPickup(turn), mas.nameGetter())
@@ -353,124 +328,74 @@ open class GameBaseClass : AppCompatActivity() {
 
         when(name){
             stringA1 -> {
-                if (A1.mPickup(turn) != 0) {
-                    commonFunc(A1)
-                } else {
-                    toastCanNotPickup()
-                }//取り出せるものが無い時の動き
+                if (A1.mPickup(turn) != 0) { commonFunc(A1) }
+                else { toastCanNotPickup() } //取り出せるものが無い時の動き
             }
             stringA2 -> {
-                if (A2.mPickup(turn) != 0) {
-                    commonFunc(A2)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (A2.mPickup(turn) != 0) { commonFunc(A2) }
+                else { toastCanNotPickup() }
             }
             stringA3 -> {
-                if (A3.mPickup(turn) != 0) {
-                    commonFunc(A3)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (A3.mPickup(turn) != 0) { commonFunc(A3) }
+                else { toastCanNotPickup() }
             }
             stringA4 -> {
-                if (A4.mPickup(turn) != 0) {
-                    commonFunc(A4)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (A4.mPickup(turn) != 0) { commonFunc(A4) }
+                else { toastCanNotPickup() }
             }
             stringB1 -> {
-                if (B1.mPickup(turn) != 0) {
-                    commonFunc(B1)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (B1.mPickup(turn) != 0) { commonFunc(B1) }
+                else { toastCanNotPickup() }
             }
             stringB2 -> {
-                if (B2.mPickup(turn) != 0) {
-                    commonFunc(B2)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (B2.mPickup(turn) != 0) { commonFunc(B2) }
+                else { toastCanNotPickup() }
             }
             stringB3 -> {
-                if (B3.mPickup(turn) != 0) {
-                    commonFunc(B3)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (B3.mPickup(turn) != 0) { commonFunc(B3) }
+                else { toastCanNotPickup() }
             }
             stringB4 -> {
-                if (B4.mPickup(turn) != 0) {
-                    commonFunc(B4)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (B4.mPickup(turn) != 0) { commonFunc(B4) }
+                else { toastCanNotPickup() }
             }
             stringC1 -> {
-                if (C1.mPickup(turn) != 0) {
-                    commonFunc(C1)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (C1.mPickup(turn) != 0) { commonFunc(C1) }
+                else { toastCanNotPickup() }
             }
             stringC2 -> {
-                if (C2.mPickup(turn) != 0) {
-                    commonFunc(C2)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (C2.mPickup(turn) != 0) { commonFunc(C2) }
+                else { toastCanNotPickup() }
             }
             stringC3 -> {
-                if (C3.mPickup(turn) != 0) {
-                    commonFunc(C3)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (C3.mPickup(turn) != 0) { commonFunc(C3) }
+                else { toastCanNotPickup() }
             }
             stringC4 -> {
-                if (C4.mPickup(turn) != 0) {
-                    commonFunc(C4)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (C4.mPickup(turn) != 0) { commonFunc(C4) }
+                else { toastCanNotPickup() }
             }
             stringD1 -> {
-                if (D1.mPickup(turn) != 0) {
-                    commonFunc(D1)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (D1.mPickup(turn) != 0) { commonFunc(D1) }
+                else { toastCanNotPickup() }
             }
             stringD2 -> {
-                if (D2.mPickup(turn) != 0) {
-                    commonFunc(D2)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (D2.mPickup(turn) != 0) { commonFunc(D2) }
+                else { toastCanNotPickup() }
             }
             stringD3 -> {
-                if (D3.mPickup(turn) != 0) {
-                    commonFunc(D3)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (D3.mPickup(turn) != 0) { commonFunc(D3) }
+                else { toastCanNotPickup() }
             }
             stringD4 -> {
-                if (D4.mPickup(turn) != 0) {
-                    commonFunc(D4)
-                } else {
-                    toastCanNotPickup()
-                }
+                if (D4.mPickup(turn) != 0) { commonFunc(D4) }
+                else { toastCanNotPickup() }
             }
         }
     }
 
     //駒を入れる
     protected fun insert(name: String):Boolean{
-        Log.d("gobblet2"," ")
-        Log.d("gobblet2","name:${name}")
         when(name){
             stringA1 -> {
                 if (A1.mInsert(size, turn)) {
@@ -608,54 +533,60 @@ open class GameBaseClass : AppCompatActivity() {
     //移動元が手持ちだったときのリセットしょり?
     protected fun resetForEnd() {
         when (movingSource) {//移動元を正しく表示する
-            stringTemochiRedBig -> {
-                temochiRedBig.usePiece()
-                textTemochiRedBig!!.text = "${temochiRedBig.returnCount()}"
-                if (temochiRedBig.returnInf() == 0) {
-                    buttonTemochiRedBig!!.visibility = View.INVISIBLE
-                    textTemochiRedBig!!.visibility = View.INVISIBLE
+            stringTemochiRedBig ->
+                {
+                    temochiRedBig.usePiece()
+                    textTemochiRedBig!!.text = "${temochiRedBig.returnCount()}"
+                    if (temochiRedBig.returnInf() == 0) {
+                        buttonTemochiRedBig!!.visibility = View.INVISIBLE
+                        textTemochiRedBig!!.visibility = View.INVISIBLE
+                    }
                 }
-            }
-            stringTemochiRedMiddle -> {
-                temochiRedMiddle.usePiece()
-                textTemochiRedMiddle!!.text = "${temochiRedMiddle.returnCount()}"
-                if (temochiRedMiddle.returnInf() == 0) {
-                    buttonTemochiRedMiddle!!.visibility = View.INVISIBLE
-                    textTemochiRedMiddle!!.visibility = View.INVISIBLE
+            stringTemochiRedMiddle ->
+                {
+                    temochiRedMiddle.usePiece()
+                    textTemochiRedMiddle!!.text = "${temochiRedMiddle.returnCount()}"
+                    if (temochiRedMiddle.returnInf() == 0) {
+                        buttonTemochiRedMiddle!!.visibility = View.INVISIBLE
+                        textTemochiRedMiddle!!.visibility = View.INVISIBLE
+                    }
                 }
-            }
-            stringTemochiRedSmall -> {
-                temochiRedSmall.usePiece()
-                textTemochiRedSmall!!.text = "${temochiRedSmall.returnCount()}"
-                if (temochiRedSmall.returnInf() == 0) {
-                    buttonTemochiRedSmall!!.visibility = View.INVISIBLE
-                    textTemochiRedSmall!!.visibility = View.INVISIBLE
+            stringTemochiRedSmall ->
+                {
+                    temochiRedSmall.usePiece()
+                    textTemochiRedSmall!!.text = "${temochiRedSmall.returnCount()}"
+                    if (temochiRedSmall.returnInf() == 0) {
+                        buttonTemochiRedSmall!!.visibility = View.INVISIBLE
+                        textTemochiRedSmall!!.visibility = View.INVISIBLE
+                    }
                 }
-            }
-            stringTemochiGreenBig -> {
-                temochiGreenBig.usePiece()
-                textTemochiGreenBig!!.text = "${temochiGreenBig.returnCount()}"
-                if (temochiGreenBig.returnInf() == 0) {
-                    buttonTemochiGreenBig!!.visibility = View.INVISIBLE
-                    textTemochiGreenBig!!.visibility = View.INVISIBLE
+            stringTemochiGreenBig ->
+                {
+                    temochiGreenBig.usePiece()
+                    textTemochiGreenBig!!.text = "${temochiGreenBig.returnCount()}"
+                    if (temochiGreenBig.returnInf() == 0) {
+                        buttonTemochiGreenBig!!.visibility = View.INVISIBLE
+                        textTemochiGreenBig!!.visibility = View.INVISIBLE
+                    }
                 }
-            }
-            stringTemochiGreenMiddle -> {
-                temochiGreenMiddle.usePiece()
-                textTemochiGreenMiddle!!.text = "${temochiGreenMiddle.returnCount()}"
-                if (temochiGreenMiddle.returnInf() == 0) {
-                    buttonTemochiGreenMiddle!!.visibility = View.INVISIBLE
-                    textTemochiGreenMiddle!!.visibility = View.INVISIBLE
+            stringTemochiGreenMiddle ->
+                {
+                    temochiGreenMiddle.usePiece()
+                    textTemochiGreenMiddle!!.text = "${temochiGreenMiddle.returnCount()}"
+                    if (temochiGreenMiddle.returnInf() == 0) {
+                        buttonTemochiGreenMiddle!!.visibility = View.INVISIBLE
+                        textTemochiGreenMiddle!!.visibility = View.INVISIBLE
+                    }
                 }
-            }
-            stringTemochiGreenSmall -> {
-                temochiGreenSmall.usePiece()
-                textTemochiGreenSmall!!.text = "${temochiGreenSmall.returnCount()}"
-                if (temochiGreenSmall.returnInf() == 0) {
-                    buttonTemochiGreenSmall!!.visibility = View.INVISIBLE
-                    textTemochiGreenSmall!!.visibility = View.INVISIBLE
+            stringTemochiGreenSmall ->
+                {
+                    temochiGreenSmall.usePiece()
+                    textTemochiGreenSmall!!.text = "${temochiGreenSmall.returnCount()}"
+                    if (temochiGreenSmall.returnInf() == 0) {
+                        buttonTemochiGreenSmall!!.visibility = View.INVISIBLE
+                        textTemochiGreenSmall!!.visibility = View.INVISIBLE
+                    }
                 }
-            }
         }
     }
 
@@ -1012,8 +943,6 @@ open class GameBaseClass : AppCompatActivity() {
 
     //viewを取得?
     open fun iniView(){}
-
-
 
     //音を鳴らす処理
     protected fun playSound(status: Int){
