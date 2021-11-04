@@ -25,6 +25,7 @@ class Com {
 
     private val comPiece=-1
     private val humanPiece = 1
+    private val empty = 0
 
     private val bigPiece=3
     private val middlePiece=2
@@ -113,8 +114,8 @@ class Com {
         var countP1 = 0
         for (i in line.listGetter()){ // -1,1の個数をそれぞれ数える
             when(i.returnLastElement()) {
-                -1 -> {countM1 += 1}
-                1 -> {countP1 += 1}
+                comPiece -> {countM1 += 1}
+                humanPiece -> {countP1 += 1}
             }
             if (countM1 >=3){
                 comReachList.add(line)
@@ -162,7 +163,7 @@ class Com {
         fun commonFunc(line:Line){
             //ここからどのマスがまだ自分のマスでないかを教える?
             for (i in line.listGetter()){
-                if (i.returnLastElement() != -1){
+                if (i.returnLastElement() != comPiece){
                     //すでに大きいコマをそのリーチを作るのに使っていてなおかつ､最後のマスに相手の中コマ以上が入っている
                     Log.d("gobblet2Com","[0]*[1]${i.funcForDisplay()[1]*i.funcForDisplay()[0] > 2}")
                     if (use3BigPieceOnTheLine(line) && i.funcForDisplay()[1]*i.funcForDisplay()[0] > 2){
@@ -209,10 +210,9 @@ class Com {
             //var target:Mas? = null
             //ここからどのマスがまだ相手のマスでないかを教える?
             for (i in line.listGetter()){
-                if (i.returnLastElement() != 1){
+                if (i.returnLastElement() != humanPiece){
                     //すでに大きいコマでブロックしてあるか調べる
                     if (i.funcForDisplay()[1]*i.funcForDisplay()[0] == -3){
-                        Log.d("gobblet2Com","elaced")
                         //すでにブロックしてたらリストから消す
                         humanReachList.remove(line)
                     } else{
@@ -257,7 +257,7 @@ class Com {
         var counter = 0
         val list = line.listGetter()
         for (mas in list){
-            if (mas.funcForDisplay()[1] == -1 && mas.funcForDisplay()[0] == 3){
+            if (mas.funcForDisplay()[1] == comPiece && mas.funcForDisplay()[0] == 3){
                 //マスに自分の大きいコマが入っていたら+1
                 counter+=1
             }
@@ -273,7 +273,7 @@ class Com {
         var counter = 0
         val list = line.listGetter()
         for (mas in list){
-            if (mas.funcForDisplay()[1] == -1 && mas.funcForDisplay()[0] == middlePiece){
+            if (mas.funcForDisplay()[1] == comPiece && mas.funcForDisplay()[0] == middlePiece){
                 //マスに自分の中コマが入っていたら+1
                 counter+=1
             }
@@ -289,7 +289,7 @@ class Com {
         var counter = 0
         val list = line.listGetter()
         for (mas in list){
-            if (mas.funcForDisplay()[1] == -1 && mas.funcForDisplay()[0] == smallPiece){
+            if (mas.funcForDisplay()[1] == comPiece && mas.funcForDisplay()[0] == smallPiece){
                 //マスに自分の小さいコマが入っていたら+1
                 counter+=1
             }
@@ -343,21 +343,24 @@ class Com {
             for (mas in line.listGetter()){
                 val rv = mas.funcForDisplay() //帰り値を入れる箱を用意する
                 when{
-                    rv[0] == 3 && rv[1] == 1 -> { mas.addScore(-50) }//相手の大コマが置かれている
-                    rv[0] == 2 && rv[1] == 1 -> {mas.addScore(-38)}//相手の中コマが置かれている
-                    rv[0] == 1 && rv[1] == 1 -> {mas.addScore(-19)}//相手の小コマが置かれている
-                    rv[0] == 3 && rv[1] ==-1 -> {
+                    rv[0] == bigPiece && rv[1] == humanPiece -> { mas.addScore(-50) }//相手の大コマが置かれている
+                    rv[0] == middlePiece && rv[1] == humanPiece -> {mas.addScore(-38)}//相手の中コマが置かれている
+                    rv[0] == smallPiece && rv[1] == humanPiece -> {mas.addScore(-19)}//相手の小コマが置かれている
+                    rv[0] == bigPiece && rv[1] == comPiece -> {
+                        //自分の大コマが置かれている
                         mas.addScore(-8)
                         masInTheGreenBigPiece.add(mas)
-                    }//自分の大コマが置かれている
-                    rv[0] == 2 && rv[1] ==-1 -> {
+                    }
+                    rv[0] == middlePiece && rv[1] == comPiece -> {
+                        //自分の中コマが置かれている
                         mas.addScore(-8)
                         masInTheGreenMiddlePiece.add(mas)
-                    }//自分の中コマが置かれている
-                    rv[0] == 1 && rv[1] ==-1 -> {
+                    }
+                    rv[0] == smallPiece && rv[1] == comPiece -> {
+                        //自分の小コマが置かれている
                         masInTheGreenSmallPiece.add(mas)
                         mas.addScore(-9)
-                    }//自分の小コマが置かれている
+                    }
                 }
             }
         }
@@ -385,7 +388,7 @@ class Com {
             //そのラインの各ますについて調べる
             for (mas in thisLine){
                 if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
-                if (mas.returnLastElement() == 1){ countP1 +=1 }
+                if (mas.returnLastElement() == humanPiece ){ countP1 +=1 }
                 if (countP1 == 3 && !comReachList.contains(line)){ //<------ここ作りなおし
                     //ライン上は自分以外全部敵のコマだった
                     //そのコマは相手のリーチをふせいでいる
@@ -406,9 +409,9 @@ class Com {
                 //周りの各マスを調べて
                 //基準にしたマスに評価値を入れる
                 when(rv[1]){
-                    0 -> {inTheCaseOfEmp(standard!!)}//なにもはいってなかった時
-                    -1 -> { inTheCaseOfM1(rv[0],standard!!) }//自分のコマが入っていた場合
-                    1 -> { inTheCaseOfP1(rv[0],standard!!) }//相手のコマが入っていた場合
+                    empty -> {inTheCaseOfEmp(standard!!)}//なにもはいってなかった時
+                    comPiece -> { inTheCaseOfM1(rv[0],standard!!) }//自分のコマが入っていた場合
+                    humanPiece -> { inTheCaseOfP1(rv[0],standard!!) }//相手のコマが入っていた場合
                 }
             }
         }
@@ -419,9 +422,9 @@ class Com {
 
             //基準となったマスに何が入っているかによってすることが違う
             when(standard.funcForDisplay()[1]){
-                -1 ->{standardIsM1()}
-                1 ->{standardIsP1()}
-                0 ->{standardIsP1()}
+                comPiece ->{standardIsM1()}
+                humanPiece ->{standardIsP1()}
+                empty ->{standardIsP1()}
             }
         }
 
@@ -438,25 +441,19 @@ class Com {
     //周りををしらべている時に自分のコマがあった時の処理
     fun inTheCaseOfM1(size:Int,mas: Mas){
         when(size){
-            1->{ mas.addScore(40) } //小
-            2->{ mas.addScore(50) } //中
-            3->{ mas.addScore(60) } //大
+            smallPiece  ->{ mas.addScore(40) } //小
+            middlePiece ->{ mas.addScore(50) } //中
+            bigPiece    ->{ mas.addScore(60) } //大
         }
-//                Log.d("gobblet2Com","${mas.nameGetter()} add:40")
-//                Log.d("gobblet2Com","${mas.nameGetter()} add:50")
-//                Log.d("gobblet2Com","${mas.nameGetter()} add:60")
     }
 
     //周りををしらべている時に相手のコマがあった時の処理
     fun inTheCaseOfP1(size:Int,mas: Mas){
         when(size){
-            1->{ mas.addScore(-20) } //小
-            2->{ mas.addScore(-40) } //中
-            3->{ mas.addScore(-80) } //大
+            smallPiece  ->{ mas.addScore(-10) } //小
+            middlePiece ->{ mas.addScore(-30) } //中
+            bigPiece    ->{ mas.addScore(-50) } //大
         }
-//                Log.d("gobblet2Com","${mas.nameGetter()} add:-20")
-//                Log.d("gobblet2Com","${mas.nameGetter()} add:-30")
-//                Log.d("gobblet2Com","${mas.nameGetter()} add:-50")
     }
 //-----------------------------
 //配置
@@ -541,18 +538,18 @@ class Com {
     fun choosePickup(mas: Mas?):Boolean{
         //移動先におけるコマがあるか検証
         when(destination?.funcForDisplay()?.get(0)){
-            3 ->{return false} //そもそも大きいコマはどうやっても置けないかえら諦める
-            2 ->{
+            bigPiece ->{return false} //そもそも大きいコマはどうやっても置けないかえら諦める
+            middlePiece ->{
                 //中コマなら大きいコマのみおけるから大きいコマを取り出せるか調べる
                 return pickUpBigPiece(mas)
             }
-            1 -> {
+            smallPiece -> {
                 //小さいコマなら中コマか大コマを取り出せるかしらべる
                 //中コマ->大コマと探す
                 if (pickUpMiddlePiece(mas)){ return true }
                 else  { return pickUpBigPiece(mas) }
             }
-            0 -> {
+            empty -> {
                 //ここではいろんな条件に応じてうごかないと行けない
                 if (blocking||turnCount==2){
                     //ブロックまたは2ターン目に大きいコマを使う
@@ -681,9 +678,6 @@ class Com {
     }
 
     fun start(){
-
-
-
         turnCount+=1
         //1ターン目
         if (turnCount==1){
