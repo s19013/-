@@ -50,7 +50,9 @@ class Com {
     var movingSource:String? = null //移動元
     var size = 0 //強制的に動かすコマの大きさを決める時に使う
 
-    var target:Mas? = null //防いだり止めを指すのに使う
+    //var target:Mas? = null //防いだり止めを指すのに使う
+    var blocking=false
+    var chance = false
 
     private var turnCount = 0 //自分のターンが回ってきた回数
 
@@ -95,27 +97,29 @@ class Com {
 ////リーチ系=------
     //リーチなった列がないか調べる
     fun reachChecker(){
-        fun counter(line: Line){
-            var countM1 = 0
-            var countP1 = 0
-            for (i in line.listGetter()){ // -1,1の個数をそれぞれ数える
-                when(i.returnLastElement()) {
-                    -1 -> {countM1 += 1}
-                    1 -> {countP1 += 1}
-                }
-                if (countP1 >=3){
-                    humanReachList.add(line)
-                    return
-                } //1が3つ以上なら敵がリーチ
-                if (countM1 >=3){
-                    comReachList.add(line)
-                    return
-                } //-1 が3つ以上ならcomがリーチ
-            }
-        }
-
         for (i in 0 until lineAllAtOnce.size){
             counter(lineAllAtOnce[i])
+        }
+
+        //もっと情報を細かく調べる
+    }
+
+    fun counter(line: Line){
+        var countM1 = 0
+        var countP1 = 0
+        for (i in line.listGetter()){ // -1,1の個数をそれぞれ数える
+            when(i.returnLastElement()) {
+                -1 -> {countM1 += 1}
+                1 -> {countP1 += 1}
+            }
+            if (countM1 >=3){
+                comReachList.add(line)
+                return
+            } //-1 が3つ以上ならcomがリーチ
+            if (countP1 >=3){
+                humanReachList.add(line)
+                return
+            } //1が3つ以上なら敵がリーチ
         }
     }
 
@@ -147,132 +151,98 @@ class Com {
     }
 
     //コンピューターにリーチがかかってないか調べる(止めをさせる場所を探す)
-    fun checkCanIcheckmate():Boolean{
-        //true:強制的にゲームクラスにわたす
-        //false:次の作業へすすむ
-        //var target:Mas? = null
-
-        fun containHumanBigPiece(line: Line):Boolean{
-            //true:おけた
-            //false:置けない
-            if (use3BigPieceOnTheLine(line)){
-                target?.addScore(-300) //大きいコマをリーチを作るのに使っている時は諦める
-                return false
-            }
-
-            destination=target
-            UseBigPieceInSpecialCase(line)
-            return true
-        }
-
-        fun containHumanMiddlePiece(line: Line):Boolean{
-            //true:おけた
-            //false:置けない
-            if (use3MiddlePieceOnTheLine(line)){ return false } //中コマが使え無い時
-
-            destination=target
-            UseMiddlePieceInSpecialCase(line)
-            return true
-        }
-
-        fun containHumanSmallPiece(line: Line):Boolean{
-            //true:おけた
-            //false:置けない
-            if (use3SmallPieceOnTheLine(line)){
-                target?.addScore(-300) //小さいコマが使え無い時
-                return false
-            }
-
-            destination=target
-            UseSmallPieceInSpecialCase(line)
-            return true
-        }
-
+    fun checkCanIcheckmate(){
+        var target:Mas? = null
 
         //最後の決めてとなる場所を探す,そしてそこに入れられるかを探す
-        fun commonFunc(line:Line):Boolean{
+        fun commonFunc(line:Line){
             //ここからどのマスがまだ自分のマスでないかを教える?
             for (i in line.listGetter()){
                 if (i.returnLastElement() != -1){
-                    target=i //最後に置くところがわかった
-                    break
+                    //すでに大きいコマをそのリーチを作るのに使っていてなおかつ､最後のマスに相手の中コマ以上が入っている
+                    Log.d("gobblet2Com","[0]*[1]${i.funcForDisplay()[1]*i.funcForDisplay()[0] > 2}")
+                    if (use3BigPieceOnTheLine(line) && i.funcForDisplay()[1]*i.funcForDisplay()[0] > 2){
+                        Log.d("gobblet2Com","comReachList:elaced")
+                        //すでにブロックしてたらリストから消す
+                        comReachList.remove(line)
+                    } else{
+                        target=i//置くべき場所がわかった
+                        break
+                    }
                 }
             }
+
+
 
             //コマをおけば勝てるところに相手の大きいコマがおいてないか調べる
             if (target != null){
-                when(howBighumansPiece(target)){
-                    3 -> { target?.addScore(-300) } //諦めること指す
-                    2 -> {
-                        //相手の中コマが入っていた
-                        if (containHumanBigPiece(line)) {return true}
-                    }
-                    1 -> {
-                        //小コマが入っていた
-                        //中コマ->大コマの順で考える
-                        when{
-                            containHumanMiddlePiece(line) -> {return true}
-                            containHumanBigPiece(line)    -> {return true}
-                        }
-                    }
-                    0 -> {
-                        //小コマ->中コマ->大コマの順で考える
-                        when{
-                            containHumanSmallPiece(line)  -> {return true}
-                            containHumanMiddlePiece(line) -> {return true}
-                            containHumanBigPiece(line)    -> {return true}
-                        }
-                    }
+                //狙っている場所の相手のコマの大きさを調べる
+                when(howBigPiece(target)){
+                    3 -> {
+                        target?.addScore(-300)
+                    } //諦めること指す
+                    else -> {target?.addScore(10000)} //行けることを表す
                 }
             }
-            return false
         }
 
         //リストの中身を調べていく
-        for (value in comReachList){ if (commonFunc(value)){return true} }
-        //trueが帰ってきた->勝てる時はループ抜けてコマを置く処理に移る
-        return false
+        var listForIterativeProcessing = mutableListOf<Line>()
+        listForIterativeProcessing.addAll(comReachList)
+        //繰り返し処理中のリストにremoveとかしちゃうと動きがおかしくなるから一旦別の変数にコピー
+        for (value in listForIterativeProcessing){ commonFunc(value) }
+
+        if (comReachList.isNotEmpty()){chance=true}
     }
 
-
-
     //人間にリーチがかかってないか調べる(相手の勝利を阻止する)
-    fun checkCanIBlockCheckmate():Boolean{
-        //こっちは評価値を入れるだけで良い
-        //場合によってはかぶせたりするから
+    fun checkCanIBlockCheckmate(){
+        //場合によってはblockingを解除する必要がある
+        var target:Mas? = null
 
         ////どこに入れれば防げるか探す
-        fun commonFunc(line:Line):Boolean{
+        fun commonFunc(line:Line){
             //var target:Mas? = null
             //ここからどのマスがまだ相手のマスでないかを教える?
             for (i in line.listGetter()){
                 if (i.returnLastElement() != 1){
-                    target=i//置くべき場所がわかった
-                    break
+                    //すでに大きいコマでブロックしてあるか調べる
+                    if (i.funcForDisplay()[1]*i.funcForDisplay()[0] == -3){
+                        Log.d("gobblet2Com","elaced")
+                        //すでにブロックしてたらリストから消す
+                        humanReachList.remove(line)
+                    } else{
+                        target=i//置くべき場所がわかった
+                        break
+                    }
                 }
             }
 
             if (target != null){//コマをおけば防げるところに相手のコマがおいてないか調べる
-                when(howBighumansPiece(target)){
-                    3 -> {target?.addScore(-300)}//諦めること指す
-                    else ->{
-                        //大きいコマを入れる
-                        if (pickUpBigPiece(target)){
-                            destination=target
-                            return true
-                        }
-                    }
+                when(howBigPiece(target)){
+                    3 -> {
+                        target?.addScore(-300)
+                    }//諦めること指す
+                    else ->{ target?.addScore(800) }
                 }
             }
-            return false
         }
 
-        for (value in humanReachList){ if (commonFunc(value)){return true} }
-        return false
+//        for (value in humanReachList){ if (commonFunc(value)){return true} }
+        var listForIterativeProcessing = mutableListOf<Line>()
+        listForIterativeProcessing.addAll(humanReachList)
+        //繰り返し処理中のリストにremoveとかしちゃうと動きがおかしくなるから一旦別の変数にコピー
+        for (value in listForIterativeProcessing){ commonFunc(value) }
+        //細かくしらべて本当にリーチがかかっているかつまだ止めをさせないならばブロックする
+        if (humanReachList.isNotEmpty() && !chance){blocking = true}
+
+        Log.d("gobblet2Com","blocking:${blocking}")
+        Log.d("gobblet2Com","chance:${chance}")
+
     }
 
     //敵のコマの大きさを調べる
-    fun howBighumansPiece(mas:Mas?):Int{
+    fun howBigPiece(mas:Mas?):Int{
         return mas!!.funcForDisplay()[0]
     }
 
@@ -362,7 +332,6 @@ class Com {
 
     }
 
-
     //各マスに何が入っているのかしらべて評価値をつける
     //ついでにコンピューターのコマがどこにあるかも調べる
     fun checkWhatIsInTheMas(){
@@ -413,7 +382,12 @@ class Com {
             for (mas in thisLine){
                 if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
                 if (mas.returnLastElement() == 1){ countP1 +=1 }
-                if (countP1 == 3){doNotMoveList.add(standard!!) } //ライン上は自分以外全部敵のコマだったらそのコマを動かさないリストに追加
+                if (countP1 == 3 && !comReachList.contains(line)){ //<------ここ作りなおし
+                    //ライン上は自分以外全部敵のコマだった
+                    //そのコマは相手のリーチをふせいでいる
+                    //かつリーチがかかってなかったらそのコマを動かさないリストに追加(自分でかいておいてなにいっているかわからない)
+                    doNotMoveList.add(standard!!)
+                }
             }
         }
 
@@ -501,16 +475,8 @@ class Com {
                     secondBiggestScoreList.addAll(mostBiggestScoreList) //2番めに上書き
                     mostBiggestScoreList.clear()
                     mostBiggestScoreList.add(mas) //一番大きいリストに追加
-                    Log.d("gobblet2Com","biggestScore:${biggestScore}")
-                    debC()
-                    Log.d("gobblet2Com","mostBiggestScoreList:${debmostBiggestScoreList}")
-                    Log.d("gobblet2Com","secondBiggestScoreList:${debsecondBiggestScoreList}")
-                    Log.d("gobblet2Com","thirdBiggestScoreList:${debthirdBiggestScoreList}")
                 } else if (mas.scoreGetter() == biggestScore){
                     mostBiggestScoreList.add(mas) //候補リストに追加
-                    debC()
-                    Log.d("gobblet2Com","mostBiggestScoreListAdd")
-                    Log.d("gobblet2Com","mostBiggestScoreList:${debmostBiggestScoreList}")
                 }
             }
         }
@@ -524,14 +490,12 @@ class Com {
     fun chooseLocation(){
         var errorCount =0
         var success = false
-        var tentative:Mas? = null //仮の候補
         //一番大きい評価値のマスから選んで行く
         while (true){
-            if (errorCount>=mostBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
+            if (errorCount>=mostBiggestScoreList.size){ break } //数回エラーがでたらループを抜ける
             destination = mostBiggestScoreList[(0 until mostBiggestScoreList.size).random()]
-            if (!choosePickup(destination)){
-                errorCount+=1  //指定した場所におけなかったら他のこうほを探す
-            } else {
+            if (!choosePickup(destination)){ errorCount+=1 }//指定した場所におけなかったら他のこうほを探す
+            else {
                 success=true
                 break //おけるなら置く作業に進む
             }
@@ -541,7 +505,7 @@ class Com {
         if (!success){
             errorCount = 0
             while (true){
-                if (errorCount>=secondBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
+                if (errorCount>=secondBiggestScoreList.size){ break } //数回エラーがでたらループを抜ける
                 destination = secondBiggestScoreList[(0 until secondBiggestScoreList.size).random()]
                 if (!choosePickup(destination)){
                     errorCount+=1  //指定した場所におけなかったら他のこうほを探す
@@ -585,12 +549,19 @@ class Com {
                 else  { return pickUpBigPiece(mas) }
             }
             0 -> {
+                //ここではいろんな条件に応じてうごかないと行けない
+                if (blocking||turnCount==2){
+                    //ブロックまたは2ターン目に大きいコマを使う
+                    return pickUpBigPiece(mas)
+                }
                 //空いているなら何でも入れられる
                 //中コマ->大コマ->小コマと探す
-                return when {
-                    pickUpMiddlePiece(mas) -> { true }
-                    pickUpBigPiece(mas) -> { true }
-                    else -> { pickUpSmallPiece(mas) }
+                else{
+                    return when {
+                        pickUpMiddlePiece(mas) -> { true }
+                        pickUpBigPiece(mas) -> { true }
+                        else -> { pickUpSmallPiece(mas) }
+                    }
                 }
             }
         }
@@ -608,14 +579,19 @@ class Com {
     //false:取り出せない
         if (temochiBig?.returnCount() != 0){
             movingSource = temochiBig?.nameGetter() //手持ちからだせるなら手持ちを移動元にする
+            Log.d("gobblet2Com","pickupFromTemochi")
             return true
         } else {
             val box = masInTheGreenBigPiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
+            Log.d("gobblet2Com","boxSize${box.size}")
             if (box.isNotEmpty()){
                 //一つでも動かせるならそれを移動元にする
-                movingSource= box[0].nameGetter()
+                movingSource= box[(box.indices).random()].nameGetter()
+                Log.d("gobblet2Com","pickupFrom${movingSource}")
                 return true
-            } else{return false} //だめならだめと返す
+            } else{
+                Log.d("gobblet2Com","can't pickup")
+                return false} //だめならだめと返す
         }
     }
     
@@ -630,7 +606,7 @@ class Com {
             val box = masInTheGreenMiddlePiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
             if (box.isNotEmpty()){
                 //一つでも動かせるならそれを移動元にする
-                movingSource= box[0].nameGetter()
+                movingSource= box[(box.indices).random()].nameGetter()
                 return true
             } else{return false} //だめならだめと返す
         }
@@ -647,7 +623,7 @@ class Com {
             val box = masInTheGreenSmallPiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
             if (box.isNotEmpty()){
                 //一つでも動かせるならそれを移動元にする
-                movingSource= box[0].nameGetter()
+                movingSource= box[(box.indices).random()].nameGetter()
                 return true
             } else{return false} //だめならだめと返す
         }
@@ -671,21 +647,18 @@ class Com {
 
     }
 
-
     fun start(){
         turnCount+=1
-        reachChecker() //リーチがかかってないか調べる
-        //自分にリーチがかかっていた
-        if (comReachList.size!=0){ if (checkCanIcheckmate()){return} }
-        //相手にリーチがかかっていた
-        if (humanReachList.size!=0){
-            if (checkCanIBlockCheckmate()){return}
-        }
         //1ターン目
         if (turnCount==1){
             firstTurn()
             return
         }
+        reachChecker() //リーチがかかってないか調べる
+        //自分にリーチがかかっていた
+        if (comReachList.isNotEmpty()){ checkCanIcheckmate() }
+        //相手にリーチがかかっていた
+        if (humanReachList.isNotEmpty()){ checkCanIBlockCheckmate() }
         //2ターン目
 //        if (turnCount==2){
 //            secondTurn()
@@ -784,7 +757,8 @@ class Com {
         mostBiggestScoreList.clear()
         secondBiggestScoreList.clear()
         thirdBiggestScoreList.clear()
-        target=null
+        blocking=false
+        chance=false
     }
 
 //初期化関係
@@ -853,6 +827,7 @@ class Com {
         Log.d("gobblet2Com","comReachList:${debComReachList}")
         Log.d("gobblet2Com","humanReachList:${debhumanReachList}")
         Log.d("gobblet2Com","DoNotMoveList:${debDoNotMoveList}")
+        Log.d("gobblet2Com","debMasInTheGreenBigPiece:${debMasInTheGreenBigPiece}")
         Log.d("gobblet2Com"," ")
         Log.d("gobblet2Com","movingSource:${movingSource}")
         Log.d("gobblet2Com","destination:${destination?.nameGetter()}")
