@@ -1016,8 +1016,6 @@ open class GameBaseClass : AppCompatActivity() {
         if (SE){
             when(status){
                 cannotDoItSE -> sp!!.play(cannotDoItSE, 1.0f, 1.0f, 1, 0, 1.5f) //これだけ少し早く再生
-                openSE -> sp!!.play(openSE, 1.0f, 1.0f, 1, 0, 0.9f)
-                closeSE -> sp!!.play(closeSE, 1.0f, 1.0f, 1, 0, 0.9f)
                 else -> sp!!.play(status, 1.0f, 1.0f, 1, 0, 1.0f)
             }
         }
