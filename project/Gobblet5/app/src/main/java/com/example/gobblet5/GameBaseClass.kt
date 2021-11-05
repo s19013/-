@@ -818,9 +818,9 @@ open class GameBaseClass : AppCompatActivity() {
         configPopup!!.isOutsideTouchable = true
         configPopup!!.isFocusable = true
 
-        // 表示サイズの設定 今回は画面の半分
-        configPopup!!.width  = width*8/10
-        configPopup!!.height = height*4/10
+        // 表示サイズの設定
+        configPopup!!.width  = width  * 8/10
+        configPopup!!.height = height * 6/10
 
         // 画面中央に表示
         configPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
@@ -1036,12 +1036,13 @@ open class GameBaseClass : AppCompatActivity() {
         override fun run() {
             time += millisecond
             when(time){
-                200L -> mediaPlayer?.setVolume(0.7f,0.7f)
-                400L -> mediaPlayer?.setVolume(0.4f,0.4f)
-                600L -> mediaPlayer?.setVolume(0.1f,0.1f)
+                200L -> mediaPlayer?.setVolume(0.8f,0.8f)
+                400L -> mediaPlayer?.setVolume(0.6f,0.6f)
+                600L -> mediaPlayer?.setVolume(0.4f,0.4f)
+                800L -> mediaPlayer?.setVolume(0.2f,0.2f)
             }
             handler.postDelayed(this,millisecond)
-            if (time>800L){
+            if (time>1000L){
                 stopMusic()
                 handler.removeCallbacks(this)
                 time = 0L
