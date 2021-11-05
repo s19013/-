@@ -161,7 +161,7 @@
             android:autoSizeTextType="uniform"
             android:textAllCaps="false"
             android:background="@drawable/btn_style"
-            android:text="@string/Retry" />
+            android:text="@string/playAgain" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
