@@ -25,6 +25,14 @@ open class GameBaseClass : AppCompatActivity() {
     //コンピューター対戦:-1
     //人間対戦:1
 
+    //タイマー関係
+    protected val millisecond:Long=100
+    protected var time = 0L
+    protected val handler = Handler()
+    protected var nowDoingTimerID:String? = null
+    ////タイマーのid
+    protected val fadeOutMusicId = "fadeOutMusic"
+
     ////手持ち宣言
     //赤
     protected val temochiRedBig = Temochi(3,"TemochiRedBig")
@@ -98,6 +106,8 @@ open class GameBaseClass : AppCompatActivity() {
     protected var radioButtonSE = 0
     protected var openSE = 0
     protected var closeSE = 0
+    protected var winSE = 0
+    protected var loosSE = 0
     //ゲームに必要なもの
     protected var turn = 0 //後でちゃんと設定する
     protected var size = 0
@@ -647,7 +657,19 @@ open class GameBaseClass : AppCompatActivity() {
         }
 
         if (finished){
+            //ジングルを鳴らす
+            if (SE){
+                if (thisAct==1){playSound(winSE)}
+                if (thisAct==-1){
+                    when(winner){
+                        "1p" -> playSound(winSE)
+                        "2p" -> playSound(loosSE)
+                    }
+                }
+            }
             resaltButton!!.visibility= View.VISIBLE
+            nowDoingTimerID = fadeOutMusicId
+            handler.post(fadeOutMusic)
             showResultPopup()
         }
 
@@ -689,6 +711,7 @@ open class GameBaseClass : AppCompatActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }
+
     fun goToPreGameWithManAct(){
         val intent = Intent(this, preGameWithManActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -700,6 +723,7 @@ open class GameBaseClass : AppCompatActivity() {
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }
+
     fun goToGameWithManAct(){
         val intent = Intent(this, GameWithManActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -933,16 +957,15 @@ open class GameBaseClass : AppCompatActivity() {
         gameStartSE = sp!!.load(this,R.raw.game_start_se,1)
         openSE = sp!!.load(this,R.raw.open,1)
         closeSE = sp!!.load(this,R.raw.close,1)
+        winSE = sp!!.load(this,R.raw.win_single,1)
+        loosSE = sp!!.load(this,R.raw.loose_single,1)
     }
 
     protected fun iniMediaPlayer(){
         //mediaPlayer
         mediaPlayer=MediaPlayer.create(applicationContext,R.raw.okashi_time)
         mediaPlayer?.isLooping=true
-        if (BGM){
-            bgmLooping=true
-            mediaPlayer?.start()
-        }
+        playMusic()
     }
 
     //先攻後攻設定
@@ -982,15 +1005,37 @@ open class GameBaseClass : AppCompatActivity() {
     protected fun playSound(status: Int){
         if (SE){
             when(status){
-                cannotDoItSE -> sp!!.play(cannotDoItSE, 1.0f, 1.0f, 1, 0, 1.5f)
-                putSE -> sp!!.play(putSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                selectSE -> sp!!.play(selectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                cancelSE -> sp!!.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                menuSelectSE -> sp!!.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                gameStartSE -> sp!!.play(gameStartSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                radioButtonSE -> sp!!.play(radioButtonSE,1.0f,1.0f,1,0,1.0f)
-                openSE -> sp!!.play(openSE,1.0f,1.0f,1,0,1.0f)
-                closeSE -> sp!!.play(closeSE,1.0f,1.0f,1,0,1.0f)
+                cannotDoItSE -> sp!!.play(cannotDoItSE, 1.0f, 1.0f, 1, 0, 1.5f) //これだけ少し早く再生
+                else -> sp!!.play(status, 1.0f, 1.0f, 1, 0, 1.0f)
+            }
+        }
+    }
+
+    protected fun playMusic(){
+        if (BGM){
+            bgmLooping=true
+            mediaPlayer?.start()
+        }
+    }
+
+    protected fun stopMusic(){
+        mediaPlayer?.pause()
+    }
+
+    private val fadeOutMusic: Runnable = object : Runnable{
+        override fun run() {
+            time += millisecond
+            when(time){
+                200L -> mediaPlayer?.setVolume(0.7f,0.7f)
+                400L -> mediaPlayer?.setVolume(0.4f,0.4f)
+                600L -> mediaPlayer?.setVolume(0.1f,0.1f)
+            }
+            handler.postDelayed(this,millisecond)
+            if (time>800L){
+                stopMusic()
+                handler.removeCallbacks(this)
+                time = 0L
+                nowDoingTimerID = null
             }
         }
     }
@@ -1023,6 +1068,9 @@ open class GameBaseClass : AppCompatActivity() {
         if (BGM) {
             mediaPlayer?.start()
         }
+        when (nowDoingTimerID){
+            fadeOutMusicId -> handler.post(fadeOutMusic)
+        }
     }
 
     override fun onPause() {
@@ -1030,6 +1078,7 @@ open class GameBaseClass : AppCompatActivity() {
         if (BGM){
             mediaPlayer?.pause()
         }
+        handler.removeCallbacks(fadeOutMusic)
 
     }
 
@@ -1037,7 +1086,9 @@ open class GameBaseClass : AppCompatActivity() {
         super.onDestroy()
         sp!!.release()
         mediaPlayer?.release()
+        handler.removeCallbacks(fadeOutMusic)
         mediaPlayer=null
     }
+
 
 }
