@@ -42,7 +42,6 @@
     <string name="GameStartText">GameStart</string>
     <string name="BackToGame">Back To Game</string>
     <string name="BackToTitle">Back To Title</string>
-    <string name="CheckTheBord">Check The Bord</string>
     <string name="BackToGameSetting">Back To GameSetting</string>
     <string name="playAgain">playAgain</string>
     <string name="HowToOperateText">How To Operate</string>
@@ -102,4 +101,5 @@
     <string name="notYourTurnDialogText">Not your turn now</string>
     <string name="OkText">OK</string>
     <string name="startOver">startOver</string>
+    <string name="CheckTheBoard">CheckTheBoard</string>
 </resources>

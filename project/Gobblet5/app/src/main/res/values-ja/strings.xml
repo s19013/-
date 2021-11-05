@@ -42,7 +42,6 @@
     <string name="EnemyText">相手</string>
     <string name="comText">コンピューター</string>
     <string name="GameStartText">ゲームスタート</string>
-    <string name="CheckTheBord">ボードを見る</string>
     <string name="playAgain">もう一度遊ぶ</string>
     <string name="HowToOperateText">操作説明</string>
     <string name="HowToPlayText">ルール説明</string>
@@ -105,6 +104,7 @@
     <string name="notYourTurnDialogText">あなたのターンではありません</string>
     <string name="OkText">わかりました</string>
     <string name="startOver">やり直す</string>
+    <string name="CheckTheBoard">ボードを確認する</string>
 
 
 </resources>
