@@ -80,7 +80,7 @@
                     android:layout_weight="9"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
-                    android:text="@string/Back"
+                    android:text="@string/CheckTheBoard"
                     android:textColor="@color/black" />
             </LinearLayout>
 
