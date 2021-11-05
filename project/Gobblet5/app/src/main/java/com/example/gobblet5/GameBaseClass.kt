@@ -865,7 +865,6 @@ open class GameBaseClass : AppCompatActivity() {
             playSound(radioButtonSE)
             val editor= pref!!.edit()
             editor.putBoolean("BGMOnOff",BGM).apply()
-            //Log.d("gobblet2", "BGM=${BGM}")
         }
 
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
@@ -932,7 +931,7 @@ open class GameBaseClass : AppCompatActivity() {
         //共有プリファレンス
         pref = PreferenceManager.getDefaultSharedPreferences(this)
         SE = pref!!.getBoolean("SEOnOff", true)
-        BGM =pref!!.getBoolean("BGMOnOff", true)
+        BGM =pref!!.getBoolean("BGMOnOff", false)
         playFirst=pref!!.getInt("playFirst", 1)
     }
 
