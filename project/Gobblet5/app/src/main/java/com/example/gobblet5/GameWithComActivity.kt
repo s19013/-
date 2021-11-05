@@ -10,6 +10,8 @@ import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_2
 import kotlinx.android.synthetic.main.activity_game_with_com.*
 
 class GameWithComActivity : GameBaseClass() {
+    override var thisAct: Int = -1
+
     //コンピューター宣言
     val com:Com=Com()
 

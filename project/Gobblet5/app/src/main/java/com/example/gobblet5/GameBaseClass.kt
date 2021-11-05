@@ -21,6 +21,10 @@ import androidx.preference.PreferenceManager
 import java.util.*
 
 open class GameBaseClass : AppCompatActivity() {
+    open var thisAct=0
+    //コンピューター対戦:-1
+    //人間対戦:1
+
     ////手持ち宣言
     //赤
     protected val temochiRedBig = Temochi(3,"TemochiRedBig")
@@ -679,6 +683,35 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     ////ポップアップ
+    //ポップアップが使う画面遷移
+    fun goToPreGameWithComAct(){
+        val intent = Intent(this, preGameWithComActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+    fun goToPreGameWithManAct(){
+        val intent = Intent(this, preGameWithManActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+
+    fun goToGameWithComAct(){
+        val intent = Intent(this, GameWithComActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+    fun goToGameWithManAct(){
+        val intent = Intent(this, GameWithManActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+
+    fun goToMainAct(){
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+
     //結果ポップアップ
     @SuppressLint("InflateParams")
     protected fun showResultPopup(){
@@ -716,28 +749,31 @@ open class GameBaseClass : AppCompatActivity() {
             Log.d("gobblet2", "lang:en")
         }
 
-
+        //タイトルへ戻る
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            goToMainAct()
         }
 
+        //もう一度やる
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
             playSound(gameStartSE)
-            val intent = Intent(this, GameWithComActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            when(thisAct){
+                -1 -> {goToGameWithComAct()}
+                 1 -> {goToGameWithManAct()}
+            }
         }
 
+        //設定へ
         popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
             playSound(cancelSE)
-            val intent = Intent(this, preGameWithComActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            when(thisAct){
+                -1 -> {goToPreGameWithComAct()}
+                1 -> {goToPreGameWithManAct()}
+            }
         }
 
+        //盤面を見る
         popupView.findViewById<View>(R.id.backButton).setOnClickListener {
             if (resultPopup!!.isShowing) {
                 playSound(closeSE)
@@ -810,9 +846,7 @@ open class GameBaseClass : AppCompatActivity() {
 
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            goToMainAct()
         }
 
         popupView.findViewById<View>(R.id.backButton).setOnClickListener {

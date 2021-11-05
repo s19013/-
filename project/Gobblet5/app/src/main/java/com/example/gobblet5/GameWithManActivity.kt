@@ -23,6 +23,7 @@ import java.util.*
 
 
 class GameWithManActivity : GameBaseClass() {
+    override var thisAct: Int = -1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
