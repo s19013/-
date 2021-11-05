@@ -867,15 +867,26 @@ open class GameBaseClass : AppCompatActivity() {
             editor.putBoolean("BGMOnOff",BGM).apply()
         }
 
+        //タイトルへ戻るボタン
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
             goToMainAct()
         }
 
+        //盤面へ戻るボタン
         popupView.findViewById<View>(R.id.backButton).setOnClickListener {
             if (configPopup!!.isShowing) {
                 playSound(closeSE)
                 configPopup!!.dismiss()
+            }
+        }
+
+
+        popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
+            playSound(gameStartSE)
+            when(thisAct){
+                -1 -> {goToGameWithComAct()}
+                 1 -> {goToGameWithManAct()}
             }
         }
     }
