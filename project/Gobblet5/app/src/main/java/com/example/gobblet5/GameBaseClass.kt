@@ -31,7 +31,7 @@ open class GameBaseClass : AppCompatActivity() {
     protected val handler = Handler()
     protected var nowDoingTimerID:String? = null
     ////タイマーのid
-    protected val fadeOutMusicId = "fadeOutMusic"
+    protected val resultTimerId = "resultTimer"
 
     ////手持ち宣言
     //赤
@@ -668,9 +668,9 @@ open class GameBaseClass : AppCompatActivity() {
                 }
             }
             resaltButton!!.visibility= View.VISIBLE
-            nowDoingTimerID = fadeOutMusicId
-            handler.post(fadeOutMusic)
-            showResultPopup()
+            nowDoingTimerID = resultTimerId
+            handler.post(resultTimer)
+            //showResultPopup()
         }
 
         debJudge()
@@ -1016,6 +1016,8 @@ open class GameBaseClass : AppCompatActivity() {
         if (SE){
             when(status){
                 cannotDoItSE -> sp!!.play(cannotDoItSE, 1.0f, 1.0f, 1, 0, 1.5f) //これだけ少し早く再生
+                openSE -> sp!!.play(openSE, 1.0f, 1.0f, 1, 0, 0.9f)
+                closeSE -> sp!!.play(closeSE, 1.0f, 1.0f, 1, 0, 0.9f)
                 else -> sp!!.play(status, 1.0f, 1.0f, 1, 0, 1.0f)
             }
         }
@@ -1032,7 +1034,7 @@ open class GameBaseClass : AppCompatActivity() {
         mediaPlayer?.pause()
     }
 
-    private val fadeOutMusic: Runnable = object : Runnable{
+    private val resultTimer: Runnable = object : Runnable{
         override fun run() {
             time += millisecond
             when(time){
@@ -1044,6 +1046,7 @@ open class GameBaseClass : AppCompatActivity() {
             handler.postDelayed(this,millisecond)
             if (time>1000L){
                 stopMusic()
+                showResultPopup()
                 handler.removeCallbacks(this)
                 time = 0L
                 nowDoingTimerID = null
@@ -1080,7 +1083,7 @@ open class GameBaseClass : AppCompatActivity() {
             mediaPlayer?.start()
         }
         when (nowDoingTimerID){
-            fadeOutMusicId -> handler.post(fadeOutMusic)
+            resultTimerId -> handler.post(resultTimer)
         }
     }
 
@@ -1089,7 +1092,7 @@ open class GameBaseClass : AppCompatActivity() {
         if (BGM){
             mediaPlayer?.pause()
         }
-        handler.removeCallbacks(fadeOutMusic)
+        handler.removeCallbacks(resultTimer)
 
     }
 
@@ -1097,7 +1100,7 @@ open class GameBaseClass : AppCompatActivity() {
         super.onDestroy()
         sp!!.release()
         mediaPlayer?.release()
-        handler.removeCallbacks(fadeOutMusic)
+        handler.removeCallbacks(resultTimer)
         mediaPlayer=null
     }
 
