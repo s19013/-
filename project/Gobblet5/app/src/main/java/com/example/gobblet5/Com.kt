@@ -164,20 +164,19 @@ class Com {
             //ここからどのマスがまだ自分のマスでないかを教える?
             for (i in line.listGetter()){
                 if (i.returnLastElement() != comPiece){
-                    //すでに大きいコマをそのリーチを作るのに使っていてなおかつ､最後のマスに相手の中コマ以上が入っている
-                    Log.d("gobblet2Com","[0]*[1]${i.funcForDisplay()[1]*i.funcForDisplay()[0] > 2}")
-                    if (use3BigPieceOnTheLine(line) && i.funcForDisplay()[1]*i.funcForDisplay()[0] > 2){
-                        Log.d("gobblet2Com","comReachList:elaced")
-                        //すでにブロックしてたらリストから消す
+                    //相手の大きいコマでブロックされている
+                    if (i.funcForDisplay()[1]*i.funcForDisplay()[0] == 3){
                         comReachList.remove(line)
+                    }
+                    //すでにすべての大きいコマをそのリーチを作るのに使っていてなおかつ､最後のマスに相手の中コマ以上が入っている
+                    else if (use3BigPieceOnTheLine(line) && i.funcForDisplay()[1]*i.funcForDisplay()[0] > 2){
+                        comReachList.remove(line) //すでにブロックされていたらリストから消す
                     } else{
                         target=i//置くべき場所がわかった
                         break
                     }
                 }
             }
-
-
 
             //コマをおけば勝てるところに相手の大きいコマがおいてないか調べる
             if (target != null){
@@ -232,11 +231,14 @@ class Com {
             }
         }
 
-//        for (value in humanReachList){ if (commonFunc(value)){return true} }
         var listForIterativeProcessing = mutableListOf<Line>()
         listForIterativeProcessing.addAll(humanReachList)
         //繰り返し処理中のリストにremoveとかしちゃうと動きがおかしくなるから一旦別の変数にコピー
         for (value in listForIterativeProcessing){ commonFunc(value) }
+
+        debC()
+        Log.d("gobblet2Com","debhumanReachList:${debhumanReachList}")
+
         //細かくしらべて本当にリーチがかかっているかつまだ止めをさせないならばブロックする
         if (humanReachList.isNotEmpty() && !chance){blocking = true}
 
@@ -344,22 +346,22 @@ class Com {
                 val rv = mas.funcForDisplay() //帰り値を入れる箱を用意する
                 when{
                     rv[0] == bigPiece && rv[1] == humanPiece -> { mas.addScore(-50) }//相手の大コマが置かれている
-                    rv[0] == middlePiece && rv[1] == humanPiece -> {mas.addScore(-38)}//相手の中コマが置かれている
-                    rv[0] == smallPiece && rv[1] == humanPiece -> {mas.addScore(-19)}//相手の小コマが置かれている
+                    rv[0] == middlePiece && rv[1] == humanPiece -> {mas.addScore(-30)}//相手の中コマが置かれている
+                    rv[0] == smallPiece && rv[1] == humanPiece -> {mas.addScore(-20)}//相手の小コマが置かれている
                     rv[0] == bigPiece && rv[1] == comPiece -> {
                         //自分の大コマが置かれている
-                        mas.addScore(-8)
+                        mas.addScore(-50)
                         masInTheGreenBigPiece.add(mas)
                     }
                     rv[0] == middlePiece && rv[1] == comPiece -> {
                         //自分の中コマが置かれている
-                        mas.addScore(-8)
+                        mas.addScore(-5)
                         masInTheGreenMiddlePiece.add(mas)
                     }
                     rv[0] == smallPiece && rv[1] == comPiece -> {
                         //自分の小コマが置かれている
                         masInTheGreenSmallPiece.add(mas)
-                        mas.addScore(-9)
+                        mas.addScore(-10)
                     }
                 }
             }
@@ -434,7 +436,7 @@ class Com {
 
     //周りををしらべている時に空のコマがあった時の処理
     fun inTheCaseOfEmp(mas:Mas){
-        mas.addScore(20)
+        mas.addScore(30)
 //        Log.d("gobblet2Com","${mas.nameGetter()} add:10")
     }
 
@@ -551,9 +553,16 @@ class Com {
             }
             empty -> {
                 //ここではいろんな条件に応じてうごかないと行けない
-                if (blocking||turnCount==2){
+                if (blocking){
                     //ブロックまたは2ターン目に大きいコマを使う
-                    return pickUpBigPiece(mas)
+                    if (pickUpBigPiece(mas)){
+                        return true
+                    } else if (pickUpMiddlePiece(mas)){
+                        //どうしても大きいコマが使えない時は中コマ
+                        return true
+                    } else {
+                        return pickUpSmallPiece(mas)
+                    }
                 }
                 //空いているなら何でも入れられる
                 //中コマ->大コマ->小コマと探す
@@ -578,7 +587,7 @@ class Com {
     fun pickUpBigPiece(mas: Mas?):Boolean{
     //true:取り出せる
     //false:取り出せない
-        if (temochiBig?.returnCount() != 0){
+        if (temochiBig?.returnCount()!! > 0){
             movingSource = temochiBig //手持ちからだせるなら手持ちを移動元にする
             Log.d("gobblet2Com","pickupFromTemochi")
             return true
@@ -600,7 +609,7 @@ class Com {
     fun pickUpMiddlePiece(mas: Mas?):Boolean{
         //true:取り出せる
         //false:取り出せない
-        if (temochiMiddle?.returnCount() != 0){
+        if (temochiMiddle?.returnCount()!! > 0){
             movingSource = temochiMiddle //手持ちからだせるなら手持ちを移動元にする
             return true
         } else {
@@ -617,7 +626,7 @@ class Com {
     fun pickUpSmallPiece(mas: Mas?):Boolean{
         //true:取り出せる
         //false:取り出せない
-        if (temochiSmall?.returnCount() != 0){
+        if (temochiSmall?.returnCount()!! > 0){
             movingSource = temochiSmall //手持ちからだせるなら手持ちを移動元にする
             return true
         } else {
