@@ -44,7 +44,7 @@
     <string name="BackToTitle">Back To Title</string>
     <string name="CheckTheBord">Check The Bord</string>
     <string name="BackToGameSetting">Back To GameSetting</string>
-    <string name="Retry">Retry</string>
+    <string name="playAgain">playAgain</string>
     <string name="HowToOperateText">How To Operate</string>
     <string name="HowToPlayText">How To Play</string>
     <!--設定    -->
@@ -101,4 +101,5 @@
     <string name="cannotPickupDialogText">You can\'t pick up of there</string>
     <string name="notYourTurnDialogText">Not your turn now</string>
     <string name="OkText">OK</string>
+    <string name="startOver">startOver</string>
 </resources>
