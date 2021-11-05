@@ -65,7 +65,8 @@
             android:autoSizeTextType="uniform"
             android:background="@drawable/btn_style"
             android:text="@string/ResultText"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
