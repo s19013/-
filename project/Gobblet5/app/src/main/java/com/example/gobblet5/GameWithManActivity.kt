@@ -23,7 +23,7 @@ import java.util.*
 
 
 class GameWithManActivity : GameBaseClass() {
-    override var thisAct: Int = -1
+    override var thisAct: Int = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,9 +37,6 @@ class GameWithManActivity : GameBaseClass() {
         //ゲームを始める
         startTurn()
         Log.d("gobblet2", "pF:${playFirst}")
-
-
-
 
 
 //手持ちのボタンを触った時
