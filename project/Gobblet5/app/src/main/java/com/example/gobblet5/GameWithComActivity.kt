@@ -12,15 +12,10 @@ import kotlinx.android.synthetic.main.activity_game_with_com.*
 class GameWithComActivity : GameBaseClass() {
     override var thisAct: Int = -1
 
+    val insertTimerId = "insertTimer"
+
     //コンピューター宣言
     val com:Com=Com()
-
-    //タイマー関係
-    protected val millisecond:Long=100
-    protected var time = 0L
-    protected val handler = Handler()
-    protected var nowDoingTimerID = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -249,7 +244,7 @@ class GameWithComActivity : GameBaseClass() {
     fun startCom(){
         com.start()
         pickUpCom()
-        nowDoingTimerID = 1
+        nowDoingTimerID = insertTimerId
         handler.post(insertTimer)
         com.debScore()
         resetCom()
@@ -331,7 +326,7 @@ class GameWithComActivity : GameBaseClass() {
                 insertCom()
                 handler.removeCallbacks(this)
                 time = 0L
-                nowDoingTimerID = 0
+                nowDoingTimerID = null
             }
         }
     }
@@ -340,7 +335,7 @@ class GameWithComActivity : GameBaseClass() {
     override fun onResume() {
         super.onResume()
         when (nowDoingTimerID){
-            1 -> handler.post(insertTimer)
+            insertTimerId -> handler.post(insertTimer)
         }
     }
 
