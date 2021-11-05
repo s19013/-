@@ -101,5 +101,5 @@
     <string name="notYourTurnDialogText">Not your turn now</string>
     <string name="OkText">OK</string>
     <string name="startOver">startOver</string>
-    <string name="CheckTheBoard">CheckTheBoard</string>
+    <string name="CheckTheBoard">Check The Board</string>
 </resources>
