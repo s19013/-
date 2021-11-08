@@ -98,8 +98,8 @@ class Com {
     private var debmostBiggestScoreList:MutableList<String> = mutableListOf() //一番大きいスコア
     private var debsecondBiggestScoreList:MutableList<String> = mutableListOf() //二番目
     private var debthirdBiggestScoreList:MutableList<String> = mutableListOf() //3番目
-
-
+    private var debFourthBiggestScoreList:MutableList<String> = mutableListOf() //4
+    private var debFifthBiggestScoreList:MutableList<String> = mutableListOf() //5
 
 ////リーチ系=------
     //リーチなった列がないか調べる
@@ -466,64 +466,147 @@ class Com {
 
     //一番評価値が大きい場所を選ぶ
     fun biggestScore(){
-        var biggestScore = 0
-        var secondBiggestScore = 0
-        var thirdBiggestScore  = 0
-        var fourthBiggestScore = 0
-        var fifthBiggestScore  = 0
+//        var biggestScore = 0
+//        var secondBiggestScore = 0
+//        var thirdBiggestScore  = 0
+//        var fourthBiggestScore = 0
+//        var fifthBiggestScore  = 0
 
-        var scoreList = mutableListOf(mostBiggestScoreList,secondBiggestScoreList,thirdBiggestScoreList,fourthBiggestScoreList,fifthBiggestScoreList)
+        var biggestScore = mutableListOf(-300,-300,-300,-300,-300) //[dammy,1番,2番､3番､4番､5番]
 
-        fun commonFunc(line:Line){
+        fun setBiggestScore(line: Line){
             for (mas in line.listGetter()){
-                if (mas.scoreGetter() > biggestScore){ //基準より大きかった場合
-                    fifthBiggestScore=fourthBiggestScore
-                    fourthBiggestScore=thirdBiggestScore
-                    thirdBiggestScore=secondBiggestScore
-                    secondBiggestScore=biggestScore
-                    biggestScore = mas.scoreGetter() //基準を設定し直す
-
-                    fifthBiggestScoreList.clear()
-                    fifthBiggestScoreList.addAll(fourthBiggestScoreList) //5番目
-                    fourthBiggestScoreList.clear()
-                    fourthBiggestScoreList.addAll(thirdBiggestScoreList) //4番目に上書き
-                    thirdBiggestScoreList.clear()
-                    thirdBiggestScoreList.addAll(secondBiggestScoreList) //3番目に上書き
-                    secondBiggestScoreList.clear()
-                    secondBiggestScoreList.addAll(mostBiggestScoreList) //2番めに上書き
-                    mostBiggestScoreList.clear()
-                    mostBiggestScoreList.add(mas) //一番大きいリストに追加
-                }
-
-                if (mas.scoreGetter() < biggestScore && mas.scoreGetter() < secondBiggestScore ){ //基準より大きかった場合
-                    fifthBiggestScore=fourthBiggestScore
-                    fourthBiggestScore=thirdBiggestScore
-                    thirdBiggestScore=secondBiggestScore
-                    secondBiggestScore=mas.scoreGetter() //基準を設定し直す
-
-                    fifthBiggestScoreList.clear()
-                    fifthBiggestScoreList.addAll(fourthBiggestScoreList) //5番目
-                    fourthBiggestScoreList.clear()
-                    fourthBiggestScoreList.addAll(thirdBiggestScoreList) //4番目に上書き
-                    thirdBiggestScoreList.clear()
-                    thirdBiggestScoreList.addAll(secondBiggestScoreList) //3番目に上書き
-                    secondBiggestScoreList.clear()
-                    secondBiggestScoreList.add(mas)
-                }
-
                 when{
-                    mas.scoreGetter() == biggestScore -> {mostBiggestScoreList.add(mas) }//候補リストに追加
-                    mas.scoreGetter() == secondBiggestScore -> {secondBiggestScoreList.add(mas) }
-                    mas.scoreGetter() == thirdBiggestScore -> {thirdBiggestScoreList.add(mas) }
-                    mas.scoreGetter() == fourthBiggestScore -> {fourthBiggestScoreList.add(mas) }
-                    mas.scoreGetter() == fifthBiggestScore -> {fifthBiggestScoreList.add(mas) }
+                    mas.scoreGetter() > biggestScore[0] ->
+                        {
+                            for (i in 4 downTo 1){ biggestScore[i] = biggestScore[i-1] }
+                            biggestScore[0] = mas.scoreGetter()
+                            Log.d("gobblet2Com","------------")
+                            Log.d("gobblet2Com","biggestScore[0]:${biggestScore[0]}")
+                            Log.d("gobblet2Com","biggestScore[1]:${biggestScore[1]}")
+                            Log.d("gobblet2Com","biggestScore[2]:${biggestScore[2]}")
+                            Log.d("gobblet2Com","biggestScore[3]:${biggestScore[3]}")
+                            Log.d("gobblet2Com","biggestScore[4]:${biggestScore[4]}")
+                        }
+                    mas.scoreGetter() > biggestScore[1] && mas.scoreGetter() < biggestScore[0] ->
+                        {
+                            for (i in 4 downTo 2){ biggestScore[i] = biggestScore[i-1] }
+                            biggestScore[1] = mas.scoreGetter()
+                            Log.d("gobblet2Com","------------")
+                            Log.d("gobblet2Com","biggestScore[0]:${biggestScore[0]}")
+                            Log.d("gobblet2Com","biggestScore[1]:${biggestScore[1]}")
+                            Log.d("gobblet2Com","biggestScore[2]:${biggestScore[2]}")
+                            Log.d("gobblet2Com","biggestScore[3]:${biggestScore[3]}")
+                            Log.d("gobblet2Com","biggestScore[4]:${biggestScore[4]}")
+                        }
+                    mas.scoreGetter() > biggestScore[2] && mas.scoreGetter() < biggestScore[1] ->
+                        {
+                            for (i in 4 downTo 3){ biggestScore[i] = biggestScore[i-1] }
+                            biggestScore[2] = mas.scoreGetter()
+                            Log.d("gobblet2Com","------------")
+                            Log.d("gobblet2Com","biggestScore[0]:${biggestScore[0]}")
+                            Log.d("gobblet2Com","biggestScore[1]:${biggestScore[1]}")
+                            Log.d("gobblet2Com","biggestScore[2]:${biggestScore[2]}")
+                            Log.d("gobblet2Com","biggestScore[3]:${biggestScore[3]}")
+                            Log.d("gobblet2Com","biggestScore[4]:${biggestScore[4]}")
+                        }
+                    mas.scoreGetter() > biggestScore[3] && mas.scoreGetter() < biggestScore[2] ->
+                        {
+                            biggestScore[4] = biggestScore[3]
+                            biggestScore[3] = mas.scoreGetter()
+                            Log.d("gobblet2Com","------------")
+                            Log.d("gobblet2Com","biggestScore[0]:${biggestScore[0]}")
+                            Log.d("gobblet2Com","biggestScore[1]:${biggestScore[1]}")
+                            Log.d("gobblet2Com","biggestScore[2]:${biggestScore[2]}")
+                            Log.d("gobblet2Com","biggestScore[3]:${biggestScore[3]}")
+                            Log.d("gobblet2Com","biggestScore[4]:${biggestScore[4]}")
+                        }
+                    mas.scoreGetter() > biggestScore[4] && mas.scoreGetter() < biggestScore[3] ->
+                        {
+                            biggestScore[4] = mas.scoreGetter()
+                            Log.d("gobblet2Com","------------")
+                            Log.d("gobblet2Com","biggestScore[0]:${biggestScore[0]}")
+                            Log.d("gobblet2Com","biggestScore[1]:${biggestScore[1]}")
+                            Log.d("gobblet2Com","biggestScore[2]:${biggestScore[2]}")
+                            Log.d("gobblet2Com","biggestScore[3]:${biggestScore[3]}")
+                            Log.d("gobblet2Com","biggestScore[4]:${biggestScore[4]}")
+                        }
                 }
             }
         }
 
-        for (i in 0..3){
-            commonFunc(lineAllAtOnce[i])
+        fun addMas(line: Line){
+            for (mas in line.listGetter()){
+                when{
+                    mas.scoreGetter() == biggestScore[0] -> {mostBiggestScoreList.add(mas)}
+                    mas.scoreGetter() == biggestScore[1] -> {secondBiggestScoreList.add(mas)}
+                    mas.scoreGetter() == biggestScore[2] -> {thirdBiggestScoreList.add(mas)}
+                    mas.scoreGetter() == biggestScore[3] -> {fourthBiggestScoreList.add(mas)}
+                    mas.scoreGetter() == biggestScore[4] -> {fifthBiggestScoreList.add(mas)}
+                }
+            }
         }
+
+//        fun commonFunc(line:Line){
+//            for (mas in line.listGetter()){
+//                if (mas.scoreGetter() > biggestScore){ //基準より大きかった場合
+//                    fifthBiggestScore=fourthBiggestScore
+//                    fourthBiggestScore=thirdBiggestScore
+//                    thirdBiggestScore=secondBiggestScore
+//                    secondBiggestScore=biggestScore
+//                    biggestScore = mas.scoreGetter() //基準を設定し直す
+//
+//                    fifthBiggestScoreList.clear()
+//                    fifthBiggestScoreList.addAll(fourthBiggestScoreList) //5番目
+//                    fourthBiggestScoreList.clear()
+//                    fourthBiggestScoreList.addAll(thirdBiggestScoreList) //4番目に上書き
+//                    thirdBiggestScoreList.clear()
+//                    thirdBiggestScoreList.addAll(secondBiggestScoreList) //3番目に上書き
+//                    secondBiggestScoreList.clear()
+//                    secondBiggestScoreList.addAll(mostBiggestScoreList) //2番めに上書き
+//                    mostBiggestScoreList.clear()
+//                    mostBiggestScoreList.add(mas) //一番大きいリストに追加
+//                }
+//
+//                if (mas.scoreGetter() < biggestScore && mas.scoreGetter() < secondBiggestScore ){ //基準より大きかった場合
+//                    fifthBiggestScore=fourthBiggestScore
+//                    fourthBiggestScore=thirdBiggestScore
+//                    thirdBiggestScore=secondBiggestScore
+//                    secondBiggestScore=mas.scoreGetter() //基準を設定し直す
+//
+//                    fifthBiggestScoreList.clear()
+//                    fifthBiggestScoreList.addAll(fourthBiggestScoreList) //5番目
+//                    fourthBiggestScoreList.clear()
+//                    fourthBiggestScoreList.addAll(thirdBiggestScoreList) //4番目に上書き
+//                    thirdBiggestScoreList.clear()
+//                    thirdBiggestScoreList.addAll(secondBiggestScoreList) //3番目に上書き
+//                    secondBiggestScoreList.clear()
+//                    secondBiggestScoreList.add(mas)
+//                }
+//
+//                when{
+//                    mas.scoreGetter() == biggestScore -> {mostBiggestScoreList.add(mas) }//候補リストに追加
+//                    mas.scoreGetter() == secondBiggestScore -> {secondBiggestScoreList.add(mas) }
+//                    mas.scoreGetter() == thirdBiggestScore -> {thirdBiggestScoreList.add(mas) }
+//                    mas.scoreGetter() == fourthBiggestScore -> {fourthBiggestScoreList.add(mas) }
+//                    mas.scoreGetter() == fifthBiggestScore -> {fifthBiggestScoreList.add(mas) }
+//                }
+//            }
+//        }
+
+        for (i in 0..3){
+            setBiggestScore(lineAllAtOnce[i])
+        }
+        for (i in 0..3){
+            addMas(lineAllAtOnce[i])
+        }
+
+        debC()
+        Log.d("gobblet2Com","1番:${biggestScore[0]} -${debmostBiggestScoreList}")
+        Log.d("gobblet2Com","2番:${biggestScore[1]} -${debsecondBiggestScoreList}")
+        Log.d("gobblet2Com","3番:${biggestScore[2]} -${debthirdBiggestScoreList}")
+        Log.d("gobblet2Com","4番:${biggestScore[3]} -${debFourthBiggestScoreList}")
+        Log.d("gobblet2Com","5番:${biggestScore[4]} -${debFifthBiggestScoreList}")
     }
 
     //起き場所を決める
@@ -857,6 +940,8 @@ class Com {
         mostBiggestScoreList.clear()
         secondBiggestScoreList.clear()
         thirdBiggestScoreList.clear()
+        fourthBiggestScoreList.clear()
+        fifthBiggestScoreList.clear()
         blocking=false
         chance=false
     }
@@ -948,7 +1033,8 @@ class Com {
             debComReachList, debhumanReachList,
             debMasInTheGreenBigPiece, debMasInTheGreenMiddlePiece, debMasInTheGreenSmallPiece,
             debMasList,
-            debmostBiggestScoreList, debsecondBiggestScoreList, debthirdBiggestScoreList
+            debmostBiggestScoreList, debsecondBiggestScoreList, debthirdBiggestScoreList,
+            debFourthBiggestScoreList,debFifthBiggestScoreList
             )
 
         val List = mutableListOf(
@@ -956,7 +1042,8 @@ class Com {
             comReachList, humanReachList,
             masInTheGreenBigPiece, masInTheGreenMiddlePiece, masInTheGreenSmallPiece,
             masList,
-            mostBiggestScoreList, secondBiggestScoreList, thirdBiggestScoreList
+            mostBiggestScoreList, secondBiggestScoreList, thirdBiggestScoreList,
+            fourthBiggestScoreList,fifthBiggestScoreList
         )
 
         for (l in debList){
@@ -975,6 +1062,8 @@ class Com {
         for (i in mostBiggestScoreList){debmostBiggestScoreList.add(i.nameGetter())}
         for (i in secondBiggestScoreList){debsecondBiggestScoreList.add(i.nameGetter())}
         for (i in thirdBiggestScoreList){debthirdBiggestScoreList.add(i.nameGetter())}
+        for (i in fourthBiggestScoreList){debFourthBiggestScoreList.add(i.nameGetter())}
+        for (i in fifthBiggestScoreList){debFifthBiggestScoreList.add(i.nameGetter())}
         
     }
 
