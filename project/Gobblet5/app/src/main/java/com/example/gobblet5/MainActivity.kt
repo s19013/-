@@ -95,18 +95,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        Log.d("gobblet2", "keycode:${keyCode} KeyEvent:${event}")
-
-//        if (keyCode==KeyEvent.KEYCODE_CALL
-//                ){ } else{
-//            bgmlooping=false
-//            val intent = Intent(this,BgmService::class.java)
-//            stopService(intent)
-//        }
-        return super.onKeyDown(keyCode, event)
-    }
-
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
         Log.d("gobblet2", "KeyEvent:${event}")
         val code = event?.keyCode
