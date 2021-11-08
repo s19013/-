@@ -69,9 +69,11 @@ class Com {
 
     private var masList:MutableList<Mas> = mutableListOf()
 
-    private var mostBiggestScoreList:MutableList<Mas> = mutableListOf() //一番大きいスコア
+    private var mostBiggestScoreList:MutableList<Mas>   = mutableListOf() //一番大きいスコア
     private var secondBiggestScoreList:MutableList<Mas> = mutableListOf() //二番目
-    private var thirdBiggestScoreList:MutableList<Mas> = mutableListOf() //3番目
+    private var thirdBiggestScoreList:MutableList<Mas>  = mutableListOf() //3番目
+    private var fourthBiggestScoreList:MutableList<Mas> = mutableListOf() //4番目
+    private var fifthBiggestScoreList:MutableList<Mas>  = mutableListOf() //5番目
 
     private var doNotMoveList:MutableList<Mas> = mutableListOf() //動かしては行けないコマを管理
     private var unnecessaryList:MutableList<String> = mutableListOf() //うごかしても問題ないコマを管理
@@ -466,12 +468,18 @@ class Com {
     fun biggestScore(){
         var biggestScore = 0
         var secondBiggestScore = 0
-        var thirdBiggestScore = 0
+        var thirdBiggestScore  = 0
+        var fourthBiggestScore = 0
+        var fifthBiggestScore  = 0
 
         fun commonFunc(line:Line){
             for (mas in line.listGetter()){
                 if (mas.scoreGetter() > biggestScore){ //基準より大きかった場合
                     biggestScore = mas.scoreGetter() //基準を設定し直す
+                    fifthBiggestScoreList.clear()
+                    fifthBiggestScoreList.addAll(fourthBiggestScoreList) //5番目
+                    fourthBiggestScoreList.clear()
+                    fourthBiggestScoreList.addAll(thirdBiggestScoreList) //4番目に上書き
                     thirdBiggestScoreList.clear()
                     thirdBiggestScoreList.addAll(secondBiggestScoreList) //3番目に上書き
                     secondBiggestScoreList.clear()
@@ -525,6 +533,34 @@ class Com {
             while (true){
                 if (errorCount>=thirdBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
                 destination = thirdBiggestScoreList[(0 until thirdBiggestScoreList.size).random()]
+                if (!choosePickup(destination)){
+                    errorCount+=1  //指定した場所におけなかったら他のこうほを探す
+                } else {
+                    success=true
+                    break //おけるなら置く作業に進む
+                }
+            }
+        }
+
+        if (!success){
+            errorCount = 0
+            while (true){
+                if (errorCount>=fourthBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
+                destination = fourthBiggestScoreList[(0 until fourthBiggestScoreList.size).random()]
+                if (!choosePickup(destination)){
+                    errorCount+=1  //指定した場所におけなかったら他のこうほを探す
+                } else {
+                    success=true
+                    break //おけるなら置く作業に進む
+                }
+            }
+        }
+
+        if (!success){
+            errorCount = 0
+            while (true){
+                if (errorCount>=fifthBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
+                destination = fifthBiggestScoreList[(0 until fifthBiggestScoreList.size).random()]
                 if (!choosePickup(destination)){
                     errorCount+=1  //指定した場所におけなかったら他のこうほを探す
                 } else {
