@@ -466,13 +466,7 @@ class Com {
 
     //一番評価値が大きい場所を選ぶ
     fun biggestScore(){
-//        var biggestScore = 0
-//        var secondBiggestScore = 0
-//        var thirdBiggestScore  = 0
-//        var fourthBiggestScore = 0
-//        var fifthBiggestScore  = 0
-
-        var biggestScore = mutableListOf(-300,-300,-300,-300,-300) //[dammy,1番,2番､3番､4番､5番]
+        var biggestScore = mutableListOf(-500,-500,-500,-500,-500) //[dammy,1番,2番､3番､4番､5番]
 
         fun setBiggestScore(line: Line){
             for (mas in line.listGetter()){
@@ -481,55 +475,25 @@ class Com {
                         {
                             for (i in 4 downTo 1){ biggestScore[i] = biggestScore[i-1] }
                             biggestScore[0] = mas.scoreGetter()
-                            Log.d("gobblet2Com","------------")
-                            Log.d("gobblet2Com","biggestScore[0]:${biggestScore[0]}")
-                            Log.d("gobblet2Com","biggestScore[1]:${biggestScore[1]}")
-                            Log.d("gobblet2Com","biggestScore[2]:${biggestScore[2]}")
-                            Log.d("gobblet2Com","biggestScore[3]:${biggestScore[3]}")
-                            Log.d("gobblet2Com","biggestScore[4]:${biggestScore[4]}")
                         }
                     mas.scoreGetter() > biggestScore[1] && mas.scoreGetter() < biggestScore[0] ->
                         {
                             for (i in 4 downTo 2){ biggestScore[i] = biggestScore[i-1] }
                             biggestScore[1] = mas.scoreGetter()
-                            Log.d("gobblet2Com","------------")
-                            Log.d("gobblet2Com","biggestScore[0]:${biggestScore[0]}")
-                            Log.d("gobblet2Com","biggestScore[1]:${biggestScore[1]}")
-                            Log.d("gobblet2Com","biggestScore[2]:${biggestScore[2]}")
-                            Log.d("gobblet2Com","biggestScore[3]:${biggestScore[3]}")
-                            Log.d("gobblet2Com","biggestScore[4]:${biggestScore[4]}")
                         }
                     mas.scoreGetter() > biggestScore[2] && mas.scoreGetter() < biggestScore[1] ->
                         {
                             for (i in 4 downTo 3){ biggestScore[i] = biggestScore[i-1] }
                             biggestScore[2] = mas.scoreGetter()
-                            Log.d("gobblet2Com","------------")
-                            Log.d("gobblet2Com","biggestScore[0]:${biggestScore[0]}")
-                            Log.d("gobblet2Com","biggestScore[1]:${biggestScore[1]}")
-                            Log.d("gobblet2Com","biggestScore[2]:${biggestScore[2]}")
-                            Log.d("gobblet2Com","biggestScore[3]:${biggestScore[3]}")
-                            Log.d("gobblet2Com","biggestScore[4]:${biggestScore[4]}")
                         }
                     mas.scoreGetter() > biggestScore[3] && mas.scoreGetter() < biggestScore[2] ->
                         {
                             biggestScore[4] = biggestScore[3]
                             biggestScore[3] = mas.scoreGetter()
-                            Log.d("gobblet2Com","------------")
-                            Log.d("gobblet2Com","biggestScore[0]:${biggestScore[0]}")
-                            Log.d("gobblet2Com","biggestScore[1]:${biggestScore[1]}")
-                            Log.d("gobblet2Com","biggestScore[2]:${biggestScore[2]}")
-                            Log.d("gobblet2Com","biggestScore[3]:${biggestScore[3]}")
-                            Log.d("gobblet2Com","biggestScore[4]:${biggestScore[4]}")
                         }
                     mas.scoreGetter() > biggestScore[4] && mas.scoreGetter() < biggestScore[3] ->
                         {
                             biggestScore[4] = mas.scoreGetter()
-                            Log.d("gobblet2Com","------------")
-                            Log.d("gobblet2Com","biggestScore[0]:${biggestScore[0]}")
-                            Log.d("gobblet2Com","biggestScore[1]:${biggestScore[1]}")
-                            Log.d("gobblet2Com","biggestScore[2]:${biggestScore[2]}")
-                            Log.d("gobblet2Com","biggestScore[3]:${biggestScore[3]}")
-                            Log.d("gobblet2Com","biggestScore[4]:${biggestScore[4]}")
                         }
                 }
             }
@@ -547,53 +511,6 @@ class Com {
             }
         }
 
-//        fun commonFunc(line:Line){
-//            for (mas in line.listGetter()){
-//                if (mas.scoreGetter() > biggestScore){ //基準より大きかった場合
-//                    fifthBiggestScore=fourthBiggestScore
-//                    fourthBiggestScore=thirdBiggestScore
-//                    thirdBiggestScore=secondBiggestScore
-//                    secondBiggestScore=biggestScore
-//                    biggestScore = mas.scoreGetter() //基準を設定し直す
-//
-//                    fifthBiggestScoreList.clear()
-//                    fifthBiggestScoreList.addAll(fourthBiggestScoreList) //5番目
-//                    fourthBiggestScoreList.clear()
-//                    fourthBiggestScoreList.addAll(thirdBiggestScoreList) //4番目に上書き
-//                    thirdBiggestScoreList.clear()
-//                    thirdBiggestScoreList.addAll(secondBiggestScoreList) //3番目に上書き
-//                    secondBiggestScoreList.clear()
-//                    secondBiggestScoreList.addAll(mostBiggestScoreList) //2番めに上書き
-//                    mostBiggestScoreList.clear()
-//                    mostBiggestScoreList.add(mas) //一番大きいリストに追加
-//                }
-//
-//                if (mas.scoreGetter() < biggestScore && mas.scoreGetter() < secondBiggestScore ){ //基準より大きかった場合
-//                    fifthBiggestScore=fourthBiggestScore
-//                    fourthBiggestScore=thirdBiggestScore
-//                    thirdBiggestScore=secondBiggestScore
-//                    secondBiggestScore=mas.scoreGetter() //基準を設定し直す
-//
-//                    fifthBiggestScoreList.clear()
-//                    fifthBiggestScoreList.addAll(fourthBiggestScoreList) //5番目
-//                    fourthBiggestScoreList.clear()
-//                    fourthBiggestScoreList.addAll(thirdBiggestScoreList) //4番目に上書き
-//                    thirdBiggestScoreList.clear()
-//                    thirdBiggestScoreList.addAll(secondBiggestScoreList) //3番目に上書き
-//                    secondBiggestScoreList.clear()
-//                    secondBiggestScoreList.add(mas)
-//                }
-//
-//                when{
-//                    mas.scoreGetter() == biggestScore -> {mostBiggestScoreList.add(mas) }//候補リストに追加
-//                    mas.scoreGetter() == secondBiggestScore -> {secondBiggestScoreList.add(mas) }
-//                    mas.scoreGetter() == thirdBiggestScore -> {thirdBiggestScoreList.add(mas) }
-//                    mas.scoreGetter() == fourthBiggestScore -> {fourthBiggestScoreList.add(mas) }
-//                    mas.scoreGetter() == fifthBiggestScore -> {fifthBiggestScoreList.add(mas) }
-//                }
-//            }
-//        }
-
         for (i in 0..3){
             setBiggestScore(lineAllAtOnce[i])
         }
@@ -601,12 +518,12 @@ class Com {
             addMas(lineAllAtOnce[i])
         }
 
-        debC()
-        Log.d("gobblet2Com","1番:${biggestScore[0]} -${debmostBiggestScoreList}")
-        Log.d("gobblet2Com","2番:${biggestScore[1]} -${debsecondBiggestScoreList}")
-        Log.d("gobblet2Com","3番:${biggestScore[2]} -${debthirdBiggestScoreList}")
-        Log.d("gobblet2Com","4番:${biggestScore[3]} -${debFourthBiggestScoreList}")
-        Log.d("gobblet2Com","5番:${biggestScore[4]} -${debFifthBiggestScoreList}")
+//        debC()
+//        Log.d("gobblet2Com","1番:${biggestScore[0]} -${debmostBiggestScoreList}")
+//        Log.d("gobblet2Com","2番:${biggestScore[1]} -${debsecondBiggestScoreList}")
+//        Log.d("gobblet2Com","3番:${biggestScore[2]} -${debthirdBiggestScoreList}")
+//        Log.d("gobblet2Com","4番:${biggestScore[3]} -${debFourthBiggestScoreList}")
+//        Log.d("gobblet2Com","5番:${biggestScore[4]} -${debFifthBiggestScoreList}")
     }
 
     //起き場所を決める
@@ -618,68 +535,42 @@ class Com {
             if (errorCount>=mostBiggestScoreList.size){ break } //数回エラーがでたらループを抜ける
             destination = mostBiggestScoreList[(0 until mostBiggestScoreList.size).random()]
             if (!choosePickup(destination)){ errorCount+=1 }//指定した場所におけなかったら他のこうほを探す
-            else {
-                success=true
-                break //おけるなら置く作業に進む
-            }
+            else { return } //おけるなら置く作業に進む
         }
         //一番大きい評価値のマスから選べなかった場合
         //二番目に大きい評価値のマスから選んで行く
-        if (!success){
-            errorCount = 0
-            while (true){
-                if (errorCount>=secondBiggestScoreList.size){ break } //数回エラーがでたらループを抜ける
-                destination = secondBiggestScoreList[(0 until secondBiggestScoreList.size).random()]
-                if (!choosePickup(destination)){
-                    errorCount+=1  //指定した場所におけなかったら他のこうほを探す
-                } else {
-                    success=true
-                    break //おけるなら置く作業に進む
-                }
-            }
+        errorCount = 0
+        while (true){
+            if (errorCount>=secondBiggestScoreList.size){ break } //数回エラーがでたらループを抜ける
+            destination = secondBiggestScoreList[(0 until secondBiggestScoreList.size).random()]
+            if (!choosePickup(destination)){ errorCount+=1 } //指定した場所におけなかったら他のこうほを探す
+            else { return } //おけるなら置く作業に進む
+
         }
         //二番目に大きい評価値のマスから選べなかった場合
         //三番目に大きい評価値のマスから選んで行く
-        if (!success){
-            errorCount = 0
-            while (true){
-                if (errorCount>=thirdBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
-                destination = thirdBiggestScoreList[(0 until thirdBiggestScoreList.size).random()]
-                if (!choosePickup(destination)){
-                    errorCount+=1  //指定した場所におけなかったら他のこうほを探す
-                } else {
-                    success=true
-                    break //おけるなら置く作業に進む
-                }
-            }
+        errorCount = 0
+        while (true){
+            if (errorCount>=thirdBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
+            destination = thirdBiggestScoreList[(0 until thirdBiggestScoreList.size).random()]
+            if (!choosePickup(destination)){ errorCount+=1 }
+            else { return } //おけるなら置く作業に進む
         }
 
-        if (!success){
-            errorCount = 0
-            while (true){
-                if (errorCount>=fourthBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
-                destination = fourthBiggestScoreList[(0 until fourthBiggestScoreList.size).random()]
-                if (!choosePickup(destination)){
-                    errorCount+=1  //指定した場所におけなかったら他のこうほを探す
-                } else {
-                    success=true
-                    break //おけるなら置く作業に進む
-                }
-            }
+        errorCount = 0
+        while (true){
+            if (errorCount>=fourthBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
+            destination = fourthBiggestScoreList[(0 until fourthBiggestScoreList.size).random()]
+            if (!choosePickup(destination)){ errorCount+=1 }
+            else { return } //おけるなら置く作業に進む
         }
 
-        if (!success){
-            errorCount = 0
-            while (true){
-                if (errorCount>=fifthBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
-                destination = fifthBiggestScoreList[(0 until fifthBiggestScoreList.size).random()]
-                if (!choosePickup(destination)){
-                    errorCount+=1  //指定した場所におけなかったら他のこうほを探す
-                } else {
-                    success=true
-                    break //おけるなら置く作業に進む
-                }
-            }
+        errorCount = 0
+        while (true){
+            if (errorCount>=fifthBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
+            destination = fifthBiggestScoreList[(0 until fifthBiggestScoreList.size).random()]
+            if (!choosePickup(destination)){ errorCount+=1 }
+            else { return } //おけるなら置く作業に進む
         }
     }
 
@@ -713,13 +604,13 @@ class Com {
                     }
                 }
                 //空いているなら何でも入れられる
-                //中コマ->大コマ->小コマと探す
+                //中コマ->小コマ->大きいと探す
                 else{
-                    return when {
-                        pickUpMiddlePiece(mas) -> { true }
-                        pickUpBigPiece(mas) -> { true }
-                        else -> { pickUpSmallPiece(mas) }
+                    if (temochiMiddle?.returnCount()!! == 0 && temochiBig?.returnCount()!! == 0){
+                        if (pickUpSmallPiece(mas)){return true}
                     }
+                    if (pickUpMiddlePiece(mas)){return true}
+                    if (pickUpBigPiece(mas)) {return true}
                 }
             }
         }
