@@ -472,10 +472,17 @@ class Com {
         var fourthBiggestScore = 0
         var fifthBiggestScore  = 0
 
+        var scoreList = mutableListOf(mostBiggestScoreList,secondBiggestScoreList,thirdBiggestScoreList,fourthBiggestScoreList,fifthBiggestScoreList)
+
         fun commonFunc(line:Line){
             for (mas in line.listGetter()){
                 if (mas.scoreGetter() > biggestScore){ //基準より大きかった場合
+                    fifthBiggestScore=fourthBiggestScore
+                    fourthBiggestScore=thirdBiggestScore
+                    thirdBiggestScore=secondBiggestScore
+                    secondBiggestScore=biggestScore
                     biggestScore = mas.scoreGetter() //基準を設定し直す
+
                     fifthBiggestScoreList.clear()
                     fifthBiggestScoreList.addAll(fourthBiggestScoreList) //5番目
                     fourthBiggestScoreList.clear()
@@ -486,8 +493,30 @@ class Com {
                     secondBiggestScoreList.addAll(mostBiggestScoreList) //2番めに上書き
                     mostBiggestScoreList.clear()
                     mostBiggestScoreList.add(mas) //一番大きいリストに追加
-                } else if (mas.scoreGetter() == biggestScore){
-                    mostBiggestScoreList.add(mas) //候補リストに追加
+                }
+
+                if (mas.scoreGetter() < biggestScore && mas.scoreGetter() < secondBiggestScore ){ //基準より大きかった場合
+                    fifthBiggestScore=fourthBiggestScore
+                    fourthBiggestScore=thirdBiggestScore
+                    thirdBiggestScore=secondBiggestScore
+                    secondBiggestScore=mas.scoreGetter() //基準を設定し直す
+
+                    fifthBiggestScoreList.clear()
+                    fifthBiggestScoreList.addAll(fourthBiggestScoreList) //5番目
+                    fourthBiggestScoreList.clear()
+                    fourthBiggestScoreList.addAll(thirdBiggestScoreList) //4番目に上書き
+                    thirdBiggestScoreList.clear()
+                    thirdBiggestScoreList.addAll(secondBiggestScoreList) //3番目に上書き
+                    secondBiggestScoreList.clear()
+                    secondBiggestScoreList.add(mas)
+                }
+
+                when{
+                    mas.scoreGetter() == biggestScore -> {mostBiggestScoreList.add(mas) }//候補リストに追加
+                    mas.scoreGetter() == secondBiggestScore -> {secondBiggestScoreList.add(mas) }
+                    mas.scoreGetter() == thirdBiggestScore -> {thirdBiggestScoreList.add(mas) }
+                    mas.scoreGetter() == fourthBiggestScore -> {fourthBiggestScoreList.add(mas) }
+                    mas.scoreGetter() == fifthBiggestScore -> {fifthBiggestScoreList.add(mas) }
                 }
             }
         }
