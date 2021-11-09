@@ -52,9 +52,7 @@ class Com {
     //
     var destination :Mas? = null //移動先
     var movingSource:Any? = null //移動元
-//    var size = 0 //強制的に動かすコマの大きさを決める時に使う
 
-    //var target:Mas? = null //防いだり止めを指すのに使う
     var blocking=false
     var chance = false
 
@@ -118,33 +116,6 @@ class Com {
 
         for (i in 0 until lineAllAtOnce.size){
             commonFunc(lineAllAtOnce[i])
-        }
-    }
-
-    fun UseBigPieceInSpecialCase(line: Line){
-        //手持ちに大きいこまがあったらそれを使う
-        if (temochiBig?.returnCount() != 0){ movingSource=temochiBig }
-        else{
-            //ライン上に無い大きいコマを探す
-            movingSource =findOtherBigPiece(line)
-        }
-    }
-
-    fun UseMiddlePieceInSpecialCase(line: Line){
-        //手持ちに中コマがあったらそれを使う
-        if (temochiMiddle?.returnCount() != 0){ movingSource=temochiMiddle }
-        else{
-            //ライン上に無い中コマを探す
-            movingSource =findOtherMiddlePiece(line)
-        }
-    }
-
-    fun UseSmallPieceInSpecialCase(line: Line){
-        //手持ちに中コマがあったらそれを使う
-        if (temochiSmall?.returnCount() != 0){ movingSource=temochiSmall }
-        else{
-            //ライン上に無い中コマを探す
-            movingSource =findOtherSmallPiece(line)
         }
     }
 
