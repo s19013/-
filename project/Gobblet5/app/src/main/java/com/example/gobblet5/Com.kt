@@ -202,8 +202,7 @@ class Com {
         //細かくしらべて本当にリーチがかかっているかつまだ止めをさせないならばブロックする
         if (humanReachList.isNotEmpty() && !chance){blocking = true}
 
-        Log.d("gobblet2Com","blocking:${blocking}")
-        Log.d("gobblet2Com","chance:${chance}")
+
 
     }
 
@@ -351,7 +350,7 @@ class Com {
 
     //周りををしらべている時に空のコマがあった時の処理
     fun inTheCaseOfEmp(mas:Mas){
-        mas.addScore(30)
+        mas.addScore(10)
 //        Log.d("gobblet2Com","${mas.nameGetter()} add:10")
     }
 
@@ -367,16 +366,13 @@ class Com {
     //周りををしらべている時に相手のコマがあった時の処理
     fun inTheCaseOfP1(size:Int,mas: Mas){
         when(size){
-            smallPiece  ->{ mas.addScore(-10) } //小
-            middlePiece ->{ mas.addScore(-30) } //中
-            bigPiece    ->{ mas.addScore(-50) } //大
+//            smallPiece  ->{ mas.addScore(-10) } //小
+//            middlePiece ->{ mas.addScore(-30) } //中
+            bigPiece    ->{ mas.addScore(-30) } //大
         }
     }
 //-----------------------------
 //配置
-    //
-
-
     //一番評価値が大きい場所を選ぶ
     fun biggestScore(){
         var biggestScore = mutableListOf(-500,-500,-500,-500,-500) //[1番,2番､3番､4番､5番]
@@ -497,19 +493,20 @@ class Com {
             }
             empty -> {
                 //ここではいろんな条件に応じてうごかないと行けない
+                if (chance){
+                    if (pickUpSmallPiece(mas)){ return true } //空だから小さいやつを入れても平気
+                    else if (pickUpMiddlePiece(mas)){return true}
+                    else { return pickUpBigPiece(mas) }
+                }
+
                 if (blocking){
-                    //ブロックまたは2ターン目に大きいコマを使う
-                    if (pickUpBigPiece(mas)){
-                        return true
-                    } else if (pickUpMiddlePiece(mas)){
-                        //どうしても大きいコマが使えない時は中コマ
-                        return true
-                    } else {
-                        return pickUpSmallPiece(mas)
-                    }
+                    //ブロックするときは大きいコマを使う
+                    if (pickUpBigPiece(mas)){ return true }
+                    else if (pickUpMiddlePiece(mas)){ return true } //どうしても大きいコマが使えない時は中コマ
+                    else { return pickUpSmallPiece(mas) } //最悪小さいコマ
                 }
                 //空いているなら何でも入れられる
-                //中コマ->小コマ->大きいと探す
+                //小コマ->中コマ->大きいと探す
                 else{
                     if (temochiMiddle?.returnCount()!! == 0 && temochiBig?.returnCount()!! == 0){
                         if (pickUpSmallPiece(mas)){return true}
@@ -794,6 +791,9 @@ class Com {
         Log.d("gobblet2Com","humanReachList:${debhumanReachList}")
         Log.d("gobblet2Com","DoNotMoveList:${debDoNotMoveList}")
         Log.d("gobblet2Com","debMasInTheGreenBigPiece:${debMasInTheGreenBigPiece}")
+        Log.d("gobblet2Com"," ")
+        Log.d("gobblet2Com","blocking:${blocking}")
+        Log.d("gobblet2Com","chance:${chance}")
         Log.d("gobblet2Com"," ")
         if (movingSource is Mas){
             val m:Mas= movingSource as Mas
