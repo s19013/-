@@ -119,33 +119,37 @@ class Com {
 
         //最後の決めてとなる場所を探す,そしてそこに入れられるかを探す
         fun commonFunc(line:Line){
-            //ここからどのマスがまだ自分のマスでないかを教える?
-            for (i in line.listGetter()){
-                if (i.returnLastElement() != comPiece){
-                    //相手の大きいコマでブロックされている
-                    if (i.funcForDisplay()[1]*i.funcForDisplay()[0] == 3){
-                        comReachList.remove(line)
+            //どのマスがまだ自分のマスでないかを調べる?
+            for (mas in line.listGetter()){
+                if (!mas.OccupiedByTheCom()){ //自分のマスで埋まってない場所を見つけた
+                    //最後のマスが相手の大きいコマでブロックされている場合は諦める
+                    if (mas.funcForDisplay()[1]==humanPiece &&
+                        mas.funcForDisplay()[0] == bigPiece){
+                            comReachList.remove(line)
+                            mas.addScore(-300)
                     }
-                    //すでにすべての大きいコマをそのリーチを作るのに使っていてなおかつ､最後のマスに相手の中コマ以上が入っている
-                    else if (line.use3BigPieceOnTheLine() && i.funcForDisplay()[1]*i.funcForDisplay()[0] > 2){
-                        comReachList.remove(line) //すでにブロックされていたらリストから消す
-                    } else{
-                        target=i//置くべき場所がわかった
+                    //大きいコマがすべて動かさない状態で
+                    //なおかつ､最後のマスに相手の中コマ以上が入っている場合は諦める
+                    else if (line.use3BigPieceOnTheLine() &&
+                        mas.funcForDisplay()[1] == humanPiece &&
+                        mas.funcForDisplay()[0] > 2){ comReachList.remove(line) }
+                    else{
+                        mas.addScore(10000)
                         break
                     }
                 }
             }
 
             //コマをおけば勝てるところに相手の大きいコマがおいてないか調べる
-            if (target != null){
-                //狙っている場所の相手のコマの大きさを調べる
-                when(howBigPiece(target)){
-                    3 -> {
-                        target?.addScore(-300)
-                    } //諦めること指す
-                    else -> {target?.addScore(10000)} //行けることを表す
-                }
-            }
+//            if (target != null){
+//                //狙っている場所の相手のコマの大きさを調べる
+//                when(howBigPiece(target)){
+//                    3 -> {
+//                        target?.addScore(-300)
+//                    } //諦めること指す
+//                    else -> {target?.addScore(10000)} //行けることを表す
+//                }
+//            }
         }
 
         //リストの中身を調べていく
@@ -375,7 +379,7 @@ class Com {
 
     //一番評価値が大きい場所を選ぶ
     fun biggestScore(){
-        var biggestScore = mutableListOf(-500,-500,-500,-500,-500) //[dammy,1番,2番､3番､4番､5番]
+        var biggestScore = mutableListOf(-500,-500,-500,-500,-500) //[1番,2番､3番､4番､5番]
 
         fun setBiggestScore(line: Line){
             for (mas in line.listGetter()){
@@ -420,12 +424,9 @@ class Com {
             }
         }
 
-        for (i in 0..3){
-            setBiggestScore(lineAllAtOnce[i])
-        }
-        for (i in 0..3){
-            addMas(lineAllAtOnce[i])
-        }
+        for (i in 0..3){ setBiggestScore(lineAllAtOnce[i]) }
+
+        for (i in 0..3){ addMas(lineAllAtOnce[i]) }
 
 //        debC()
 //        Log.d("gobblet2Com","1番:${biggestScore[0]} -${debmostBiggestScoreList}")
@@ -437,51 +438,46 @@ class Com {
 
     //起き場所を決める
     fun chooseLocation(){
-        var errorCount =0
-        var success = false
+        fun commonFunc(scoreList:MutableList<Mas>):Boolean{
+            var errorCount = 0
+            while (true){
+                if (errorCount>scoreList.size){ return false } //数回エラーがでたらループを抜ける
+                destination = scoreList[(0 until scoreList.size).random()]
+                if (!choosePickup(destination)){ errorCount+=1 }//指定した場所におけなかったら他のこうほを探す
+                else { return true } //おけるなら置く作業に進む
+            }
+        }
+
         //一番大きい評価値のマスから選んで行く
-        while (true){
-            if (errorCount>=mostBiggestScoreList.size){ break } //数回エラーがでたらループを抜ける
-            destination = mostBiggestScoreList[(0 until mostBiggestScoreList.size).random()]
-            if (!choosePickup(destination)){ errorCount+=1 }//指定した場所におけなかったら他のこうほを探す
-            else { return } //おけるなら置く作業に進む
+        if (commonFunc(mostBiggestScoreList)){
+            Log.d("gobblet2Com","mostBiggest")
+            return
         }
         //一番大きい評価値のマスから選べなかった場合
         //二番目に大きい評価値のマスから選んで行く
-        errorCount = 0
-        while (true){
-            if (errorCount>=secondBiggestScoreList.size){ break } //数回エラーがでたらループを抜ける
-            destination = secondBiggestScoreList[(0 until secondBiggestScoreList.size).random()]
-            if (!choosePickup(destination)){ errorCount+=1 } //指定した場所におけなかったら他のこうほを探す
-            else { return } //おけるなら置く作業に進む
-
+        if (commonFunc(secondBiggestScoreList)){
+            Log.d("gobblet2Com","secondBiggest")
+            return
         }
+
         //二番目に大きい評価値のマスから選べなかった場合
         //三番目に大きい評価値のマスから選んで行く
-        errorCount = 0
-        while (true){
-            if (errorCount>=thirdBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
-            destination = thirdBiggestScoreList[(0 until thirdBiggestScoreList.size).random()]
-            if (!choosePickup(destination)){ errorCount+=1 }
-            else { return } //おけるなら置く作業に進む
+        if (commonFunc(thirdBiggestScoreList)){
+            Log.d("gobblet2Com","thirdBiggest")
+            return
         }
 
-        errorCount = 0
-        while (true){
-            if (errorCount>=fourthBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
-            destination = fourthBiggestScoreList[(0 until fourthBiggestScoreList.size).random()]
-            if (!choosePickup(destination)){ errorCount+=1 }
-            else { return } //おけるなら置く作業に進む
+        if (commonFunc(fourthBiggestScoreList)){
+            Log.d("gobblet2Com","fourthBiggest")
+            return
         }
-
-        errorCount = 0
-        while (true){
-            if (errorCount>=fifthBiggestScoreList.size){ break } //候補がなくなったらループから抜ける
-            destination = fifthBiggestScoreList[(0 until fifthBiggestScoreList.size).random()]
-            if (!choosePickup(destination)){ errorCount+=1 }
-            else { return } //おけるなら置く作業に進む
+        if (commonFunc(fifthBiggestScoreList)){
+            Log.d("gobblet2Com","fifthBiggest")
+            return
         }
     }
+
+
 
     //取り出す場所を決める
     //その前に色々検証?
@@ -524,11 +520,6 @@ class Com {
             }
         }
         return false
-    }
-
-    //大きさを決定する
-    fun chooseASize(){
-
     }
 
     //大コマを取り出す関数
