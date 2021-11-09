@@ -104,24 +104,21 @@ class Com {
 ////リーチ系=------
     //リーチなった列がないか調べる
     fun reachChecker(){
+        fun commonFunc(line: Line){
+            if (line.comPieceCounter()>=3){
+                comReachList.add(line)
+                return
+            }
+
+            if (line.humanPieceCounter()>=3){
+                humanReachList.add(line)
+                return
+            }
+        }
+
         for (i in 0 until lineAllAtOnce.size){
-            counter(lineAllAtOnce[i])
+            commonFunc(lineAllAtOnce[i])
         }
-
-        //もっと情報を細かく調べる
-    }
-
-    fun counter(line: Line){
-        if (line.comPieceCounter()>=3){
-            comReachList.add(line)
-            return
-        }
-
-        if (line.humanPieceCounter()>=3){
-            humanReachList.add(line)
-            return
-        }
-
     }
 
     fun UseBigPieceInSpecialCase(line: Line){
