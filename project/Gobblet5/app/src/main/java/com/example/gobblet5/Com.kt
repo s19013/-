@@ -343,8 +343,9 @@ class Com {
 
 
         //基準のマスに相手のコマが入っていた､もしくは何も入ってなかった場合
+        //後で編集
         fun standardIsP1(){
-            if (standard!!.funcForDisplay()[0] == 3) {return}
+            if (standard!!.funcForDisplay()[0] == bigPiece) {return} //基準が大きいコマだったら飛ばす (どうやってもコマが入らないから)
             for (mas in thisLine){
                 val rv = mas.funcForDisplay()
                 if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
@@ -352,11 +353,15 @@ class Com {
                 //周りの各マスを調べて
                 //基準にしたマスに評価値を入れる
                 when(rv[1]){
-                    empty -> {inTheCaseOfEmp(standard!!)}//なにもはいってなかった時
-                    comPiece -> { inTheCaseOfM1(rv[0],standard!!) }//自分のコマが入っていた場合
+                    empty      -> { inTheCaseOfEmp(standard!!)}//なにもはいってなかった時
+                    comPiece   -> { inTheCaseOfM1(rv[0],standard!!) }//自分のコマが入っていた場合
                     humanPiece -> { inTheCaseOfP1(rv[0],standard!!) }//相手のコマが入っていた場合
                 }
             }
+        }
+
+        fun standardIsEmp(){
+
         }
 
         for (i in 0..3){
@@ -741,25 +746,15 @@ class Com {
 //リセット関係
     fun resetScore(){
         //すべてのマスクラスの評価値を0にする
-        for (l in line1.listGetter()){
-            l.resetScore()
-        }
-        for (l in line2.listGetter()){
-            l.resetScore()
-        }
-        for (l in line3.listGetter()){
-            l.resetScore()
-        }
-        for (l in line4.listGetter()){
-            l.resetScore()
-        }
-
+        for (mas in line1.listGetter()){ mas.resetScore() }
+        for (mas in line2.listGetter()){ mas.resetScore() }
+        for (mas in line3.listGetter()){ mas.resetScore() }
+        for (mas in line4.listGetter()){ mas.resetScore() }
     }
 
     fun resetLists(){
-        for (i in 0..9){
-            judgeList[i] = 0
-        }
+        for (i in 0..9){ judgeList[i] = 0 }
+
         humanReachList.clear()
         comReachList.clear()
         candidateList.clear()
