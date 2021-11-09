@@ -7,75 +7,84 @@ class Mas(private val name:String, private val myValueOfY: Int, private val myVa
     private var list= mutableListOf<Int>(0,0,0) // [小､中､大]
     private var score = 0 //コンピューターが使う評価値みたいなもの
 
+    private val comPiece=-1
+    private val humanPiece = 1
+    private val empty = 0
+
+    private val bigPiece=3
+    private val middlePiece=2
+    private val smallPiece=1
+
     fun nameGetter():String{ return name }
 
     fun scoreGetter():Int{ return score }
 
-    fun myValueOfXGetter():Int{return myValueOfX}
-
-    fun myValueOfYGetter():Int{return myValueOfY}
-
-    fun addScore(arg:Int){ //スコアに引数の値を足す
-        score+=arg
-    }
+    fun addScore(arg:Int){ score+=arg } //スコアに引数の値を足す
 
     fun mPickup(turn:Int):Int{
+
         when(list.lastIndexOf(turn)){
-            0-> if (list[1]==0 && list[2]==0){ return 1}
-            1-> if (list[2]==0){return 2}
-            2-> return 3
-            else-> return 0
+            0-> if (list[1]== empty && list[2]== empty ){ return smallPiece }
+            1-> if (list[2]== empty ){return middlePiece }
+            2-> return bigPiece
+            else-> return empty
         }
-        return 0
+        return empty
     }
 
     fun mInsert(size:Int,turn: Int):Boolean{
         when(size){
-            3->{
-                if (list[2]==0) {list[2]=turn}
-                else return false
+            bigPiece ->
+            {
+                if (list[2] == empty) {
+                    list[2] = turn //指定した場所が空っぽだったら入れる
+                    return true
+                }
             }
-            2->{
-                if (list[2] == 0 && list[1] == 0){ list[1]=turn }
-                else return false
+            middlePiece ->
+            {
+                if (list[2] == empty && list[1] == empty){
+                    list[1] = turn //指定した場所と前のすべてが空っぽだったら入れる
+                    return true
+                }
             }
-            1->{
-                if (list[2] == 0 && list[1] == 0 && list[0] == 0) {list[0]=turn }
-                else return false
+            smallPiece ->
+            {
+                if (list[2] == empty && list[1] == empty && list[0] == empty ) {
+                    list[0] = turn //指定した場所と前のすべてが空っぽだったら入れる
+                    return true
+                }
             }
         }
-        return true
+        return false
     }
 
     fun returnLastElement():Int{
+        //後ろからコマがあるかどうか調べる
+        //とにかくこのマスの中にコマがあるか
         for (i in 2 downTo 0){
-            //後ろからコマがあるかどうか調べる
-            //とにかくこのマスの中にコマがあるか
-            if (list[i]!=0){ return list[i] }
+            if (list[i] != empty){ return list[i] } //最初に見つけた要素を返す
         }
-        return 0 //マスの中に何もなかったら0と返す
+        return empty //マスの中に何もなかったら空っぽと返す
     }
 
-    fun resetList(size: Int){ //取り出して空にする
-        list[size-1]=0
-    }
+    //指定された大きさの部分を取り出して空にする
+    fun resetList(size: Int){list[size-1] = empty}
 
-    fun resetScore(){ //スコアを0に戻す
-        score = 0
-    }
+    //スコアを0に戻す
+    fun resetScore(){ score = 0 }
 
     fun funcForDisplay():MutableList<Int>{
+        //大きさ 小:1 中:2 大:3
+        //1p:1 2p:-1
         for (i in 2 downTo 0){
-            if (list[i]!=0){
+            if (list[i] != empty){
                 return mutableListOf(i+1,list[i]) //[大きさ､1pのか2pのか]
-            } //大きさ 小:1 中:2 大:3
-        } //1p:1 2p:-1
+            }
+        }
         return mutableListOf(0,0)
     }
 
-    //    fun debugDisplay():MutableList<Int>{
-//        return list
-//    }
     fun debugDisplay(){
         Log.d("gobblet2","list:[${list[0]},${list[1]},${list[2]}]")
     }
