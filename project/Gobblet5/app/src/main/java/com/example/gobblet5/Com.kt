@@ -301,10 +301,14 @@ class Com {
 
         //基準のマスに自分のコマが入っていた場合
         fun standardIsM1(){
-            if (line.humanPieceCounter() == 3 && !comReachList.contains(line) ){ //<- なんで!comReachList.contains(line)とかにしているかわすれた
+            if (line.humanPieceCounter() == 3 && !comReachList.contains(line) ){
                 //ライン上は自分以外全部敵のコマだった
                 //基準の自分のコマは相手のリーチをふせいでいる
-                //基準のコマがリーチを作るのに使われていなかったらそのコマを動かさないリストに追加
+                doNotMoveList.add(standard!!)
+            }
+
+            //基準のコマがリーチを作るのに使われていたら動かさないリストに追加
+            if (line.comPieceCounter() == 3 && comReachList.contains(line)){
                 doNotMoveList.add(standard!!)
             }
         }
@@ -538,6 +542,7 @@ class Com {
             } else{
                 Log.d("gobblet2Com","can't pickup")
                 return false} //だめならだめと返す
+
         }
     }
     
