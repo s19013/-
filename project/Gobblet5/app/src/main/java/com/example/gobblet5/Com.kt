@@ -333,17 +333,11 @@ class Com {
 
         //基準のマスに自分のコマが入っていた場合
         fun standardIsM1(){
-            var countP1=0 //相手のコマの数を数える
-            //そのラインの各ますについて調べる
-            for (mas in thisLine){
-                if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
-                if (mas.OccupiedByTheHuman()){ countP1 +=1 } //調べたマスが人間のものだった
-                if (countP1 == 3 && !comReachList.contains(line)){ //<------ここ作りなおし
-                    //ライン上は自分以外全部敵のコマだった
-                    //そのコマは相手のリーチをふせいでいる
-                    //かつリーチがかかってなかったらそのコマを動かさないリストに追加(自分でかいておいてなにいっているかわからない)
-                    doNotMoveList.add(standard!!)
-                }
+            if (line.humanPieceCounter() == 3 && !comReachList.contains(line) ){ //<- なんで!comReachList.contains(line)とかにしているかわすれた
+                //ライン上は自分以外全部敵のコマだった
+                //基準の自分のコマは相手のリーチをふせいでいる
+                //基準のコマがリーチを作るのに使われていなかったらそのコマを動かさないリストに追加
+                doNotMoveList.add(standard!!)
             }
         }
 
@@ -366,8 +360,8 @@ class Com {
         }
 
         for (i in 0..3){
-            standard=line.listGetter()[i]
             //ライン上で一番前のマスから順に基準のマスにしていく
+            standard=line.listGetter()[i]
 
             //基準となったマスに何が入っているかによってすることが違う
             when(standard.funcForDisplay()[1]){
