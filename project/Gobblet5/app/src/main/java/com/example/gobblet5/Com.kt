@@ -49,7 +49,6 @@ class Com {
     private var temochiMiddle:Temochi? = null
     private var temochiSmall:Temochi? = null
 
-    //
     var destination :Mas? = null //移動先
     var movingSource:Any? = null //移動元
 
