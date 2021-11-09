@@ -112,22 +112,16 @@ class Com {
     }
 
     fun counter(line: Line){
-        var countM1 = 0
-        var countP1 = 0
-        for (i in line.listGetter()){ // -1,1の個数をそれぞれ数える
-            when(i.returnLastElement()) {
-                comPiece -> {countM1 += 1}
-                humanPiece -> {countP1 += 1}
-            }
-            if (countM1 >=3){
-                comReachList.add(line)
-                return
-            } //-1 が3つ以上ならcomがリーチ
-            if (countP1 >=3){
-                humanReachList.add(line)
-                return
-            } //1が3つ以上なら敵がリーチ
+        if (line.comPieceCounter()>=3){
+            comReachList.add(line)
+            return
         }
+
+        if (line.humanPieceCounter()>=3){
+            humanReachList.add(line)
+            return
+        }
+
     }
 
     fun UseBigPieceInSpecialCase(line: Line){
