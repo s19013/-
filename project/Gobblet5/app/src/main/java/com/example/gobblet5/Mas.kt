@@ -71,6 +71,16 @@ class Mas(private val name:String, private val myValueOfY: Int, private val myVa
     //指定された大きさの部分を取り出して空にする
     fun resetList(size: Int){list[size-1] = empty}
 
+    //このマスは人間のものか答える
+    fun OccupiedByTheHuman():Boolean{
+       return returnLastElement() == humanPiece
+    }
+
+    //このマスはコンピューターのものか答える
+    fun OccupiedByTheCom():Boolean{
+        return returnLastElement() == comPiece
+    }
+
     //スコアを0に戻す
     fun resetScore(){ score = 0 }
 
