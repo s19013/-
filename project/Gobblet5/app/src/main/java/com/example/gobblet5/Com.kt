@@ -52,7 +52,7 @@ class Com {
     //
     var destination :Mas? = null //移動先
     var movingSource:Any? = null //移動元
-    var size = 0 //強制的に動かすコマの大きさを決める時に使う
+//    var size = 0 //強制的に動かすコマの大きさを決める時に使う
 
     //var target:Mas? = null //防いだり止めを指すのに使う
     var blocking=false
@@ -162,7 +162,7 @@ class Com {
                         comReachList.remove(line)
                     }
                     //すでにすべての大きいコマをそのリーチを作るのに使っていてなおかつ､最後のマスに相手の中コマ以上が入っている
-                    else if (use3BigPieceOnTheLine(line) && i.funcForDisplay()[1]*i.funcForDisplay()[0] > 2){
+                    else if (line.use3BigPieceOnTheLine() && i.funcForDisplay()[1]*i.funcForDisplay()[0] > 2){
                         comReachList.remove(line) //すでにブロックされていたらリストから消す
                     } else{
                         target=i//置くべき場所がわかった
@@ -199,16 +199,14 @@ class Com {
 
         ////どこに入れれば防げるか探す
         fun commonFunc(line:Line){
-            //var target:Mas? = null
-            //ここからどのマスがまだ相手のマスでないかを教える?
-            for (i in line.listGetter()){
-                if (i.returnLastElement() != humanPiece){
-                    //すでに大きいコマでブロックしてあるか調べる
-                    if (i.funcForDisplay()[1]*i.funcForDisplay()[0] == -3){
-                        //すでにブロックしてたらリストから消す
-                        humanReachList.remove(line)
+            //そのライン上で相手のものになっていないマスを探す?
+            for (mas in line.listGetter()){
+                if (!mas.OccupiedByTheHuman()){ //相手のものになってないマスを見つけた
+                    //すでに自分の大きいコマでブロックしてあるか調べる
+                    if (mas.funcForDisplay()[1]*mas.funcForDisplay()[0] == -3){
+                        humanReachList.remove(line) //すでにブロックしてたらリストから消す
                     } else{
-                        target=i//置くべき場所がわかった
+                        target=mas//置くべき場所がわかった
                         break
                     }
                 }
@@ -216,7 +214,7 @@ class Com {
 
             if (target != null){//コマをおけば防げるところに相手のコマがおいてないか調べる
                 when(howBigPiece(target)){
-                    3 -> {
+                    bigPiece -> {
                         target?.addScore(-300)
                     }//諦めること指す
                     else ->{ target?.addScore(800) }
@@ -245,53 +243,7 @@ class Com {
         return mas!!.funcForDisplay()[0]
     }
 
-    //同じライン上で自分の大きいコマを3つ使っているか?
-    fun use3BigPieceOnTheLine(line: Line):Boolean{
-        // true:3つあった
-        //false:それ以外
-        var counter = 0
-        val list = line.listGetter()
-        for (mas in list){
-            if (mas.funcForDisplay()[1] == comPiece && mas.funcForDisplay()[0] == 3){
-                //マスに自分の大きいコマが入っていたら+1
-                counter+=1
-            }
-        }
-        if (counter==3){return true}
-        return false
-    }
 
-    //同じライン上で自分の中コマを3つ使っているか?
-    fun use3MiddlePieceOnTheLine(line: Line):Boolean{
-        // true:3つあった
-        //false:それ以外
-        var counter = 0
-        val list = line.listGetter()
-        for (mas in list){
-            if (mas.funcForDisplay()[1] == comPiece && mas.funcForDisplay()[0] == middlePiece){
-                //マスに自分の中コマが入っていたら+1
-                counter+=1
-            }
-        }
-        if (counter==3){return true}
-        return false
-    }
-
-    //同じライン上で自分の小コマを3つ使っているか?
-    fun use3SmallPieceOnTheLine(line: Line):Boolean{
-        // true:3つあった
-        //false:それ以外
-        var counter = 0
-        val list = line.listGetter()
-        for (mas in list){
-            if (mas.funcForDisplay()[1] == comPiece && mas.funcForDisplay()[0] == smallPiece){
-                //マスに自分の小さいコマが入っていたら+1
-                counter+=1
-            }
-        }
-        if (counter==3){return true}
-        return false
-    }
 
     //ボード上に動かせる大きなコマはないか探す
     fun findOtherBigPiece(line: Line):Mas{
@@ -318,9 +270,9 @@ class Com {
     //マスが空かどうかしらべる
     fun checkEmptyMas() {
         fun commonFunc(line: Line){
-            for (L in line.listGetter()) {
-                if (L.returnLastElement() == 0) {
-                    L.addScore(10) //マスの中が空だったら評価値10を加える
+            for (mas in line.listGetter()) {
+                if (mas.returnLastElement() == 0) {
+                    mas.addScore(10) //マスの中が空だったら評価値10を加える
                 }
             }
         }
@@ -337,21 +289,23 @@ class Com {
         fun commonFunc(line: Line){
             for (mas in line.listGetter()){
                 val rv = mas.funcForDisplay() //帰り値を入れる箱を用意する
+                val size = rv[0] //コマの大きさ
+                val attribute = rv[1] //人間のかコンピューターのか
                 when{
-                    rv[0] == bigPiece && rv[1] == humanPiece -> { mas.addScore(-50) }//相手の大コマが置かれている
-                    rv[0] == middlePiece && rv[1] == humanPiece -> {mas.addScore(-30)}//相手の中コマが置かれている
-                    rv[0] == smallPiece && rv[1] == humanPiece -> {mas.addScore(-20)}//相手の小コマが置かれている
-                    rv[0] == bigPiece && rv[1] == comPiece -> {
+                    size == bigPiece    && attribute == humanPiece -> { mas.addScore(-50) }//相手の大コマが置かれている
+                    size == middlePiece && attribute == humanPiece -> { mas.addScore(-30) }//相手の中コマが置かれている
+                    size == smallPiece  && attribute == humanPiece -> { mas.addScore(-20) }//相手の小コマが置かれている
+                    size == bigPiece    && attribute == comPiece -> {
                         //自分の大コマが置かれている
                         mas.addScore(-50)
                         masInTheGreenBigPiece.add(mas)
                     }
-                    rv[0] == middlePiece && rv[1] == comPiece -> {
+                    size == middlePiece && attribute == comPiece -> {
                         //自分の中コマが置かれている
                         mas.addScore(-5)
                         masInTheGreenMiddlePiece.add(mas)
                     }
-                    rv[0] == smallPiece && rv[1] == comPiece -> {
+                    size == smallPiece && attribute == comPiece -> {
                         //自分の小コマが置かれている
                         masInTheGreenSmallPiece.add(mas)
                         mas.addScore(-10)
@@ -383,7 +337,7 @@ class Com {
             //そのラインの各ますについて調べる
             for (mas in thisLine){
                 if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
-                if (mas.returnLastElement() == humanPiece ){ countP1 +=1 }
+                if (mas.OccupiedByTheHuman()){ countP1 +=1 } //調べたマスが人間のものだった
                 if (countP1 == 3 && !comReachList.contains(line)){ //<------ここ作りなおし
                     //ライン上は自分以外全部敵のコマだった
                     //そのコマは相手のリーチをふせいでいる
