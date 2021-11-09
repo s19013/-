@@ -57,8 +57,6 @@ class Com {
 
     private var turnCount = 0 //自分のターンが回ってきた回数
 
-
-
     //考えるのに使う道具?
     private var masInTheGreenBigPiece:MutableList<Mas> = mutableListOf()   //自分の大コマがどこにあるか把握する
     private var masInTheGreenMiddlePiece:MutableList<Mas> = mutableListOf()//自分の中コマがどこにあるか把握する
@@ -73,15 +71,12 @@ class Com {
     private var fifthBiggestScoreList:MutableList<Mas>  = mutableListOf() //5番目
 
     private var doNotMoveList:MutableList<Mas> = mutableListOf() //動かしては行けないコマを管理
-    private var unnecessaryList:MutableList<String> = mutableListOf() //うごかしても問題ないコマを管理
     private var candidateList:MutableList<Mas> = mutableListOf() //コマを入れる候補を管理するリスト
     private var humanReachList:MutableList<Line> = mutableListOf() //敵にリーチがかかっているラインを管理するリスト
     private var comReachList:MutableList<Line> = mutableListOf() //自分にリーチがかかっているラインを管理するリスト
     private var bord:MutableList<MutableList<Mas>> = mutableListOf() //[縦列][横列]　例:B3 -> [2][1]
     private var lineAllAtOnce:MutableList<Line> = mutableListOf() //すべてのラインクラスに対して色々やる時に使うリスト
     private var judgeList:MutableList<Int> = mutableListOf(0,0,0,0,0,0,0,0,0,0)
-    private var nameList:MutableList<String> = mutableListOf(stringLine1,stringLine2,stringLine3,stringLine4,
-        stringLineA,stringLineB,stringLineC,stringLineD,stringLineS,stringLineBS)
 
     //デバッグ用
     private var debComReachList = mutableListOf<String>()
