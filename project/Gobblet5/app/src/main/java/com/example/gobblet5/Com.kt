@@ -113,14 +113,11 @@ class Com {
             }
         }
 
-        for (i in 0 until lineAllAtOnce.size){
-            commonFunc(lineAllAtOnce[i])
-        }
+        for (i in 0 until lineAllAtOnce.size){ commonFunc(lineAllAtOnce[i]) }
     }
 
     //コンピューターにリーチがかかってないか調べる(止めをさせる場所を探す)
     fun checkCanIcheckmate(){
-        var target:Mas? = null
 
         //最後の決めてとなる場所を探す,そしてそこに入れられるかを探す
         fun commonFunc(line:Line){
@@ -144,17 +141,6 @@ class Com {
                     }
                 }
             }
-
-            //コマをおけば勝てるところに相手の大きいコマがおいてないか調べる
-//            if (target != null){
-//                //狙っている場所の相手のコマの大きさを調べる
-//                when(howBigPiece(target)){
-//                    3 -> {
-//                        target?.addScore(-300)
-//                    } //諦めること指す
-//                    else -> {target?.addScore(10000)} //行けることを表す
-//                }
-//            }
         }
 
         //リストの中身を調べていく
@@ -188,9 +174,7 @@ class Com {
 
             if (target != null){//コマをおけば防げるところに相手のコマがおいてないか調べる
                 when(howBigPiece(target)){
-                    bigPiece -> {
-                        target?.addScore(-300)
-                    }//諦めること指す
+                    bigPiece -> { target?.addScore(-300) }//諦めること指す
                     else ->{ target?.addScore(800) }
                 }
             }
@@ -214,45 +198,8 @@ class Com {
 
     //敵のコマの大きさを調べる
     fun howBigPiece(mas:Mas?):Int{ return mas!!.funcForDisplay()[0] }
-
-    //ボード上に動かせる大きなコマはないか探す
-    fun findOtherBigPiece(line: Line):Mas{
-        val list = line.listGetter()
-        val etc = masInTheGreenBigPiece.minus(list)
-        return etc[0]
-    }
-
-    //ボード上に動かせる中コマはないか探す
-    fun findOtherMiddlePiece(line: Line):Mas{
-        val list = line.listGetter()
-        val etc = masInTheGreenMiddlePiece.minus(list)
-        return etc[0]
-    }
-
-    //ボード上に動かせる小コマはないか探す
-    fun findOtherSmallPiece(line: Line):Mas{
-        val list = line.listGetter()
-        val etc = masInTheGreenSmallPiece.minus(list)
-        return etc[0]
-    }
 ////-----------------------
 //評価値関係?-----------------
-    //マスが空かどうかしらべる
-    fun checkEmptyMas() {
-        fun commonFunc(line: Line){
-            for (mas in line.listGetter()) {
-                if (mas.returnLastElement() == 0) {
-                    mas.addScore(10) //マスの中が空だったら評価値10を加える
-                }
-            }
-        }
-
-        for (i in 0..3){
-            commonFunc(lineAllAtOnce[i])
-        }
-
-    }
-
     //各マスに何が入っているのかしらべて評価値をつける
     //ついでにコンピューターのコマがどこにあるかも調べる
     fun checkWhatIsInTheMas(){
@@ -594,92 +541,6 @@ class Com {
         return false //だめならだめと返す
     }
 
-    //大コマを取り出す関数
-    fun pickUpBigPiece(mas: Mas?):Boolean{
-    //true:取り出せる
-    //false:取り出せない
-        if (temochiBig?.returnCount()!! > 0){
-            movingSource = temochiBig //手持ちからだせるなら手持ちを移動元にする
-            Log.d("gobblet2Com","pickupFromTemochi")
-            return true
-        }
-        
-        when {
-            chance -> { //止めをさせそうな時
-                //差集合を使ってリーチを作っているコマ以外で動かせる大きいコマがあるか調べる
-                val box = masInTheGreenBigPiece.minus(doNotMoveListBecauseItMakeReach)
-                Log.d("gobblet2Com", "boxSize${box.size}")
-                if (box.isNotEmpty()) {
-                    //一つでも動かせるならそれを移動元にする
-                    movingSource = box[(box.indices).random()]
-                    Log.d("gobblet2Com", "pickupFrom${movingSource}")
-                    return true
-                }
-            }
-            blocking -> { //ブロックする必要がある場合
-                //差集合を使って防いでいるコマ以外で動かせる大きいコマがあるか調べる
-                val box = masInTheGreenBigPiece.minus(doNotMoveListBecauseItIsBlocking)
-                Log.d("gobblet2Com", "boxSize${box.size}")
-                if (box.isNotEmpty()) {
-                    //一つでも動かせるならそれを移動元にする
-                    movingSource = box[(box.indices).random()]
-                    Log.d("gobblet2Com", "pickupFrom${movingSource}")
-                    return true
-                }
-            }
-            else ->{
-                //差集合を使って動かせる大きいコマがあるか調べる
-                val box1 = masInTheGreenBigPiece.minus(doNotMoveListBecauseItIsBlocking) //ブロックに使っている
-                val box2 = masInTheGreenBigPiece.minus(doNotMoveListBecauseItMakeReach) //リーチにつかっている
-                val box = box1+box2
-                Log.d("gobblet2Com", "boxSize${box.size}")
-                if (box.isNotEmpty()) {
-                    //一つでも動かせるならそれを移動元にする
-                    movingSource = box[(box.indices).random()]
-                    Log.d("gobblet2Com", "pickupFrom${movingSource}")
-                    return true
-                }
-            }
-
-        }
-        Log.d("gobblet2Com", "can't pickup")
-        return false //だめならだめと返す
-    }
-    
-    //中コマを取り出す関数
-    fun pickUpMiddlePiece(mas: Mas?):Boolean{
-        //true:取り出せる
-        //false:取り出せない
-        if (temochiMiddle?.returnCount()!! > 0){
-            movingSource = temochiMiddle //手持ちからだせるなら手持ちを移動元にする
-            return true
-        } else {
-            val box = masInTheGreenMiddlePiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
-            if (box.isNotEmpty()){
-                //一つでも動かせるならそれを移動元にする
-                movingSource= box[(box.indices).random()]
-                return true
-            } else{return false} //だめならだめと返す
-        }
-    }
-
-    //小さいコマを取り出す関数
-    fun pickUpSmallPiece(mas: Mas?):Boolean{
-        //true:取り出せる
-        //false:取り出せない
-        if (temochiSmall?.returnCount()!! > 0){
-            movingSource = temochiSmall //手持ちからだせるなら手持ちを移動元にする
-            return true
-        } else {
-            val box = masInTheGreenSmallPiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
-            if (box.isNotEmpty()){
-                //一つでも動かせるならそれを移動元にする
-                movingSource= box[(box.indices).random()]
-                return true
-            } else{return false} //だめならだめと返す
-        }
-    }
-
     //最初のターンの定石を実行
     fun firstTurn(){
         while (true){
@@ -720,12 +581,6 @@ class Com {
         }
     }
 
-    //2ターン目の定石
-    fun secondTurn(){
-        movingSource=temochiBig
-
-    }
-
     fun start(){
         turnCount+=1
         //1ターン目
@@ -752,55 +607,9 @@ class Com {
         chooseLocation()
     }
 
-    //リストにスコアをいれていく
-    //最後に大きい順にソート
-    //ソート順だとある程度決まった場所しかとらないので面白くない
-    fun sortMasList(){
-        val comparator:Comparator<Mas> = compareBy<Mas> { it.scoreGetter() }
-        masList.sortWith(comparator)
-        masList.reverse()
-    }
+    fun destinationGetter(): Mas?{ return destination }
 
-    fun judge(){
-        for(i in 0..3){
-            judgeList[0] += bord[0][i].returnLastElement()
-        }
-        for(i in 0..3){
-            judgeList[1] += bord[1][i].returnLastElement()
-        }
-        for(i in 0..3){
-            judgeList[2] += bord[2][i].returnLastElement()
-        }
-        for(i in 0..3){
-            judgeList[3] += bord[3][i].returnLastElement()
-        }
-        for(i in 0..3){
-            judgeList[4] += bord[i][0].returnLastElement()
-        }
-        for(i in 0..3){
-            judgeList[5] += bord[i][1].returnLastElement()
-        }
-        for(i in 0..3){
-            judgeList[6] += bord[i][2].returnLastElement()
-        }
-        for(i in 0..3){
-            judgeList[7] += bord[i][3].returnLastElement()
-        }
-        for(i in 0..3){
-            judgeList[8] += bord[i][3-i].returnLastElement()
-        }
-        for(i in 0..3){
-            judgeList[9] += bord[i][i].returnLastElement()
-        }
-    }
-
-    fun destinationGetter(): Mas?{
-        return destination
-    }
-
-    fun movingSourceGetter():Any?{
-        return movingSource
-    }
+    fun movingSourceGetter():Any?{ return movingSource }
 
 //リセット関係
     fun resetScore(){
@@ -928,15 +737,6 @@ class Com {
             debmostBiggestScoreList, debsecondBiggestScoreList, debthirdBiggestScoreList,
             debFourthBiggestScoreList,debFifthBiggestScoreList
             )
-
-        val List = mutableListOf(
-            candidateList,doNotMoveList,
-            comReachList, humanReachList,
-            masInTheGreenBigPiece, masInTheGreenMiddlePiece, masInTheGreenSmallPiece,
-            masList,
-            mostBiggestScoreList, secondBiggestScoreList, thirdBiggestScoreList,
-            fourthBiggestScoreList,fifthBiggestScoreList
-        )
 
         for (l in debList){ l.clear() }
 
