@@ -71,6 +71,9 @@ class Com {
     private var fifthBiggestScoreList:MutableList<Mas>  = mutableListOf() //5番目
 
     private var doNotMoveList:MutableList<Mas> = mutableListOf() //動かしては行けないコマを管理
+
+    private var doNotMoveListBecauseItIsBlocking:MutableList<Mas> = mutableListOf() //敵のリーチをブロックしているから動かしては行けないコマを管理
+    private var doNotMoveListBecauseItMakeReach:MutableList<Mas> = mutableListOf() //リーチを作っているから動かしては行けないコマを管理
     private var candidateList:MutableList<Mas> = mutableListOf() //コマを入れる候補を管理するリスト
     private var humanReachList:MutableList<Line> = mutableListOf() //敵にリーチがかかっているラインを管理するリスト
     private var comReachList:MutableList<Line> = mutableListOf() //自分にリーチがかかっているラインを管理するリスト
@@ -83,6 +86,8 @@ class Com {
     private var debhumanReachList = mutableListOf<String>()
     private var debCandidateList= mutableListOf<String>()
     private var debDoNotMoveList= mutableListOf<String>()
+    private var debDoNotMoveListBecauseItIsBlocking:MutableList<String> = mutableListOf()
+    private var debDoNotMoveListBecauseItMakeReach:MutableList<String> = mutableListOf()
     private var debMasInTheGreenBigPiece:MutableList<String> = mutableListOf()
     private var debMasInTheGreenMiddlePiece:MutableList<String> = mutableListOf()
     private var debMasInTheGreenSmallPiece:MutableList<String> = mutableListOf()
@@ -128,7 +133,7 @@ class Com {
                             comReachList.remove(line)
                             mas.addScore(-300)
                     }
-                    //大きいコマがすべて動かさない状態で
+                    //大きいコマがすべて動かせない状態で
                     //なおかつ､最後のマスに相手の中コマ以上が入っている場合は諦める
                     else if (line.use3BigPieceOnTheLine() &&
                         mas.funcForDisplay()[1] == humanPiece &&
@@ -200,18 +205,15 @@ class Com {
         Log.d("gobblet2Com","debhumanReachList:${debhumanReachList}")
 
         //細かくしらべて本当にリーチがかかっているかつまだ止めをさせないならばブロックする
-        if (humanReachList.isNotEmpty() && !chance){blocking = true}
+        if (humanReachList.isNotEmpty()){blocking = true}
+                //&& !chance
 
 
 
     }
 
     //敵のコマの大きさを調べる
-    fun howBigPiece(mas:Mas?):Int{
-        return mas!!.funcForDisplay()[0]
-    }
-
-
+    fun howBigPiece(mas:Mas?):Int{ return mas!!.funcForDisplay()[0] }
 
     //ボード上に動かせる大きなコマはないか探す
     fun findOtherBigPiece(line: Line):Mas{
@@ -265,26 +267,24 @@ class Com {
                     size == smallPiece  && attribute == humanPiece -> { mas.addScore(-20) }//相手の小コマが置かれている
                     size == bigPiece    && attribute == comPiece -> {
                         //自分の大コマが置かれている
-                        mas.addScore(-50)
                         masInTheGreenBigPiece.add(mas)
+                        mas.addScore(-50)
                     }
                     size == middlePiece && attribute == comPiece -> {
                         //自分の中コマが置かれている
-                        mas.addScore(-5)
                         masInTheGreenMiddlePiece.add(mas)
+                        //mas.addScore(-5)
                     }
                     size == smallPiece && attribute == comPiece -> {
                         //自分の小コマが置かれている
                         masInTheGreenSmallPiece.add(mas)
-                        mas.addScore(-10)
+                        //mas.addScore(-10)
                     }
                 }
             }
         }
 
-        for (i in 0..3){
-            commonFunc(lineAllAtOnce[i])
-        }
+        for (i in 0..3){ commonFunc(lineAllAtOnce[i]) }
     }
 
     //コマの周りを調べる(今は空白の部分だけ)
@@ -304,12 +304,12 @@ class Com {
             if (line.humanPieceCounter() == 3 && !comReachList.contains(line) ){
                 //ライン上は自分以外全部敵のコマだった
                 //基準の自分のコマは相手のリーチをふせいでいる
-                doNotMoveList.add(standard!!)
+                doNotMoveListBecauseItIsBlocking.add(standard!!) //防いでるコマは動かせない
             }
 
             //基準のコマがリーチを作るのに使われていたら動かさないリストに追加
             if (line.comPieceCounter() == 3 && comReachList.contains(line)){
-                doNotMoveList.add(standard!!)
+                doNotMoveListBecauseItMakeReach.add(standard!!) //リーチを作っているから動かせない
             }
         }
 
@@ -487,40 +487,111 @@ class Com {
             bigPiece ->{return false} //そもそも大きいコマはどうやっても置けないかえら諦める
             middlePiece ->{
                 //中コマなら大きいコマのみおけるから大きいコマを取り出せるか調べる
-                return pickUpBigPiece(mas)
+                return pickUpPiece(bigPiece,mas)
             }
             smallPiece -> {
                 //小さいコマなら中コマか大コマを取り出せるかしらべる
                 //中コマ->大コマと探す
-                if (pickUpMiddlePiece(mas)){ return true }
-                else  { return pickUpBigPiece(mas) }
+                if (pickUpPiece(middlePiece,mas)){ return true }
+                else  { return pickUpPiece(bigPiece,mas) }
             }
             empty -> {
                 //ここではいろんな条件に応じてうごかないと行けない
                 if (chance){
-                    if (pickUpSmallPiece(mas)){ return true } //空だから小さいやつを入れても平気
-                    else if (pickUpMiddlePiece(mas)){return true}
-                    else { return pickUpBigPiece(mas) }
+                    if (pickUpPiece(smallPiece,mas)){ return true } //空だから小さいやつを入れても平気
+                    else if (pickUpPiece(middlePiece,mas)){return true}
+                    else { return pickUpPiece(bigPiece,mas) }
                 }
 
                 if (blocking){
                     //ブロックするときは大きいコマを使う
-                    if (pickUpBigPiece(mas)){ return true }
-                    else if (pickUpMiddlePiece(mas)){ return true } //どうしても大きいコマが使えない時は中コマ
-                    else { return pickUpSmallPiece(mas) } //最悪小さいコマ
+                    if (pickUpPiece(bigPiece,mas)){ return true }
+                    else if (pickUpPiece(middlePiece,mas)){ return true } //どうしても大きいコマが使えない時は中コマ
+                    else { return pickUpPiece(smallPiece,mas) } //最悪小さいコマ
                 }
                 //空いているなら何でも入れられる
                 //小コマ->中コマ->大きいと探す
                 else{
                     if (temochiMiddle?.returnCount()!! == 0 && temochiBig?.returnCount()!! == 0){
-                        if (pickUpSmallPiece(mas)){return true}
+                        if (pickUpPiece(smallPiece,mas)){return true}
                     }
-                    if (pickUpMiddlePiece(mas)){return true}
-                    if (pickUpBigPiece(mas)) {return true}
+                    if (pickUpPiece(middlePiece,mas)){return true}
+                    if (pickUpPiece(bigPiece,mas)) {return true}
                 }
             }
         }
         return false
+    }
+    
+    fun pickUpPiece(size: Int,mas: Mas?):Boolean{
+        var masInTheGreenPiece:MutableList<Mas> = mutableListOf()   
+        when(size){
+            smallPiece  -> {
+                masInTheGreenPiece = masInTheGreenSmallPiece
+                if (temochiSmall?.returnCount()!! > 0){
+                    movingSource = temochiSmall //手持ちからだせるなら手持ちを移動元にする
+                    Log.d("gobblet2Com","pickupFromTemochi")
+                    return true
+                }
+            }
+            middlePiece -> {
+                masInTheGreenPiece = masInTheGreenMiddlePiece
+                if (temochiMiddle?.returnCount()!! > 0){
+                    movingSource = temochiMiddle //手持ちからだせるなら手持ちを移動元にする
+                    Log.d("gobblet2Com","pickupFromTemochi")
+                    return true
+                }
+            }
+            bigPiece    -> {
+                masInTheGreenPiece = masInTheGreenBigPiece
+                if (temochiBig?.returnCount()!! > 0){
+                    movingSource = temochiBig //手持ちからだせるなら手持ちを移動元にする
+                    Log.d("gobblet2Com","pickupFromTemochi")
+                    return true
+                }
+            }
+        }
+
+        when {
+            chance -> { //止めをさせそうな時
+                //差集合を使ってリーチを作っているコマ以外で動かせる大きいコマがあるか調べる
+                val box = masInTheGreenPiece.minus(doNotMoveListBecauseItMakeReach)
+                Log.d("gobblet2Com", "boxSize${box.size}")
+                if (box.isNotEmpty()) {
+                    //一つでも動かせるならそれを移動元にする
+                    movingSource = box[(box.indices).random()]
+                    Log.d("gobblet2Com", "pickupFrom${movingSource}")
+                    return true
+                }
+            }
+            blocking -> { //ブロックする必要がある場合
+                //差集合を使って防いでいるコマ以外で動かせる大きいコマがあるか調べる
+                val box = masInTheGreenPiece.minus(doNotMoveListBecauseItIsBlocking)
+                Log.d("gobblet2Com", "boxSize${box.size}")
+                if (box.isNotEmpty()) {
+                    //一つでも動かせるならそれを移動元にする
+                    movingSource = box[(box.indices).random()]
+                    Log.d("gobblet2Com", "pickupFrom${movingSource}")
+                    return true
+                }
+            }
+            else ->{
+                //差集合を使って動かせる大きいコマがあるか調べる
+                val box1 = masInTheGreenPiece.minus(doNotMoveListBecauseItIsBlocking) //ブロックに使っている
+                val box2 = masInTheGreenPiece.minus(doNotMoveListBecauseItMakeReach) //リーチにつかっている
+                val box = box1+box2
+                Log.d("gobblet2Com", "boxSize${box.size}")
+                if (box.isNotEmpty()) {
+                    //一つでも動かせるならそれを移動元にする
+                    movingSource = box[(box.indices).random()]
+                    Log.d("gobblet2Com", "pickupFrom${movingSource}")
+                    return true
+                }
+            }
+
+        }
+        Log.d("gobblet2Com", "can't pickup")
+        return false //だめならだめと返す
     }
 
     //大コマを取り出す関数
@@ -531,19 +602,48 @@ class Com {
             movingSource = temochiBig //手持ちからだせるなら手持ちを移動元にする
             Log.d("gobblet2Com","pickupFromTemochi")
             return true
-        } else {
-            val box = masInTheGreenBigPiece.minus(doNotMoveList) //差集合を使って動かせる大きいコマがあるか調べる
-            Log.d("gobblet2Com","boxSize${box.size}")
-            if (box.isNotEmpty()){
-                //一つでも動かせるならそれを移動元にする
-                movingSource= box[(box.indices).random()]
-                Log.d("gobblet2Com","pickupFrom${movingSource}")
-                return true
-            } else{
-                Log.d("gobblet2Com","can't pickup")
-                return false} //だめならだめと返す
+        }
+        
+        when {
+            chance -> { //止めをさせそうな時
+                //差集合を使ってリーチを作っているコマ以外で動かせる大きいコマがあるか調べる
+                val box = masInTheGreenBigPiece.minus(doNotMoveListBecauseItMakeReach)
+                Log.d("gobblet2Com", "boxSize${box.size}")
+                if (box.isNotEmpty()) {
+                    //一つでも動かせるならそれを移動元にする
+                    movingSource = box[(box.indices).random()]
+                    Log.d("gobblet2Com", "pickupFrom${movingSource}")
+                    return true
+                }
+            }
+            blocking -> { //ブロックする必要がある場合
+                //差集合を使って防いでいるコマ以外で動かせる大きいコマがあるか調べる
+                val box = masInTheGreenBigPiece.minus(doNotMoveListBecauseItIsBlocking)
+                Log.d("gobblet2Com", "boxSize${box.size}")
+                if (box.isNotEmpty()) {
+                    //一つでも動かせるならそれを移動元にする
+                    movingSource = box[(box.indices).random()]
+                    Log.d("gobblet2Com", "pickupFrom${movingSource}")
+                    return true
+                }
+            }
+            else ->{
+                //差集合を使って動かせる大きいコマがあるか調べる
+                val box1 = masInTheGreenBigPiece.minus(doNotMoveListBecauseItIsBlocking) //ブロックに使っている
+                val box2 = masInTheGreenBigPiece.minus(doNotMoveListBecauseItMakeReach) //リーチにつかっている
+                val box = box1+box2
+                Log.d("gobblet2Com", "boxSize${box.size}")
+                if (box.isNotEmpty()) {
+                    //一つでも動かせるならそれを移動元にする
+                    movingSource = box[(box.indices).random()]
+                    Log.d("gobblet2Com", "pickupFrom${movingSource}")
+                    return true
+                }
+            }
 
         }
+        Log.d("gobblet2Com", "can't pickup")
+        return false //だめならだめと返す
     }
     
     //中コマを取り出す関数
@@ -583,6 +683,7 @@ class Com {
     //最初のターンの定石を実行
     fun firstTurn(){
         while (true){
+            movingSource= temochiBig
             val randomNum = (0..3).random()
             when(randomNum){
                 0 ->{
@@ -616,9 +717,7 @@ class Com {
             }
             //すでにプレイヤーがコマをおいていたらやり直し
             //空いているところを見つけるまでずっと探す
-
         }
-        movingSource= temochiBig
     }
 
     //2ターン目の定石
@@ -638,7 +737,7 @@ class Com {
         //自分にリーチがかかっていた
         if (comReachList.isNotEmpty()){ checkCanIcheckmate() }
         //相手にリーチがかかっていた
-        if (humanReachList.isNotEmpty()){ checkCanIBlockCheckmate() }
+        if (humanReachList.isNotEmpty()){ checkCanIBlockCheckmate()}
 
         standardProcessing()
     }
@@ -647,6 +746,8 @@ class Com {
     fun standardProcessing(){
         checkWhatIsInTheMas()
         checkEachMas()
+        doNotMoveList.addAll(doNotMoveListBecauseItMakeReach)
+        doNotMoveList.addAll(doNotMoveListBecauseItIsBlocking)
         biggestScore()
         chooseLocation()
     }
@@ -725,6 +826,8 @@ class Com {
         thirdBiggestScoreList.clear()
         fourthBiggestScoreList.clear()
         fifthBiggestScoreList.clear()
+        doNotMoveListBecauseItIsBlocking.clear()
+        doNotMoveListBecauseItMakeReach.clear()
         blocking=false
         chance=false
     }
@@ -795,6 +898,8 @@ class Com {
         Log.d("gobblet2Com","comReachList:${debComReachList}")
         Log.d("gobblet2Com","humanReachList:${debhumanReachList}")
         Log.d("gobblet2Com","DoNotMoveList:${debDoNotMoveList}")
+        Log.d("gobblet2Com","debDoNotMoveListBecauseItMakeReach:${debDoNotMoveListBecauseItMakeReach}")
+        Log.d("gobblet2Com","debDoNotMoveListBecauseItIsBlocking:${debDoNotMoveListBecauseItIsBlocking}")
         Log.d("gobblet2Com","debMasInTheGreenBigPiece:${debMasInTheGreenBigPiece}")
         Log.d("gobblet2Com"," ")
         Log.d("gobblet2Com","blocking:${blocking}")
@@ -816,6 +921,7 @@ class Com {
     fun debC(){
         val debList = mutableListOf(
             debCandidateList,debDoNotMoveList,
+            debDoNotMoveListBecauseItIsBlocking,debDoNotMoveListBecauseItMakeReach,
             debComReachList, debhumanReachList,
             debMasInTheGreenBigPiece, debMasInTheGreenMiddlePiece, debMasInTheGreenSmallPiece,
             debMasList,
@@ -832,12 +938,12 @@ class Com {
             fourthBiggestScoreList,fifthBiggestScoreList
         )
 
-        for (l in debList){
-            l.clear()
-        }
+        for (l in debList){ l.clear() }
 
         for (i in candidateList){ debCandidateList.add(i.nameGetter()) }
         for (i in doNotMoveList){ debDoNotMoveList.add(i.nameGetter()) }
+        for (i in doNotMoveListBecauseItMakeReach){debDoNotMoveListBecauseItMakeReach.add(i.nameGetter()) }
+        for (i in doNotMoveListBecauseItIsBlocking){debDoNotMoveListBecauseItIsBlocking.add(i.nameGetter()) }
         for (i in comReachList){ debComReachList.add(i.nameGetter()) }
         for (i in humanReachList){ debhumanReachList.add(i.nameGetter()) }
         for (i in masInTheGreenBigPiece){ debMasInTheGreenBigPiece.add(i.nameGetter()) }
@@ -860,9 +966,7 @@ class Com {
         Log.d("gobblet2Com","[${bord[3][0].nameGetter()},${bord[3][1].nameGetter()},${bord[3][2].nameGetter()},${bord[3][3].nameGetter()}]")
     }
 
-    fun deblist(){
-        Log.d("gobblet2Com","[]")
-    }
+    fun deblist(){ Log.d("gobblet2Com","[]") }
 
 }
 
