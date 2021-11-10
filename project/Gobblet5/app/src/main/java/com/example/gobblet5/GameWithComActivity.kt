@@ -40,9 +40,7 @@ class GameWithComActivity : GameBaseClass() {
         buttonTemochiRedBig!!.setOnClickListener {
             if (turn == 1){
                 //movingSourceが同じときやり直しができる
-                if (movingSource == stringTemochiRedBig){
-                    resetTemochi()
-                }
+                if (movingSource == stringTemochiRedBig){ resetTemochi() }
                 //移動元が手持ちの場合のみコマを
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedMiddle||
@@ -55,9 +53,7 @@ class GameWithComActivity : GameBaseClass() {
 
         buttonTemochiRedMiddle!!.setOnClickListener {
             if (turn == 1){
-                if (movingSource==stringTemochiRedMiddle){
-                    resetTemochi()
-                }
+                if (movingSource==stringTemochiRedMiddle){ resetTemochi() }
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
                     movingSource==stringTemochiRedSmall){
@@ -69,9 +65,7 @@ class GameWithComActivity : GameBaseClass() {
 
         buttonTemochiRedSmall!!.setOnClickListener {
             if (turn == 1){
-                if (movingSource==stringTemochiRedSmall){
-                    resetTemochi()
-                }
+                if (movingSource==stringTemochiRedSmall){ resetTemochi() }
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
                     movingSource==stringTemochiRedMiddle){
@@ -84,9 +78,7 @@ class GameWithComActivity : GameBaseClass() {
         //2p手持ち
         buttonTemochiGreenBig!!.setOnClickListener {
             if (turn == -1){
-                if (movingSource==stringTemochiGreenBig){
-                    resetTemochi()
-                }
+                if (movingSource==stringTemochiGreenBig){ resetTemochi() }
                 else if (movingSource== null ||
                     movingSource==stringTemochiGreenMiddle||
                     movingSource==stringTemochiGreenSmall) {
@@ -98,9 +90,7 @@ class GameWithComActivity : GameBaseClass() {
 
         buttonTemochiGreenMiddle!!.setOnClickListener {
             if (turn == -1){
-                if (movingSource==stringTemochiGreenMiddle){
-                    resetTemochi()
-                }
+                if (movingSource==stringTemochiGreenMiddle){ resetTemochi() }
                 else if (movingSource== null ||
                     movingSource==stringTemochiGreenBig ||
                     movingSource==stringTemochiGreenSmall){
@@ -112,14 +102,10 @@ class GameWithComActivity : GameBaseClass() {
 
         buttonTemochiGreenSmall!!.setOnClickListener {
             if (turn == -1){
-                if (movingSource==stringTemochiGreenSmall){
-                    resetTemochi()
-                }
+                if (movingSource==stringTemochiGreenSmall){ resetTemochi() }
                 else if (movingSource==null||
                     movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenMiddle){
-                    pickupTemochi(temochiGreenSmall)
-                }
+                    movingSource==stringTemochiGreenMiddle){ pickupTemochi(temochiGreenSmall) }
             }
             else{toastNotYourTurn()}
         }
@@ -248,29 +234,18 @@ class GameWithComActivity : GameBaseClass() {
         handler.post(insertTimer)
         com.debScore()
         resetCom()
-
-
-
     }
 
     fun pickUpCom(){
         val rv = com.movingSourceGetter()
 
         when{
-            //移動元がマスだった場合
-            rv is Mas     -> {
-                pushedMasButton(rv)
-            }
-            //移動元が手持ちだった場合
-            rv is Temochi -> {
-                pickupTemochi(rv)
-            }
+            rv is Mas     -> { pushedMasButton(rv) } //移動元がマスだった場合
+            rv is Temochi -> { pickupTemochi(rv) } //移動元が手持ちだった場合
         }
     }
 
-    fun insertCom(){
-        pushedMasButton(com.destinationGetter()!!)
-    }
+    fun insertCom(){ pushedMasButton(com.destinationGetter()!!) }
 
     fun resetCom(){
         com.resetScore()
@@ -334,9 +309,7 @@ class GameWithComActivity : GameBaseClass() {
     //タイマー再開
     override fun onResume() {
         super.onResume()
-        when (nowDoingTimerID){
-            insertTimerId -> handler.post(insertTimer)
-        }
+        when (nowDoingTimerID){insertTimerId -> handler.post(insertTimer) }
     }
 
     //タイマーを止める
