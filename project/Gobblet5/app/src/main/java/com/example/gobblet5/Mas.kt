@@ -3,7 +3,12 @@ package com.example.gobblet5
 import android.util.Log
 
 
-class Mas(private val name:String, private val myValueOfY: Int, private val myValueOfX: Int) {
+class Mas(
+    private val name:String,
+    private var attributeVertical:Line? = null, //縦に交わるライン
+    private var attributeHorizontal:Line? = null,//横に交わるライン
+    private var attributeDiagonal:Line? =null //斜めに交わるライン
+    ) {
     private var list= mutableListOf<Int>(0,0,0) // [小､中､大]
     private var score = 0 //コンピューターが使う評価値みたいなもの
 
@@ -14,6 +19,15 @@ class Mas(private val name:String, private val myValueOfY: Int, private val myVa
     private val bigPiece=3
     private val middlePiece=2
     private val smallPiece=1
+
+    fun attributeVerticalSetter(line: Line){this.attributeVertical=line }
+    fun attributeHorizontalSetter(line: Line){this.attributeHorizontal=line }
+    fun attributeDiagonalSetter(line: Line){this.attributeDiagonal=line }
+
+    fun attributeVerticalGetter():Line?{ return attributeVertical }
+    fun attributeHorizontalGetter():Line?{ return attributeHorizontal  }
+    fun attributeDiagonalGetter():Line?{return attributeDiagonal}
+
 
     fun nameGetter():String{ return name }
 
