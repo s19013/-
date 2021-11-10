@@ -12,17 +12,11 @@ class Line(private val name:String) {
     private val middlePiece=2
     private val smallPiece=1
 
-    fun nameGetter():String{
-        return name
-    }
+    fun nameGetter():String{ return name }
 
-    fun listSetter(mutableList: MutableList<Mas>){
-        this.list = mutableList
-    }
+    fun listSetter(mutableList: MutableList<Mas>){ this.list = mutableList }
 
-    fun listGetter():MutableList<Mas>{
-        return list
-    }
+    fun listGetter():MutableList<Mas>{ return list }
 
     //ライン上にあるコンピューターのコマの数を数える
     fun comPieceCounter():Int{
