@@ -1,25 +1,9 @@
 package com.example.gobblet5
 
-import android.annotation.SuppressLint
-import android.content.Intent
-import android.content.SharedPreferences
-import android.content.res.Resources
 import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.media.AudioAttributes
-import android.media.MediaPlayer
-import android.media.SoundPool
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
-import android.view.Gravity
-import android.view.View
-import android.widget.*
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_game_with_man.*
-import java.util.*
 
 
 class GameWithManActivity : GameBaseClass() {
