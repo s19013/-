@@ -191,9 +191,6 @@ class Com {
         //細かくしらべて本当にリーチがかかっているかつまだ止めをさせないならばブロックする
         if (humanReachList.isNotEmpty()){blocking = true}
                 //&& !chance
-
-
-
     }
 
     //敵のコマの大きさを調べる
