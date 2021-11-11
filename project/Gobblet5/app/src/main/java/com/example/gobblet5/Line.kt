@@ -22,9 +22,7 @@ class Line(private val name:String) {
     fun comPieceCounter():Int{
         var counter=0
         for (mas in list){
-            if (mas.returnLastElement()==comPiece){
-                counter+=1
-            }
+            if (mas.returnLastElement()==comPiece){ counter+=1 }
         }
         return counter
     }
@@ -33,9 +31,7 @@ class Line(private val name:String) {
     fun humanPieceCounter():Int{
         var counter=0
         for (mas in list){
-            if (mas.returnLastElement()==humanPiece){
-                counter+=1
-            }
+            if (mas.returnLastElement()==humanPiece){ counter+=1 }
         }
         return counter
     }

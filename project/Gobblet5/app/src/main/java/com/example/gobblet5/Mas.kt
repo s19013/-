@@ -3,30 +3,17 @@ package com.example.gobblet5
 import android.util.Log
 
 
-class Mas(
-    private val name:String,
-    private var attributeVertical:Line? = null, //縦に交わるライン
-    private var attributeHorizontal:Line? = null,//横に交わるライン
-    private var attributeDiagonal:Line? =null //斜めに交わるライン
-    ) {
+class Mas(private val name:String, ) {
     private var list= mutableListOf<Int>(0,0,0) // [小､中､大]
     private var score = 0 //コンピューターが使う評価値みたいなもの
 
-    private val comPiece=-1
-    private val humanPiece = 1
+    private val humanPiece =  1
+    private val comPiece   = -1
     private val empty = 0
 
-    private val bigPiece=3
-    private val middlePiece=2
-    private val smallPiece=1
-
-    fun attributeVerticalSetter(line: Line){this.attributeVertical=line }
-    fun attributeHorizontalSetter(line: Line){this.attributeHorizontal=line }
-    fun attributeDiagonalSetter(line: Line){this.attributeDiagonal=line }
-
-    fun attributeVerticalGetter():Line?{ return attributeVertical }
-    fun attributeHorizontalGetter():Line?{ return attributeHorizontal  }
-    fun attributeDiagonalGetter():Line?{return attributeDiagonal}
+    private val bigPiece   = 3
+    private val middlePiece= 2
+    private val smallPiece = 1
 
 
     fun nameGetter():String{ return name }
@@ -86,14 +73,10 @@ class Mas(
     fun resetList(size: Int){list[size-1] = empty}
 
     //このマスは人間のものか答える
-    fun OccupiedByTheHuman():Boolean{
-       return returnLastElement() == humanPiece
-    }
+    fun OccupiedByTheHuman():Boolean{ return returnLastElement() == humanPiece }
 
     //このマスはコンピューターのものか答える
-    fun OccupiedByTheCom():Boolean{
-        return returnLastElement() == comPiece
-    }
+    fun OccupiedByTheCom():Boolean{ return returnLastElement() == comPiece }
 
     //スコアを0に戻す
     fun resetScore(){ score = 0 }
@@ -102,9 +85,7 @@ class Mas(
         //大きさ 小:1 中:2 大:3
         //1p:1 2p:-1
         for (i in 2 downTo 0){
-            if (list[i] != empty){
-                return mutableListOf(i+1,list[i]) //[大きさ､1pのか2pのか]
-            }
+            if (list[i] != empty){ return mutableListOf(i+1,list[i]) } //[大きさ､1pのか2pのか]
         }
         return mutableListOf(0,0)
     }
