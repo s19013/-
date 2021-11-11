@@ -102,19 +102,14 @@ class Com {
 ////リーチ系=------
     //リーチなった列がないか調べる
     fun reachChecker(){
-        fun commonFunc(line: Line){
+        for (line in lineAllAtOnce){
             if (line.comPieceCounter()>=3){
                 comReachList.add(line)
                 return
             }
 
-            if (line.humanPieceCounter()>=3){
-                humanReachList.add(line)
-                return
-            }
+            if (line.humanPieceCounter()>=3){ humanReachList.add(line) }
         }
-
-        for (i in 0 until lineAllAtOnce.size){ commonFunc(lineAllAtOnce[i]) }
     }
 
     //コンピューターにリーチがかかってないか調べる(止めをさせる場所を探す)
@@ -124,18 +119,18 @@ class Com {
         fun commonFunc(line:Line){
             //どのマスがまだ自分のマスでないかを調べる?
             for (mas in line.listGetter()){
+                val size = mas.funcForDisplay()[0] //コマの大きさ
+                val attribute = mas.funcForDisplay()[1] //人間のかコンピューターのか
                 if (!mas.OccupiedByTheCom()){ //自分のマスで埋まってない場所を見つけた
                     //最後のマスが相手の大きいコマでブロックされている場合は諦める
-                    if (mas.funcForDisplay()[1]==humanPiece &&
-                        mas.funcForDisplay()[0] == bigPiece){
+                    if (attribute==humanPiece && size == bigPiece){
                             comReachList.remove(line)
                             mas.addScore(-300)
                     }
                     //大きいコマがすべて動かせない状態で
                     //なおかつ､最後のマスに相手の中コマ以上が入っている場合は諦める
                     else if (line.use3BigPieceOnTheLine() &&
-                        mas.funcForDisplay()[1] == humanPiece &&
-                        mas.funcForDisplay()[0] > 2){
+                        attribute == humanPiece && size > 2){
                             comReachList.remove(line)
                             mas.addScore(-300)
                     }
@@ -158,28 +153,19 @@ class Com {
 
     //人間にリーチがかかってないか調べる(相手の勝利を阻止する)
     fun checkCanIBlockCheckmate(){
-        //場合によってはblockingを解除する必要がある
-        var target:Mas? = null
-
         ////どこに入れれば防げるか探す
         fun commonFunc(line:Line){
             //そのライン上で相手のものになっていないマスを探す?
             for (mas in line.listGetter()){
+                val size = mas.funcForDisplay()[0] //コマの大きさ
+                val attribute = mas.funcForDisplay()[1] //人間のかコンピューターのか
                 if (!mas.OccupiedByTheHuman()){ //相手のものになってないマスを見つけた
                     //すでに自分の大きいコマでブロックしてあるか調べる
-                    if (mas.funcForDisplay()[1]*mas.funcForDisplay()[0] == -3){
-                        humanReachList.remove(line) //すでにブロックしてたらリストから消す
-                    } else{
-                        target=mas//置くべき場所がわかった
+                    if (attribute * size == -3){ humanReachList.remove(line) }//すでにブロックしてたらリストから消す
+                    else{
+                        if (size == bigPiece){ mas.addScore(-300) } //コマをおけば防げるところに相手の大きいコマがおいてないあったら諦める
                         break
                     }
-                }
-            }
-
-            if (target != null){//コマをおけば防げるところに相手のコマがおいてないか調べる
-                when(howBigPiece(target)){
-                    bigPiece -> { target?.addScore(-300) }//諦めること指す
-                    //else ->{ target?.addScore(300) }//800
                 }
             }
         }
@@ -194,7 +180,6 @@ class Com {
 
         //細かくしらべて本当にリーチがかかっているかつまだ止めをさせないならばブロックする
         if (humanReachList.isNotEmpty()){blocking = true}
-                //&& !chance
     }
 
     //敵のコマの大きさを調べる
@@ -206,28 +191,17 @@ class Com {
     fun checkWhatIsInTheMas(){
         fun commonFunc(line: Line){
             for (mas in line.listGetter()){
-                val rv = mas.funcForDisplay() //帰り値を入れる箱を用意する
-                val size = rv[0] //コマの大きさ
-                val attribute = rv[1] //人間のかコンピューターのか
+                val size = mas.funcForDisplay()[0] //コマの大きさ
+                val attribute = mas.funcForDisplay()[1] //人間のかコンピューターのか
                 when{
                     size == bigPiece    && attribute == humanPiece -> { mas.addScore(-300) }//相手の大コマが置かれている
-                    //size == middlePiece && attribute == humanPiece -> { mas.addScore(-30) }//相手の中コマが置かれている
-                    //size == smallPiece  && attribute == humanPiece -> { mas.addScore(-20) }//相手の小コマが置かれている
                     size == bigPiece    && attribute == comPiece -> {
                         //自分の大コマが置かれている
                         masInTheGreenBigPiece.add(mas)
                         mas.addScore(-300)
                     }
-                    size == middlePiece && attribute == comPiece -> {
-                        //自分の中コマが置かれている
-                        masInTheGreenMiddlePiece.add(mas)
-                        //mas.addScore(-5)
-                    }
-                    size == smallPiece && attribute == comPiece -> {
-                        //自分の小コマが置かれている
-                        masInTheGreenSmallPiece.add(mas)
-                        //mas.addScore(-10)
-                    }
+                    size == middlePiece && attribute == comPiece -> { masInTheGreenMiddlePiece.add(mas) } //自分の中コマが置かれている
+                    size == smallPiece && attribute == comPiece -> { masInTheGreenSmallPiece.add(mas) } //自分の小コマが置かれている
                 }
             }
         }
@@ -237,9 +211,7 @@ class Com {
 
     //コマの周りを調べる(今は空白の部分だけ)
     fun checkEachMas(){
-        for (line in lineAllAtOnce){
-            funcForCheckEachMas(line)
-        }
+        for (line in lineAllAtOnce){ funcForCheckEachMas(line) }
     }
 
     //ラインごとに分けて各マスに評価値を入れる
@@ -266,24 +238,18 @@ class Com {
         //後で編集
         fun standardIsP1(){
             if (standard!!.funcForDisplay()[0] == bigPiece) {return} //基準が大きいコマだったら飛ばす (どうやってもコマが入らないから)
-            if (humanReachList.contains(line)) { //ここでコマを置いたら相手のリーチを防げる場合､基準のマスに評価値を追加
-                standard?.addScore(200)
-//                when(standard?.funcForDisplay()!![0]){
-//                    empty -> {standard?.addScore(300)}
-//                    smallPiece -> {standard?.addScore(300)}
-//                    middlePiece -> {standard?.addScore(300)}
-//                }
-            }
+            if (humanReachList.contains(line)) { standard?.addScore(200) } //ここでコマを置いたら相手のリーチを防げる場合､基準のマスに評価値を追加
                 for (mas in linesList){
-                    val rv = mas.funcForDisplay()
+                    val size = mas.funcForDisplay()[0] //コマの大きさ
+                    val attribute = mas.funcForDisplay()[1] //人間のかコンピューターのか
                     if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
 
                     //周りの各マスを調べて
                     //基準にしたマスに評価値を入れる
-                    when(rv[1]){
+                    when(attribute){
                         empty      -> { inTheCaseOfEmp(standard!!)}//なにもはいってなかった時
-                        comPiece   -> { inTheCaseOfM1(rv[0],standard!!) }//自分のコマが入っていた場合
-                        humanPiece -> { inTheCaseOfP1(rv[0],standard!!) }//相手のコマが入っていた場合
+                        comPiece   -> { inTheCaseOfM1(size,standard!!) }//自分のコマが入っていた場合
+                        humanPiece -> { inTheCaseOfP1(size,standard!!) }//相手のコマが入っていた場合
                     }
                 }
         }
@@ -310,10 +276,7 @@ class Com {
     }
 
     //周りををしらべている時に空のコマがあった時の処理
-    fun inTheCaseOfEmp(mas:Mas){
-        mas.addScore(10)
-//        Log.d("gobblet2Com","${mas.nameGetter()} add:10")
-    }
+    fun inTheCaseOfEmp(mas:Mas){ mas.addScore(10) }
 
     //周りををしらべている時に自分のコマがあった時の処理
     //大きさの差を減らそうかな?
@@ -328,8 +291,6 @@ class Com {
     //周りををしらべている時に相手のコマがあった時の処理
     fun inTheCaseOfP1(size:Int,mas: Mas){
         when(size){
-//            smallPiece  ->{ mas.addScore(-10) } //小
-//            middlePiece ->{ mas.addScore(-30) } //中
             bigPiece    ->{ mas.addScore(-5) } //大
         }
     }
@@ -342,8 +303,9 @@ class Com {
         fun setBiggestScore(line: Line){
             for (mas in line.listGetter()){
                 when{
-                    mas.scoreGetter() > biggestScore[0] ->
+                    mas.scoreGetter() > biggestScore[0] -> //基準の一番大きい評価値よりも大きい値を見つけた
                         {
+                            //基準の評価値たちを設定し直す
                             for (i in 4 downTo 1){ biggestScore[i] = biggestScore[i-1] }
                             biggestScore[0] = mas.scoreGetter()
                         }
@@ -363,9 +325,7 @@ class Com {
                             biggestScore[3] = mas.scoreGetter()
                         }
                     mas.scoreGetter() > biggestScore[4] && mas.scoreGetter() < biggestScore[3] ->
-                        {
-                            biggestScore[4] = mas.scoreGetter()
-                        }
+                        { biggestScore[4] = mas.scoreGetter() }
                 }
             }
         }
@@ -443,10 +403,7 @@ class Com {
         //移動先におけるコマがあるか検証
         when(destination?.funcForDisplay()?.get(0)){
             bigPiece ->{return false} //そもそも大きいコマはどうやっても置けないかえら諦める
-            middlePiece ->{
-                //中コマなら大きいコマのみおけるから大きいコマを取り出せるか調べる
-                return pickUpPiece(bigPiece,mas)
-            }
+            middlePiece ->{ return pickUpPiece(bigPiece,mas) } //中コマなら大きいコマのみおけるから大きいコマを取り出せるか調べる
             smallPiece -> {
                 //小さいコマなら中コマか大コマを取り出せるかしらべる
                 //中コマ->大コマと探す
@@ -538,9 +495,7 @@ class Com {
                 val box1 = masInTheGreenPiece.minus(doNotMoveListBecauseItIsBlocking) //ブロックに使っている
                 val box2 = masInTheGreenPiece.minus(doNotMoveListBecauseItMakeReach) //リーチにつかっている
                 val box = box1+box2
-                for (i in box){
-                    Log.d("gobblet2Com", "${i.nameGetter()}inBox")
-                }
+                for (i in box){ Log.d("gobblet2Com", "${i.nameGetter()}inBox") }
                 Log.d("gobblet2Com", "elseBoxSize${box.size}")
                 if (box.isNotEmpty()) {
                     //一つでも動かせるならそれを移動元にする
@@ -559,8 +514,7 @@ class Com {
     fun firstTurn(){
         while (true){
             movingSource= temochiBig
-            val randomNum = (0..3).random()
-            when(randomNum){
+            when((0..3).random()){
                 0 ->{
                     //b2に置く
                     if (lineB.listGetter()[1].returnLastElement() != 1){
