@@ -43,6 +43,7 @@ class Com {
     private val lineD:Line = Line(stringLineD)
     private val lineS:Line = Line(stringLineS)
     private val lineBS:Line = Line(stringLineBS)
+    private var lineAllAtOnce:MutableList<Line> = mutableListOf() //すべてのラインクラスに対して色々やる時に使うリスト
 
     //手持ち
     private var temochiBig:Temochi? = null
@@ -78,7 +79,7 @@ class Com {
     private var humanReachList:MutableList<Line> = mutableListOf() //敵にリーチがかかっているラインを管理するリスト
     private var comReachList:MutableList<Line> = mutableListOf() //自分にリーチがかかっているラインを管理するリスト
     private var bord:MutableList<MutableList<Mas>> = mutableListOf() //[縦列][横列]　例:B3 -> [2][1]
-    private var lineAllAtOnce:MutableList<Line> = mutableListOf() //すべてのラインクラスに対して色々やる時に使うリスト
+    
     private var judgeList:MutableList<Int> = mutableListOf(0,0,0,0,0,0,0,0,0,0)
 
     //デバッグ用
@@ -134,7 +135,10 @@ class Com {
                     //なおかつ､最後のマスに相手の中コマ以上が入っている場合は諦める
                     else if (line.use3BigPieceOnTheLine() &&
                         mas.funcForDisplay()[1] == humanPiece &&
-                        mas.funcForDisplay()[0] > 2){ comReachList.remove(line) }
+                        mas.funcForDisplay()[0] > 2){
+                            comReachList.remove(line)
+                        mas.addScore(-300)
+                    }
                     else{
                         mas.addScore(10000)
                         break
@@ -175,7 +179,7 @@ class Com {
             if (target != null){//コマをおけば防げるところに相手のコマがおいてないか調べる
                 when(howBigPiece(target)){
                     bigPiece -> { target?.addScore(-300) }//諦めること指す
-                    else ->{ target?.addScore(800) }
+                    //else ->{ target?.addScore(300) }//800
                 }
             }
         }
@@ -207,8 +211,8 @@ class Com {
                 val attribute = rv[1] //人間のかコンピューターのか
                 when{
                     size == bigPiece    && attribute == humanPiece -> { mas.addScore(-50) }//相手の大コマが置かれている
-                    size == middlePiece && attribute == humanPiece -> { mas.addScore(-30) }//相手の中コマが置かれている
-                    size == smallPiece  && attribute == humanPiece -> { mas.addScore(-20) }//相手の小コマが置かれている
+                    //size == middlePiece && attribute == humanPiece -> { mas.addScore(-30) }//相手の中コマが置かれている
+                    //size == smallPiece  && attribute == humanPiece -> { mas.addScore(-20) }//相手の小コマが置かれている
                     size == bigPiece    && attribute == comPiece -> {
                         //自分の大コマが置かれている
                         masInTheGreenBigPiece.add(mas)
@@ -241,13 +245,13 @@ class Com {
     //ラインごとに分けて各マスに評価値を入れる
     fun funcForCheckEachMas(line: Line){
         var standard:Mas? =null
-        var thisLine= line.listGetter()
+        var linesList= line.listGetter()
 
         //基準のマスに自分のコマが入っていた場合
         fun standardIsM1(){
-            if (line.humanPieceCounter() == 3 && !comReachList.contains(line) ){
+            if (line.humanPieceCounter() == 3 && !comReachList.contains(line) && standard?.funcForDisplay()!![0] == bigPiece){
                 //ライン上は自分以外全部敵のコマだった
-                //基準の自分のコマは相手のリーチをふせいでいる
+                //基準の自分のコマは大きいコマで相手のリーチをふせいでいる
                 doNotMoveListBecauseItIsBlocking.add(standard!!) //防いでるコマは動かせない
             }
 
@@ -262,18 +266,25 @@ class Com {
         //後で編集
         fun standardIsP1(){
             if (standard!!.funcForDisplay()[0] == bigPiece) {return} //基準が大きいコマだったら飛ばす (どうやってもコマが入らないから)
-            for (mas in thisLine){
-                val rv = mas.funcForDisplay()
-                if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
-
-                //周りの各マスを調べて
-                //基準にしたマスに評価値を入れる
-                when(rv[1]){
-                    empty      -> { inTheCaseOfEmp(standard!!)}//なにもはいってなかった時
-                    comPiece   -> { inTheCaseOfM1(rv[0],standard!!) }//自分のコマが入っていた場合
-                    humanPiece -> { inTheCaseOfP1(rv[0],standard!!) }//相手のコマが入っていた場合
+            if (humanReachList.contains(line)) { //まだ防がれていなくて､ここでコマを置いたら相手のリーチを防げる場合､基準のマスに評価値を追加 //line.humanPieceCounter() == 3 &&
+                when(standard?.funcForDisplay()!![0]){
+                    empty -> {standard?.addScore(300)}
+                    smallPiece -> {standard?.addScore(300)}
+                    middlePiece -> {standard?.addScore(200)}
                 }
             }
+                for (mas in linesList){
+                    val rv = mas.funcForDisplay()
+                    if (mas == standard) {continue} //基準のマスを調べようとしたらスキップ
+
+                    //周りの各マスを調べて
+                    //基準にしたマスに評価値を入れる
+                    when(rv[1]){
+                        empty      -> { inTheCaseOfEmp(standard!!)}//なにもはいってなかった時
+                        comPiece   -> { inTheCaseOfM1(rv[0],standard!!) }//自分のコマが入っていた場合
+                        humanPiece -> { inTheCaseOfP1(rv[0],standard!!) }//相手のコマが入っていた場合
+                    }
+                }
         }
 
         fun standardIsEmp(){
@@ -291,6 +302,7 @@ class Com {
                 empty ->{standardIsP1()}
             }
         }
+        
 
         //Log.d("gobblet2Com","${bord[y][x].nameGetter()}に緑")
         //Log.d("gobblet2Com","${bord[y][x].nameGetter()}に赤")
@@ -303,10 +315,11 @@ class Com {
     }
 
     //周りををしらべている時に自分のコマがあった時の処理
+    //大きさの差を減らそうかな?
     fun inTheCaseOfM1(size:Int,mas: Mas){
         when(size){
-            smallPiece  ->{ mas.addScore(40) } //小
-            middlePiece ->{ mas.addScore(50) } //中
+            smallPiece  ->{ mas.addScore(50) } //小
+            middlePiece ->{ mas.addScore(55) } //中
             bigPiece    ->{ mas.addScore(60) } //大
         }
     }
@@ -500,7 +513,7 @@ class Com {
             chance -> { //止めをさせそうな時
                 //差集合を使ってリーチを作っているコマ以外で動かせる大きいコマがあるか調べる
                 val box = masInTheGreenPiece.minus(doNotMoveListBecauseItMakeReach)
-                Log.d("gobblet2Com", "boxSize${box.size}")
+                Log.d("gobblet2Com", "chanceBoxSize${box.size}")
                 if (box.isNotEmpty()) {
                     //一つでも動かせるならそれを移動元にする
                     movingSource = box[(box.indices).random()]
@@ -511,7 +524,7 @@ class Com {
             blocking -> { //ブロックする必要がある場合
                 //差集合を使って防いでいるコマ以外で動かせる大きいコマがあるか調べる
                 val box = masInTheGreenPiece.minus(doNotMoveListBecauseItIsBlocking)
-                Log.d("gobblet2Com", "boxSize${box.size}")
+                Log.d("gobblet2Com", "blockingBoxSize${box.size}")
                 if (box.isNotEmpty()) {
                     //一つでも動かせるならそれを移動元にする
                     movingSource = box[(box.indices).random()]
@@ -524,7 +537,10 @@ class Com {
                 val box1 = masInTheGreenPiece.minus(doNotMoveListBecauseItIsBlocking) //ブロックに使っている
                 val box2 = masInTheGreenPiece.minus(doNotMoveListBecauseItMakeReach) //リーチにつかっている
                 val box = box1+box2
-                Log.d("gobblet2Com", "boxSize${box.size}")
+                for (i in box){
+                    Log.d("gobblet2Com", "${i.nameGetter()}inBox")
+                }
+                Log.d("gobblet2Com", "elseBoxSize${box.size}")
                 if (box.isNotEmpty()) {
                     //一つでも動かせるならそれを移動元にする
                     movingSource = box[(box.indices).random()]
@@ -579,6 +595,7 @@ class Com {
     }
 
     fun start(){
+        Log.d("gobblet2Com","--------------------------------")
         turnCount+=1
         //1ターン目
         if (turnCount==1){
@@ -720,8 +737,6 @@ class Com {
             Log.d("gobblet2Com","movingSource:${m.nameGetter()}")
         }
         Log.d("gobblet2Com","destination:${destination?.nameGetter()}")
-        Log.d("gobblet2Com","--------------------------------")
-
     }
 
     fun debC(){
