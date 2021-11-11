@@ -74,7 +74,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.95" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV1"
@@ -124,13 +124,13 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.1" />
+                android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="20"
                 android:scaleX="@dimen/iconScale"
                 android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_uturn" />
@@ -138,13 +138,13 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:layout_weight="2" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
+                android:layout_weight="90"
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/Back"
@@ -153,7 +153,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:layout_weight="2" />
         </LinearLayout>
 
         <Space
@@ -173,7 +173,7 @@
                 android:id="@+id/textView5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
+                android:layout_weight="90"
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/QuitGame"
@@ -182,13 +182,13 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:layout_weight="2" />
 
             <ImageView
                 android:id="@+id/imageView4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="20"
                 android:scaleX="@dimen/iconScale"
                 android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_back_title" />
@@ -196,7 +196,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:layout_weight="2" />
         </LinearLayout>
 
     </LinearLayout>
