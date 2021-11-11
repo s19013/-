@@ -1013,12 +1013,7 @@ open class GameBaseClass : AppCompatActivity() {
 
     //音を鳴らす処理
     protected fun playSound(status: Int){
-        if (SE){
-            when(status){
-                cannotDoItSE -> sp!!.play(cannotDoItSE, 1.0f, 1.0f, 1, 0, 1.5f) //これだけ少し早く再生
-                else -> sp!!.play(status, 1.0f, 1.0f, 1, 0, 1.0f)
-            }
-        }
+        if (SE){ sp!!.play(status, 1.0f, 1.0f, 1, 0, 1.0f) }
     }
 
     protected fun playMusic(){
@@ -1028,9 +1023,7 @@ open class GameBaseClass : AppCompatActivity() {
         }
     }
 
-    protected fun stopMusic(){
-        mediaPlayer?.pause()
-    }
+    protected fun stopMusic(){ mediaPlayer?.pause() }
 
     private val resultTimer: Runnable = object : Runnable{
         override fun run() {
@@ -1077,9 +1070,7 @@ open class GameBaseClass : AppCompatActivity() {
     //ライフサイクル
     override fun onResume() {
         super.onResume()
-        if (BGM) {
-            mediaPlayer?.start()
-        }
+        if (BGM) { mediaPlayer?.start() }
         when (nowDoingTimerID){
             resultTimerId -> handler.post(resultTimer)
         }
@@ -1087,9 +1078,7 @@ open class GameBaseClass : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        if (BGM){
-            mediaPlayer?.pause()
-        }
+        if (BGM){ mediaPlayer?.pause() }
         handler.removeCallbacks(resultTimer)
 
     }
