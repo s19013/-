@@ -137,7 +137,7 @@ class Com {
                         mas.funcForDisplay()[1] == humanPiece &&
                         mas.funcForDisplay()[0] > 2){
                             comReachList.remove(line)
-                        mas.addScore(-300)
+                            mas.addScore(-300)
                     }
                     else{
                         mas.addScore(10000)
@@ -210,13 +210,13 @@ class Com {
                 val size = rv[0] //コマの大きさ
                 val attribute = rv[1] //人間のかコンピューターのか
                 when{
-                    size == bigPiece    && attribute == humanPiece -> { mas.addScore(-50) }//相手の大コマが置かれている
+                    size == bigPiece    && attribute == humanPiece -> { mas.addScore(-300) }//相手の大コマが置かれている
                     //size == middlePiece && attribute == humanPiece -> { mas.addScore(-30) }//相手の中コマが置かれている
                     //size == smallPiece  && attribute == humanPiece -> { mas.addScore(-20) }//相手の小コマが置かれている
                     size == bigPiece    && attribute == comPiece -> {
                         //自分の大コマが置かれている
                         masInTheGreenBigPiece.add(mas)
-                        mas.addScore(-50)
+                        mas.addScore(-300)
                     }
                     size == middlePiece && attribute == comPiece -> {
                         //自分の中コマが置かれている
@@ -266,12 +266,13 @@ class Com {
         //後で編集
         fun standardIsP1(){
             if (standard!!.funcForDisplay()[0] == bigPiece) {return} //基準が大きいコマだったら飛ばす (どうやってもコマが入らないから)
-            if (humanReachList.contains(line)) { //まだ防がれていなくて､ここでコマを置いたら相手のリーチを防げる場合､基準のマスに評価値を追加 //line.humanPieceCounter() == 3 &&
-                when(standard?.funcForDisplay()!![0]){
-                    empty -> {standard?.addScore(300)}
-                    smallPiece -> {standard?.addScore(300)}
-                    middlePiece -> {standard?.addScore(200)}
-                }
+            if (humanReachList.contains(line)) { //ここでコマを置いたら相手のリーチを防げる場合､基準のマスに評価値を追加
+                standard?.addScore(200)
+//                when(standard?.funcForDisplay()!![0]){
+//                    empty -> {standard?.addScore(300)}
+//                    smallPiece -> {standard?.addScore(300)}
+//                    middlePiece -> {standard?.addScore(300)}
+//                }
             }
                 for (mas in linesList){
                     val rv = mas.funcForDisplay()
@@ -318,9 +319,9 @@ class Com {
     //大きさの差を減らそうかな?
     fun inTheCaseOfM1(size:Int,mas: Mas){
         when(size){
-            smallPiece  ->{ mas.addScore(50) } //小
-            middlePiece ->{ mas.addScore(55) } //中
-            bigPiece    ->{ mas.addScore(60) } //大
+            smallPiece  ->{ mas.addScore(30) } //小 50
+            middlePiece ->{ mas.addScore(30) } //中 55
+            bigPiece    ->{ mas.addScore(30) } //大
         }
     }
 
@@ -329,7 +330,7 @@ class Com {
         when(size){
 //            smallPiece  ->{ mas.addScore(-10) } //小
 //            middlePiece ->{ mas.addScore(-30) } //中
-            bigPiece    ->{ mas.addScore(-30) } //大
+            bigPiece    ->{ mas.addScore(-5) } //大
         }
     }
 //-----------------------------
