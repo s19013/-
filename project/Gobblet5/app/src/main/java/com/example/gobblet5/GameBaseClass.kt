@@ -706,33 +706,17 @@ open class GameBaseClass : AppCompatActivity() {
 
     ////ポップアップ
     //ポップアップが使う画面遷移
-    fun goToPreGameWithComAct(){
-        val intent = Intent(this, preGameWithComActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
-    }
+    fun changeActivity(id:String){
+        var intent:Intent?=null
+        when(id){
+            "main"->intent = Intent(this, MainActivity::class.java)
+            "gameWithMan" -> intent = Intent(this, GameWithManActivity::class.java)
+            "gameWithCom" -> intent = Intent(this, GameWithComActivity::class.java)
+            "preGameWithMan" -> intent = Intent(this, preGameWithManActivity::class.java)
+            "preGameWithCom" -> intent = Intent(this, preGameWithComActivity::class.java)
+        }
 
-    fun goToPreGameWithManAct(){
-        val intent = Intent(this, preGameWithManActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
-    }
-
-    fun goToGameWithComAct(){
-        val intent = Intent(this, GameWithComActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
-    }
-
-    fun goToGameWithManAct(){
-        val intent = Intent(this, GameWithManActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
-    }
-
-    fun goToMainAct(){
-        val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
     }
 
@@ -776,15 +760,15 @@ open class GameBaseClass : AppCompatActivity() {
         //タイトルへ戻る
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
-            goToMainAct()
+            changeActivity("main")
         }
 
         //もう一度やる
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
             playSound(gameStartSE)
             when(thisAct){
-                -1 -> {goToGameWithComAct()}
-                 1 -> {goToGameWithManAct()}
+                -1 -> {changeActivity("gameWithCom")}
+                 1 -> {changeActivity("gameWithMan")}
             }
         }
 
@@ -792,8 +776,8 @@ open class GameBaseClass : AppCompatActivity() {
         popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
             playSound(cancelSE)
             when(thisAct){
-                -1 -> {goToPreGameWithComAct()}
-                1 -> {goToPreGameWithManAct()}
+                -1 -> {changeActivity("preGameWithCom")}
+                 1 -> {changeActivity("preGameWithMan")}
             }
         }
 
@@ -870,7 +854,7 @@ open class GameBaseClass : AppCompatActivity() {
         //タイトルへ戻るボタン
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
-            goToMainAct()
+            changeActivity("main")
         }
 
         //盤面へ戻るボタン
@@ -885,8 +869,8 @@ open class GameBaseClass : AppCompatActivity() {
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
             playSound(gameStartSE)
             when(thisAct){
-                -1 -> {goToGameWithComAct()}
-                 1 -> {goToGameWithManAct()}
+                -1 -> {changeActivity("gameWithCom")}
+                 1 -> {changeActivity("gameWithMan")}
             }
         }
     }
