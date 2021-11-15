@@ -1,28 +1,45 @@
 package com.example.gobblet5
 
+import android.content.SharedPreferences
 import android.media.AudioAttributes
 import android.media.SoundPool
 import android.os.Bundle
+import android.util.Log
+import android.widget.SeekBar
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
 
 open class BaseClass: AppCompatActivity()  {
+    
+    //効果音
     private lateinit var sp: SoundPool
-    private var putSE=0
-    private var selectSE = 0
     private var cancelSE = 0
+    private var seekSE = 0
+    private var radioButtonSE = 0
     private var menuSelectSE = 0
-    private var cannotDoitSE = 0
     private var gameStartSE = 0
 
-    open override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
+    //プレファレンス
+    protected var pref: SharedPreferences? =null
+    protected var seVolume = 0
+    protected var bgmVolume = 0
+
+    protected fun iniall(){
+        iniPreference()
+        iniSoundPool()
+    }
+
+    protected fun iniPreference(){
         //共有プリファレンス
-        val pref = PreferenceManager.getDefaultSharedPreferences(this)
-        var SE =pref.getBoolean("SEOnOff", true)
-        var BGM =pref.getBoolean("BGMOnOff", true)
+        pref = PreferenceManager.getDefaultSharedPreferences(this)
+        seVolume =pref!!.getInt("seVolume",0)
+        bgmVolume =pref!!.getInt("bgmVolume",0)
+    }
 
+    protected fun iniSoundPool(){
+        //soundPool
         val audioAttributes = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
             AudioAttributes.Builder()
                 .setUsage(AudioAttributes.USAGE_GAME)
@@ -33,30 +50,21 @@ open class BaseClass: AppCompatActivity()  {
             .setAudioAttributes(audioAttributes)
             .setMaxStreams(1)
             .build()
-
-        cannotDoitSE=sp.load(this, R.raw.cannotdoit, 1)
-        putSE=sp.load(this, R.raw.select_se, 1)
-        selectSE = sp.load(this, R.raw.put, 1)
+        //使う効果音を準備
         cancelSE = sp.load(this, R.raw.cancel, 1)
-        menuSelectSE = sp.load(this, R.raw.menu_selected, 1)
+        radioButtonSE = sp.load(this,R.raw.radio_button,1)
+        seekSE=sp.load(this,R.raw.select_se,1)
+        menuSelectSE = sp.load(this, R.raw.button, 1)
         gameStartSE = sp.load(this,R.raw.game_start_se,1)
 
-        fun playSound(status: String){
-            if (SE){
-                when(status){
-                    "cannotDoit" -> sp.play(cannotDoitSE, 1.0f, 1.0f, 1, 0, 1.5f)
-                    "put" -> sp.play(putSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                    "select" -> sp.play(selectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                    "cancel" -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                    "menuSelect" -> sp.play(menuSelectSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                    "gameStart" -> sp.play(gameStartSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                }
-            }
-        }
+    }
+
+    protected fun playSound(status: Int){
+        if (seVolume>0){ sp.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        sp.release()
+        sp!!.release()
     }
 }
