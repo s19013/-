@@ -80,7 +80,7 @@ class ConfigActivity : AppCompatActivity() {
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
                     val editor= pref!!.edit()
-                    editor.putInt("seVolume",seVolume).commit()
+                    editor.putInt("seVolume",seVolume).apply()
                 }
             }
         )
@@ -100,7 +100,7 @@ class ConfigActivity : AppCompatActivity() {
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
                     val editor= pref!!.edit()
-                    editor.putInt("bgmVolume",bgmVolume).commit()
+                    editor.putInt("bgmVolume",bgmVolume).apply()
                 }
             }
         )
