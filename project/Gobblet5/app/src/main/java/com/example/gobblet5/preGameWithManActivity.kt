@@ -31,7 +31,7 @@ class preGameWithManActivity : BaseClass() {
             }
             playSound(radioButtonSE)
             val editor=pref!!.edit()
-            editor.putInt("playFirst",playFirst!!).commit()
+            editor.putInt("playFirst",playFirst!!).apply()
             Log.d("gobblet2", "${playFirst}")
         }
 
