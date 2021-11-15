@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
     //音関係
     private lateinit var sp: SoundPool
     private var menuSelectSE = 0
-    private var bgmlooping = false
-    //
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,7 +87,6 @@ class MainActivity : AppCompatActivity() {
         goTutorialBtn.setOnClickListener {
             playSound(menuSelectSE)
             val intent = Intent(this,SelectTutorialActivity::class.java)
-//            intent.putExtra("bgmlooping",bgmlooping) なんのために書いたのか忘れたけどとりあえず残しておく
             startActivity(intent)
         }
 
@@ -100,14 +97,5 @@ class MainActivity : AppCompatActivity() {
         val code = event?.keyCode
 
         return super.dispatchKeyEvent(event)
-    }
-
-
-
-    override fun onUserLeaveHint() {
-        super.onUserLeaveHint()
-        bgmlooping=false
-        val intent = Intent(this,BgmService::class.java)
-        stopService(intent)
     }
 }

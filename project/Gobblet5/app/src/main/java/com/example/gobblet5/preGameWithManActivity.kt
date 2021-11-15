@@ -28,24 +28,6 @@ class preGameWithManActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pre_game_with_man)
 
-//        backButton.getViewTreeObserver()
-//            .addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
-//                override fun onGlobalLayout() {
-//                    val width = converPxToDp(backButton.width) // 横幅が返却される
-//                    val height = converPxToDp(backButton.height)
-//                    backButton.setCompoundDrawablesWithIntrinsicBounds(UturnIcon, 0, 0, 0)
-//                   backButton.setCompoundDrawables(UturnIcon, null, null, null)
-//                    backButton.getViewTreeObserver().removeOnGlobalLayoutListener(this)
-//                }
-//            })
-        
-//        backButton.post {
-//            val width = converPxToDp(backButton.width)
-//            val height = converPxToDp(backButton.height)
-//
-//            backButton.setCompoundDrawables(UturnIcon,null,null,null)
-//        }
-
         //共有プリファレンス
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
         var SE =pref.getBoolean("SEOnOff", true)
@@ -110,12 +92,6 @@ class preGameWithManActivity : AppCompatActivity() {
 
 
     }
-
-    //pxをdpに変換
-    fun converPxToDp(px: Int): Float {
-        return px / this.getResources().getDisplayMetrics().density
-    }
-
 
     override fun onDestroy() {
         super.onDestroy()

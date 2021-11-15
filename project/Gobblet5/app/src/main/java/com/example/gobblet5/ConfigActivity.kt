@@ -110,7 +110,6 @@ class ConfigActivity : AppCompatActivity() {
         //共有プリファレンス
         pref = PreferenceManager.getDefaultSharedPreferences(this)
         seVolume =pref!!.getInt("seVolume",0)
-        Log.d("gobblet2", "prefSE${pref?.getInt("seVolume",0)}")
         bgmVolume =pref!!.getInt("bgmVolume",0)
     }
 
@@ -142,7 +141,8 @@ class ConfigActivity : AppCompatActivity() {
         }
     }
 
-    fun changeVolumeText(){
-
+    override fun onDestroy() {
+        super.onDestroy()
+        sp!!.release()
     }
 }
