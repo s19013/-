@@ -3,15 +3,14 @@ package com.example.gobblet5
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.KeyEvent
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 
 class MainActivity : BaseClass() {
-    private val activityIDpreGameWithCom = 1
-    private val activityIDpreGameWithMan = 2
+    private val activityIDPreGameWithCom = 1
+    private val activityIDPreGameWithMan = 2
     private val activityIDConfig = 3
     private val activityIDSelectTutorial = 4
 
@@ -31,8 +30,8 @@ class MainActivity : BaseClass() {
         }
 
 
-        goPreGameWithComBtn.setOnClickListener { changeActivity(activityIDpreGameWithCom) }
-        goPreGameWithManBtn.setOnClickListener { changeActivity(activityIDpreGameWithMan) }
+        goPreGameWithComBtn.setOnClickListener { changeActivity(activityIDPreGameWithCom) }
+        goPreGameWithManBtn.setOnClickListener { changeActivity(activityIDPreGameWithMan) }
         goTutorialBtn.setOnClickListener { changeActivity(activityIDSelectTutorial) }
         goConfigBtn.setOnClickListener { changeActivity(activityIDConfig) }
 
@@ -43,17 +42,11 @@ class MainActivity : BaseClass() {
         var intent:Intent?=null
 
         when(act){
-            activityIDpreGameWithCom -> intent = Intent(this,preGameWithComActivity::class.java)
-            activityIDpreGameWithMan -> intent = Intent(this,preGameWithManActivity::class.java)
+            activityIDPreGameWithCom -> intent = Intent(this,preGameWithComActivity::class.java)
+            activityIDPreGameWithMan -> intent = Intent(this,preGameWithManActivity::class.java)
             activityIDSelectTutorial -> intent = Intent(this,SelectTutorialActivity::class.java)
             activityIDConfig -> intent = Intent(this,ConfigActivity::class.java)
         }
         startActivity(intent)
-    }
-
-    override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
-        Log.d("gobblet2", "KeyEvent:${event}")
-        val code = event?.keyCode
-        return super.dispatchKeyEvent(event)
     }
 }
