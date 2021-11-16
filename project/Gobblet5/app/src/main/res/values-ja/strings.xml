@@ -91,7 +91,7 @@
     <string name="HowToPlayTutorialText8">自分が手に持っているコマが,マスに置かれたコマより大きい場合</string>
     <string name="HowToPlayTutorialText9">持っているコマを置かれたコマにかぶせることができます｡</string>
     <string name="HowToPlayTutorialText10">自分のコマにも､相手のコマにも､かぶせることができます｡</string>
-    <string name="HowToPlayTutorialText11">かぶせられたコマは,かぶせたコマがどかさないと動かせません｡</string>
+    <string name="HowToPlayTutorialText11">かぶせられたコマは,かぶせたコマをどかさないと動かせません｡</string>
     <string name="HowToPlayTutorialText12">ルール説明を終わります｡</string>
     <string name="BackToHowToOperateMenu">操作方法メニュー\nに戻る</string>
     <string name="MovePieceFromHandToSquare">手持ちからマスへ</string>
