@@ -25,7 +25,7 @@ class GameWithManActivity : GameBaseClass() {
 
 //手持ちのボタンを触った時
         buttonTemochiRedBig!!.setOnClickListener {
-            if (turn == 1){
+            if (turn == 1 && !finished){
                 //movingSourceが同じときやり直しができる
                 if (movingSource == stringTemochiRedBig){
                     resetTemochi()
@@ -41,7 +41,7 @@ class GameWithManActivity : GameBaseClass() {
         }
 
         buttonTemochiRedMiddle!!.setOnClickListener {
-            if (turn == 1){
+            if (turn == 1 && !finished){
                 if (movingSource==stringTemochiRedMiddle){
                     resetTemochi()
                 }
@@ -55,7 +55,7 @@ class GameWithManActivity : GameBaseClass() {
         }
 
         buttonTemochiRedSmall!!.setOnClickListener {
-            if (turn == 1){
+            if (turn == 1 && !finished){
                 if (movingSource==stringTemochiRedSmall){
                     resetTemochi()
                 }
@@ -69,7 +69,7 @@ class GameWithManActivity : GameBaseClass() {
         }
 
         buttonTemochiGreenBig!!.setOnClickListener {
-            if (turn == -1){
+            if (turn == -1 && !finished){
                 if (movingSource==stringTemochiGreenBig){
                     resetTemochi()
                 }
@@ -83,7 +83,7 @@ class GameWithManActivity : GameBaseClass() {
         }
 
         buttonTemochiGreenMiddle!!.setOnClickListener {
-            if (turn == -1){
+            if (turn == -1 && !finished){
                 if (movingSource==stringTemochiGreenMiddle){
                     resetTemochi()
                 }
@@ -97,7 +97,7 @@ class GameWithManActivity : GameBaseClass() {
         }
 
         buttonTemochiGreenSmall!!.setOnClickListener {
-            if (turn == -1){
+            if (turn == -1 && !finished){
                 if (movingSource==stringTemochiGreenSmall){
                     resetTemochi()
                 }
@@ -112,95 +112,88 @@ class GameWithManActivity : GameBaseClass() {
       ////マスを触ったとき
         buttonA1.setOnClickListener {
             //ゲームが終わったらさわれないようにする,相手のターン中に触れないようにするためにこんなif文を書く
-            if (turn != 0){ pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
+            if (turn != 0 && !finished){ pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
             else{toastNotYourTurn()}
         }
 
         buttonA2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(A2) }
+            if (turn != 0 && !finished){ pushedMasButton(A2) }
             else{toastNotYourTurn()}
         }
 
         buttonA3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(A3) }
+            if (turn != 0 && !finished){ pushedMasButton(A3) }
             else{toastNotYourTurn()}
         }
 
         buttonA4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(A4) }
+            if (turn != 0 && !finished){ pushedMasButton(A4) }
             else{toastNotYourTurn()}
         }
 
         buttonB1.setOnClickListener {
-            if (turn != 0){ pushedMasButton(B1) }
+            if (turn != 0 && !finished){ pushedMasButton(B1) }
             else{toastNotYourTurn()}
         }
 
         buttonB2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(B2) }
+            if (turn != 0 && !finished){ pushedMasButton(B2) }
             else{toastNotYourTurn()}
         }
 
         buttonB3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(B3) }
+            if (turn != 0 && !finished){ pushedMasButton(B3) }
             else{toastNotYourTurn()}
         }
 
         buttonB4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(B4) }
+            if (turn != 0 && !finished){ pushedMasButton(B4) }
             else{toastNotYourTurn()}
         }
 
         buttonC1.setOnClickListener {
-            if (turn != 0){pushedMasButton(C1) }
+            if (turn != 0 && !finished){pushedMasButton(C1) }
             else{toastNotYourTurn()}
         }
 
         buttonC2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(C2) }
+            if (turn != 0 && !finished){ pushedMasButton(C2) }
             else{toastNotYourTurn()}
         }
 
         buttonC3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(C3) }
+            if (turn != 0 && !finished){ pushedMasButton(C3) }
             else{toastNotYourTurn()}
         }
 
         buttonC4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(C4) }
+            if (turn != 0 && !finished){ pushedMasButton(C4) }
             else{toastNotYourTurn()}
         }
 
         buttonD1.setOnClickListener {
-            if (turn != 0){ pushedMasButton(D1) }
+            if (turn != 0 && !finished){ pushedMasButton(D1) }
             else{toastNotYourTurn()}
         }
 
         buttonD2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(D2) }
+            if (turn != 0 && !finished){ pushedMasButton(D2) }
             else{toastNotYourTurn()}
         }
 
         buttonD3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(D3) }
+            if (turn != 0 && !finished){ pushedMasButton(D3) }
             else{toastNotYourTurn()}
         }
 
         buttonD4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(D4) }
+            if (turn != 0 && !finished){ pushedMasButton(D4) }
             else{toastNotYourTurn()}
         }
 
         // その他
-        configButton.setOnClickListener {
-            playSound(openSE)
-            showConfigPopup()
-        }
-
-        resaltButton!!.setOnClickListener {
-            playSound(openSE)
-            showResultPopup()
-        }
+        configButton.setOnClickListener { showConfigPopup() }
+        resultButton!!.setOnClickListener { showResultPopup() }
 
     }
 
@@ -239,6 +232,6 @@ class GameWithManActivity : GameBaseClass() {
         buttonTemochiGreenBig=findViewById(R.id.buttonTemochiGreenBig)
         buttonTemochiGreenMiddle=findViewById(R.id.buttonTemochiGreenMiddle)
         buttonTemochiGreenSmall=findViewById(R.id.buttonTemochiGreenSmall)
-        resaltButton=findViewById(R.id.resaltButton)
+        resultButton=findViewById(R.id.resaltButton)
     }
 }

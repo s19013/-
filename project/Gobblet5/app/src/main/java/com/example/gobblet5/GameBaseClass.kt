@@ -9,6 +9,7 @@ import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.SoundPool
 import android.os.Handler
+import android.os.Looper
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.Gravity
@@ -23,19 +24,19 @@ open class GameBaseClass : AppCompatActivity() {
     open var thisAct=0 //今のアクティビティ
     //コンピューター対戦:-1
     //人間対戦:1
-    val activityIdGameWithCom = 1
-    val activityIdGameWithMan = 2
-    val activityIdPreGameWithCom = 3
-    val activityIdPreGameWithMan = 4
-    val activityIdMain = 5
+    private val activityIdGameWithCom = 1
+    private val activityIdGameWithMan = 2
+    private val activityIdPreGameWithCom = 3
+    private val activityIdPreGameWithMan = 4
+    private val activityIdMain = 5
 
     //タイマー関係
     protected val millisecond:Long=100
     protected var time = 0L
-    protected val handler = Handler()
+    protected val handler = Handler(Looper.getMainLooper()) // Looper.getMainLooper()を書くとクラッシュしにくいらしい
     protected var nowDoingTimerID:String? = null
     ////タイマーのid
-    protected val resultTimerId = "resultTimer"
+    private val resultTimerId = "resultTimer"
 
     ////手持ち宣言
     //赤
@@ -74,82 +75,80 @@ open class GameBaseClass : AppCompatActivity() {
     protected val stringTemochiGreenMiddle=temochiGreenMiddle.nameGetter()
     protected val stringTemochiGreenSmall=temochiGreenSmall.nameGetter()
     //マス
-    protected val stringA1=A1.nameGetter()
-    protected val stringA2=A2.nameGetter()
-    protected val stringA3=A3.nameGetter()
-    protected val stringA4=A4.nameGetter()
-    protected val stringB1=B1.nameGetter()
-    protected val stringB2=B2.nameGetter()
-    protected val stringB3=B3.nameGetter()
-    protected val stringB4=B4.nameGetter()
-    protected val stringC1=C1.nameGetter()
-    protected val stringC2=C2.nameGetter()
-    protected val stringC3=C3.nameGetter()
-    protected val stringC4=C4.nameGetter()
-    protected val stringD1=D1.nameGetter()
-    protected val stringD2=D2.nameGetter()
-    protected val stringD3=D3.nameGetter()
-    protected val stringD4=D4.nameGetter()
+    private val stringA1=A1.nameGetter()
+    private val stringA2=A2.nameGetter()
+    private val stringA3=A3.nameGetter()
+    private val stringA4=A4.nameGetter()
+    private val stringB1=B1.nameGetter()
+    private val stringB2=B2.nameGetter()
+    private val stringB3=B3.nameGetter()
+    private val stringB4=B4.nameGetter()
+    private val stringC1=C1.nameGetter()
+    private val stringC2=C2.nameGetter()
+    private val stringC3=C3.nameGetter()
+    private val stringC4=C4.nameGetter()
+    private val stringD1=D1.nameGetter()
+    private val stringD2=D2.nameGetter()
+    private val stringD3=D3.nameGetter()
+    private val stringD4=D4.nameGetter()
 
     //popup
-    protected var configPopup: PopupWindow?=null
-    protected var resultPopup: PopupWindow?=null
+    private var configPopup: PopupWindow?=null
+    private var resultPopup: PopupWindow?=null
 
     //mp
-    protected var mediaPlayer: MediaPlayer?=null
-    protected var bgmLooping = false
+    private var mediaPlayer: MediaPlayer?=null
+    private var bgmLooping = false
 
     //soundPool
-    protected var sp: SoundPool? = null
-    protected var putSE=0
-    protected var selectSE = 0
-    protected var cancelSE = 0
-    protected var menuSelectSE = 0
-    protected var cannotDoItSE = 0
-    protected var gameStartSE = 0
-    protected var radioButtonSE = 0
-    protected var openSE = 0
-    protected var closeSE = 0
-    protected var winSE = 0
-    protected var loosSE = 0
-    protected var seekSE = 0
+    private var sp: SoundPool? = null
+    private var putSE=0
+    private var selectSE = 0
+    private var cancelSE = 0
+    private var menuSelectSE = 0
+    private var cannotDoItSE = 0
+    private var gameStartSE = 0
+    private var openSE = 0
+    private var closeSE = 0
+    private var winSE = 0
+    private var loosSE = 0
+    private var seekSE = 0
     //ゲームに必要なもの
     protected var turn = 0 //後でちゃんと設定する
-    protected var size = 0
-    protected var winner : String?=null
+    private var size = 0
+    private var winner : String?=null
     protected var movingSource : String? = null
-    protected var destination : String? = null
+    private var destination : String? = null
     protected var finished = false
-    protected var pickupDone= false
-    protected var insetDone = false
+    private var pickupDone= false
 
     //ライン デバック用
-    protected var debLine1 = mutableListOf(0, 0, 0, 0)
-    protected var debLine2 = mutableListOf(0, 0, 0, 0)
-    protected var debLine3 = mutableListOf(0, 0, 0, 0)
-    protected var debLine4 = mutableListOf(0, 0, 0, 0)
+    private var debLine1 = mutableListOf(0, 0, 0, 0)
+    private var debLine2 = mutableListOf(0, 0, 0, 0)
+    private var debLine3 = mutableListOf(0, 0, 0, 0)
+    private var debLine4 = mutableListOf(0, 0, 0, 0)
 
     //勝敗を決めるのに使う
-    protected var judgeMap = mutableMapOf(
+    private var judgeMap = mutableMapOf(
         "lineA" to 0, "lineB" to 0, "lineC" to 0, "lineD" to 0,
         "line1" to 0, "line2" to 0, "line3" to 0, "line4" to 0,
         "lineS" to 0, "lineBS" to 0
     )
 
     //表示に使う物　(箱を用意している状態)
-    protected var res: Resources? = null
-    protected var view: ImageView? = null
+    private var res: Resources? = null
+    private var view: ImageView? = null
     //マス
-    protected var masImag: Drawable? = null
+    private var masImag: Drawable? = null
     //駒
     //赤
-    protected var komaRedBigD: Drawable? = null
-    protected var komaRedMiddleD: Drawable? = null
-    protected var komaRedSmallD: Drawable? = null
+    private var komaRedBigD: Drawable? = null
+    private var komaRedMiddleD: Drawable? = null
+    private var komaRedSmallD: Drawable? = null
     //緑
-    protected var komaGreenBigD: Drawable? = null
-    protected var komaGreenMiddleD: Drawable? = null
-    protected var komaGreenSmallD: Drawable? = null
+    private var komaGreenBigD: Drawable? = null
+    private var komaGreenMiddleD: Drawable? = null
+    private var komaGreenSmallD: Drawable? = null
 
     //テキスト
     protected var textTemochiRedBig:TextView?=null
@@ -166,20 +165,20 @@ open class GameBaseClass : AppCompatActivity() {
     protected var buttonTemochiGreenBig:View?=null
     protected var buttonTemochiGreenMiddle:View?=null
     protected var buttonTemochiGreenSmall:View?=null
-    protected var resaltButton:View?=null
+    protected var resultButton:View?=null
 
     //共有プリファレンス
-    protected var pref: SharedPreferences? =null
-    protected var seVolume = 0
-    protected var bgmVolume = 0
+    private var pref: SharedPreferences? =null
+    private var seVolume = 0
+    private var bgmVolume = 0
     protected var playFirst=1
     //画面の大きさ
-    protected var width = 0
-    protected var height = 0
+    private var width = 0
+    private var height = 0
 
     ////持ちての表示に関する関数
     //持ちてのコマを表示
-    protected fun havingDisplay(){
+    private fun havingDisplay(){
         playSound(selectSE)
         Log.d("gobblet2", "havingDisplay  size=${size},turn=${turn}")
         if (turn == 1){
@@ -199,7 +198,7 @@ open class GameBaseClass : AppCompatActivity() {
         }
     }
     //持ちてのコマをなにも持ってない状態にもどす
-    protected fun resetHavingDisplay(){
+    private fun resetHavingDisplay(){
         when(turn){
             1 -> {
                 view = findViewById(R.id.having1p)
@@ -213,7 +212,7 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //各マスの描写に関する関数
-    protected fun bordDisplay(location: String?) {
+    private fun bordDisplay(location: String?) {
         var box = mutableListOf(0, 0)
         //大きさを判断
         fun redSet(s: Int){
@@ -319,22 +318,20 @@ open class GameBaseClass : AppCompatActivity() {
     //一旦ここを通して分岐
     protected fun pushedMasButton(mas: Mas){
         //取り出し作業
-        if (!pickupDone) {
-            pickup(mas.nameGetter())
-            return
-        }
+        if (!pickupDone) { return pickup(mas.nameGetter()) }
         //マスの中に入れる
-        val returnValue =  insert(mas.nameGetter())
+        insert(mas.nameGetter())
         if(pickupDone && movingSource == mas.nameGetter()){ resetMas(mas.nameGetter()) } //考え直し
-        else if(!returnValue) { } //ルール上指定した場所にコマを入れられなかった場合 特に何もしなくて良い
         else{
             bordDisplay(destination)//コマの移動先を再描画
             endTurn() //ターン終了作業に移る
         }
+
+        // if(!returnValue) { } //ルール上指定した場所にコマを入れられなかった場合 特に何もしなくて良いわざわざかく必要もない
     }
 
     //コマを取り出す
-    protected fun pickup(name: String){
+    private fun pickup(name: String){
 
         fun commonFunc(mas: Mas){
             setSMP(mas.mPickup(turn), mas.nameGetter())
@@ -368,7 +365,7 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //駒を入れる
-    protected fun insert(name: String):Boolean{
+    private fun insert(name: String):Boolean{
         when(name){
             stringA1 -> {
                 if (A1.mInsert(size, turn)) {
@@ -479,7 +476,7 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //マスやり直し
-    protected fun resetMas(masName:String){
+    private fun resetMas(masName:String){
         bordDisplay(masName)
         resetSMP()
         resetHavingDisplay()
@@ -492,7 +489,7 @@ open class GameBaseClass : AppCompatActivity() {
     open fun startTurn(){}
 
     //ターン終了時の処理に関すること
-    protected fun endTurn() {
+    private fun endTurn() {
         resetForEnd()
         resetHavingDisplay()
         judge()
@@ -504,7 +501,7 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //移動元が手持ちだったときのリセットしょり?
-    protected fun resetForEnd() {
+    private fun resetForEnd() {
         when (movingSource) {//移動元を正しく表示する
             stringTemochiRedBig ->
                 {
@@ -563,35 +560,35 @@ open class GameBaseClass : AppCompatActivity() {
         }
     }
 
-    protected fun debSMP(){
+    private fun debSMP(){
         Log.d("gobblet2", "")
         Log.d("gobblet2", "size:${size}, movingSource:${movingSource}, pickupDone:${pickupDone}")
     }
 
-    protected fun setSMP(s: Int, m: String){
+    private fun setSMP(s: Int, m: String){
         size=s
         movingSource=m
         pickupDone=true
     }
 
-    protected fun resetSMP(){
+    private fun resetSMP(){
         size=0
         movingSource=null
         pickupDone=false
     }
 
-    protected fun setD(location: String) {
+    private fun setD(location: String) {
         playSound(putSE)
         destination = location
         Log.d("gobblet2", "destination:${destination}")
     }
 
-    protected fun resetD(){
+    private fun resetD(){
         destination = null
         Log.d("gobblet2", "destination:${destination}")
     }
 
-    protected fun judge(){
+    private fun judge(){
         judgeMap["lineA"]=A1.returnLastElement()+A2.returnLastElement()+A3.returnLastElement()+A4.returnLastElement()
         judgeMap["lineB"]=B1.returnLastElement()+B2.returnLastElement()+B3.returnLastElement()+B4.returnLastElement()
         judgeMap["lineC"]=C1.returnLastElement()+C2.returnLastElement()+C3.returnLastElement()+C4.returnLastElement()
@@ -616,6 +613,7 @@ open class GameBaseClass : AppCompatActivity() {
         }
 
         if (finished){
+            turn = 0
             //ジングルを鳴らす
             if (seVolume > 0){
                 if (thisAct==1){playSound(winSE)}
@@ -626,7 +624,7 @@ open class GameBaseClass : AppCompatActivity() {
                     }
                 }
             }
-            resaltButton!!.visibility= View.VISIBLE
+            resultButton!!.visibility= View.VISIBLE
             nowDoingTimerID = resultTimerId
             handler.post(resultTimer)
             //showResultPopup()
@@ -635,7 +633,7 @@ open class GameBaseClass : AppCompatActivity() {
         debJudge()
     }
 
-    protected fun debJudge(){
+    private fun debJudge(){
         Log.d("gobblet2", "")
 
         debLine1[0]=A1.returnLastElement()
@@ -665,7 +663,7 @@ open class GameBaseClass : AppCompatActivity() {
 
     ////ポップアップ
     //ポップアップが使う画面遷移
-    protected fun changeActivity(id:Int){
+    private fun changeActivity(id:Int){
         var intent:Intent?=null
         when(id){
             activityIdMain->intent = Intent(this, MainActivity::class.java)
@@ -682,6 +680,7 @@ open class GameBaseClass : AppCompatActivity() {
     //結果ポップアップ
     @SuppressLint("InflateParams")
     protected fun showResultPopup(){
+        playSound(openSE)
         resultPopup = PopupWindow(this)
         // レイアウト設定
         val popupView: View = layoutInflater.inflate(R.layout.popup_resalt, null)
@@ -752,6 +751,7 @@ open class GameBaseClass : AppCompatActivity() {
     //設定ポップアップ
     @SuppressLint("InflateParams")
     protected fun showConfigPopup(){
+        playSound(openSE)
         configPopup = PopupWindow(this)
         // レイアウト設定
         val popupView: View = layoutInflater.inflate(R.layout.popup_config, null)
@@ -777,7 +777,7 @@ open class GameBaseClass : AppCompatActivity() {
 
 
         //動かす前の値を記録
-        val recordBgmVolue = bgmVolume
+        val recordBgmVolume = bgmVolume
 
         //シークバー初期化
         val seSeekBar = popupView.findViewById<SeekBar>(R.id.seSeekBar)
@@ -826,8 +826,8 @@ open class GameBaseClass : AppCompatActivity() {
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
                     val editor= pref!!.edit()
                     editor.putInt("bgmVolume",bgmVolume).apply()
-                    if (recordBgmVolue <= 0 || bgmVolume > 0  ) {playMusic()} // 音楽再開
-                    if (recordBgmVolue > 0 || bgmVolume <= 0  ) {stopMusic()} // 音楽停止
+                    if (recordBgmVolume <= 0 || bgmVolume > 0  ) {playMusic()} // 音楽再開
+                    if (recordBgmVolume > 0 || bgmVolume <= 0  ) {stopMusic()} // 音楽停止
                 }
             }
         )
@@ -858,7 +858,7 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //トースト関係(ホントはダイアログだけど面倒だからそのまま使う)
-    protected fun toastCanNotPickup(){
+    private fun toastCanNotPickup(){
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.cannotPickupDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
@@ -866,7 +866,7 @@ open class GameBaseClass : AppCompatActivity() {
         playSound(cannotDoItSE)
     }
 
-    protected fun toastCanNotInsert(){
+    private fun toastCanNotInsert(){
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.cannotInsertDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
@@ -896,7 +896,7 @@ open class GameBaseClass : AppCompatActivity() {
         iniView()
     }
 
-    protected fun iniFullscreen(){
+    private fun iniFullscreen(){
         //画面の大きさ
         val dm = DisplayMetrics()
         windowManager.defaultDisplay.getRealMetrics(dm)
@@ -904,7 +904,7 @@ open class GameBaseClass : AppCompatActivity() {
         height = dm.heightPixels
     }
 
-    protected fun iniPreference(){
+    private fun iniPreference(){
         //共有プリファレンス
         pref = PreferenceManager.getDefaultSharedPreferences(this)
         seVolume =pref!!.getInt("seVolume",5)
@@ -912,7 +912,7 @@ open class GameBaseClass : AppCompatActivity() {
         playFirst=pref!!.getInt("playFirst", 1)
     }
 
-    protected fun iniSoundPool(){
+    private fun iniSoundPool(){
         //soundPool
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_GAME)
@@ -936,7 +936,7 @@ open class GameBaseClass : AppCompatActivity() {
         seekSE=sp!!.load(this,R.raw.select_se,1)
     }
 
-    protected fun iniMediaPlayer(){
+    private fun iniMediaPlayer(){
         //mediaPlayer
         mediaPlayer=MediaPlayer.create(applicationContext,R.raw.okashi_time)
         mediaPlayer?.isLooping=true
@@ -944,7 +944,7 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //先攻後攻設定
-    protected fun iniWhichIsFirst(){
+    private fun iniWhichIsFirst(){
         if (playFirst != 0){ turn = playFirst }
         else {
             when((1..2).random()){
@@ -955,7 +955,7 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
-    protected fun iniDrawable(){
+    private fun iniDrawable(){
         //表示に使う物(空箱に実物を入れる)
         res=resources
         view=findViewById(R.id.buttonA1) //適当にダミーを入れてるだけ
@@ -977,11 +977,11 @@ open class GameBaseClass : AppCompatActivity() {
     open fun iniView(){}
 
     //音を鳴らす処理
-    protected fun playSound(status: Int){
+    private fun playSound(status: Int){
         if (seVolume > 0){ sp!!.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
     }
 
-    protected fun playMusic(){
+    private fun playMusic(){
         if (bgmVolume > 0){
             bgmLooping=true
             mediaPlayer?.setVolume(bgmVolume*0.1f,bgmVolume*0.1f)
@@ -989,7 +989,7 @@ open class GameBaseClass : AppCompatActivity() {
         }
     }
 
-    protected fun stopMusic(){ mediaPlayer?.pause() }
+    private fun stopMusic(){ mediaPlayer?.pause() }
 
     private val resultTimer: Runnable = object : Runnable{
         override fun run() {
@@ -1017,7 +1017,7 @@ open class GameBaseClass : AppCompatActivity() {
         if (hasFocus) hideSystemUI()
     }
 
-    protected fun hideSystemUI() {
+    private fun hideSystemUI() {
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                         or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -1028,11 +1028,6 @@ open class GameBaseClass : AppCompatActivity() {
                 )
     }
 
-    protected fun showSystemUI() {
-        window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN)
-    }
     //ライフサイクル
     override fun onResume() {
         super.onResume()
@@ -1045,9 +1040,7 @@ open class GameBaseClass : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         if (bgmVolume > 0){ mediaPlayer?.pause() }
-        handler.removeCallbacks(resultTimer)
-
-    }
+        handler.removeCallbacks(resultTimer) }
 
     override fun onDestroy() {
         super.onDestroy()

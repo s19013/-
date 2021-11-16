@@ -8,7 +8,7 @@ import kotlinx.android.synthetic.main.activity_game_with_com.*
 class GameWithComActivity : GameBaseClass() {
     override var thisAct: Int = -1
 
-    val insertTimerId = "insertTimer"
+    private val insertTimerId = "insertTimer"
 
     //コンピューター宣言
     val com:Com=Com()
@@ -34,7 +34,7 @@ class GameWithComActivity : GameBaseClass() {
 //手持ちのボタンを触った時
         //1p手持ち
         buttonTemochiRedBig!!.setOnClickListener {
-            if (turn == 1){
+            if (turn == 1 && !finished){
                 //movingSourceが同じときやり直しができる
                 if (movingSource == stringTemochiRedBig){ resetTemochi() }
                 //移動元が手持ちの場合のみコマを
@@ -48,7 +48,7 @@ class GameWithComActivity : GameBaseClass() {
         }
 
         buttonTemochiRedMiddle!!.setOnClickListener {
-            if (turn == 1){
+            if (turn == 1 && !finished){
                 if (movingSource==stringTemochiRedMiddle){ resetTemochi() }
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
@@ -60,7 +60,7 @@ class GameWithComActivity : GameBaseClass() {
         }
 
         buttonTemochiRedSmall!!.setOnClickListener {
-            if (turn == 1){
+            if (turn == 1 && !finished){
                 if (movingSource==stringTemochiRedSmall){ resetTemochi() }
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
@@ -71,179 +71,139 @@ class GameWithComActivity : GameBaseClass() {
             else{toastNotYourTurn()}
         }
 
-        //2p手持ち
-        buttonTemochiGreenBig!!.setOnClickListener {
-            if (turn == -1){
-                if (movingSource==stringTemochiGreenBig){ resetTemochi() }
-                else if (movingSource== null ||
-                    movingSource==stringTemochiGreenMiddle||
-                    movingSource==stringTemochiGreenSmall) {
-                    pickupTemochi(temochiGreenBig)
-                }
-            }
-            else{toastNotYourTurn()}
-        }
-
-        buttonTemochiGreenMiddle!!.setOnClickListener {
-            if (turn == -1){
-                if (movingSource==stringTemochiGreenMiddle){ resetTemochi() }
-                else if (movingSource== null ||
-                    movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenSmall){
-                    pickupTemochi(temochiGreenMiddle)
-                }
-            }
-            else{toastNotYourTurn()}
-        }
-
-        buttonTemochiGreenSmall!!.setOnClickListener {
-            if (turn == -1){
-                if (movingSource==stringTemochiGreenSmall){ resetTemochi() }
-                else if (movingSource==null||
-                    movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenMiddle){ pickupTemochi(temochiGreenSmall) }
-            }
-            else{toastNotYourTurn()}
-        }
-
-
         ////マスを触ったとき
         buttonA1.setOnClickListener {
             //ゲームが終わったらさわれないようにする,相手のターン中に触れないようにするためにこんなif文を書く
-            if (turn != 0){ pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
+            if (turn != 0 && !finished){ pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
             else{toastNotYourTurn()}
         }
 
         buttonA2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(A2) }
+            if (turn != 0 && !finished){ pushedMasButton(A2) }
             else{toastNotYourTurn()}
         }
 
         buttonA3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(A3) }
+            if (turn != 0 && !finished){ pushedMasButton(A3) }
             else{toastNotYourTurn()}
         }
 
         buttonA4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(A4) }
+            if (turn != 0 && !finished){ pushedMasButton(A4) }
             else{toastNotYourTurn()}
         }
 
         buttonB1.setOnClickListener {
-            if (turn != 0){ pushedMasButton(B1) }
+            if (turn != 0 && !finished){ pushedMasButton(B1) }
             else{toastNotYourTurn()}
         }
 
         buttonB2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(B2) }
+            if (turn != 0 && !finished){ pushedMasButton(B2) }
             else{toastNotYourTurn()}
         }
 
         buttonB3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(B3) }
+            if (turn != 0 && !finished){ pushedMasButton(B3) }
             else{toastNotYourTurn()}
         }
 
         buttonB4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(B4) }
+            if (turn != 0 && !finished){ pushedMasButton(B4) }
             else{toastNotYourTurn()}
         }
 
         buttonC1.setOnClickListener {
-            if (turn != 0){pushedMasButton(C1) }
+            if (turn != 0 && !finished){pushedMasButton(C1) }
             else{toastNotYourTurn()}
         }
 
         buttonC2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(C2) }
+            if (turn != 0 && !finished){ pushedMasButton(C2) }
             else{toastNotYourTurn()}
         }
 
         buttonC3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(C3) }
+            if (turn != 0 && !finished){ pushedMasButton(C3) }
             else{toastNotYourTurn()}
         }
 
         buttonC4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(C4) }
+            if (turn != 0 && !finished){ pushedMasButton(C4) }
             else{toastNotYourTurn()}
         }
 
         buttonD1.setOnClickListener {
-            if (turn != 0){ pushedMasButton(D1) }
+            if (turn != 0 && !finished){ pushedMasButton(D1) }
             else{toastNotYourTurn()}
         }
 
         buttonD2.setOnClickListener {
-            if (turn != 0){ pushedMasButton(D2) }
+            if (turn != 0 && !finished){ pushedMasButton(D2) }
             else{toastNotYourTurn()}
         }
 
         buttonD3.setOnClickListener {
-            if (turn != 0){ pushedMasButton(D3) }
+            if (turn != 0 && !finished){ pushedMasButton(D3) }
             else{toastNotYourTurn()}
         }
 
         buttonD4.setOnClickListener {
-            if (turn != 0){ pushedMasButton(D4) }
+            if (turn != 0 && !finished){ pushedMasButton(D4) }
             else{toastNotYourTurn()}
         }
 
         // その他
-        configButton.setOnClickListener {
-            playSound(openSE)
-            showConfigPopup()
-        }
+        configButton.setOnClickListener { showConfigPopup() }
 
-        resaltButton!!.setOnClickListener {
-            playSound(openSE)
-            showResultPopup()
-        }
+        resultButton!!.setOnClickListener { showResultPopup() }
 
     }
 
 
     //コンピューター関係
-    fun iniCom(){
+    private fun iniCom(){
         //コンピューターにわたすよう?
 
         com.iniLines(
-            mutableListOf<Mas>(A1, B1, C1, D1),//l1
-            mutableListOf<Mas>(A2, B2, C2, D2),//l2
-            mutableListOf<Mas>(A3, B3, C3, D3),//l3
-            mutableListOf<Mas>(A4, B4, C4, D4),//l4
-            mutableListOf<Mas>(A1, A2, A3, A4),//lA
-            mutableListOf<Mas>(B1, B2, B3, B4),//lB
-            mutableListOf<Mas>(C1, C2, C3, C4),//lC
-            mutableListOf<Mas>(D1, D2, D3, D4),//lD
-            mutableListOf<Mas>(A1, B2, C3, D4),//lS
-            mutableListOf<Mas>(A4, B3, C2, D1),//lBS
+            mutableListOf(A1, B1, C1, D1),//l1
+            mutableListOf(A2, B2, C2, D2),//l2
+            mutableListOf(A3, B3, C3, D3),//l3
+            mutableListOf(A4, B4, C4, D4),//l4
+            mutableListOf(A1, A2, A3, A4),//lA
+            mutableListOf(B1, B2, B3, B4),//lB
+            mutableListOf(C1, C2, C3, C4),//lC
+            mutableListOf(D1, D2, D3, D4),//lD
+            mutableListOf(A1, B2, C3, D4),//lS
+            mutableListOf(A4, B3, C2, D1),//lBS
         )
         com.iniConcatLine()
         com.iniTemochi(temochiGreenBig,temochiGreenMiddle,temochiGreenSmall)
     }
 
-    fun startCom(){
+    private fun startCom(){
         com.start()
         pickUpCom()
         nowDoingTimerID = insertTimerId
-        handler.post(insertTimer)
-        com.debScore()
-        resetCom()
-    }
-
-    fun pickUpCom(){
-        val rv = com.movingSourceGetter()
-
-        when{
-            rv is Mas     -> { pushedMasButton(rv) } //移動元がマスだった場合
-            rv is Temochi -> { pickupTemochi(rv) } //移動元が手持ちだった場合
+        if (turn != 0 && !finished) {
+            handler.post(insertTimer)
+            com.debScore()
+            resetCom()
         }
     }
 
-    fun insertCom(){ pushedMasButton(com.destinationGetter()!!) }
+    private fun pickUpCom(){
+        val rv = com.movingSourceGetter()
 
-    fun resetCom(){
+        when (rv) {
+            is Mas -> { pushedMasButton(rv) } //移動元がマスだった場合
+            is Temochi -> { pickupTemochi(rv) } //移動元が手持ちだった場合
+        }
+    }
+
+    private fun insertCom(){ pushedMasButton(com.destinationGetter()!!) }
+
+    private fun resetCom(){
         com.resetScore()
         com.resetLists()
     }
@@ -286,7 +246,7 @@ class GameWithComActivity : GameBaseClass() {
         buttonTemochiGreenBig=findViewById(R.id.buttonTemochiGreenBig)
         buttonTemochiGreenMiddle=findViewById(R.id.buttonTemochiGreenMiddle)
         buttonTemochiGreenSmall=findViewById(R.id.buttonTemochiGreenSmall)
-        resaltButton=findViewById(R.id.resaltButton)
+        resultButton=findViewById(R.id.resaltButton)
     }
 
     private val insertTimer: Runnable = object : Runnable{
