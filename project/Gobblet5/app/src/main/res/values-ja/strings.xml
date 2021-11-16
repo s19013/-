@@ -86,12 +86,12 @@
     <string name="HowToPlayTutorialText3">両方のプレイヤーがおたがいにコマをマスに置き合います｡</string>
     <string name="HowToPlayTutorialText4">縦</string>
     <string name="HowToPlayTutorialText5">横</string>
-    <string name="HowToPlayTutorialText6">ナナメの一列に自分のコマを4つ揃えたら勝ちです｡</string>
+    <string name="HowToPlayTutorialText6">ナナメの一列に,自分のコマを4つ揃えたら勝ちです｡</string>
     <string name="HowToPlayTutorialText7">ゴブレットでは､一度置いたコマを動かすことができます｡</string>
-    <string name="HowToPlayTutorialText8">自分が手に持っているコマがマスに置かれたコマより大きい場合</string>
+    <string name="HowToPlayTutorialText8">自分が手に持っているコマが,マスに置かれたコマより大きい場合</string>
     <string name="HowToPlayTutorialText9">持っているコマを置かれたコマにかぶせることができます｡</string>
-    <string name="HowToPlayTutorialText10">自分のコマにも､相手のコマにもかぶせることができます｡</string>
-    <string name="HowToPlayTutorialText11">かぶせられたコマはかぶせたコマがどかさないとと動かせません｡</string>
+    <string name="HowToPlayTutorialText10">自分のコマにも､相手のコマにも､かぶせることができます｡</string>
+    <string name="HowToPlayTutorialText11">かぶせられたコマは,かぶせたコマがどかさないと動かせません｡</string>
     <string name="HowToPlayTutorialText12">ルール説明を終わります｡</string>
     <string name="BackToHowToOperateMenu">操作方法メニュー\nに戻る</string>
     <string name="MovePieceFromHandToSquare">手持ちからマスへ</string>
@@ -104,7 +104,7 @@
     <string name="notYourTurnDialogText">あなたのターンではありません</string>
     <string name="OkText">わかりました</string>
     <string name="startOver">やり直す</string>
-    <string name="CheckTheBoard">ボードを確認する</string>
+    <string name="CheckTheBoard">ボードを\n確認する</string>
 
 
 </resources>
