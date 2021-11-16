@@ -31,8 +31,8 @@
         android:id="@+id/guidelineH4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintGuide_percent="0.3"
-        android:orientation="horizontal" />
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH5"
@@ -50,13 +50,6 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.60" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineH8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -201,94 +194,131 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/SeText"
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:autoSizeTextType="uniform"
-        android:text="@string/SEText"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="@id/guidelineH3"
+        android:orientation="vertical"
+        android:background="@color/textBackground"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH4"
-        app:layout_constraintStart_toStartOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="@id/guidelineV3"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH3">
 
-    <RadioGroup
-        android:id="@+id/SEOnOff"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="100"
+                android:autoSizeTextType="uniform"
+                android:text="@string/SEText"
+                android:textColor="@android:color/black" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/seVolume"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:autoSizeTextType="uniform"
+            android:textColor="@android:color/black"
+            android:text="0" />
+
+        <SeekBar
+            android:id="@+id/seSeekBar"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="3" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="@id/guidelineH4"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH5"
-        app:layout_constraintStart_toStartOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="@id/guidelineV3"
-        >
-
-        <RadioButton
-            android:id="@+id/SEOn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:autoSizeTextType="uniform"
-            android:text="@string/OnText"
-            android:textColor="@android:color/black" />
-
-        <RadioButton
-            android:id="@+id/SEOff"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:autoSizeTextType="uniform"
-            android:text="@string/OffText"
-            android:textColor="@android:color/black" />
-
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/BgmText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:autoSizeTextType="uniform"
-        android:text="@string/BGMText"
-        android:textColor="@android:color/black"
-        app:layout_constraintTop_toTopOf="@id/guidelineH6"
+        android:orientation="vertical"
+        android:background="@color/textBackground"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH7"
-        app:layout_constraintStart_toStartOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="@id/guidelineV3"
-        />
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH6">
 
-    <RadioGroup
-        android:id="@+id/BGMOnOff"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="@id/guidelineH7"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineH8"
-        app:layout_constraintStart_toStartOf="@id/guidelineV2"
-        app:layout_constraintEnd_toEndOf="@id/guidelineV3"
-        >
-
-        <RadioButton
-            android:id="@+id/BGMOn"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:autoSizeTextType="uniform"
-            android:text="@string/OnText" />
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/BGMOff"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="100"
+                android:autoSizeTextType="uniform"
+                android:text="@string/BGMText"
+                android:textColor="@android:color/black" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/bgmVolume"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
+            android:gravity="center"
             android:autoSizeTextType="uniform"
-            android:text="@string/OffText" />
-    </RadioGroup>
+            android:textColor="@android:color/black"
+            android:text="0" />
+
+        <SeekBar
+            android:id="@+id/bgmSeekBar"
+            style="@style/Widget.AppCompat.SeekBar.Discrete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="3" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.25" />
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/retryButtton"
