@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_how_to_play.*
 import java.util.*
 
 
-class HowToPlayActivity : AppCompatActivity() {
+class HowToPlayActivity : BaseClass() {
     private val maxPage = 12
     private var Page:Int = 1
     //タイマー関係
@@ -22,37 +22,22 @@ class HowToPlayActivity : AppCompatActivity() {
     private var time = 0L
     val handler = Handler()
     private var nowDoingTimerID = 0
-    //音関係
-    private lateinit var sp: SoundPool
-    private var cancelSE = 0
-    private var pageSE = 0
-    //プリファレンス関係
-    var pref: SharedPreferences? = null
-    var SE = false
-    var BGM =false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_how_to_play)
 
-        iniPreference()
-        iniSoundPool()
+        maxPageText.text = maxPage.toString()
 
-        nextButton.setOnClickListener {
-            countUpPage()
-        }
+        nextButton.setOnClickListener { countUpPage() }
 
-        preButton.setOnClickListener {
-            countDownPage()
-        }
+        preButton.setOnClickListener { countDownPage() }
 
         backButton.setOnClickListener {
             val intent = Intent(this,SelectTutorialActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
-
-        maxPageText.text = maxPage.toString()
     }
 
     fun changeElements(){
@@ -67,9 +52,7 @@ class HowToPlayActivity : AppCompatActivity() {
             Page += 1
             changeElements()
         }
-        if (Page > maxPage) {
-            Page = maxPage
-        }
+        if (Page > maxPage) { Page = maxPage }
 
     }
 
@@ -79,41 +62,37 @@ class HowToPlayActivity : AppCompatActivity() {
             changeElements()
         }
 
-        if (Page < 1) {
-            Page = 1
-        }
+        if (Page < 1) { Page = 1 }
     }
 
-    private fun changeCurrentPage() {
-        currentPageText.text = Page.toString()
-    }
+    private fun changeCurrentPage() { currentPageText.text = Page.toString() }
 
     fun changeText() {
-        when {
-            Page == 1 -> tutorialText.text = getString(R.string.HowToPlayTutorialText1)
-            Page == 2 -> tutorialText.text = getString(R.string.HowToPlayTutorialText2)
-            Page == 3 -> tutorialText.text = getString(R.string.HowToPlayTutorialText3)
-            Page == 4 -> tutorialText.text = getString(R.string.HowToPlayTutorialText4)
-            Page == 5 -> tutorialText.text = getString(R.string.HowToPlayTutorialText5)
-            Page == 6 -> tutorialText.text = getString(R.string.HowToPlayTutorialText6)
-            Page == 7 -> tutorialText.text = getString(R.string.HowToPlayTutorialText7)
-            Page == 8 -> tutorialText.text = getString(R.string.HowToPlayTutorialText8)
-            Page == 9 -> tutorialText.text = getString(R.string.HowToPlayTutorialText9)
-            Page == 10 -> tutorialText.text = getString(R.string.HowToPlayTutorialText10)
-            Page == 11 -> tutorialText.text = getString(R.string.HowToPlayTutorialText11)
-            Page == 12 -> tutorialText.text = getString(R.string.HowToPlayTutorialText12)
+        when (Page) {
+            1  -> tutorialText.text = getString(R.string.HowToPlayTutorialText1)
+            2  -> tutorialText.text = getString(R.string.HowToPlayTutorialText2)
+            3  -> tutorialText.text = getString(R.string.HowToPlayTutorialText3)
+            4  -> tutorialText.text = getString(R.string.HowToPlayTutorialText4)
+            5  -> tutorialText.text = getString(R.string.HowToPlayTutorialText5)
+            6  -> tutorialText.text = getString(R.string.HowToPlayTutorialText6)
+            7  -> tutorialText.text = getString(R.string.HowToPlayTutorialText7)
+            8  -> tutorialText.text = getString(R.string.HowToPlayTutorialText8)
+            9  -> tutorialText.text = getString(R.string.HowToPlayTutorialText9)
+            10 -> tutorialText.text = getString(R.string.HowToPlayTutorialText10)
+            11 -> tutorialText.text = getString(R.string.HowToPlayTutorialText11)
+            12 -> tutorialText.text = getString(R.string.HowToPlayTutorialText12)
         }
     }
 
     private fun changeImg() {
-        when {
-            Page == 1 -> {
+        when (Page) {
+            1 -> {
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment1())
                     .addToBackStack(null)
                     .commit()
             }
-            Page == 2 -> {
+            2 -> {
                 handler.removeCallbacks(fragment3)
                 time = 0L
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -121,11 +100,11 @@ class HowToPlayActivity : AppCompatActivity() {
                     .addToBackStack(null)
                     .commit()
             }
-            Page == 3 -> {
+            3 -> {
                 handler.post(fragment3)
                 nowDoingTimerID = 3
             }
-            Page == 4 -> {
+            4 -> {
                 handler.removeCallbacks(fragment3)
                 time = 0L
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -133,13 +112,13 @@ class HowToPlayActivity : AppCompatActivity() {
                     .addToBackStack(null)
                     .commit()
             }
-            Page == 5 -> {
+            5 -> {
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment5())
                     .addToBackStack(null)
                     .commit()
             }
-            Page == 6 -> {
+            6 -> {
                 handler.removeCallbacks(fragment7)
                 time = 0L
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -147,11 +126,11 @@ class HowToPlayActivity : AppCompatActivity() {
                     .addToBackStack(null)
                     .commit()
             }
-            Page == 7 -> {
+            7 -> {
                 handler.post(fragment7)
                 nowDoingTimerID = 7
             }
-            Page == 8 -> {
+            8 -> {
                 handler.removeCallbacks(fragment7)
                 handler.removeCallbacks(fragment9)
                 time = 0L
@@ -160,19 +139,19 @@ class HowToPlayActivity : AppCompatActivity() {
                     .addToBackStack(null)
                     .commit()
             }
-            Page == 9 -> {
+            9 -> {
                 handler.removeCallbacks(fragment7)
                 time = 0L
                 handler.post(fragment9)
                 nowDoingTimerID = 9
             }
-            Page == 10 -> {
+            10 -> {
                 handler.removeCallbacks(fragment9)
                 time = 0L
                 handler.post(fragment10)
                 nowDoingTimerID = 9
             }
-            Page == 11 -> {
+            11 -> {
                 handler.removeCallbacks(fragment10)
                 time = 0L
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -180,7 +159,7 @@ class HowToPlayActivity : AppCompatActivity() {
                     .addToBackStack(null)
                     .commit()
             }
-            Page == 12 -> {
+            12 -> {
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
                 fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment9_2())
                     .addToBackStack(null)
@@ -342,42 +321,6 @@ class HowToPlayActivity : AppCompatActivity() {
         handler.removeCallbacks(fragment9)
         handler.removeCallbacks(fragment10)
     }
-
-    fun playSound(status: Int){
-        Log.d("gobblet2", "status:${status}")
-        if (SE){
-            when(status){
-                cancelSE -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                pageSE -> sp.play(pageSE, 1.0f, 1.0f, 1, 0, 1.0f)
-            }
-        }
-    }
-
-    private fun iniPreference(){
-        //共有プリファレンス
-        pref = PreferenceManager.getDefaultSharedPreferences(this)
-        SE = pref!!.getBoolean("SEOnOff", true)
-        BGM =pref!!.getBoolean("BGMOnOff", true)
-    }
-
-    private fun iniSoundPool(){
-        //soundPool
-        val audioAttributes = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                .build()
-        } else { TODO("VERSION.SDK_INT < LOLLIPOP") }
-        sp = SoundPool.Builder()
-            .setAudioAttributes(audioAttributes)
-            .setMaxStreams(1)
-            .build()
-
-        cancelSE = sp.load(this, R.raw.cancel, 1)
-        pageSE = sp.load(this,R.raw.page_sound,1)
-    }
-
-
 }
 
 
