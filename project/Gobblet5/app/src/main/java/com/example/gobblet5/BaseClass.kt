@@ -17,6 +17,8 @@ import java.util.*
 
 //11/16日にやることほとんどのクラスにbaseClassを継承させる
 
+
+//主にどのクラスでも使うプレファレンスと効果音をまとめた
 open class BaseClass: AppCompatActivity()  {
     //効果音
     private   var sp: SoundPool?= null
@@ -26,7 +28,6 @@ open class BaseClass: AppCompatActivity()  {
     protected var menuSelectSE = 0
     protected var gameStartSE = 0
 
-
     //プレファレンス
     protected var pref: SharedPreferences? =null
     protected var seVolume = 0
@@ -34,10 +35,10 @@ open class BaseClass: AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        iniall()
+        iniAll()
     }
 
-    protected fun iniall(){
+    protected fun iniAll(){
         iniPreference()
         iniSoundPool()
     }
