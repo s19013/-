@@ -36,18 +36,16 @@ open class BaseClass: AppCompatActivity()  {
     protected fun iniPreference(){
         //共有プリファレンス
         pref = PreferenceManager.getDefaultSharedPreferences(this)
-        seVolume =pref!!.getInt("seVolume",0)
-        bgmVolume =pref!!.getInt("bgmVolume",0)
+        seVolume =pref!!.getInt("seVolume",5)
+        bgmVolume =pref!!.getInt("bgmVolume",5)
     }
 
     protected fun iniSoundPool(){
         //soundPool
-        val audioAttributes = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                .build()
-        } else { TODO("VERSION.SDK_INT < LOLLIPOP") }
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+            .build()
         sp = SoundPool.Builder()
             .setAudioAttributes(audioAttributes)
             .setMaxStreams(1)

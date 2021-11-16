@@ -665,7 +665,7 @@ open class GameBaseClass : AppCompatActivity() {
 
     ////ポップアップ
     //ポップアップが使う画面遷移
-    fun changeActivity(id:Int){
+    protected fun changeActivity(id:Int){
         var intent:Intent?=null
         when(id){
             activityIdMain->intent = Intent(this, MainActivity::class.java)
@@ -907,19 +907,17 @@ open class GameBaseClass : AppCompatActivity() {
     protected fun iniPreference(){
         //共有プリファレンス
         pref = PreferenceManager.getDefaultSharedPreferences(this)
-        seVolume =pref!!.getInt("seVolume",0)
-        bgmVolume =pref!!.getInt("bgmVolume",0)
+        seVolume =pref!!.getInt("seVolume",5)
+        bgmVolume =pref!!.getInt("bgmVolume",5)
         playFirst=pref!!.getInt("playFirst", 1)
     }
 
     protected fun iniSoundPool(){
         //soundPool
-        val audioAttributes = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                .build()
-        } else { TODO("VERSION.SDK_INT < LOLLIPOP") }
+        val audioAttributes = AudioAttributes.Builder()
+            .setUsage(AudioAttributes.USAGE_GAME)
+            .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+            .build()
         sp = SoundPool.Builder()
             .setAudioAttributes(audioAttributes)
             .setMaxStreams(1)
