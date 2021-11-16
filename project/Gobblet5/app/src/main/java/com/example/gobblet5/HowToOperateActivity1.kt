@@ -8,8 +8,8 @@ import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment1_3
 import kotlinx.android.synthetic.main.activity_how_to_operate1.*
 
 class HowToOperateActivity1 : BaseClass() {
-    val maxPage = 3
-    var Page:Int = 1
+    private val maxPage = 3
+    private var Page:Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +29,14 @@ class HowToOperateActivity1 : BaseClass() {
 
     }
 
-    fun changeElements(){
+    private fun changeElements(){
         playSound(pageSE)
         changeText()
         changeImg()
         changeCurrentPage()
     }
 
-    fun countUpPage() {
+    private fun countUpPage() {
         if (Page < maxPage) {
             Page += 1
             changeElements()
@@ -44,7 +44,7 @@ class HowToOperateActivity1 : BaseClass() {
         if (Page > maxPage) { Page = maxPage }
     }
 
-    fun countDownPage() {
+    private fun countDownPage() {
         if (Page > 1) {
             Page -= 1
             changeElements()
@@ -54,7 +54,7 @@ class HowToOperateActivity1 : BaseClass() {
     }
 
 
-    fun changeText() {
+    private fun changeText() {
         when (Page) {
             1 -> tutorialText.text = getString(R.string.HowToOperateTutorialText1_1)
             2 -> tutorialText.text = getString(R.string.HowToOperateTutorialText1_2)
@@ -62,9 +62,9 @@ class HowToOperateActivity1 : BaseClass() {
         }
     }
 
-    fun changeCurrentPage() { currentPageText.text = Page.toString() }
+    private fun changeCurrentPage() { currentPageText.text = Page.toString() }
 
-    fun changeImg() {
+    private fun changeImg() {
         when(Page) {
             1 -> {
                 val fragmentTransaction = supportFragmentManager.beginTransaction()

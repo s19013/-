@@ -28,7 +28,7 @@ class SelectTutorialActivity : BaseClass() {
         backButton.setOnClickListener {
             playSound(cancelSE)
             val intent = Intent(this, MainActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
         }
     }

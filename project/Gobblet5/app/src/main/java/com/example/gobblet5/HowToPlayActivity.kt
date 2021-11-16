@@ -3,6 +3,7 @@ package com.example.gobblet5
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import com.example.gobblet5.HowToPlayFragment.*
 import kotlinx.android.synthetic.main.activity_how_to_play.*
@@ -13,7 +14,7 @@ class HowToPlayActivity : BaseClass() {
     //タイマー関係
     private val millisecond:Long=100
     private var time = 0L
-    val handler = Handler()
+    val handler = Handler(Looper.getMainLooper())
     private var nowDoingTimerID = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,14 +35,14 @@ class HowToPlayActivity : BaseClass() {
         }
     }
 
-    fun changeElements(){
+    private  fun changeElements(){
         playSound(pageSE)
         changeText()
         changeImg()
         changeCurrentPage()
     }
 
-    fun countUpPage() {
+    private fun countUpPage() {
         if (Page < maxPage) {
             Page += 1
             changeElements()
@@ -50,7 +51,7 @@ class HowToPlayActivity : BaseClass() {
 
     }
 
-    fun countDownPage() {
+    private fun countDownPage() {
         if (Page > 1) {
             Page -= 1
             changeElements()
@@ -61,7 +62,7 @@ class HowToPlayActivity : BaseClass() {
 
     private fun changeCurrentPage() { currentPageText.text = Page.toString() }
 
-    fun changeText() {
+    private fun changeText() {
         when (Page) {
             1  -> tutorialText.text = getString(R.string.HowToPlayTutorialText1)
             2  -> tutorialText.text = getString(R.string.HowToPlayTutorialText2)
@@ -218,7 +219,6 @@ class HowToPlayActivity : BaseClass() {
                 }
                 800L -> {
                     val fragment = HowToPlayFragment7_2()
-                    val fragmentManager = supportFragmentManager
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
                     fragmentTransaction.replace(R.id.tutorialImg,fragment)
                         .addToBackStack(null)
