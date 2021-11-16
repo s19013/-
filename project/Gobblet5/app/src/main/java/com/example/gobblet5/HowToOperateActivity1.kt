@@ -13,32 +13,17 @@ import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment1_2
 import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment1_3
 import kotlinx.android.synthetic.main.activity_how_to_operate1.*
 
-class HowToOperateActivity1 : AppCompatActivity() {
+class HowToOperateActivity1 : BaseClass() {
     val maxPage = 3
     var Page:Int = 1
-    //音関係
-    private lateinit var sp: SoundPool
-    private var cancelSE = 0
-    private var pageSE = 0
-    //プリファレンス関係
-    var pref: SharedPreferences? = null
-    var SE = false
-    var BGM =false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_how_to_operate1)
 
-        iniPreference()
-        iniSoundPool()
+        nextButton.setOnClickListener { countUpPage() }
 
-        nextButton.setOnClickListener {
-            countUpPage()
-        }
-
-        preButton.setOnClickListener {
-            countDownPage()
-        }
+        preButton.setOnClickListener { countDownPage() }
 
         backButton.setOnClickListener {
             playSound(cancelSE)
@@ -62,10 +47,7 @@ class HowToOperateActivity1 : AppCompatActivity() {
             Page += 1
             changeElements()
         }
-        if (Page > maxPage) {
-            Page = maxPage
-        }
-
+        if (Page > maxPage) { Page = maxPage }
     }
 
     fun countDownPage() {
@@ -74,9 +56,7 @@ class HowToOperateActivity1 : AppCompatActivity() {
             changeElements()
         }
 
-        if (Page < 1) {
-            Page = 1
-        }
+        if (Page < 1) { Page = 1 }
     }
 
 
@@ -88,9 +68,7 @@ class HowToOperateActivity1 : AppCompatActivity() {
         }
     }
 
-    fun changeCurrentPage() {
-        currentPageText.text = Page.toString()
-    }
+    fun changeCurrentPage() { currentPageText.text = Page.toString() }
 
     fun changeImg() {
         when(Page) {
@@ -115,40 +93,6 @@ class HowToOperateActivity1 : AppCompatActivity() {
 
         }
 
-    }
-
-    fun playSound(status: Int){
-        Log.d("gobblet2", "status:${status}")
-        if (SE){
-            when(status){
-                cancelSE -> sp.play(cancelSE, 1.0f, 1.0f, 1, 0, 1.0f)
-                pageSE -> sp.play(pageSE, 1.0f, 1.0f, 1, 0, 1.0f)
-            }
-        }
-    }
-
-    private fun iniPreference(){
-        //共有プリファレンス
-        pref = PreferenceManager.getDefaultSharedPreferences(this)
-        SE = pref!!.getBoolean("SEOnOff", true)
-        BGM =pref!!.getBoolean("BGMOnOff", true)
-    }
-
-    private fun iniSoundPool(){
-        //soundPool
-        val audioAttributes = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_GAME)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                .build()
-        } else { TODO("VERSION.SDK_INT < LOLLIPOP") }
-        sp = SoundPool.Builder()
-            .setAudioAttributes(audioAttributes)
-            .setMaxStreams(1)
-            .build()
-
-        cancelSE = sp.load(this, R.raw.cancel, 1)
-        pageSE = sp.load(this,R.raw.page_sound,1)
     }
 
 }
