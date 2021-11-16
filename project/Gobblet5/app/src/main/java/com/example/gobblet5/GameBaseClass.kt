@@ -17,13 +17,19 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import java.lang.IndexOutOfBoundsException
 //import kotlinx.android.synthetic.main.activity_game_with_man.*
 import java.util.*
 
 open class GameBaseClass : AppCompatActivity() {
-    open var thisAct=0
+    open var thisAct=0 //今のアクティビティ
     //コンピューター対戦:-1
     //人間対戦:1
+    val activityIdGameWithCom = 1
+    val activityIdGameWithMan = 2
+    val activityIdPreGameWithCom = 3
+    val activityIdPreGameWithMan = 4
+    val activityIdMain = 5
 
     //タイマー関係
     protected val millisecond:Long=100
@@ -341,71 +347,25 @@ open class GameBaseClass : AppCompatActivity() {
         }
 
         when(name){
-            stringA1 -> {
-                if (A1.mPickup(turn) != 0) { commonFunc(A1) }
-                else { toastCanNotPickup() } //取り出せるものが無い時の動き
-            }
-            stringA2 -> {
-                if (A2.mPickup(turn) != 0) { commonFunc(A2) }
-                else { toastCanNotPickup() }
-            }
-            stringA3 -> {
-                if (A3.mPickup(turn) != 0) { commonFunc(A3) }
-                else { toastCanNotPickup() }
-            }
-            stringA4 -> {
-                if (A4.mPickup(turn) != 0) { commonFunc(A4) }
-                else { toastCanNotPickup() }
-            }
-            stringB1 -> {
-                if (B1.mPickup(turn) != 0) { commonFunc(B1) }
-                else { toastCanNotPickup() }
-            }
-            stringB2 -> {
-                if (B2.mPickup(turn) != 0) { commonFunc(B2) }
-                else { toastCanNotPickup() }
-            }
-            stringB3 -> {
-                if (B3.mPickup(turn) != 0) { commonFunc(B3) }
-                else { toastCanNotPickup() }
-            }
-            stringB4 -> {
-                if (B4.mPickup(turn) != 0) { commonFunc(B4) }
-                else { toastCanNotPickup() }
-            }
-            stringC1 -> {
-                if (C1.mPickup(turn) != 0) { commonFunc(C1) }
-                else { toastCanNotPickup() }
-            }
-            stringC2 -> {
-                if (C2.mPickup(turn) != 0) { commonFunc(C2) }
-                else { toastCanNotPickup() }
-            }
-            stringC3 -> {
-                if (C3.mPickup(turn) != 0) { commonFunc(C3) }
-                else { toastCanNotPickup() }
-            }
-            stringC4 -> {
-                if (C4.mPickup(turn) != 0) { commonFunc(C4) }
-                else { toastCanNotPickup() }
-            }
-            stringD1 -> {
-                if (D1.mPickup(turn) != 0) { commonFunc(D1) }
-                else { toastCanNotPickup() }
-            }
-            stringD2 -> {
-                if (D2.mPickup(turn) != 0) { commonFunc(D2) }
-                else { toastCanNotPickup() }
-            }
-            stringD3 -> {
-                if (D3.mPickup(turn) != 0) { commonFunc(D3) }
-                else { toastCanNotPickup() }
-            }
-            stringD4 -> {
-                if (D4.mPickup(turn) != 0) { commonFunc(D4) }
-                else { toastCanNotPickup() }
-            }
+            stringA1 -> { if (A1.mPickup(turn) != 0) {return commonFunc(A1) } }
+            stringA2 -> { if (A2.mPickup(turn) != 0) {return commonFunc(A2) } }
+            stringA3 -> { if (A3.mPickup(turn) != 0) {return commonFunc(A3) } }
+            stringA4 -> { if (A4.mPickup(turn) != 0) {return commonFunc(A4) } }
+            stringB1 -> { if (B1.mPickup(turn) != 0) {return commonFunc(B1) } }
+            stringB2 -> { if (B2.mPickup(turn) != 0) {return commonFunc(B2) } }
+            stringB3 -> { if (B3.mPickup(turn) != 0) {return commonFunc(B3) } }
+            stringB4 -> { if (B4.mPickup(turn) != 0) {return commonFunc(B4) } }
+            stringC1 -> { if (C1.mPickup(turn) != 0) {return commonFunc(C1) } }
+            stringC2 -> { if (C2.mPickup(turn) != 0) {return commonFunc(C2) } }
+            stringC3 -> { if (C3.mPickup(turn) != 0) {return commonFunc(C3) } }
+            stringC4 -> { if (C4.mPickup(turn) != 0) {return commonFunc(C4) } }
+            stringD1 -> { if (D1.mPickup(turn) != 0) {return commonFunc(D1) } }
+            stringD2 -> { if (D2.mPickup(turn) != 0) {return commonFunc(D2) } }
+            stringD3 -> { if (D3.mPickup(turn) != 0) {return commonFunc(D3) } }
+            stringD4 -> { if (D4.mPickup(turn) != 0) {return commonFunc(D4) } }
         }
+
+        toastCanNotPickup() //取り出せるものが無い時の動き
     }
 
     //駒を入れる
@@ -706,14 +666,14 @@ open class GameBaseClass : AppCompatActivity() {
 
     ////ポップアップ
     //ポップアップが使う画面遷移
-    fun changeActivity(id:String){
+    fun changeActivity(id:Int){
         var intent:Intent?=null
         when(id){
-            "main"->intent = Intent(this, MainActivity::class.java)
-            "gameWithMan" -> intent = Intent(this, GameWithManActivity::class.java)
-            "gameWithCom" -> intent = Intent(this, GameWithComActivity::class.java)
-            "preGameWithMan" -> intent = Intent(this, preGameWithManActivity::class.java)
-            "preGameWithCom" -> intent = Intent(this, preGameWithComActivity::class.java)
+            activityIdMain->intent = Intent(this, MainActivity::class.java)
+            activityIdGameWithMan -> intent = Intent(this, GameWithManActivity::class.java)
+            activityIdGameWithCom -> intent = Intent(this, GameWithComActivity::class.java)
+            activityIdPreGameWithMan -> intent = Intent(this, preGameWithManActivity::class.java)
+            activityIdPreGameWithCom -> intent = Intent(this, preGameWithComActivity::class.java)
         }
 
         intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -760,15 +720,15 @@ open class GameBaseClass : AppCompatActivity() {
         //タイトルへ戻る
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
-            changeActivity("main")
+            changeActivity(activityIdMain)
         }
 
         //もう一度やる
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
             playSound(gameStartSE)
             when(thisAct){
-                -1 -> {changeActivity("gameWithCom")}
-                 1 -> {changeActivity("gameWithMan")}
+                -1 -> {changeActivity(activityIdGameWithCom)}
+                 1 -> {changeActivity(activityIdGameWithMan)}
             }
         }
 
@@ -776,8 +736,8 @@ open class GameBaseClass : AppCompatActivity() {
         popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
             playSound(cancelSE)
             when(thisAct){
-                -1 -> {changeActivity("preGameWithCom")}
-                 1 -> {changeActivity("preGameWithMan")}
+                -1 -> {changeActivity(activityIdPreGameWithCom)}
+                 1 -> {changeActivity(activityIdPreGameWithMan)}
             }
         }
 
@@ -854,7 +814,7 @@ open class GameBaseClass : AppCompatActivity() {
         //タイトルへ戻るボタン
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
-            changeActivity("main")
+            changeActivity(activityIdMain)
         }
 
         //盤面へ戻るボタン
@@ -869,8 +829,8 @@ open class GameBaseClass : AppCompatActivity() {
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
             playSound(gameStartSE)
             when(thisAct){
-                -1 -> {changeActivity("gameWithCom")}
-                 1 -> {changeActivity("gameWithMan")}
+                -1 -> {changeActivity(activityIdGameWithCom)}
+                 1 -> {changeActivity(activityIdGameWithMan)}
             }
         }
     }
