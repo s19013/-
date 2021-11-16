@@ -28,19 +28,19 @@ open class BaseClass: AppCompatActivity()  {
         iniAll()
     }
 
-    protected fun iniAll(){
+    private fun iniAll(){
         iniPreference()
         iniSoundPool()
     }
 
-    protected fun iniPreference(){
+    private fun iniPreference(){
         //共有プリファレンス
         pref = PreferenceManager.getDefaultSharedPreferences(this)
         seVolume =pref!!.getInt("seVolume",5)
         bgmVolume =pref!!.getInt("bgmVolume",5)
     }
 
-    protected fun iniSoundPool(){
+    private fun iniSoundPool(){
         //soundPool
         val audioAttributes = AudioAttributes.Builder()
             .setUsage(AudioAttributes.USAGE_GAME)

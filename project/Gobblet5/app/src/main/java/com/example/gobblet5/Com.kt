@@ -42,11 +42,13 @@ class Com {
     private var temochiMiddle:Temochi? = null
     private var temochiSmall:Temochi? = null
 
+
+    //ゲームクラスが取り出せるやつ
     var destination :Mas? = null //移動先
     var movingSource:Any? = null //移動元
 
-    var blocking=false
-    var chance = false
+    private var blocking=false
+    private var chance = false
 
     private var turnCount = 0 //自分のターンが回ってきた回数
 
@@ -76,7 +78,7 @@ class Com {
 
     //デバッグ用
     private var debComReachList = mutableListOf<String>()
-    private var debhumanReachList = mutableListOf<String>()
+    private var debHumanReachList = mutableListOf<String>()
     private var debCandidateList= mutableListOf<String>()
     private var debDoNotMoveList= mutableListOf<String>()
     private var debDoNotMoveListBecauseItIsBlocking:MutableList<String> = mutableListOf()
@@ -85,15 +87,15 @@ class Com {
     private var debMasInTheGreenMiddlePiece:MutableList<String> = mutableListOf()
     private var debMasInTheGreenSmallPiece:MutableList<String> = mutableListOf()
     private var debMasList = mutableListOf<String>()
-    private var debmostBiggestScoreList:MutableList<String> = mutableListOf() //一番大きいスコア
-    private var debsecondBiggestScoreList:MutableList<String> = mutableListOf() //二番目
-    private var debthirdBiggestScoreList:MutableList<String> = mutableListOf() //3番目
+    private var debMostBiggestScoreList:MutableList<String> = mutableListOf() //一番大きいスコア
+    private var debSecondBiggestScoreList:MutableList<String> = mutableListOf() //二番目
+    private var debThirdBiggestScoreList:MutableList<String> = mutableListOf() //3番目
     private var debFourthBiggestScoreList:MutableList<String> = mutableListOf() //4
     private var debFifthBiggestScoreList:MutableList<String> = mutableListOf() //5
 
 ////リーチ系=------
     //リーチなった列がないか調べる
-    fun reachChecker(){
+    private fun reachChecker(){
         for (line in lineAllAtOnce){
             if (line.comPieceCounter()>=3){
                 comReachList.add(line)
@@ -105,7 +107,7 @@ class Com {
     }
 
     //コンピューターにリーチがかかってないか調べる(止めをさせる場所を探す)
-    fun checkCanIcheckmate(){
+    private fun checkCanICheckmate(){
 
         //最後の決めてとなる場所を探す,そしてそこに入れられるかを探す
         fun commonFunc(line:Line){
@@ -135,7 +137,7 @@ class Com {
         }
 
         //リストの中身を調べていく
-        var listForIterativeProcessing = mutableListOf<Line>()
+        val listForIterativeProcessing = mutableListOf<Line>()
         listForIterativeProcessing.addAll(comReachList)
         //繰り返し処理中のリストにremoveとかしちゃうと動きがおかしくなるから一旦別の変数にコピー
         for (value in listForIterativeProcessing){ commonFunc(value) }
@@ -144,7 +146,7 @@ class Com {
     }
 
     //人間にリーチがかかってないか調べる(相手の勝利を阻止する)
-    fun checkCanIBlockCheckmate(){
+    private fun checkCanIBlockCheckmate(){
         ////どこに入れれば防げるか探す
         fun commonFunc(line:Line){
             //そのライン上で相手のものになっていないマスを探す?
@@ -162,13 +164,13 @@ class Com {
             }
         }
 
-        var listForIterativeProcessing = mutableListOf<Line>()
+        val listForIterativeProcessing = mutableListOf<Line>()
         listForIterativeProcessing.addAll(humanReachList)
         //繰り返し処理中のリストにremoveとかしちゃうと動きがおかしくなるから一旦別の変数にコピー
         for (value in listForIterativeProcessing){ commonFunc(value) }
 
         debC()
-        Log.d("gobblet2Com","debhumanReachList:${debhumanReachList}")
+        Log.d("gobblet2Com","debHumanReachList:${debHumanReachList}")
 
         //細かくしらべて本当にリーチがかかっているかつまだ止めをさせないならばブロックする
         if (humanReachList.isNotEmpty()){blocking = true}
@@ -180,7 +182,7 @@ class Com {
 //評価値関係?-----------------
     //各マスに何が入っているのかしらべて評価値をつける
     //ついでにコンピューターのコマがどこにあるかも調べる
-    fun checkWhatIsInTheMas(){
+    private fun checkWhatIsInTheMas(){
         fun commonFunc(line: Line){
             for (mas in line.listGetter()){
                 val size = mas.funcForDisplay()[0] //コマの大きさ
@@ -202,14 +204,14 @@ class Com {
     }
 
     //コマの周りを調べる(今は空白の部分だけ)
-    fun checkEachMas(){
+    private fun checkEachMas(){
         for (line in lineAllAtOnce){ funcForCheckEachMas(line) }
     }
 
     //ラインごとに分けて各マスに評価値を入れる
-    fun funcForCheckEachMas(line: Line){
+    private fun funcForCheckEachMas(line: Line){
         var standard:Mas? =null
-        var linesList= line.listGetter()
+        val linesList= line.listGetter()
 
         //基準のマスに自分のコマが入っていた場合
         fun standardIsM1(){
@@ -246,10 +248,6 @@ class Com {
                 }
         }
 
-        fun standardIsEmp(){
-
-        }
-
         for (i in 0..3){
             //ライン上で一番前のマスから順に基準のマスにしていく
             standard=line.listGetter()[i]
@@ -268,11 +266,11 @@ class Com {
     }
 
     //周りををしらべている時に空のコマがあった時の処理
-    fun inTheCaseOfEmp(mas:Mas){ mas.addScore(10) }
+    private fun inTheCaseOfEmp(mas:Mas){ mas.addScore(10) }
 
     //周りををしらべている時に自分のコマがあった時の処理
     //大きさの差を減らそうかな?
-    fun inTheCaseOfM1(size:Int,mas: Mas){
+    private fun inTheCaseOfM1(size:Int,mas: Mas){
         when(size){
             smallPiece  ->{ mas.addScore(30) } //小 50
             middlePiece ->{ mas.addScore(30) } //中 55
@@ -281,7 +279,7 @@ class Com {
     }
 
     //周りををしらべている時に相手のコマがあった時の処理
-    fun inTheCaseOfP1(size:Int,mas: Mas){
+    private fun inTheCaseOfP1(size:Int,mas: Mas){
         when(size){
             bigPiece    ->{ mas.addScore(-5) } //大
         }
@@ -289,8 +287,8 @@ class Com {
 //-----------------------------
 //配置
     //一番評価値が大きい場所を選ぶ
-    fun biggestScore(){
-        var biggestScore = mutableListOf(-500,-500,-500,-500,-500) //[1番,2番､3番､4番､5番]
+    private fun biggestScore(){
+        val biggestScore = mutableListOf(-500,-500,-500,-500,-500) //[1番,2番､3番､4番､5番]
 
         fun setBiggestScore(line: Line){
             for (mas in line.listGetter()){
@@ -339,21 +337,21 @@ class Com {
         for (i in 0..3){ addMas(lineAllAtOnce[i]) }
 
 //        debC()
-//        Log.d("gobblet2Com","1番:${biggestScore[0]} -${debmostBiggestScoreList}")
-//        Log.d("gobblet2Com","2番:${biggestScore[1]} -${debsecondBiggestScoreList}")
-//        Log.d("gobblet2Com","3番:${biggestScore[2]} -${debthirdBiggestScoreList}")
+//        Log.d("gobblet2Com","1番:${biggestScore[0]} -${debMostBiggestScoreList}")
+//        Log.d("gobblet2Com","2番:${biggestScore[1]} -${debSecondBiggestScoreList}")
+//        Log.d("gobblet2Com","3番:${biggestScore[2]} -${debThirdBiggestScoreList}")
 //        Log.d("gobblet2Com","4番:${biggestScore[3]} -${debFourthBiggestScoreList}")
 //        Log.d("gobblet2Com","5番:${biggestScore[4]} -${debFifthBiggestScoreList}")
     }
 
     //起き場所を決める
-    fun chooseLocation(){
+    private fun chooseLocation(){
         fun commonFunc(scoreList:MutableList<Mas>):Boolean{
             var errorCount = 0
             while (true){
                 if (errorCount>scoreList.size){ return false } //数回エラーがでたらループを抜ける
                 destination = scoreList[(0 until scoreList.size).random()]
-                if (!choosePickup(destination)){ errorCount+=1 }//指定した場所におけなかったら他のこうほを探す
+                if (!choosePickup()){ errorCount+=1 }//指定した場所におけなかったら他のこうほを探す
                 else { return true } //おけるなら置く作業に進む
             }
         }
@@ -391,46 +389,50 @@ class Com {
 
     //取り出す場所を決める
     //その前に色々検証?
-    fun choosePickup(mas: Mas?):Boolean{
+    private fun choosePickup():Boolean{
         //移動先におけるコマがあるか検証
         when(destination?.funcForDisplay()?.get(0)){
             bigPiece ->{return false} //そもそも大きいコマはどうやっても置けないかえら諦める
-            middlePiece ->{ return pickUpPiece(bigPiece,mas) } //中コマなら大きいコマのみおけるから大きいコマを取り出せるか調べる
+            middlePiece ->{ return pickUpPiece(bigPiece) } //中コマなら大きいコマのみおけるから大きいコマを取り出せるか調べる
             smallPiece -> {
                 //小さいコマなら中コマか大コマを取り出せるかしらべる
                 //中コマ->大コマと探す
-                if (pickUpPiece(middlePiece,mas)){ return true }
-                else  { return pickUpPiece(bigPiece,mas) }
+                return if (pickUpPiece(middlePiece)){ true }
+                else  { pickUpPiece(bigPiece) }
             }
             empty -> {
                 //ここではいろんな条件に応じてうごかないと行けない
                 if (chance){
-                    if (pickUpPiece(smallPiece,mas)){ return true } //空だから小さいやつを入れても平気
-                    else if (pickUpPiece(middlePiece,mas)){return true}
-                    else { return pickUpPiece(bigPiece,mas) }
+                    return when {
+                        pickUpPiece(smallPiece) -> { true } //空だから小さいやつを入れても平気
+                        pickUpPiece(middlePiece) -> { true }
+                        else -> { pickUpPiece(bigPiece) }
+                    }
                 }
 
                 if (blocking){
                     //ブロックするときは大きいコマを使う
-                    if (pickUpPiece(bigPiece,mas)){ return true }
-                    else if (pickUpPiece(middlePiece,mas)){ return true } //どうしても大きいコマが使えない時は中コマ
-                    else { return pickUpPiece(smallPiece,mas) } //最悪小さいコマ
-                }
-                //空いているなら何でも入れられる
-                //小コマ->中コマ->大きいと探す
-                else{
-                    if (temochiMiddle?.returnCount()!! == 0 && temochiBig?.returnCount()!! == 0){
-                        if (pickUpPiece(smallPiece,mas)){return true}
+                    return when {
+                        pickUpPiece(bigPiece) -> { true }
+                        pickUpPiece(middlePiece) -> { true } //どうしても大きいコマが使えない時は中コマ
+                        else -> { pickUpPiece(smallPiece) } //最悪小さいコマ
                     }
-                    if (pickUpPiece(middlePiece,mas)){return true}
-                    if (pickUpPiece(bigPiece,mas)) {return true}
+                }
+                else{
+                    //空いているなら何でも入れられる
+                    //小コマ->中コマ->大きいと探す
+                    if (temochiMiddle?.returnCount()!! == 0 && temochiBig?.returnCount()!! == 0){
+                        if (pickUpPiece(smallPiece)){return true}
+                    }
+                    if (pickUpPiece(middlePiece)){return true}
+                    if (pickUpPiece(bigPiece)) {return true}
                 }
             }
         }
         return false
     }
     
-    fun pickUpPiece(size: Int,mas: Mas?):Boolean{
+    private fun pickUpPiece(size: Int):Boolean{
         var masInTheGreenPiece:MutableList<Mas> = mutableListOf()   
         when(size){
             smallPiece  -> {
@@ -486,7 +488,7 @@ class Com {
                 //差集合を使って動かせる大きいコマがあるか調べる
                 val box1 = masInTheGreenPiece.minus(doNotMoveListBecauseItIsBlocking) //ブロックに使っている
                 val box2 = masInTheGreenPiece.minus(doNotMoveListBecauseItMakeReach) //リーチにつかっている
-                val box = box1+box2
+                val box = box1+box2 //1,2の条件に合わないやつを選ぶ
                 for (i in box){ Log.d("gobblet2Com", "${i.nameGetter()}inBox") }
                 Log.d("gobblet2Com", "elseBoxSize${box.size}")
                 if (box.isNotEmpty()) {
@@ -496,14 +498,13 @@ class Com {
                     return true
                 }
             }
-
         }
         Log.d("gobblet2Com", "can't pickup")
         return false //だめならだめと返す
     }
 
     //最初のターンの定石を実行
-    fun firstTurn(){
+    private fun firstTurn(){
         while (true){
             movingSource= temochiBig
             when((0..3).random()){
@@ -551,7 +552,7 @@ class Com {
         }
         reachChecker() //リーチがかかってないか調べる
         //自分にリーチがかかっていた
-        if (comReachList.isNotEmpty()){ checkCanIcheckmate() }
+        if (comReachList.isNotEmpty()){ checkCanICheckmate() }
         //相手にリーチがかかっていた
         if (humanReachList.isNotEmpty()){ checkCanIBlockCheckmate()}
 
@@ -559,7 +560,7 @@ class Com {
     }
 
     //特定条件以外での処理
-    fun standardProcessing(){
+    private fun standardProcessing(){
         checkWhatIsInTheMas()
         checkEachMas()
         doNotMoveList.addAll(doNotMoveListBecauseItMakeReach)
@@ -666,7 +667,7 @@ class Com {
         Log.d("gobblet2Com"," ")
         debC()
         Log.d("gobblet2Com","comReachList:${debComReachList}")
-        Log.d("gobblet2Com","humanReachList:${debhumanReachList}")
+        Log.d("gobblet2Com","humanReachList:${debHumanReachList}")
         Log.d("gobblet2Com","DoNotMoveList:${debDoNotMoveList}")
         Log.d("gobblet2Com","debDoNotMoveListBecauseItMakeReach:${debDoNotMoveListBecauseItMakeReach}")
         Log.d("gobblet2Com","debDoNotMoveListBecauseItIsBlocking:${debDoNotMoveListBecauseItIsBlocking}")
@@ -686,14 +687,14 @@ class Com {
         Log.d("gobblet2Com","destination:${destination?.nameGetter()}")
     }
 
-    fun debC(){
+    private fun debC(){
         val debList = mutableListOf(
             debCandidateList,debDoNotMoveList,
             debDoNotMoveListBecauseItIsBlocking,debDoNotMoveListBecauseItMakeReach,
-            debComReachList, debhumanReachList,
+            debComReachList, debHumanReachList,
             debMasInTheGreenBigPiece, debMasInTheGreenMiddlePiece, debMasInTheGreenSmallPiece,
             debMasList,
-            debmostBiggestScoreList, debsecondBiggestScoreList, debthirdBiggestScoreList,
+            debMostBiggestScoreList, debSecondBiggestScoreList, debThirdBiggestScoreList,
             debFourthBiggestScoreList,debFifthBiggestScoreList
             )
 
@@ -704,15 +705,15 @@ class Com {
         for (i in doNotMoveListBecauseItMakeReach){debDoNotMoveListBecauseItMakeReach.add(i.nameGetter()) }
         for (i in doNotMoveListBecauseItIsBlocking){debDoNotMoveListBecauseItIsBlocking.add(i.nameGetter()) }
         for (i in comReachList){ debComReachList.add(i.nameGetter()) }
-        for (i in humanReachList){ debhumanReachList.add(i.nameGetter()) }
+        for (i in humanReachList){ debHumanReachList.add(i.nameGetter()) }
         for (i in masInTheGreenBigPiece){ debMasInTheGreenBigPiece.add(i.nameGetter()) }
         for (i in masInTheGreenMiddlePiece){ debMasInTheGreenMiddlePiece.add(i.nameGetter()) }
         for (i in masInTheGreenSmallPiece){ debMasInTheGreenSmallPiece.add(i.nameGetter()) }
         for (i in masList){debMasList.add(i.nameGetter())}
 
-        for (i in mostBiggestScoreList){debmostBiggestScoreList.add(i.nameGetter())}
-        for (i in secondBiggestScoreList){debsecondBiggestScoreList.add(i.nameGetter())}
-        for (i in thirdBiggestScoreList){debthirdBiggestScoreList.add(i.nameGetter())}
+        for (i in mostBiggestScoreList){debMostBiggestScoreList.add(i.nameGetter())}
+        for (i in secondBiggestScoreList){debSecondBiggestScoreList.add(i.nameGetter())}
+        for (i in thirdBiggestScoreList){debThirdBiggestScoreList.add(i.nameGetter())}
         for (i in fourthBiggestScoreList){debFourthBiggestScoreList.add(i.nameGetter())}
         for (i in fifthBiggestScoreList){debFifthBiggestScoreList.add(i.nameGetter())}
         
@@ -724,9 +725,6 @@ class Com {
         Log.d("gobblet2Com","[${bord[2][0].nameGetter()},${bord[2][1].nameGetter()},${bord[2][2].nameGetter()},${bord[2][3].nameGetter()}]")
         Log.d("gobblet2Com","[${bord[3][0].nameGetter()},${bord[3][1].nameGetter()},${bord[3][2].nameGetter()},${bord[3][3].nameGetter()}]")
     }
-
-    fun deblist(){ Log.d("gobblet2Com","[]") }
-
 }
 
 //Log.d("gobblet2Com","now checking ${bord[y][x].nameGetter()}")
