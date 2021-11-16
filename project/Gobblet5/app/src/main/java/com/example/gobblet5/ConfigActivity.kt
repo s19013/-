@@ -27,11 +27,11 @@ class ConfigActivity : BaseClass() {
         }
     }
 
+    //テキスト初期化
     private fun iniTextView(){
         seVolumeText = findViewById(R.id.seVolume)
         bgmVolumeText = findViewById(R.id.bgmVolume)
 
-        //テキスト初期化
         seVolumeText?.text = seVolume.toString() //プレファレンスの値をセット
         bgmVolumeText?.text = bgmVolume.toString() //プレファレンスの値をセット
 
@@ -78,6 +78,7 @@ class ConfigActivity : BaseClass() {
                     playSound(seekSE)
                     bgmVolumeText?.text = progress.toString()
                     bgmVolume=progress
+                    //mediaPlayer?.setVolume(bgmVolume*0.1f,bgmVolume*0.1f)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}

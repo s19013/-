@@ -73,7 +73,7 @@ open class BaseClass: AppCompatActivity()  {
     }
 
     protected fun playSound(status: Int){
-        if (seVolume>0){ sp!!.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
+        if (seVolume > 0){ sp!!.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
     }
 
     override fun onDestroy() {
