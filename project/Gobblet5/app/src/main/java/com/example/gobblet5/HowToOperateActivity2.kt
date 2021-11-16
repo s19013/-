@@ -1,18 +1,10 @@
 package com.example.gobblet5
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.media.AudioAttributes
-import android.media.SoundPool
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.preference.PreferenceManager
 import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment2_1
 import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment2_2
 import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment2_3
-import kotlinx.android.synthetic.main.activity_how_to_operate1.*
-import kotlinx.android.synthetic.main.activity_how_to_operate2.*
 import kotlinx.android.synthetic.main.activity_how_to_operate2.backButton
 import kotlinx.android.synthetic.main.activity_how_to_operate2.currentPageText
 import kotlinx.android.synthetic.main.activity_how_to_operate2.maxPageText

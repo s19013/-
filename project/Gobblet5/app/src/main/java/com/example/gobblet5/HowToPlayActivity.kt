@@ -1,18 +1,11 @@
 package com.example.gobblet5
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.media.AudioAttributes
-import android.media.SoundPool
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
 import com.example.gobblet5.HowToPlayFragment.*
 import kotlinx.android.synthetic.main.activity_how_to_play.*
-import java.util.*
-
 
 class HowToPlayActivity : BaseClass() {
     private val maxPage = 12

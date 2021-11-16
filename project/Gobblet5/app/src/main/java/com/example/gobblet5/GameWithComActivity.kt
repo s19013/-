@@ -2,11 +2,7 @@ package com.example.gobblet5
 
 import android.os.Bundle
 import android.graphics.Color
-import android.os.Handler
 import android.util.Log
-import android.view.View
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_1
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_2
 import kotlinx.android.synthetic.main.activity_game_with_com.*
 
 class GameWithComActivity : GameBaseClass() {

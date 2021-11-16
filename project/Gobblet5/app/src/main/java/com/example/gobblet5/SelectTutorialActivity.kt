@@ -1,12 +1,7 @@
 package com.example.gobblet5
 
 import android.content.Intent
-import android.media.AudioAttributes
-import android.media.SoundPool
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.preference.PreferenceManager
 import kotlinx.android.synthetic.main.activity_select_tutorial.*
 
 

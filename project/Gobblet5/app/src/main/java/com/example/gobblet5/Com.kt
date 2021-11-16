@@ -1,14 +1,6 @@
 package com.example.gobblet5
 
-import android.os.Build
-import android.os.Handler
 import android.util.Log
-import androidx.annotation.RequiresApi
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_1
-import com.example.gobblet5.HowToPlayFragment.HowToPlayFragment7_2
-import org.jetbrains.annotations.NotNull
-import java.util.stream.Collectors
-import java.util.stream.Stream
 
 class Com {
     //マジックナンバー防止

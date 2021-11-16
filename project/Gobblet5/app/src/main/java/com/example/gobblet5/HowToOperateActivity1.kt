@@ -1,13 +1,7 @@
 package com.example.gobblet5
 
 import android.content.Intent
-import android.content.SharedPreferences
-import android.media.AudioAttributes
-import android.media.SoundPool
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import androidx.preference.PreferenceManager
 import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment1_1
 import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment1_2
 import com.example.gobblet5.HowToOperateFragment.HowToOperateFragment1_3
