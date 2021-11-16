@@ -114,6 +114,7 @@ open class GameBaseClass : AppCompatActivity() {
     protected var closeSE = 0
     protected var winSE = 0
     protected var loosSE = 0
+    protected var seekSE = 0
     //ゲームに必要なもの
     protected var turn = 0 //後でちゃんと設定する
     protected var size = 0
@@ -171,8 +172,8 @@ open class GameBaseClass : AppCompatActivity() {
 
     //共有プリファレンス
     protected var pref: SharedPreferences? =null
-    protected var SE =false
-    protected var BGM =false
+    protected var seVolume = 0
+    protected var bgmVolume = 0
     protected var playFirst=1
     //画面の大きさ
     protected var width = 0
@@ -618,7 +619,7 @@ open class GameBaseClass : AppCompatActivity() {
 
         if (finished){
             //ジングルを鳴らす
-            if (SE){
+            if (seVolume > 0){
                 if (thisAct==1){playSound(winSE)}
                 if (thisAct==-1){
                     when(winner){
@@ -769,47 +770,70 @@ open class GameBaseClass : AppCompatActivity() {
         // 画面中央に表示
         configPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
 
-        //ラジオボタン初期化
-        val radioSE = popupView.findViewById<RadioGroup>(R.id.SEOnOff)
-        when(SE){
-            true -> {popupView.findViewById<RadioButton>(R.id.SEOn).isChecked = true}
-            false -> {popupView.findViewById<RadioButton>(R.id.SEOff).isChecked = true}
-        }
+        //テキスト初期化
+        val seVolumeText = popupView.findViewById<TextView>(R.id.seVolume)
+        val bgmVolumeText = popupView.findViewById<TextView>(R.id.bgmVolume)
 
-        val radioBGM = popupView.findViewById<RadioGroup>(R.id.BGMOnOff)
-        when(BGM){
-            true -> {popupView.findViewById<RadioButton>(R.id.BGMOn).isChecked = true}
-            false -> {popupView.findViewById<RadioButton>(R.id.BGMOff).isChecked = true}
-        }
+        seVolumeText?.text = seVolume.toString() //プレファレンスの値をセット
+        bgmVolumeText?.text = bgmVolume.toString() //プレファレンスの値をセット
 
 
-        //// 関数設定
-        radioSE.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId){
-                R.id.SEOn->{SE=true}
-                R.id.SEOff->{SE=false}
-            }
-            playSound(radioButtonSE)
-            val editor=pref!!.edit()
-            editor.putBoolean("SEOnOff",SE).apply()
-            //Log.d("gobblet2", "SE=${SE}")
-        }
+        //動かす前の値を記録
+        val recordBgmVolue = bgmVolume
 
-        radioBGM.setOnCheckedChangeListener { group, checkedId ->
-            when(checkedId){
-                R.id.BGMOn->{
-                    BGM=true
-                    mediaPlayer?.start()
+        //シークバー初期化
+        val seSeekBar = popupView.findViewById<SeekBar>(R.id.seSeekBar)
+        val bgmSeekBar = popupView.findViewById<SeekBar>(R.id.bgmSeekBar)
+
+        seSeekBar?.progress = seVolume //プレファレンスの値を初期値にセット
+        seSeekBar?.max = 10
+
+        bgmSeekBar?.progress = bgmVolume //プレファレンスの値を初期値にセット
+        bgmSeekBar?.max = 10
+
+        seSeekBar?.setOnSeekBarChangeListener(
+            object:SeekBar.OnSeekBarChangeListener{
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    seVolumeText?.text = progress.toString()
+                    seVolume=progress
+                    playSound(seekSE)
                 }
-                R.id.BGMOff->{
-                    BGM=false
-                    mediaPlayer?.pause()
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    val editor= pref!!.edit()
+                    editor.putInt("seVolume",seVolume).apply()
                 }
             }
-            playSound(radioButtonSE)
-            val editor= pref!!.edit()
-            editor.putBoolean("BGMOnOff",BGM).apply()
-        }
+        )
+
+        bgmSeekBar?.setOnSeekBarChangeListener(
+            object:SeekBar.OnSeekBarChangeListener{
+                override fun onProgressChanged(
+                    seekBar: SeekBar?,
+                    progress: Int,
+                    fromUser: Boolean
+                ) {
+                    playSound(seekSE)
+                    bgmVolumeText?.text = progress.toString()
+                    bgmVolume=progress
+                    mediaPlayer?.setVolume(bgmVolume*0.1f,bgmVolume*0.1f)
+                }
+
+                override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+                override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                    val editor= pref!!.edit()
+                    editor.putInt("bgmVolume",bgmVolume).apply()
+                    if (recordBgmVolue <= 0 || bgmVolume > 0  ) {playMusic()} // 音楽再開
+                    if (recordBgmVolue > 0 || bgmVolume <= 0  ) {stopMusic()} // 音楽停止
+                }
+            }
+        )
+
 
         //タイトルへ戻るボタン
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
@@ -885,8 +909,8 @@ open class GameBaseClass : AppCompatActivity() {
     protected fun iniPreference(){
         //共有プリファレンス
         pref = PreferenceManager.getDefaultSharedPreferences(this)
-        SE = pref!!.getBoolean("SEOnOff", true)
-        BGM =pref!!.getBoolean("BGMOnOff", false)
+        seVolume =pref!!.getInt("seVolume",0)
+        bgmVolume =pref!!.getInt("bgmVolume",0)
         playFirst=pref!!.getInt("playFirst", 1)
     }
 
@@ -913,6 +937,7 @@ open class GameBaseClass : AppCompatActivity() {
         closeSE = sp!!.load(this,R.raw.close,1)
         winSE = sp!!.load(this,R.raw.win_single,1)
         loosSE = sp!!.load(this,R.raw.loose_single,1)
+        seekSE=sp!!.load(this,R.raw.select_se,1)
     }
 
     protected fun iniMediaPlayer(){
@@ -957,12 +982,13 @@ open class GameBaseClass : AppCompatActivity() {
 
     //音を鳴らす処理
     protected fun playSound(status: Int){
-        if (SE){ sp!!.play(status, 1.0f, 1.0f, 1, 0, 1.0f) }
+        if (seVolume > 0){ sp!!.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
     }
 
     protected fun playMusic(){
-        if (BGM){
+        if (bgmVolume > 0){
             bgmLooping=true
+            mediaPlayer?.setVolume(bgmVolume*0.1f,bgmVolume*0.1f)
             mediaPlayer?.start()
         }
     }
@@ -973,10 +999,10 @@ open class GameBaseClass : AppCompatActivity() {
         override fun run() {
             time += millisecond
             when(time){
-                200L -> mediaPlayer?.setVolume(0.8f,0.8f)
-                400L -> mediaPlayer?.setVolume(0.6f,0.6f)
-                600L -> mediaPlayer?.setVolume(0.4f,0.4f)
-                800L -> mediaPlayer?.setVolume(0.2f,0.2f)
+                200L -> mediaPlayer?.setVolume(bgmVolume*0.1f*0.8f,bgmVolume*0.1f*0.8f)
+                400L -> mediaPlayer?.setVolume(bgmVolume*0.1f*0.6f,bgmVolume*0.1f*0.6f)
+                600L -> mediaPlayer?.setVolume(bgmVolume*0.1f*0.4f,bgmVolume*0.1f*0.4f)
+                800L -> mediaPlayer?.setVolume(bgmVolume*0.1f*0.2f,bgmVolume*0.1f*0.2f)
             }
             handler.postDelayed(this,millisecond)
             if (time>1000L){
@@ -1014,7 +1040,7 @@ open class GameBaseClass : AppCompatActivity() {
     //ライフサイクル
     override fun onResume() {
         super.onResume()
-        if (BGM) { mediaPlayer?.start() }
+        if (bgmVolume > 0) { mediaPlayer?.start() }
         when (nowDoingTimerID){
             resultTimerId -> handler.post(resultTimer)
         }
@@ -1022,7 +1048,7 @@ open class GameBaseClass : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
-        if (BGM){ mediaPlayer?.pause() }
+        if (bgmVolume > 0){ mediaPlayer?.pause() }
         handler.removeCallbacks(resultTimer)
 
     }
