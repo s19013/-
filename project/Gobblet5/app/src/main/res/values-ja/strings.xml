@@ -99,7 +99,7 @@
     <string name="Back">戻る</string>
     <string name="Oops">おけません</string>
     <string name="cannotInsertDialogText">そこにはおけません</string>
-    <string name="QuitGame">ゲームをやめる</string>
+    <string name="QuitGame">ゲームを\nやめる</string>
     <string name="cannotPickupDialogText">そこからは取り出せません</string>
     <string name="notYourTurnDialogText">あなたのターンではありません</string>
     <string name="OkText">わかりました</string>

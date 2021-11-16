@@ -47,14 +47,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="15"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/backButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="20"
                 android:background="@drawable/back_btn_style"
                 android:orientation="horizontal">
 
@@ -82,18 +82,23 @@
                     android:gravity="center"
                     android:text="@string/CheckTheBoard"
                     android:textColor="@color/black" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
             </LinearLayout>
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="5" />
 
             <LinearLayout
                 android:id="@+id/BackToTitleButton"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="20"
                 android:background="@drawable/btn_style"
                 android:orientation="horizontal">
 
