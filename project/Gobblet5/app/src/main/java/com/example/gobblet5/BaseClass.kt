@@ -1,22 +1,11 @@
 package com.example.gobblet5
 
-import android.content.Intent
 import android.content.SharedPreferences
 import android.media.AudioAttributes
 import android.media.SoundPool
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
-import android.widget.ImageView
-import android.widget.SeekBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
-
-//11/16日にやることほとんどのクラスにbaseClassを継承させる
-
 
 //主にどのクラスでも使うプレファレンスと効果音をまとめた
 open class BaseClass: AppCompatActivity()  {

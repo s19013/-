@@ -17,8 +17,6 @@ import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import java.lang.IndexOutOfBoundsException
-//import kotlinx.android.synthetic.main.activity_game_with_man.*
 import java.util.*
 
 open class GameBaseClass : AppCompatActivity() {
