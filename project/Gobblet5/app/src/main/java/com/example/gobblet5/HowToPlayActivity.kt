@@ -27,6 +27,7 @@ class HowToPlayActivity : BaseClass() {
         preButton.setOnClickListener { countDownPage() }
 
         backButton.setOnClickListener {
+            playSound(cancelSE)
             val intent = Intent(this,SelectTutorialActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
