@@ -65,7 +65,7 @@
         app:layout_constraintGuide_percent="0.1" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideliV3"
+        android:id="@+id/guidelineV3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -153,7 +153,7 @@
         android:orientation="vertical"
         android:background="@color/textBackground"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH4"
-        app:layout_constraintEnd_toStartOf="@+id/guideliV3"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
         app:layout_constraintStart_toStartOf="@+id/guidelineV2"
         app:layout_constraintTop_toTopOf="@+id/guidelineH3">
 
@@ -216,7 +216,7 @@
         android:orientation="vertical"
         android:background="@color/textBackground"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH6"
-        app:layout_constraintEnd_toStartOf="@+id/guideliV3"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
         app:layout_constraintStart_toStartOf="@+id/guidelineV2"
         app:layout_constraintTop_toTopOf="@+id/guidelineH5">
 
