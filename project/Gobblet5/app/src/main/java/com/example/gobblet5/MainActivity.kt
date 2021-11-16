@@ -15,11 +15,14 @@ import java.util.*
 
 
 class MainActivity : BaseClass() {
+    private val activityIDpreGameWithCom = 1
+    private val activityIDpreGameWithMan = 2
+    private val activityIDConfig = 3
+    private val activityIDSelectTutorial = 4
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        iniall()
 
         val logo  = findViewById<ImageView>(R.id.logoImg)
 
@@ -33,30 +36,24 @@ class MainActivity : BaseClass() {
         }
 
 
-        goPreGameWithComBtn.setOnClickListener{
-            playSound(menuSelectSE)
-            val intent = Intent(this,preGameWithComActivity::class.java)
-            startActivity(intent)
-        }
+        goPreGameWithComBtn.setOnClickListener { changeActivity(activityIDpreGameWithCom) }
+        goPreGameWithManBtn.setOnClickListener { changeActivity(activityIDpreGameWithMan) }
+        goTutorialBtn.setOnClickListener { changeActivity(activityIDSelectTutorial) }
+        goConfigBtn.setOnClickListener { changeActivity(activityIDConfig) }
 
-        goPreGameWithManBtn.setOnClickListener {
-            playSound(menuSelectSE)
-            val intent = Intent(this,preGameWithManActivity::class.java)
-            startActivity(intent)
-        }
+    }
 
-        goConfigBtn.setOnClickListener {
-            playSound(menuSelectSE)
-            val intent = Intent(this,ConfigActivity::class.java)
-            startActivity(intent)
-        }
+    fun changeActivity(act:Int){
+        playSound(menuSelectSE)
+        var intent:Intent?=null
 
-        goTutorialBtn.setOnClickListener {
-            playSound(menuSelectSE)
-            val intent = Intent(this,SelectTutorialActivity::class.java)
-            startActivity(intent)
+        when(act){
+            activityIDpreGameWithCom -> intent = Intent(this,preGameWithComActivity::class.java)
+            activityIDpreGameWithMan -> intent = Intent(this,preGameWithManActivity::class.java)
+            activityIDSelectTutorial -> intent = Intent(this,SelectTutorialActivity::class.java)
+            activityIDConfig -> intent = Intent(this,ConfigActivity::class.java)
         }
-
+        startActivity(intent)
     }
 
     override fun dispatchKeyEvent(event: KeyEvent?): Boolean {
