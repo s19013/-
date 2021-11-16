@@ -29,10 +29,10 @@ class MainActivity : BaseClass() {
 
         if (Locale.getDefault().equals(Locale.JAPAN)){
             logo.setImageResource(R.drawable.logo_jp)
-            Log.d("gobblet2", "jp")
+            Log.d("gobblet2", "lang:jp")
         } else {
             logo.setImageResource(R.drawable.logo_en)
-            Log.d("gobblet2", "en")
+            Log.d("gobblet2", "lang:en")
         }
 
 
@@ -43,7 +43,7 @@ class MainActivity : BaseClass() {
 
     }
 
-    fun changeActivity(act:Int){
+    private fun changeActivity(act:Int){
         playSound(menuSelectSE)
         var intent:Intent?=null
 
