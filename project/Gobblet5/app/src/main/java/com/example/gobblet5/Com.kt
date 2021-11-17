@@ -100,14 +100,24 @@ class Com {
 ////リーチ系=------
     //リーチなった列がないか調べる
     private fun reachChecker(){
-        for (line in lineAllAtOnce){
+        fun commonFunc(line: Line){
             if (line.comPieceCounter()>=3){
                 comReachList.add(line)
                 return
             }
-
             if (line.humanPieceCounter()>=3){ humanReachList.add(line) }
         }
+
+        commonFunc(line1)
+        commonFunc(line2)
+        commonFunc(line3)
+        commonFunc(line4)
+        commonFunc(lineA)
+        commonFunc(lineB)
+        commonFunc(lineC)
+        commonFunc(lineD)
+        commonFunc(lineS)
+        commonFunc(lineBS)
     }
 
     //コンピューターにリーチがかかってないか調べる(止めをさせる場所を探す)
@@ -204,12 +214,24 @@ class Com {
             }
         }
 
-        for (i in 0..3){ commonFunc(lineAllAtOnce[i]) }
+        commonFunc(line1)
+        commonFunc(line2)
+        commonFunc(line3)
+        commonFunc(line4)
     }
 
     //コマの周りを調べる
     private fun checkEachMas(){
-        for (line in lineAllAtOnce){ funcForCheckEachMas(line) }
+        funcForCheckEachMas(line1)
+        funcForCheckEachMas(line2)
+        funcForCheckEachMas(line3)
+        funcForCheckEachMas(line4)
+        funcForCheckEachMas(lineA)
+        funcForCheckEachMas(lineB)
+        funcForCheckEachMas(lineC)
+        funcForCheckEachMas(lineD)
+        funcForCheckEachMas(lineS)
+        funcForCheckEachMas(lineBS)
     }
 
     //ラインごとに分けて各マスに評価値を入れる
@@ -340,9 +362,15 @@ class Com {
             }
         }
 
-        for (i in 0..3){ setBiggestScore(lineAllAtOnce[i]) }
+        setBiggestScore(line1)
+        setBiggestScore(line2)
+        setBiggestScore(line3)
+        setBiggestScore(line4)
 
-        for (i in 0..3){ addMas(lineAllAtOnce[i]) }
+        addMas(line1)
+        addMas(line2)
+        addMas(line3)
+        addMas(line4)
 
 //        debC()
 //        Log.d("gobblet2Com","1番:${biggestScore[0]} -${debMostBiggestScoreList}")
@@ -628,16 +656,6 @@ class Com {
     }
 
     fun iniConcatLine(){ //一旦関数にしないとエラーになるので関数化
-//        lineAllAtOnce.add(line1)
-//        lineAllAtOnce.add(line2)
-//        lineAllAtOnce.add(line3)
-//        lineAllAtOnce.add(line4)
-//        lineAllAtOnce.add(lineA)
-//        lineAllAtOnce.add(lineB)
-//        lineAllAtOnce.add(lineC)
-//        lineAllAtOnce.add(lineD)
-//        lineAllAtOnce.add(lineS)
-//        lineAllAtOnce.add(lineBS)
 
         bord.add(line1.listGetter())
         bord.add(line2.listGetter())
