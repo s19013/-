@@ -16,8 +16,7 @@
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/emphasis_btn_radius" />
-            <padding
-                android:bottom="@dimen/buttonsShadow" />
+            <padding android:bottom="@dimen/emphasis_btn_padding" />
             <solid android:color="#654D06"/>
         </shape>
     </item>
@@ -25,7 +24,7 @@
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/emphasis_btn_radius" />
-            <padding android:right="@dimen/buttonsShadow" />
+            <padding android:right="@dimen/emphasis_btn_padding"/>
             <solid android:color="#654D06"/>
         </shape>
     </item>
