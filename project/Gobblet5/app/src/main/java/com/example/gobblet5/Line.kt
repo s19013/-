@@ -33,6 +33,8 @@ class Line(private val name:String) {
         for (mas in list){
             if (mas.returnLastElement()==humanPiece){ counter+=1 }
         }
+
+        Log.d("gobblet2Com","${name} contains ${counter}humanPieace")
         return counter
     }
 
