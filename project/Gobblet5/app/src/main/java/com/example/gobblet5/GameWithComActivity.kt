@@ -67,48 +67,6 @@ class GameWithComActivity : GameBaseClass() {
             else{toastNotYourTurn()}
         }
 
-        buttonTemochiGreenBig!!.setOnClickListener {
-            if (turn == -1 && !finished){
-                if (movingSource==stringTemochiGreenBig){
-                    resetTemochi()
-                }
-                else if (movingSource== null ||
-                    movingSource==stringTemochiGreenMiddle||
-                    movingSource==stringTemochiGreenSmall) {
-                    pickupTemochi(temochiGreenBig)
-                }
-            }
-            else{toastNotYourTurn()}
-        }
-
-        buttonTemochiGreenMiddle!!.setOnClickListener {
-            if (turn == -1 && !finished){
-                if (movingSource==stringTemochiGreenMiddle){
-                    resetTemochi()
-                }
-                else if (movingSource== null ||
-                    movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenSmall){
-                    pickupTemochi(temochiGreenMiddle)
-                }
-            }
-            else{toastNotYourTurn()}
-        }
-
-        buttonTemochiGreenSmall!!.setOnClickListener {
-            if (turn == -1 && !finished){
-                if (movingSource==stringTemochiGreenSmall){
-                    resetTemochi()
-                }
-                else if (movingSource==null||
-                    movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenMiddle){
-                    pickupTemochi(temochiGreenSmall)
-                }
-            }
-            else{toastNotYourTurn()}
-        }
-
         ////マスを触ったとき
         buttonA1.setOnClickListener {
             //ゲームが終わったらさわれないようにする,相手のターン中に触れないようにするためにこんなif文を書く
