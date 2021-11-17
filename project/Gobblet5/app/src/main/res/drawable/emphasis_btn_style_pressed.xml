@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--    枠-->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/emphasis_btn_radius" />
+            <padding
+                android:left="1dp"
+                android:right="1dp"
+                android:top="1dp"
+                android:bottom="1dp" />
+            <solid android:color="#000000" />
+        </shape>
+    </item>
+    <!--    影(上)-->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/emphasis_btn_radius" />
+            <padding
+                android:top="@dimen/buttonsShadow" />
+            <solid android:color="#472B01"/>
+        </shape>
+    </item>
+    <!--    影(右)-->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/emphasis_btn_radius" />
+            <padding android:left="@dimen/buttonsShadow" />
+            <solid android:color="#472B01"/>
+        </shape>
+    </item>
+    <!--    メイン-->
+    <item>
+        <shape android:shape="rectangle">
+            <corners android:radius="@dimen/emphasis_btn_radius" />
+            <solid android:color="#8A7740"/>
+        </shape>
+    </item>
+
+</layer-list>
