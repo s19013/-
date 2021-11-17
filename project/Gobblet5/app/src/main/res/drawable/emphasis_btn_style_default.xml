@@ -5,9 +5,9 @@
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/emphasis_btn_radius" />
             <padding
-                android:left="1dp"
+                android:left="2dp"
                 android:right="1dp"
-                android:top="1dp"
+                android:top="2dp"
                 android:bottom="1dp" />
             <solid android:color="#000000" />
         </shape>
