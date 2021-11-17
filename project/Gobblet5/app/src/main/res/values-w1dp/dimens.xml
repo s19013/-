@@ -17,4 +17,6 @@
     <dimen name="buttonsShadow">2dp</dimen>
     <dimen name="tutorialText">10sp</dimen>
     <dimen name="backToTitle">14sp</dimen>
+    <dimen name="emphasis_btn_radius">10dp</dimen>
+    <dimen name="emphasis_btn_padding">3dp</dimen>
 </resources>
