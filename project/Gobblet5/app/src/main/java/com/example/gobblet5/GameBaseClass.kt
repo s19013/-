@@ -108,7 +108,7 @@ open class GameBaseClass : AppCompatActivity() {
     private var menuSelectSE = 0
     private var cannotDoItSE = 0
     private var gameStartSE = 0
-    private var openSE = 0
+    protected var openSE = 0
     private var closeSE = 0
     private var winSE = 0
     private var loosSE = 0
@@ -682,7 +682,7 @@ open class GameBaseClass : AppCompatActivity() {
     //結果ポップアップ
     @SuppressLint("InflateParams")
     protected fun showResultPopup(){
-        playSound(openSE)
+
         resultPopup = PopupWindow(this)
         // レイアウト設定
         val popupView: View = layoutInflater.inflate(R.layout.popup_resalt, null)
@@ -753,7 +753,6 @@ open class GameBaseClass : AppCompatActivity() {
     //設定ポップアップ
     @SuppressLint("InflateParams")
     protected fun showConfigPopup(){
-        playSound(openSE)
         configPopup = PopupWindow(this)
         // レイアウト設定
         val popupView: View = layoutInflater.inflate(R.layout.popup_config, null)
@@ -979,7 +978,7 @@ open class GameBaseClass : AppCompatActivity() {
     open fun iniView(){}
 
     //音を鳴らす処理
-    private fun playSound(status: Int){
+    protected fun playSound(status: Int){
         if (seVolume > 0){ sp!!.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
     }
 
