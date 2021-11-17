@@ -319,10 +319,11 @@ open class GameBaseClass : AppCompatActivity() {
     protected fun pushedMasButton(mas: Mas){
         //取り出し作業
         if (!pickupDone) { return pickup(mas.nameGetter()) }
-        //マスの中に入れる
-        insert(mas.nameGetter())
+
         if(pickupDone && movingSource == mas.nameGetter()){ resetMas(mas.nameGetter()) } //考え直し
-        else{
+
+        //マスの中に入れる
+        if (insert(mas.nameGetter())) { //ちゃんとマスの中に入った時だけ再描画する
             bordDisplay(destination)//コマの移動先を再描画
             endTurn() //ターン終了作業に移る
         }
@@ -366,6 +367,7 @@ open class GameBaseClass : AppCompatActivity() {
 
     //駒を入れる
     private fun insert(name: String):Boolean{
+//        人間の時はループ?
         when(name){
             stringA1 -> {
                 if (A1.mInsert(size, turn)) {
