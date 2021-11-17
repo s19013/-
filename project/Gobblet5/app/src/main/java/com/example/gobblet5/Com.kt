@@ -3,18 +3,6 @@ package com.example.gobblet5
 import android.util.Log
 
 class Com {
-    //マジックナンバー防止
-    private val stringLine1="L1"
-    private val stringLine2="L2"
-    private val stringLine3="L3"
-    private val stringLine4="L4"
-    private val stringLineA="LA"
-    private val stringLineB="LB"
-    private val stringLineC="LC"
-    private val stringLineD="LD"
-    private val stringLineS="LS"
-    private val stringLineBS="LBS"
-
     private val comPiece=-1
     private val humanPiece = 1
     private val empty = 0
@@ -23,19 +11,20 @@ class Com {
     private val middlePiece=2
     private val smallPiece=1
 
-
     //ライン
-    private val line1:Line = Line(stringLine1)
-    private val line2:Line = Line(stringLine2)
-    private val line3:Line = Line(stringLine3)
-    private val line4:Line = Line(stringLine4)
-    private val lineA:Line = Line(stringLineA)
-    private val lineB:Line = Line(stringLineB)
-    private val lineC:Line = Line(stringLineC)
-    private val lineD:Line = Line(stringLineD)
-    private val lineS:Line = Line(stringLineS)
-    private val lineBS:Line = Line(stringLineBS)
-    private var lineAllAtOnce:MutableList<Line> = mutableListOf() //すべてのラインクラスに対して色々やる時に使うリスト
+    private val line1:Line = Line("L1")
+    private val line2:Line = Line("L2")
+    private val line3:Line = Line("L3")
+    private val line4:Line = Line("L4")
+    private val lineA:Line = Line("LA")
+    private val lineB:Line = Line("LB")
+    private val lineC:Line = Line("LC")
+    private val lineD:Line = Line("LD")
+    private val lineS:Line = Line("LS")
+    private val lineBS:Line = Line("LBS")
+    private var lineAllAtOnce:MutableList<Line> = mutableListOf(line1,line2,line3,line4,lineA,lineB,lineC,lineD,lineS,lineBS) //すべてのラインクラスに対して色々やる時に使うリスト
+
+
 
     //手持ち
     private var temochiBig:Temochi? = null
@@ -76,6 +65,19 @@ class Com {
     
     private var judgeList:MutableList<Int> = mutableListOf(0,0,0,0,0,0,0,0,0,0)
 
+
+    //マジックナンバー防止
+    private val stringLine1=line1.nameGetter()
+    private val stringLine2=line2.nameGetter()
+    private val stringLine3=line3.nameGetter()
+    private val stringLine4=line4.nameGetter()
+    private val stringLineA=lineA.nameGetter()
+    private val stringLineB=lineB.nameGetter()
+    private val stringLineC=lineC.nameGetter()
+    private val stringLineD=lineD.nameGetter()
+    private val stringLineS=lineS.nameGetter()
+    private val stringLineBS=lineBS.nameGetter()
+
     //デバッグ用
     private var debComReachList = mutableListOf<String>()
     private var debHumanReachList = mutableListOf<String>()
@@ -92,6 +94,8 @@ class Com {
     private var debThirdBiggestScoreList:MutableList<String> = mutableListOf() //3番目
     private var debFourthBiggestScoreList:MutableList<String> = mutableListOf() //4
     private var debFifthBiggestScoreList:MutableList<String> = mutableListOf() //5
+
+    //アルゴリズムを少しいじる
 
 ////リーチ系=------
     //リーチなった列がないか調べる
@@ -155,7 +159,11 @@ class Com {
                 val attribute = mas.funcForDisplay()[1] //人間のかコンピューターのか
                 if (!mas.OccupiedByTheHuman()){ //相手のものになってないマスを見つけた
                     //すでに自分の大きいコマでブロックしてあるか調べる
-                    if (attribute * size == -3){ humanReachList.remove(line) }//すでにブロックしてたらリストから消す
+                    if (attribute * size == -3){
+                        Log.d("gobblet2Com","${line.nameGetter()} removed from humanReachList")
+                        humanReachList.remove(line)
+
+                    }//すでにブロックしてたらリストから消す
                     else{
                         if (size == bigPiece){ mas.addScore(-300) } //コマをおけば防げるところに相手の大きいコマがおいてないあったら諦める
                         break
@@ -168,10 +176,6 @@ class Com {
         listForIterativeProcessing.addAll(humanReachList)
         //繰り返し処理中のリストにremoveとかしちゃうと動きがおかしくなるから一旦別の変数にコピー
         for (value in listForIterativeProcessing){ commonFunc(value) }
-
-        debC()
-        Log.d("gobblet2Com","debHumanReachList:${debHumanReachList}")
-
         //細かくしらべて本当にリーチがかかっているかつまだ止めをさせないならばブロックする
         if (humanReachList.isNotEmpty()){blocking = true}
     }
@@ -192,7 +196,7 @@ class Com {
                     size == bigPiece    && attribute == comPiece -> {
                         //自分の大コマが置かれている
                         masInTheGreenBigPiece.add(mas)
-                        mas.addScore(-300)
+//                        mas.addScore(-300)
                     }
                     size == middlePiece && attribute == comPiece -> { masInTheGreenMiddlePiece.add(mas) } //自分の中コマが置かれている
                     size == smallPiece && attribute == comPiece -> { masInTheGreenSmallPiece.add(mas) } //自分の小コマが置かれている
@@ -203,7 +207,7 @@ class Com {
         for (i in 0..3){ commonFunc(lineAllAtOnce[i]) }
     }
 
-    //コマの周りを調べる(今は空白の部分だけ)
+    //コマの周りを調べる
     private fun checkEachMas(){
         for (line in lineAllAtOnce){ funcForCheckEachMas(line) }
     }
@@ -232,7 +236,11 @@ class Com {
         //後で編集
         fun standardIsP1(){
             if (standard!!.funcForDisplay()[0] == bigPiece) {return} //基準が大きいコマだったら飛ばす (どうやってもコマが入らないから)
-            if (humanReachList.contains(line)) { standard?.addScore(200) } //ここでコマを置いたら相手のリーチを防げる場合､基準のマスに評価値を追加
+            if (humanReachList.contains(line)) {
+                Log.d("gobblet2Com","${line.nameGetter()} is in the humanReachList")
+                Log.d("gobblet2Com","${standard?.nameGetter()} addsScore(250) ")
+                standard?.addScore(300)
+            } //ここでコマを置いたら相手のリーチを防げる場合､基準のマスに評価値を追加
                 for (mas in linesList){
                     val size = mas.funcForDisplay()[0] //コマの大きさ
                     val attribute = mas.funcForDisplay()[1] //人間のかコンピューターのか
@@ -490,7 +498,7 @@ class Com {
                 val box2 = masInTheGreenPiece.minus(doNotMoveListBecauseItMakeReach) //リーチにつかっている
                 val box = box1+box2 //1,2の条件に合わないやつを選ぶ
                 for (i in box){ Log.d("gobblet2Com", "${i.nameGetter()}inBox") }
-                Log.d("gobblet2Com", "elseBoxSize${box.size}")
+                Log.d("gobblet2Com", "elseBoxSize:${box.size}")
                 if (box.isNotEmpty()) {
                     //一つでも動かせるならそれを移動元にする
                     movingSource = box[(box.indices).random()]
@@ -620,16 +628,16 @@ class Com {
     }
 
     fun iniConcatLine(){ //一旦関数にしないとエラーになるので関数化
-        lineAllAtOnce.add(line1)
-        lineAllAtOnce.add(line2)
-        lineAllAtOnce.add(line3)
-        lineAllAtOnce.add(line4)
-        lineAllAtOnce.add(lineA)
-        lineAllAtOnce.add(lineB)
-        lineAllAtOnce.add(lineC)
-        lineAllAtOnce.add(lineD)
-        lineAllAtOnce.add(lineS)
-        lineAllAtOnce.add(lineBS)
+//        lineAllAtOnce.add(line1)
+//        lineAllAtOnce.add(line2)
+//        lineAllAtOnce.add(line3)
+//        lineAllAtOnce.add(line4)
+//        lineAllAtOnce.add(lineA)
+//        lineAllAtOnce.add(lineB)
+//        lineAllAtOnce.add(lineC)
+//        lineAllAtOnce.add(lineD)
+//        lineAllAtOnce.add(lineS)
+//        lineAllAtOnce.add(lineBS)
 
         bord.add(line1.listGetter())
         bord.add(line2.listGetter())
