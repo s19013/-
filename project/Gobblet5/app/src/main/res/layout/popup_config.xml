@@ -182,9 +182,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="20"
-                android:scaleX="@dimen/iconScale"
-                android:scaleY="@dimen/iconScale"
-                app:srcCompat="@drawable/ic_back_title" />
+                app:srcCompat="@drawable/ic_bye" />
 
             <Space
                 android:layout_width="0dp"
