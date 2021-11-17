@@ -27,10 +27,6 @@ class GameWithComActivity : GameBaseClass() {
         startTurn()
         Log.d("gobblet2", "pF:${playFirst}")
 
-
-
-
-
 //手持ちのボタンを触った時
         //1p手持ち
         buttonTemochiRedBig!!.setOnClickListener {
@@ -66,6 +62,48 @@ class GameWithComActivity : GameBaseClass() {
                     movingSource==stringTemochiRedBig ||
                     movingSource==stringTemochiRedMiddle){
                     pickupTemochi(temochiRedSmall)
+                }
+            }
+            else{toastNotYourTurn()}
+        }
+
+        buttonTemochiGreenBig!!.setOnClickListener {
+            if (turn == -1 && !finished){
+                if (movingSource==stringTemochiGreenBig){
+                    resetTemochi()
+                }
+                else if (movingSource== null ||
+                    movingSource==stringTemochiGreenMiddle||
+                    movingSource==stringTemochiGreenSmall) {
+                    pickupTemochi(temochiGreenBig)
+                }
+            }
+            else{toastNotYourTurn()}
+        }
+
+        buttonTemochiGreenMiddle!!.setOnClickListener {
+            if (turn == -1 && !finished){
+                if (movingSource==stringTemochiGreenMiddle){
+                    resetTemochi()
+                }
+                else if (movingSource== null ||
+                    movingSource==stringTemochiGreenBig ||
+                    movingSource==stringTemochiGreenSmall){
+                    pickupTemochi(temochiGreenMiddle)
+                }
+            }
+            else{toastNotYourTurn()}
+        }
+
+        buttonTemochiGreenSmall!!.setOnClickListener {
+            if (turn == -1 && !finished){
+                if (movingSource==stringTemochiGreenSmall){
+                    resetTemochi()
+                }
+                else if (movingSource==null||
+                    movingSource==stringTemochiGreenBig ||
+                    movingSource==stringTemochiGreenMiddle){
+                    pickupTemochi(temochiGreenSmall)
                 }
             }
             else{toastNotYourTurn()}
@@ -154,17 +192,21 @@ class GameWithComActivity : GameBaseClass() {
         }
 
         // その他
-        configButton.setOnClickListener { showConfigPopup() }
+        configButton.setOnClickListener {
+            playSound(openSE)
+            showConfigPopup()
+        }
 
-        resultButton!!.setOnClickListener { showResultPopup() }
+        resultButton!!.setOnClickListener {
+            playSound(openSE)
+            showResultPopup()
+        }
 
     }
-
 
     //コンピューター関係
     private fun iniCom(){
         //コンピューターにわたすよう?
-
         com.iniLines(
             mutableListOf(A1, B1, C1, D1),//l1
             mutableListOf(A2, B2, C2, D2),//l2

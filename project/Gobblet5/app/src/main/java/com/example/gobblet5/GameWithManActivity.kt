@@ -192,8 +192,14 @@ class GameWithManActivity : GameBaseClass() {
         }
 
         // その他
-        configButton.setOnClickListener { showConfigPopup() }
-        resultButton!!.setOnClickListener { showResultPopup() }
+        configButton.setOnClickListener {
+            playSound(openSE)
+            showConfigPopup()
+        }
+        resultButton!!.setOnClickListener {
+            playSound(openSE)
+            showResultPopup()
+        }
 
     }
 
