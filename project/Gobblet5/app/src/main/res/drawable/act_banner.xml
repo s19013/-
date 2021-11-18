@@ -3,10 +3,12 @@
     <item>
         <shape android:shape="rectangle">
             <corners
-                android:bottomLeftRadius="200dp"
+                android:bottomLeftRadius="25dp"
+                android:topLeftRadius="25dp"
                 />
             <padding
                 android:left="1dp"
+                android:top="1dp"
                 android:bottom="1dp" />
             <solid android:color="#383A38"/>
         </shape>
@@ -15,15 +17,21 @@
     <item>
         <shape android:shape="rectangle">
             <corners
-                android:bottomLeftRadius="200dp"
+                android:bottomLeftRadius="25dp"
+                android:topLeftRadius="25dp"
                 />
             <padding
                 android:left="4dp"
+                android:top="4dp"
                 android:bottom="4dp" />
-            <solid android:color="#D4DAB0"/>
+            <gradient
+                android:angle="-90"
+                android:endColor="#DCD16A"
+                android:centerColor="#FFF38A"
+                android:startColor="#FFF38A"
+                />
+
         </shape>
     </item>
-
-
 
 </layer-list>
