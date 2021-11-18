@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.02" />
+        app:layout_constraintGuide_percent="0.01" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV2"
@@ -66,6 +66,13 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineV3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineV4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -113,6 +120,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="90"
+                android:lines="1"
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/BackToTitle"
@@ -134,18 +142,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
+            android:lines="1"
             android:autoSizeTextType="uniform"
-            android:background="@color/textBackground"
+            android:background="@drawable/act_banner"
             android:gravity="center"
             android:text="@string/configText"
             android:textColor="@color/black" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="0dp"
@@ -153,7 +156,7 @@
         android:orientation="vertical"
         android:background="@color/textBackground"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH4"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV4"
         app:layout_constraintStart_toStartOf="@+id/guidelineV2"
         app:layout_constraintTop_toTopOf="@+id/guidelineH3">
 
@@ -216,7 +219,7 @@
         android:orientation="vertical"
         android:background="@color/textBackground"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH6"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV4"
         app:layout_constraintStart_toStartOf="@+id/guidelineV2"
         app:layout_constraintTop_toTopOf="@+id/guidelineH5">
 

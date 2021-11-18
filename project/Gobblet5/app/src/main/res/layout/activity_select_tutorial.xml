@@ -62,7 +62,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
+
         app:layout_constraintBottom_toTopOf="@+id/etcBoxGuidlineBottom"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/etcBoxGuidlineStart"
         app:layout_constraintTop_toTopOf="@+id/etcBoxGuidlineTop">
@@ -78,13 +80,13 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.1" />
+                android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="20"
                 android:scaleX="@dimen/iconScale"
                 android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_uturn" />
@@ -92,22 +94,23 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:layout_weight="2" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
+                android:layout_weight="90"
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
+                android:lines="1"
                 android:text="@string/BackToTitle"
                 android:textColor="@color/black" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:layout_weight="2" />
         </LinearLayout>
 
         <Space
@@ -121,16 +124,14 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:autoSizeTextType="uniform"
-            android:background="@color/textBackground"
+            android:background="@drawable/act_banner"
             android:gravity="center"
+            android:lines="1"
             android:text="@string/selectTutorialActivity"
-            android:textColor="@color/black" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:textColor="@color/bannerText" />
     </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/bottons"
