@@ -159,6 +159,7 @@
         android:autoSizeTextType="uniform"
         android:background="@drawable/emphasis_btn_style"
         android:text="@string/GameStartText"
+        android:textColor="#2B0000"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/StartButtonGuidelineHE"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVE"

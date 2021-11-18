@@ -78,7 +78,7 @@
             android:background="@drawable/act_banner"
             android:gravity="center"
             android:text="@string/preGameActivity"
-            android:textColor="@color/black" />
+            android:textColor="#2B0000" />
 
     </LinearLayout>
 
