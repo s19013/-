@@ -17,7 +17,7 @@
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/emphasis_btn_radius" />
             <padding android:bottom="@dimen/emphasis_btn_padding" />
-            <solid android:color="#654D06"/>
+            <solid android:color="#4B6E8A"/>
         </shape>
     </item>
     <!--    影(右)-->
@@ -25,7 +25,7 @@
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/emphasis_btn_radius" />
             <padding android:right="@dimen/emphasis_btn_padding"/>
-            <solid android:color="#654D06"/>
+            <solid android:color="#4B6E8A"/>
         </shape>
     </item>
     <!-- メイン -->
@@ -33,7 +33,7 @@
         <!-- shape:rectangle(=四角形) -->
         <shape android:shape="rectangle">
             <corners android:radius="@dimen/emphasis_btn_radius" />
-            <solid android:color="#D8BB66"/>
+            <solid android:color="#9DD4FF"/>
         </shape>
     </item>
 
