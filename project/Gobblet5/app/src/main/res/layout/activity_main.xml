@@ -47,7 +47,6 @@
         android:background="#5BFFFFFF"
         android:gravity="center"
         android:orientation="vertical"
-        android:weightSum="15"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH2"
         app:layout_constraintEnd_toStartOf="@+id/guidelineV2"
         app:layout_constraintStart_toStartOf="@+id/guidelineV1"
@@ -57,32 +56,39 @@
             android:id="@+id/logoImg"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3"
+            android:layout_weight="18"
             app:srcCompat="@drawable/logo_jp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="8" />
 
         <LinearLayout
             android:id="@+id/goPreGameWithComBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="20"
             android:background="@drawable/emphasis_btn_style"
             android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9"
+                app:srcCompat="@drawable/ic_com" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="2" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="20"
+                android:layout_weight="40"
+                android:lines="1"
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/PlayWithComText"
@@ -92,38 +98,63 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="2" />
 
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="5" />
 
     <LinearLayout
         android:id="@+id/goPreGameWithManBtn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="20"
         android:background="@drawable/emphasis_btn_style"
         android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="4"
+            app:srcCompat="@drawable/ic_human" />
 
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
-        <TextView
-            android:id="@+id/textView20"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="20"
-            android:autoSizeTextType="uniform"
-            android:gravity="center"
-            android:text="@string/PlayWithManText"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
+            android:layout_weight="18"
+            android:orientation="vertical">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20" />
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="30"
+                android:autoSizeTextType="uniform"
+                android:lines="1"
+                android:gravity="center"
+                android:text="@string/PlayWithManText"
+                android:textColor="@android:color/black"
+                android:textStyle="bold" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="20" />
+
+        </LinearLayout>
 
         <Space
             android:layout_width="0dp"
@@ -135,15 +166,21 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="5" />
 
     <LinearLayout
         android:id="@+id/goTutorialBtn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="2"
+        android:layout_weight="15"
         android:background="@drawable/btn_style"
         android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            app:srcCompat="@drawable/ic_study" />
 
         <Space
             android:layout_width="0dp"
@@ -156,10 +193,11 @@
             android:layout_height="match_parent"
             android:layout_weight="20"
             android:autoSizeTextType="uniform"
+            android:lines="1"
             android:gravity="center"
             android:text="@string/TutorialText"
             android:textColor="@android:color/black"
-            android:textStyle="bold" />
+             />
 
         <Space
             android:layout_width="0dp"
@@ -171,12 +209,12 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="5" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="12"
             android:orientation="horizontal"
             android:weightSum="10">
 
@@ -212,15 +250,34 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.2" />
 
-                <TextView
-                    android:id="@+id/textView"
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
-                    android:gravity="center"
-                    android:autoSizeTextType="uniform"
-                    android:text="@string/configText"
-                    android:textColor="@color/black" />
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:autoSizeTextType="uniform"
+                        android:layout_weight="8"
+                        android:gravity="center"
+                        android:lines="1"
+                        android:text="@string/configText"
+                        android:textColor="@color/black" />
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
 
                 <Space
                     android:layout_width="0dp"
