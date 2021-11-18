@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.01" />
+        app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/etcBoxGuidlineTop"
@@ -153,16 +153,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
+            android:lines="1"
             android:autoSizeTextType="uniform"
-            android:background="@color/textBackground"
-            android:gravity="center_horizontal"
+            android:background="@drawable/act_banner"
+            android:gravity="center"
             android:text="@string/HowToPlayText"
             android:textColor="@color/black" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout

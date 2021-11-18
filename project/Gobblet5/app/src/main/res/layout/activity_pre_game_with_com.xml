@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/table"
+    android:background="@drawable/wallpaper"
     tools:context=".preGameWithComActivity">
 
 
@@ -73,16 +73,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
+            android:lines="1"
             android:autoSizeTextType="uniform"
-            android:background="@color/textBackground"
+            android:background="@drawable/act_banner"
             android:gravity="center"
             android:text="@string/preGameActivity"
             android:textColor="@color/black" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -162,7 +159,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:autoSizeTextType="uniform"
-        android:background="@drawable/btn_style"
+        android:background="@drawable/emphasis_btn_style"
         android:text="@string/GameStartText"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/StartButtonGuidelineHE"
@@ -175,7 +172,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.02"/>
+        app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/backButtonGuidelineHS"

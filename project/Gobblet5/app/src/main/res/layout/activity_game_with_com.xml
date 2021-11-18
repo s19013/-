@@ -228,7 +228,7 @@
                 android:background="#E6E6E6"
                 android:gravity="center"
                 android:rotation="180"
-                android:text="2P"
+                android:text="@string/comText"
                 android:textColor="@android:color/black" />
 
             <Space
@@ -451,7 +451,7 @@
                 android:autoSizeTextType="uniform"
                 android:background="#E6E6E6"
                 android:gravity="center"
-                android:text="1P"
+                android:text="@string/YouText"
                 android:textColor="@android:color/black" />
 
         </LinearLayout>
