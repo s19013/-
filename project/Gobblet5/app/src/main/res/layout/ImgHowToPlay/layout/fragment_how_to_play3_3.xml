@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/flame"
+    tools:ignore="NestedWeights,ContentDescription,HardcodedText,TooManyViews"
     tools:context=".HowToPlayFragment.HowToPlayFragment3_3" >
 
     <LinearLayout
@@ -22,7 +23,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
 
@@ -30,13 +31,13 @@
                 android:id="@+id/Temochi2p"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="20"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="10"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -44,33 +45,34 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="bottom"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/temochi_btn_style2p_small" />
+                        android:layout_weight="10"
+                        app:srcCompat="@drawable/temochi_btn_style2p_small"
+                        />
 
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2" />
+                        android:layout_weight="2" />
 
                     <ImageView
                         android:id="@+id/buttonTemochiGreenMiddle"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="bottom"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         app:srcCompat="@drawable/temochi_btn_style2p_middle" />
 
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2" />
+                        android:layout_weight="2" />
 
                     <ImageView
                         android:id="@+id/buttonTemochiGreenBig"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="bottom"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         app:srcCompat="@drawable/temochi_btn_style2p_big" />
 
                 </LinearLayout>
@@ -78,36 +80,37 @@
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.1" />
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.4"
+                    android:layout_weight="4"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textTemochiGreenSmall"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
                         android:rotation="180"
                         android:text="3"
-                        android:textColor="@android:color/black" />
+                        android:textColor="@android:color/black"
+                        />
 
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2" />
+                        android:layout_weight="2" />
 
                     <TextView
                         android:id="@+id/textTemochiGreenMiddle"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
@@ -118,13 +121,13 @@
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2" />
+                        android:layout_weight="2" />
 
                     <TextView
                         android:id="@+id/textTemochiGreenBig"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
@@ -137,34 +140,35 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:layout_weight="2" />
 
             <ImageView
                 android:id="@+id/having2p"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="10"
                 app:srcCompat="@drawable/mass" />
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:layout_weight="3"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/telop2p"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:lines="1"
+                android:layout_weight="100"
                 android:autoSizeTextType="uniform"
-                android:background="#BCFFAD"
+                android:background="#E6E6E6"
                 android:gravity="center"
                 android:rotation="180"
                 android:text="2P"
@@ -173,7 +177,38 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.2" />
+                android:layout_weight="12" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="#E6E6E6"
+                android:layout_weight="48">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/telop2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="28"
+                    android:autoSizeTextType="uniform"
+                    android:lines="1"
+                    android:rotation="180"
+                    android:gravity="center"
+                    android:text="@string/pieceInYourHand"
+                    android:textColor="@android:color/black" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
         </LinearLayout>
 
     </LinearLayout>
@@ -192,7 +227,7 @@
             android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <ImageView
@@ -223,7 +258,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
-                app:srcCompat="@drawable/mass" />
+                app:srcCompat="@drawable/koma_green_big" />
 
 
         </LinearLayout>
@@ -231,13 +266,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"/>
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:id="@+id/line2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <ImageView
@@ -275,13 +310,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"/>
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:id="@+id/line3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <ImageView
@@ -319,13 +354,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"/>
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:id="@+id/line4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <ImageView
@@ -355,7 +390,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:foregroundGravity="center"
-                app:srcCompat="@drawable/koma_green_big" />
+                app:srcCompat="@drawable/mass" />
 
 
         </LinearLayout>
@@ -374,21 +409,54 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:layout_weight="3"
             android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:background="#E6E6E6"
+                android:layout_weight="48">
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/telop"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="28"
+                    android:autoSizeTextType="uniform"
+                    android:lines="1"
+                    android:gravity="center"
+                    android:text="@string/pieceInYourHand"
+                    android:textColor="@android:color/black" />
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.2" />
+                android:layout_weight="12" />
 
             <TextView
                 android:id="@+id/telop1p"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="100"
                 android:autoSizeTextType="uniform"
                 android:background="#E6E6E6"
+                android:lines="1"
                 android:gravity="center"
                 android:text="1P"
                 android:textColor="@android:color/black" />
@@ -398,12 +466,12 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1" />
+            android:layout_weight="1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
 
@@ -411,32 +479,32 @@
                 android:id="@+id/having1p"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="10"
                 app:srcCompat="@drawable/mass" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:layout_weight="2" />
 
             <LinearLayout
                 android:id="@+id/Temochi1p"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="20"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.4"
+                    android:layout_weight="4"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/textTemochiRedSmall"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
@@ -446,13 +514,13 @@
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2" />
+                        android:layout_weight="2" />
 
                     <TextView
                         android:id="@+id/textTemochiRedMiddle"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
@@ -462,13 +530,13 @@
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2" />
+                        android:layout_weight="2" />
 
                     <TextView
                         android:id="@+id/textTemochiRedBig"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         android:autoSizeTextType="uniform"
                         android:background="@drawable/popup_background"
                         android:gravity="center"
@@ -479,12 +547,12 @@
                 <Space
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.1" />
+                    android:layout_weight="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="10"
                     android:orientation="horizontal">
 
                     <ImageView
@@ -492,33 +560,33 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="bottom"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         app:srcCompat="@drawable/temochi_button1p_small" />
 
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2" />
+                        android:layout_weight="2" />
 
                     <ImageView
                         android:id="@+id/buttonTemochiRedMiddle"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="bottom"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         app:srcCompat="@drawable/temochi_button1p_middle" />
 
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.2" />
+                        android:layout_weight="2" />
 
                     <ImageView
                         android:id="@+id/buttonTemochiRedBig"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="bottom"
-                        android:layout_weight="1"
+                        android:layout_weight="10"
                         app:srcCompat="@drawable/temochi_button1p_big" />
 
                 </LinearLayout>
@@ -627,14 +695,14 @@
             android:id="@+id/imageView8"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:src="@drawable/boy1_upperbody" />
 
         <TextView
             android:id="@+id/textView8"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2.2"
+            android:layout_weight="22"
             android:autoSizeTextType="uniform"
             android:gravity="center"
             android:text="@string/YourTurn"

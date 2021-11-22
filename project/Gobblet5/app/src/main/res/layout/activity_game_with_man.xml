@@ -260,6 +260,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="28"
                     android:autoSizeTextType="uniform"
+                    android:rotation="180"
                     android:lines="1"
                     android:gravity="center"
                     android:text="@string/pieceInYourHand"

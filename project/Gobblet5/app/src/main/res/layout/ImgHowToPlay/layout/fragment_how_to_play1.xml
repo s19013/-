@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/flame"
+    tools:ignore="NestedWeights,ContentDescription,HardcodedText,TooManyViews"
     tools:context=".HowToPlayFragment.HowToPlayFragment1">
 
 
@@ -49,16 +50,17 @@
                     android:id="@+id/textView6"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="100"
                     android:autoSizeTextType="uniform"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
+                    android:lines="1"
                     android:text="@string/EnemyText"
                     android:textColor="@color/black" />
 
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.05" />
+                    android:layout_weight="5" />
             </LinearLayout>
 
         </LinearLayout>

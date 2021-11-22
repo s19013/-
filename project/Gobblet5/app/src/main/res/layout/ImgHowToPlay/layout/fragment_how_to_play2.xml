@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/flame"
+    tools:ignore="NestedWeights,ContentDescription,HardcodedText,TooManyViews"
     tools:context=".HowToPlayFragment.HowToPlayFragment2" >
 
     <LinearLayout
@@ -23,7 +24,7 @@
             android:id="@+id/box1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <TextView
@@ -32,7 +33,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:autoSizeTextType="uniform"
-                android:gravity="center_horizontal"
+                android:gravity="center"
                 android:text="@string/YouText"
                 android:textColor="@color/black" />
 
@@ -47,7 +48,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:autoSizeTextType="uniform"
-                android:gravity="center_horizontal"
+                android:gravity="center"
+                android:lines="1"
                 android:text="@string/EnemyText"
                 android:textColor="@color/black" />
         </LinearLayout>
@@ -55,7 +57,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5"
+            android:layout_weight="50"
             android:orientation="horizontal">
 
             <ImageView
@@ -86,7 +88,7 @@
             android:id="@+id/smallText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="8"
             android:autoSizeTextType="uniform"
             android:gravity="center_horizontal"
             android:text="@string/Small"
@@ -97,7 +99,7 @@
             android:id="@+id/small"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal"
             >
 
@@ -125,7 +127,7 @@
             android:id="@+id/middleText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="8"
             android:autoSizeTextType="uniform"
             android:gravity="center_horizontal"
             android:text="@string/Middle"
@@ -136,7 +138,7 @@
             android:id="@+id/middle"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1.5"
+            android:layout_weight="15"
             android:orientation="horizontal"
             >
 
@@ -164,7 +166,7 @@
             android:id="@+id/bigText"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.8"
+            android:layout_weight="8"
             android:autoSizeTextType="uniform"
             android:gravity="center_horizontal"
             android:text="@string/Big"
@@ -175,7 +177,7 @@
             android:id="@+id/big"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="20"
             android:orientation="horizontal"
             >
 

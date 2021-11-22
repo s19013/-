@@ -198,6 +198,7 @@
                     android:autoSizeTextType="uniform"
                     android:lines="1"
                     android:gravity="center"
+                    android:rotation="180"
                     android:text="@string/pieceInYourHand"
                     android:textColor="@android:color/black" />
 
