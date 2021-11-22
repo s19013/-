@@ -21,20 +21,20 @@
             android:id="@+id/configButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:background="@drawable/btn_style"
             android:orientation="horizontal">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.1" />
+                android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/imageView21"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="20"
                 android:scaleX="@dimen/iconScale"
                 android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_gear" />
@@ -42,13 +42,13 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:layout_weight="2" />
 
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
+                android:layout_weight="90"
                 android:gravity="center"
                 android:autoSizeTextType="uniform"
                 android:text="@string/configText"
@@ -58,13 +58,13 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.5" />
+            android:layout_weight="5" />
 
         <Button
             android:id="@+id/resaltButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:autoSizeTextType="uniform"
             android:background="@drawable/btn_style"
             android:text="@string/ResultText"
