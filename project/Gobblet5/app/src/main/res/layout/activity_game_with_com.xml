@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/table"
+    tools:ignore="NestedWeights,ContentDescription"
     tools:context=".GameWithComActivity">
 
     <LinearLayout
@@ -27,7 +28,8 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                />
 
             <ImageView
                 android:id="@+id/imageView21"
@@ -107,7 +109,8 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="bottom"
                         android:layout_weight="10"
-                        app:srcCompat="@drawable/temochi_btn_style2p_small" />
+                        app:srcCompat="@drawable/temochi_btn_style2p_small"
+                         />
 
                     <Space
                         android:layout_width="0dp"
