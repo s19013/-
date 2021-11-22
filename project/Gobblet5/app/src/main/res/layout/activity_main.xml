@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/dining"
+    tools:ignore="NestedWeights,ContentDescription,HardcodedText,TooManyViews"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.Guideline

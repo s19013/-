@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper"
+
     tools:context=".ConfigActivity">
 
     <androidx.constraintlayout.widget.Guideline
@@ -163,7 +164,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <Space
@@ -191,7 +192,7 @@
             android:id="@+id/seVolume"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:gravity="center"
             android:autoSizeTextType="uniform"
             android:textColor="@android:color/black"
@@ -202,14 +203,9 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="4"
             android:max="10"
             android:progress="3" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.25" />
-
 
     </LinearLayout>
 
@@ -226,7 +222,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <Space
@@ -254,7 +250,7 @@
             android:id="@+id/bgmVolume"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:gravity="center"
             android:autoSizeTextType="uniform"
             android:textColor="@android:color/black"
@@ -265,13 +261,11 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="4"
             android:max="10"
             android:progress="3" />
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.25" />
+
 
     </LinearLayout>
 
