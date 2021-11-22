@@ -317,11 +317,16 @@ open class GameBaseClass : AppCompatActivity() {
     ////マスのボタンをおした時の作業
     //一旦ここを通して分岐
     protected fun pushedMasButton(mas: Mas){
+        Log.d("gobblet2", "pickupDone:${pickupDone} movingSource:${movingSource}" )
+//        if(pickupDone && movingSource == mas.nameGetter()){
+//            Log.d("gobblet2", "thinkAgain")
+//            resetMas(mas.nameGetter()) } //考え直し
+
         //取り出し作業
         if (!pickupDone) { return pickup(mas.nameGetter()) }
 
         //マスの中に入れる
-        if (insert(mas.nameGetter())) { //ちゃんとマスの中に入った時だけ再描画する
+        if (pickupDone && insert(mas.nameGetter())) { //ちゃんとマスの中に入った時だけ再描画する
             bordDisplay(destination)//コマの移動先を再描画
             endTurn() //ターン終了作業に移る
         }
@@ -333,7 +338,6 @@ open class GameBaseClass : AppCompatActivity() {
     private fun pickup(name: String){
 
         fun commonFunc(mas: Mas){
-            Log.d("gobblet2", "pickupCommonfunc")
             setSMP(mas.mPickup(turn), mas.nameGetter())
             debSMP()
             mas.resetList(size)
@@ -360,7 +364,6 @@ open class GameBaseClass : AppCompatActivity() {
             stringD3 -> { if (D3.mPickup(turn) != 0) {return commonFunc(D3) } }
             stringD4 -> { if (D4.mPickup(turn) != 0) {return commonFunc(D4) } }
         }
-
         toastCanNotPickup() //取り出せるものが無い時の動き
     }
 
@@ -478,11 +481,11 @@ open class GameBaseClass : AppCompatActivity() {
 
     //マスやり直し
     private fun resetMas(masName:String){
+        insert(masName)
         bordDisplay(masName)
         resetSMP()
         resetHavingDisplay()
         debJudge()
-
     }
 
     //ターン開始の処理

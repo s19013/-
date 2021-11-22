@@ -70,7 +70,10 @@ class Mas(private val name:String, ) {
     }
 
     //指定された大きさの部分を取り出して空にする
-    fun resetList(size: Int){list[size-1] = empty}
+    fun resetList(size: Int){
+        list[size-1] = empty
+        debugDisplay()
+    }
 
     //このマスは人間のものか答える
     fun OccupiedByTheHuman():Boolean{ return returnLastElement() == humanPiece }
@@ -91,6 +94,6 @@ class Mas(private val name:String, ) {
     }
 
     fun debugDisplay(){
-        Log.d("gobblet2","list:[${list[0]},${list[1]},${list[2]}]")
+        Log.d("gobblet2","${name}:[${list[0]},${list[1]},${list[2]}]")
     }
 }
