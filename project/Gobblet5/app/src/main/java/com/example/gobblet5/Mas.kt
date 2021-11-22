@@ -70,10 +70,7 @@ class Mas(private val name:String, ) {
     }
 
     //指定された大きさの部分を取り出して空にする
-    fun resetList(size: Int){
-        list[size-1] = empty
-        debugDisplay()
-    }
+    fun resetList(size: Int){ list[size-1] = empty }
 
     //このマスは人間のものか答える
     fun OccupiedByTheHuman():Boolean{ return returnLastElement() == humanPiece }
