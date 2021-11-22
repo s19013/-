@@ -78,6 +78,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="90"
+                    android:lines="1"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:text="@string/CheckTheBoard"
@@ -109,6 +110,7 @@
                     android:layout_weight="90"
                     android:autoSizeTextType="uniform"
                     android:gravity="center"
+                    android:lines="1"
                     android:text="@string/QuitGame"
                     android:textColor="@android:color/holo_red_dark" />
 
