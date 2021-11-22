@@ -320,8 +320,6 @@ open class GameBaseClass : AppCompatActivity() {
         //取り出し作業
         if (!pickupDone) { return pickup(mas.nameGetter()) }
 
-        if(pickupDone && movingSource == mas.nameGetter()){ resetMas(mas.nameGetter()) } //考え直し
-
         //マスの中に入れる
         if (insert(mas.nameGetter())) { //ちゃんとマスの中に入った時だけ再描画する
             bordDisplay(destination)//コマの移動先を再描画
@@ -335,10 +333,11 @@ open class GameBaseClass : AppCompatActivity() {
     private fun pickup(name: String){
 
         fun commonFunc(mas: Mas){
+            Log.d("gobblet2", "pickupCommonfunc")
             setSMP(mas.mPickup(turn), mas.nameGetter())
             debSMP()
-            havingDisplay()
             mas.resetList(size)
+            havingDisplay()
             bordDisplay(mas.nameGetter())
             judge()//ここでしたが相手のコマで一列そろってしまったときは相手のかちにする
         }
