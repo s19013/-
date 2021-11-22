@@ -317,10 +317,6 @@ open class GameBaseClass : AppCompatActivity() {
     ////マスのボタンをおした時の作業
     //一旦ここを通して分岐
     protected fun pushedMasButton(mas: Mas){
-        Log.d("gobblet2", "pickupDone:${pickupDone} movingSource:${movingSource}" )
-//        if(pickupDone && movingSource == mas.nameGetter()){
-//            Log.d("gobblet2", "thinkAgain")
-//            resetMas(mas.nameGetter()) } //考え直し
 
         //取り出し作業
         if (!pickupDone) { return pickup(mas.nameGetter()) }
