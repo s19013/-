@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/table"
-    tools:ignore="NestedWeights,ContentDescription,HardcodedText"
+    tools:ignore="NestedWeights,ContentDescription,HardcodedText,TooManyViews"
     tools:context=".GameWithComActivity">
 
     <LinearLayout
@@ -460,7 +460,7 @@
                     android:id="@+id/telop"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="20"
+                    android:layout_weight="28"
                     android:autoSizeTextType="uniform"
                     android:lines="1"
                     android:gravity="center"
@@ -479,7 +479,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="14" />
+                android:layout_weight="12" />
 
             <TextView
                 android:id="@+id/telop1p"
