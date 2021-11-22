@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wallpaper"
+    tools:ignore="NestedWeights,ContentDescription,HardcodedText"
     tools:context=".HowToOperateActivity2">
 
     <androidx.constraintlayout.widget.Guideline
@@ -173,13 +174,13 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.5" />
+            android:layout_weight="15" />
 
         <LinearLayout
             android:id="@+id/preButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="40"
             android:background="@drawable/btn_style"
             android:orientation="horizontal">
 
@@ -188,21 +189,21 @@
                 android:id="@+id/imageView4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="30"
                 android:scaleX="@dimen/iconScale"
                 android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_l_arrow" />
 
             <Space
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="5" />
 
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
+                android:layout_weight="90"
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/PreText"
@@ -213,13 +214,13 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="10" />
 
         <TextView
             android:id="@+id/currentPageText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.8"
+            android:layout_weight="18"
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
             android:gravity="center"
@@ -230,7 +231,7 @@
             android:id="@+id/slashText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
             android:gravity="center"
@@ -241,7 +242,7 @@
             android:id="@+id/maxPageText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.8"
+            android:layout_weight="18"
             android:autoSizeTextType="uniform"
             android:background="@color/textBackground"
             android:gravity="center"
@@ -251,13 +252,13 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:layout_weight="10" />
 
         <LinearLayout
             android:id="@+id/nextButton"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="40"
             android:background="@drawable/btn_style"
             android:orientation="horizontal">
 
@@ -265,7 +266,7 @@
                 android:id="@+id/textView6"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
+                android:layout_weight="90"
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/NextText"
@@ -274,13 +275,13 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5" />
+                android:layout_weight="5" />
 
             <ImageView
                 android:id="@+id/imageView5"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="30"
                 android:scaleX="@dimen/iconScale"
                 android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_r_arrow" />
@@ -290,7 +291,7 @@
         <Space
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.5" />
+            android:layout_weight="15" />
     </LinearLayout>
 
     <LinearLayout
