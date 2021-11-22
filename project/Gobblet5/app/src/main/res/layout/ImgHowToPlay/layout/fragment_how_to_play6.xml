@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/flame"
+    tools:ignore="NestedWeights,ContentDescription,HardcodedText,TooManyViews"
     tools:context=".HowToPlayFragment.HowToPlayFragment6">
 
     <LinearLayout
@@ -22,7 +23,7 @@
             android:id="@+id/line1"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <ImageView
@@ -61,13 +62,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"/>
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:id="@+id/line2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <ImageView
@@ -105,13 +106,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"/>
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:id="@+id/line3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <ImageView
@@ -149,13 +150,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.1"/>
+            android:layout_weight="1"/>
 
         <LinearLayout
             android:id="@+id/line4"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="10"
             android:orientation="horizontal">
 
             <ImageView
