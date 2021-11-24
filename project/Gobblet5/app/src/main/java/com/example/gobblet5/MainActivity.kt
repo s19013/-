@@ -2,15 +2,13 @@ package com.example.gobblet5
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
-
+import com.google.android.gms.ads.MobileAds
 
 
 class MainActivity : BaseClass() {
@@ -26,6 +24,7 @@ class MainActivity : BaseClass() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        MobileAds.initialize(this) {}
         iniAD()
         iniLogo()
 

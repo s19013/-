@@ -27,7 +27,7 @@ open class BaseClass: AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         iniAll()
-        MobileAds.initialize(this) {}
+//        MobileAds.initialize(this) {}
     }
 
     private fun iniAll(){
