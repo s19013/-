@@ -6,6 +6,7 @@ import android.media.SoundPool
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
+import com.google.android.gms.ads.MobileAds
 
 //主にどのクラスでも使うプレファレンスと効果音をまとめた
 open class BaseClass: AppCompatActivity()  {
@@ -26,6 +27,7 @@ open class BaseClass: AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         iniAll()
+        MobileAds.initialize(this) {}
     }
 
     private fun iniAll(){

@@ -2,10 +2,15 @@ package com.example.gobblet5
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+
 
 
 class MainActivity : BaseClass() {
@@ -14,20 +19,15 @@ class MainActivity : BaseClass() {
     private val activityIDConfig = 3
     private val activityIDSelectTutorial = 4
 
+    private lateinit var mAdView : AdView
+    private lateinit var logo:ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val logo  = findViewById<ImageView>(R.id.logoImg)
-
-
-        if (Locale.getDefault().equals(Locale.JAPAN)){
-            logo.setImageResource(R.drawable.logo_jp)
-            Log.d("gobblet2", "lang:jp")
-        } else {
-            logo.setImageResource(R.drawable.logo_en)
-            Log.d("gobblet2", "lang:en")
-        }
+        iniAD()
+        iniLogo()
 
 
         goPreGameWithComBtn.setOnClickListener { changeActivity(activityIDPreGameWithCom) }
@@ -48,5 +48,23 @@ class MainActivity : BaseClass() {
             activityIDConfig -> intent = Intent(this,ConfigActivity::class.java)
         }
         startActivity(intent)
+    }
+
+    private fun iniLogo(){
+        logo  = findViewById(R.id.logoImg)
+        if (Locale.getDefault().equals(Locale.JAPAN)){
+            logo.setImageResource(R.drawable.logo_jp)
+            Log.d("gobblet2", "lang:jp")
+        } else {
+            logo.setImageResource(R.drawable.logo_en)
+            Log.d("gobblet2", "lang:en")
+        }
+    }
+
+    private fun iniAD(){
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
     }
 }
