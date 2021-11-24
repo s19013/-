@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.widget.SeekBar
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_config.*
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 
 class ConfigActivity : BaseClass() {
     private var seSeekBar:SeekBar? = null
@@ -12,12 +14,15 @@ class ConfigActivity : BaseClass() {
     private var seVolumeText:TextView? = null
     private var bgmVolumeText:TextView? = null
 
+    private lateinit var mAdView : AdView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
 
         iniTextView()
         iniSeekBar()
+        iniAD()
 
         backButton.setOnClickListener {
             playSound(cancelSE)
@@ -88,6 +93,12 @@ class ConfigActivity : BaseClass() {
                 }
             }
         )
+    }
+
+    private fun iniAD(){
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
     }
 
 }
