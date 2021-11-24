@@ -54,6 +54,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="90"
                 android:autoSizeTextType="uniform"
+                android:lines="1"
                 android:gravity="center"
                 android:text="@string/BackToTitle"
                 android:textColor="@color/black" />
@@ -186,7 +187,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.06" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineVS"
