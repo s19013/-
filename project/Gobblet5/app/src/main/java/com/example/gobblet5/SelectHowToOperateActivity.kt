@@ -17,13 +17,13 @@ class SelectHowToOperateActivity : BaseClass() {
         iniAD()
 
         MovePieceFromHandToSquareButton.setOnClickListener {
-            playSound(menuSelectSE)
+            playSound(buttonSE)
             val intent = Intent(this, HowToOperateActivity1::class.java)
             startActivity(intent)
         }
 
         MovePieceSquareToSquareButton.setOnClickListener {
-            playSound(menuSelectSE)
+            playSound(buttonSE)
             val intent = Intent(this, HowToOperateActivity2::class.java)
             startActivity(intent)
         }

@@ -18,6 +18,7 @@ open class BaseClass: AppCompatActivity()  {
     protected var menuSelectSE = 0
     protected var gameStartSE = 0
     protected var pageSE = 0
+    protected var buttonSE = 0
 
     //プレファレンス
     protected var pref: SharedPreferences? =null
@@ -55,8 +56,9 @@ open class BaseClass: AppCompatActivity()  {
         //使う効果音を準備
         cancelSE = sp!!.load(this, R.raw.cancel, 1)
         radioButtonSE = sp!!.load(this,R.raw.radio_button,1)
-        seekSE=sp!!.load(this,R.raw.select_se,1)
+        seekSE=sp!!.load(this,R.raw.seekbar,1)
         menuSelectSE = sp!!.load(this, R.raw.button, 1)
+        buttonSE = sp!!.load(this, R.raw.etc_button, 1)
         gameStartSE = sp!!.load(this,R.raw.game_start_se,1)
         pageSE = sp!!.load(this,R.raw.page_sound,1)
     }

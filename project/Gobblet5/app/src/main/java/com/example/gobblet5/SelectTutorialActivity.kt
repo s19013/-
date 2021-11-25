@@ -18,14 +18,14 @@ class SelectTutorialActivity : BaseClass() {
 
         // 操作説明画面に遷移する処理
         howToControlButton.setOnClickListener {
-            playSound(menuSelectSE)
+            playSound(buttonSE)
             val intent = Intent(this,SelectHowToOperateActivity::class.java)
             startActivity(intent)
         }
 
         // ルール説明画面に遷移する処理
         howToPlayButton.setOnClickListener {
-            playSound(menuSelectSE)
+            playSound(buttonSE)
             val intent = Intent(this, HowToPlayActivity::class.java)
             startActivity(intent)
         }
