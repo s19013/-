@@ -51,7 +51,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="90"
                 android:lines="1"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/BackToTitle"
                 android:textColor="@color/black" />
@@ -72,7 +72,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:lines="1"
-            android:autoSizeTextType="uniform"
+            app:autoSizeTextType="uniform"
             android:background="@drawable/act_banner"
             android:gravity="center"
             android:text="@string/preGameActivity"
@@ -106,7 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="100"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:text="@string/FirstPlayer"
                 android:textColor="@android:color/black" />
         </LinearLayout>
@@ -123,7 +123,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="20"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
                 android:text="1P" />
 
@@ -132,7 +132,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="20"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
                 android:text="2P" />
 
@@ -142,7 +142,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="20"
                 android:lines="1"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
                 android:text="@string/RandomText" />
 
@@ -157,7 +157,7 @@
         android:id="@+id/gameStartBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
+        app:autoSizeTextType="uniform"
         android:background="@drawable/emphasis_btn_style"
         android:text="@string/GameStartText"
         android:textColor="#2B0000"

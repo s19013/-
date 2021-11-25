@@ -136,7 +136,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="90"
                 android:lines="1"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/BackToTitle"
                 android:textColor="@color/black" />
@@ -158,7 +158,7 @@
             android:layout_height="match_parent"
             android:layout_weight="4"
             android:lines="1"
-            android:autoSizeTextType="uniform"
+            app:autoSizeTextType="uniform"
             android:background="@drawable/act_banner"
             android:gravity="center"
             android:text="@string/configText"
@@ -191,7 +191,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="100"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:text="@string/SEText"
                 android:textColor="@android:color/black" />
 
@@ -208,7 +208,7 @@
             android:layout_height="0dp"
             android:layout_weight="10"
             android:gravity="center"
-            android:autoSizeTextType="uniform"
+            app:autoSizeTextType="uniform"
             android:textColor="@android:color/black"
             android:text="0" />
 
@@ -250,7 +250,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="100"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:text="@string/BGMText"
                 android:textColor="@android:color/black" />
 
@@ -266,7 +266,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:autoSizeTextType="uniform"
+            app:autoSizeTextType="uniform"
             android:gravity="center"
             android:text="0"
             android:textColor="@android:color/black" />
