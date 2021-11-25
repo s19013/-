@@ -177,19 +177,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="5"
             android:orientation="horizontal">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/textView2"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="100"
+                android:layout_weight="50"
                 app:autoSizeTextType="uniform"
                 android:text="@string/SEText"
                 android:textColor="@android:color/black" />
@@ -197,7 +197,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -205,7 +205,7 @@
             android:id="@+id/seVolume"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="5"
             android:gravity="center"
             app:autoSizeTextType="uniform"
             android:textColor="@android:color/black"
@@ -216,7 +216,7 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="2"
             android:max="10"
             android:progress="3" />
 
@@ -236,19 +236,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="5"
             android:orientation="horizontal">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/textView3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="100"
+                android:layout_weight="50"
                 app:autoSizeTextType="uniform"
                 android:text="@string/BGMText"
                 android:textColor="@android:color/black" />
@@ -256,7 +256,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
@@ -264,7 +264,7 @@
             android:id="@+id/bgmVolume"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="5"
             app:autoSizeTextType="uniform"
             android:gravity="center"
             android:text="0"
@@ -275,7 +275,7 @@
             style="@style/Widget.AppCompat.SeekBar.Discrete"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="4"
+            android:layout_weight="2"
             android:max="10"
             android:progress="3" />
 
