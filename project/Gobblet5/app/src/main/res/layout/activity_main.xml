@@ -74,38 +74,38 @@
             android:id="@+id/logoImg"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="18"
+            android:layout_weight="9"
             app:srcCompat="@drawable/logo_jp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5" />
+            android:layout_weight="3" />
 
         <LinearLayout
             android:id="@+id/goPreGameWithComBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="20"
+            android:layout_weight="10"
             android:background="@drawable/emphasis_btn_style"
             android:orientation="horizontal">
 
             <ImageView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
+                android:layout_weight="5"
                 app:srcCompat="@drawable/ic_com" />
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="40"
+                android:layout_weight="20"
                 android:lines="1"
                 app:autoSizeTextType="uniform"
                 android:gravity="center"
@@ -116,27 +116,27 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:layout_weight="1" />
 
         </LinearLayout>
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5" />
+            android:layout_weight="3" />
 
     <LinearLayout
         android:id="@+id/goPreGameWithManBtn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="20"
+        android:layout_weight="10"
         android:background="@drawable/emphasis_btn_style"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="4"
+            android:layout_weight="5"
             app:srcCompat="@drawable/ic_human" />
 
         <Space
@@ -147,19 +147,19 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="18"
+            android:layout_weight="20"
             android:orientation="vertical">
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="20" />
+                android:layout_weight="2" />
 
             <TextView
                 android:id="@+id/textView20"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="30"
+                android:layout_weight="3"
                 app:autoSizeTextType="uniform"
                 android:lines="1"
                 android:gravity="center"
@@ -170,7 +170,7 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="20" />
+                android:layout_weight="2" />
 
         </LinearLayout>
 
@@ -184,13 +184,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5" />
+            android:layout_weight="3" />
 
     <LinearLayout
         android:id="@+id/goTutorialBtn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="15"
+        android:layout_weight="7"
         android:background="@drawable/btn_style"
         android:orientation="horizontal">
 
@@ -227,25 +227,24 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="5" />
+            android:layout_weight="3" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="12"
-            android:orientation="horizontal"
-            android:weightSum="10">
+            android:layout_weight="5"
+            android:orientation="horizontal">
 
             <Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2" />
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:id="@+id/goConfigBtn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="6"
+                android:layout_weight="3"
                 android:background="@drawable/btn_style"
                 android:orientation="horizontal">
 
@@ -259,8 +258,8 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="10"
-                    android:scaleX="0.9"
-                    android:scaleY="0.9"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8"
                     app:srcCompat="@drawable/ic_gear" />
 
                 <Space
@@ -268,34 +267,16 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/textView"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="30"
-                    android:orientation="vertical">
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:id="@+id/textView"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:autoSizeTextType="uniform"
-                        android:layout_weight="8"
-                        android:gravity="center"
-                        android:lines="1"
-                        android:text="@string/configText"
-                        android:textColor="@color/black" />
-
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                </LinearLayout>
+                    app:autoSizeTextType="uniform"
+                    android:layout_weight="20"
+                    android:gravity="center"
+                    android:lines="1"
+                    android:text="@string/configText"
+                    android:textColor="@color/black" />
 
                 <Space
                     android:layout_width="0dp"
@@ -307,7 +288,7 @@
             <Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2" />
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>
