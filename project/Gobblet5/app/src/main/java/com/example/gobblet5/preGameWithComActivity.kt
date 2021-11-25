@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.RadioButton
 import android.widget.RadioGroup
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import kotlinx.android.synthetic.main.activity_pre_game_with_man.*
 
 class preGameWithComActivity : BaseClass() {
     var radio:RadioGroup? =null
     var playFirst:Int?= null
+    private lateinit var mAdView : AdView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,6 +20,7 @@ class preGameWithComActivity : BaseClass() {
 
         iniPlayFirst()
         iniRadioButtons()
+        iniAD()
 
         backButton.setOnClickListener {
             playSound(cancelSE)
@@ -32,7 +36,7 @@ class preGameWithComActivity : BaseClass() {
         }
     }
 
-    fun iniPlayFirst(){
+    private fun iniPlayFirst(){
         playFirst=pref?.getInt("playFirst", 1)
         when(playFirst){
             1 -> {findViewById<RadioButton>(R.id.Button1p).isChecked = true}
@@ -41,7 +45,7 @@ class preGameWithComActivity : BaseClass() {
         }
     }
 
-    fun iniRadioButtons(){
+    private fun iniRadioButtons(){
         radio = findViewById<RadioGroup>(R.id.RadioGroup)
         radio!!.setOnCheckedChangeListener { group, checkedId ->
             when(checkedId){
@@ -54,5 +58,11 @@ class preGameWithComActivity : BaseClass() {
             editor.putInt("playFirst",playFirst!!).apply()
             Log.d("gobblet2", "${playFirst}")
         }
+    }
+
+    private fun iniAD(){
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
     }
 }
