@@ -96,7 +96,7 @@
     <string name="BackToHowToOperateMenu">操作方法メニュー\nに戻る</string>
     <string name="MovePieceFromHandToSquare">手持ちからマスへ</string>
     <string name="MovePieceFromSquareToSquare">置いたコマを動かす</string>
-    <string name="Back">戻る</string>
+    <string name="Back">もどる</string>
     <string name="Oops">おけません</string>
     <string name="cannotInsertDialogText">そこにはおけません</string>
     <string name="QuitGame">ゲームをやめる</string>
