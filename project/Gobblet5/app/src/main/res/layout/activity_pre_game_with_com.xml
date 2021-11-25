@@ -257,8 +257,8 @@
         app:adSize="LARGE_BANNER"
         app:adUnitId="ca-app-pub-3940256099942544/6300978111"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH8"
-        app:layout_constraintEnd_toStartOf="@+id/guidelineVE"
-        app:layout_constraintStart_toStartOf="@+id/guidelineVS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guidelineH7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
