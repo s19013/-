@@ -16,10 +16,6 @@
             android:name=".SelectHowToOperateActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".debActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity
             android:name=".HowToPlayActivity"
             android:screenOrientation="portrait"/>
         <activity
