@@ -252,13 +252,13 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.1" />
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/imageView21"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="10"
                     android:scaleX="0.9"
                     android:scaleY="0.9"
                     app:srcCompat="@drawable/ic_gear" />
@@ -266,12 +266,12 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.2" />
+                    android:layout_weight="2" />
 
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="3"
+                    android:layout_weight="30"
                     android:orientation="vertical">
 
                     <Space
@@ -300,7 +300,7 @@
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.1" />
+                    android:layout_weight="1" />
 
             </LinearLayout>
 
