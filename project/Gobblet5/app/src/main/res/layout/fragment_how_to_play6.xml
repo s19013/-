@@ -231,7 +231,7 @@
         android:id="@+id/textView10"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
+        app:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="@string/DiagonallyText"
         android:textColor="@android:color/black"

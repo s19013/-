@@ -139,7 +139,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="90"
                 android:lines="1"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/Back"
                 android:textColor="@color/black" />
@@ -168,7 +168,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="90"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:lines="1"
                 android:gravity="center"
                 android:text="@string/QuitGame"
@@ -221,7 +221,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="100"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:text="@string/SEText"
                 android:textColor="@android:color/black" />
 
@@ -238,7 +238,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:autoSizeTextType="uniform"
+            app:autoSizeTextType="uniform"
             android:textColor="@android:color/black"
             android:text="0" />
 
@@ -284,7 +284,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="100"
-                android:autoSizeTextType="uniform"
+                app:autoSizeTextType="uniform"
                 android:text="@string/BGMText"
                 android:textColor="@android:color/black" />
 
@@ -301,7 +301,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:gravity="center"
-            android:autoSizeTextType="uniform"
+            app:autoSizeTextType="uniform"
             android:textColor="@android:color/black"
             android:text="0" />
 
@@ -329,7 +329,7 @@
         app:layout_constraintStart_toStartOf="@id/guidelineV2"
         app:layout_constraintEnd_toEndOf="@id/guidelineV3"
         android:background="@drawable/btn_style"
-        android:autoSizeTextType="uniform"
+        app:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="@string/startOver"
         android:textColor="@color/black" />

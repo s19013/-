@@ -79,7 +79,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="90"
                     android:lines="1"
-                    android:autoSizeTextType="uniform"
+                    app:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:text="@string/CheckTheBoard"
                     android:textColor="@color/black" />
@@ -108,7 +108,7 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="90"
-                    android:autoSizeTextType="uniform"
+                    app:autoSizeTextType="uniform"
                     android:gravity="center"
                     android:lines="1"
                     android:text="@string/QuitGame"
@@ -149,7 +149,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="10"
-            android:autoSizeTextType="uniform"
+            app:autoSizeTextType="uniform"
             android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:text="@string/BackToGameSetting" />
@@ -164,7 +164,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="15"
-            android:autoSizeTextType="uniform"
+            app:autoSizeTextType="uniform"
             android:textAllCaps="false"
             android:background="@drawable/btn_style"
             android:text="@string/playAgain" />
