@@ -105,7 +105,7 @@
     <string name="OkText">わかりました</string>
     <string name="startOver">やり直す</string>
     <string name="CheckTheBoard">ボードを確認する</string>
-    <string name="pieceInYourHand">手に持ったコマ</string>
+    <string name="pieceInHand">手に持ったコマ</string>
 
 
 </resources>

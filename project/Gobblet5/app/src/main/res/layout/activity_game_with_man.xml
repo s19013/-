@@ -258,12 +258,12 @@
                     android:id="@+id/telop2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="28"
+                    android:layout_weight="64"
                     app:autoSizeTextType="uniform"
                     android:rotation="180"
                     android:lines="1"
                     android:gravity="center"
-                    android:text="@string/pieceInYourHand"
+                    android:text="@string/pieceInHand"
                     android:textColor="@android:color/black" />
 
                 <Space
@@ -491,11 +491,11 @@
                     android:id="@+id/telop"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="28"
+                    android:layout_weight="64"
                     app:autoSizeTextType="uniform"
                     android:lines="1"
                     android:gravity="center"
-                    android:text="@string/pieceInYourHand"
+                    android:text="@string/pieceInHand"
                     android:textColor="@android:color/black" />
 
                 <Space

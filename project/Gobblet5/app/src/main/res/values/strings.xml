@@ -102,5 +102,5 @@
     <string name="OkText">OK</string>
     <string name="startOver">startOver</string>
     <string name="CheckTheBoard">Check The Board</string>
-    <string name="pieceInYourHand">piece In Your Hand</string>
+    <string name="pieceInHand">Piece In Your Hand</string>
 </resources>
