@@ -521,7 +521,7 @@
                 android:background="#E6E6E6"
                 android:lines="1"
                 android:gravity="center"
-                android:text="@string/YouText"
+                android:text="1P"
                 android:textColor="@android:color/black" />
 
         </LinearLayout>
