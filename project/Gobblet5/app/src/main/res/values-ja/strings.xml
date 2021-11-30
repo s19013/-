@@ -106,7 +106,7 @@
     <string name="startOver">やり直す</string>
     <string name="CheckTheBoard">ボードを確認する</string>
     <string name="pieceInHand">手に持ったコマ</string>
-    <string name="sorryText">あなたの端末のバージョンでは､音は出ません</string>
+    <string name="sorryText">このスマホのバージョンでは､音を出せません</string>
 
 
 </resources>
