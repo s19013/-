@@ -16,7 +16,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.gobblet5"
-        minSdkVersion 17 //19 21
+        minSdkVersion 21 //19 21
         targetSdkVersion 30
         multiDexEnabled true//古いスマホでの64k問題解決
         versionCode 1
