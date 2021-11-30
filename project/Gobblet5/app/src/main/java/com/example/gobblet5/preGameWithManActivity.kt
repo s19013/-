@@ -44,7 +44,7 @@ class preGameWithManActivity : BaseClass() {
     
     fun iniRadioButtons(){
         radio = findViewById<RadioGroup>(R.id.RadioGroup)
-        radio!!.setOnCheckedChangeListener { group, checkedId ->
+        radio!!.setOnCheckedChangeListener { _, checkedId ->
             when(checkedId){
                 R.id.Button1p->{playFirst=1}
                 R.id.Button2p->{playFirst= -1}
