@@ -3,6 +3,9 @@ package com.example.gobblet5
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_config.*
@@ -21,7 +24,7 @@ class ConfigActivity : BaseClass() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){ visibleSorryText() }
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M){ visibleSorryText() }
 
         iniTextView()
         iniSeekBar()
@@ -102,6 +105,12 @@ class ConfigActivity : BaseClass() {
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
+    }
+
+    private fun visibleSorryText(){
+        findViewById<LinearLayout>(R.id.SEConfigBox).visibility= View.INVISIBLE
+        findViewById<LinearLayout>(R.id.MusicConfigBox).visibility= View.INVISIBLE
+        findViewById<TextView>(R.id.sorryText).visibility= View.VISIBLE
     }
 
 

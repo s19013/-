@@ -30,10 +30,8 @@ open class BaseClass: AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //アンドロイドのバージョンがマシュマロより上だったら音を鳴らす準備
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-            iniPreference()
-            iniSoundPool()
-        }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){ iniSoundPool() }
+        iniPreference()
     }
 
     private fun iniPreference(){
@@ -67,14 +65,11 @@ open class BaseClass: AppCompatActivity()  {
     }
 
     protected fun playSound(status: Int){
-        if (seVolume > 0){ sp!!.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M &&
+            seVolume > 0){ sp!!.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
     }
 
-    protected fun visibleSorryText(){
-        findViewById<LinearLayout>(R.id.SEConfigBox).visibility= View.INVISIBLE
-        findViewById<LinearLayout>(R.id.MusicConfigBox).visibility= View.INVISIBLE
-        findViewById<LinearLayout>(R.id.sorryText).visibility= View.VISIBLE
-    }
+
 
     override fun onDestroy() {
         super.onDestroy()

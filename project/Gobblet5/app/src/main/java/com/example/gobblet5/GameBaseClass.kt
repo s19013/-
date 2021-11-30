@@ -659,6 +659,7 @@ open class GameBaseClass : AppCompatActivity() {
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
             changeActivity(activityIdMain)
+            resultPopup!!.dismiss()
         }
 
         //もう一度やる
@@ -668,6 +669,7 @@ open class GameBaseClass : AppCompatActivity() {
                 -1 -> {changeActivity(activityIdGameWithCom)}
                  1 -> {changeActivity(activityIdGameWithMan)}
             }
+            resultPopup!!.dismiss()
         }
 
         //設定へ
@@ -677,6 +679,7 @@ open class GameBaseClass : AppCompatActivity() {
                 -1 -> {changeActivity(activityIdPreGameWithCom)}
                  1 -> {changeActivity(activityIdPreGameWithMan)}
             }
+            resultPopup!!.dismiss()
         }
 
         //盤面を見る
@@ -707,10 +710,10 @@ open class GameBaseClass : AppCompatActivity() {
         // 画面中央に表示
         configPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
 
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M){
             popupView.findViewById<LinearLayout>(R.id.SEConfigBox).visibility= View.INVISIBLE
             popupView.findViewById<LinearLayout>(R.id.MusicConfigBox).visibility= View.INVISIBLE
-            popupView.findViewById<LinearLayout>(R.id.sorryText).visibility= View.VISIBLE
+            popupView.findViewById<TextView>(R.id.sorryText).visibility= View.VISIBLE
         }
 
         //テキスト初期化
@@ -781,6 +784,7 @@ open class GameBaseClass : AppCompatActivity() {
         //タイトルへ戻るボタン
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
+            configPopup!!.dismiss()
             changeActivity(activityIdMain)
         }
 
@@ -795,6 +799,7 @@ open class GameBaseClass : AppCompatActivity() {
 
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
             playSound(gameStartSE)
+            configPopup!!.dismiss()
             when(thisAct){
                 -1 -> {changeActivity(activityIdGameWithCom)}
                  1 -> {changeActivity(activityIdGameWithMan)}
@@ -980,21 +985,27 @@ open class GameBaseClass : AppCompatActivity() {
     //ライフサイクル
     override fun onResume() {
         super.onResume()
-        if (bgmVolume > 0) { mediaPlayer?.start() }
-        when (nowDoingTimerID){resultTimerId -> handler.post(resultTimer) }
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            if (bgmVolume > 0) { mediaPlayer?.start() }
+            when (nowDoingTimerID){resultTimerId -> handler.post(resultTimer) }
+        }
     }
 
     override fun onPause() {
         super.onPause()
-        if (bgmVolume > 0){ mediaPlayer?.pause() }
-        handler.removeCallbacks(resultTimer)
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            if (bgmVolume > 0){ mediaPlayer?.pause() }
+            handler.removeCallbacks(resultTimer)
+        }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        sp!!.release()
-        mediaPlayer?.release()
-        handler.removeCallbacks(resultTimer)
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            sp!!.release()
+            mediaPlayer?.release()
+            handler.removeCallbacks(resultTimer)
+        }
     }
 
 
