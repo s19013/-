@@ -1,6 +1,7 @@
 package com.example.gobblet5
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.widget.SeekBar
 import android.widget.TextView
@@ -19,6 +20,8 @@ class ConfigActivity : BaseClass() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){ visibleSorryText() }
 
         iniTextView()
         iniSeekBar()
@@ -100,5 +103,7 @@ class ConfigActivity : BaseClass() {
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
     }
+
+
 
 }

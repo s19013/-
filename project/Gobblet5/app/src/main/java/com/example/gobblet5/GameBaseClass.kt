@@ -8,6 +8,7 @@ import android.graphics.drawable.Drawable
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.media.SoundPool
+import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
@@ -767,6 +768,12 @@ open class GameBaseClass : AppCompatActivity() {
         // 画面中央に表示
         configPopup!!.showAtLocation(findViewById(R.id.configButton), Gravity.CENTER, 0, 0)
 
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            popupView.findViewById<LinearLayout>(R.id.SEConfigBox).visibility= View.INVISIBLE
+            popupView.findViewById<LinearLayout>(R.id.MusicConfigBox).visibility= View.INVISIBLE
+            popupView.findViewById<LinearLayout>(R.id.sorryText).visibility= View.VISIBLE
+        }
+
         //テキスト初期化
         val seVolumeText = popupView.findViewById<TextView>(R.id.seVolume)
         val bgmVolumeText = popupView.findViewById<TextView>(R.id.bgmVolume)
@@ -887,9 +894,11 @@ open class GameBaseClass : AppCompatActivity() {
     //標準的な初期化処理
     protected fun iniStandard(){
         iniFullscreen()
-        iniPreference()
-        iniSoundPool()
-        iniMediaPlayer()
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            iniPreference()
+            iniSoundPool()
+            iniMediaPlayer()
+        }
         iniDrawable()
         iniWhichIsFirst()
         iniView()
@@ -913,14 +922,17 @@ open class GameBaseClass : AppCompatActivity() {
 
     private fun iniSoundPool(){
         //soundPool
-        val audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_GAME)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-            .build()
-        sp = SoundPool.Builder()
-            .setAudioAttributes(audioAttributes)
-            .setMaxStreams(1)
-            .build()
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            val audioAttributes =
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                    .build()
+            sp = SoundPool.Builder()
+                .setAudioAttributes(audioAttributes)
+                .setMaxStreams(1)
+                .build()
+        }
         //使う効果音を準備
         cannotDoItSE= sp!!.load(this, R.raw.cannotdoit, 1)
         putSE= sp!!.load(this, R.raw.select_se, 1)
@@ -1031,22 +1043,20 @@ open class GameBaseClass : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (bgmVolume > 0) { mediaPlayer?.start() }
-        when (nowDoingTimerID){
-            resultTimerId -> handler.post(resultTimer)
-        }
+        when (nowDoingTimerID){resultTimerId -> handler.post(resultTimer) }
     }
 
     override fun onPause() {
         super.onPause()
         if (bgmVolume > 0){ mediaPlayer?.pause() }
-        handler.removeCallbacks(resultTimer) }
+        handler.removeCallbacks(resultTimer)
+    }
 
     override fun onDestroy() {
         super.onDestroy()
         sp!!.release()
         mediaPlayer?.release()
         handler.removeCallbacks(resultTimer)
-        mediaPlayer=null
     }
 
 

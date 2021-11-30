@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineH3"
@@ -98,6 +98,7 @@
         android:orientation="vertical" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
@@ -138,11 +139,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="90"
-                android:lines="1"
-                app:autoSizeTextType="uniform"
                 android:gravity="center"
+                android:lines="1"
                 android:text="@string/Back"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform" />
 
             <Space
                 android:layout_width="0dp"
@@ -168,11 +169,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="45"
-                app:autoSizeTextType="uniform"
-                android:lines="1"
                 android:gravity="center"
+                android:lines="1"
                 android:text="@string/QuitGame"
-                android:textColor="@android:color/holo_red_dark" />
+                android:textColor="@android:color/holo_red_dark"
+                app:autoSizeTextType="uniform" />
 
             <Space
                 android:layout_width="0dp"
@@ -196,6 +197,7 @@
 
 
     <LinearLayout
+        android:id="@+id/SEConfigBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -254,7 +256,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/MusicConfigBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/textBackground"
@@ -326,5 +328,20 @@
         android:gravity="center"
         android:text="@string/startOver"
         android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/sorryText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/textBackground"
+        android:gravity="center"
+        android:text="@string/sorryText"
+        android:textColor="@color/dark_red"
+        android:visibility="invisible"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH6"
+        app:layout_constraintEnd_toStartOf="@+id/guidelineV3"
+        app:layout_constraintStart_toStartOf="@+id/guidelineV2"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

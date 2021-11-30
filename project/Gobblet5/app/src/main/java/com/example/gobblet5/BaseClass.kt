@@ -3,10 +3,12 @@ package com.example.gobblet5
 import android.content.SharedPreferences
 import android.media.AudioAttributes
 import android.media.SoundPool
+import android.os.Build
 import android.os.Bundle
+import android.view.View
+import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.preference.PreferenceManager
-import com.google.android.gms.ads.MobileAds
 
 //主にどのクラスでも使うプレファレンスと効果音をまとめた
 open class BaseClass: AppCompatActivity()  {
@@ -27,13 +29,11 @@ open class BaseClass: AppCompatActivity()  {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        iniAll()
-//        MobileAds.initialize(this) {}
-    }
-
-    private fun iniAll(){
-        iniPreference()
-        iniSoundPool()
+        //アンドロイドのバージョンがマシュマロより上だったら音を鳴らす準備
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            iniPreference()
+            iniSoundPool()
+        }
     }
 
     private fun iniPreference(){
@@ -45,14 +45,17 @@ open class BaseClass: AppCompatActivity()  {
 
     private fun iniSoundPool(){
         //soundPool
-        val audioAttributes = AudioAttributes.Builder()
-            .setUsage(AudioAttributes.USAGE_GAME)
-            .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-            .build()
-        sp = SoundPool.Builder()
-            .setAudioAttributes(audioAttributes)
-            .setMaxStreams(1)
-            .build()
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
+            val audioAttributes =
+                AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_GAME)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                    .build()
+            sp = SoundPool.Builder()
+                .setAudioAttributes(audioAttributes)
+                .setMaxStreams(1)
+                .build()
+        }
         //使う効果音を準備
         cancelSE = sp!!.load(this, R.raw.cancel, 1)
         radioButtonSE = sp!!.load(this,R.raw.radio_button,1)
@@ -67,8 +70,14 @@ open class BaseClass: AppCompatActivity()  {
         if (seVolume > 0){ sp!!.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
     }
 
+    protected fun visibleSorryText(){
+        findViewById<LinearLayout>(R.id.SEConfigBox).visibility= View.INVISIBLE
+        findViewById<LinearLayout>(R.id.MusicConfigBox).visibility= View.INVISIBLE
+        findViewById<LinearLayout>(R.id.sorryText).visibility= View.VISIBLE
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-        sp!!.release()
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){ sp!!.release() }
     }
 }
