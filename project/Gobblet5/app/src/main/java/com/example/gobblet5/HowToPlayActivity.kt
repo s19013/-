@@ -169,28 +169,24 @@ class HowToPlayActivity : BaseClass() {
         override fun run() {
             when(time){
                 0L ->{
-                    Log.d("gobblet2", "0L call")
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
                     fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment3_1())
                         .addToBackStack(null)
                         .commit()
                 }
                 800L -> {
-                    Log.d("gobblet2", "1000L call")
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
                     fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment3_2())
                         .addToBackStack(null)
                         .commit()
                 }
                 1600L -> {
-                    Log.d("gobblet2", "2000L call")
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
                     fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment3_3())
                         .addToBackStack(null)
                         .commit()
                 }
                 2400L -> {
-                    Log.d("gobblet2", "3000L call")
                     val fragmentTransaction = supportFragmentManager.beginTransaction()
                     fragmentTransaction.replace(R.id.tutorialImg,HowToPlayFragment3_4())
                         .addToBackStack(null)
@@ -200,7 +196,6 @@ class HowToPlayActivity : BaseClass() {
             }
             time += millisecond
             handler.postDelayed(this,millisecond)
-            Log.d("gobblet2", "timer_def:${time}")
             if (time==2500L){
                 handler.removeCallbacks(this)
                 time = 0L
@@ -228,7 +223,6 @@ class HowToPlayActivity : BaseClass() {
             }
             time += millisecond
             handler.postDelayed(this,millisecond)
-            Log.d("gobblet2", "timer_def:${time}")
             if (time==1000L){
                 handler.removeCallbacks(this)
                 time = 0L
@@ -255,7 +249,6 @@ class HowToPlayActivity : BaseClass() {
             }
             time += millisecond
             handler.postDelayed(this,millisecond)
-            Log.d("gobblet2", "timer_def:${time}")
             if (time==1000L){
                 handler.removeCallbacks(this)
                 time = 0L
@@ -282,7 +275,6 @@ class HowToPlayActivity : BaseClass() {
             }
             time += millisecond
             handler.postDelayed(this,millisecond)
-            Log.d("gobblet2", "timer_def:${time}")
             if (time==1000L){
                 handler.removeCallbacks(this)
                 time = 0L

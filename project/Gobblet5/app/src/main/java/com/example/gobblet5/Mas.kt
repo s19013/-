@@ -1,8 +1,5 @@
 package com.example.gobblet5
 
-import android.util.Log
-
-
 class Mas(private val name:String, ) {
     private var list= mutableListOf<Int>(0,0,0) // [小､中､大]
     private var score = 0 //コンピューターが使う評価値みたいなもの
@@ -90,7 +87,5 @@ class Mas(private val name:String, ) {
         return mutableListOf(0,0)
     }
 
-    fun debugDisplay(){
-        Log.d("gobblet2","${name}:[${list[0]},${list[1]},${list[2]}]")
-    }
+
 }

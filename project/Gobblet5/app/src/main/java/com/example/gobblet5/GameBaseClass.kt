@@ -12,7 +12,6 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
-import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -123,12 +122,6 @@ open class GameBaseClass : AppCompatActivity() {
     protected var finished = false
     private var pickupDone= false
 
-    //ライン デバック用
-    private var debLine1 = mutableListOf(0, 0, 0, 0)
-    private var debLine2 = mutableListOf(0, 0, 0, 0)
-    private var debLine3 = mutableListOf(0, 0, 0, 0)
-    private var debLine4 = mutableListOf(0, 0, 0, 0)
-
     //勝敗を決めるのに使う
     private var judgeMap = mutableMapOf(
         "lineA" to 0, "lineB" to 0, "lineC" to 0, "lineD" to 0,
@@ -181,7 +174,6 @@ open class GameBaseClass : AppCompatActivity() {
     //持ちてのコマを表示
     private fun havingDisplay(){
         playSound(selectSE)
-        Log.d("gobblet2", "havingDisplay  size=${size},turn=${turn}")
         if (turn == 1){
             view = findViewById(R.id.having1p)
             when (size){
@@ -336,7 +328,6 @@ open class GameBaseClass : AppCompatActivity() {
 
         fun commonFunc(mas: Mas){
             setSMP(mas.mPickup(turn), mas.nameGetter())
-            debSMP()
             mas.resetList(size)
             havingDisplay()
             bordDisplay(mas.nameGetter())
@@ -473,16 +464,6 @@ open class GameBaseClass : AppCompatActivity() {
     protected fun resetTemochi(){
         resetSMP()
         resetHavingDisplay()
-        debSMP()
-    }
-
-    //マスやり直し
-    private fun resetMas(masName:String){
-        insert(masName)
-        bordDisplay(masName)
-        resetSMP()
-        resetHavingDisplay()
-        debJudge()
     }
 
     //ターン開始の処理
@@ -497,7 +478,6 @@ open class GameBaseClass : AppCompatActivity() {
         resetSMP()
         resetD()
         turn*=-1
-        Log.d("gobblet2", "turnEnd")
         startTurn()
     }
 
@@ -561,11 +541,6 @@ open class GameBaseClass : AppCompatActivity() {
         }
     }
 
-    private fun debSMP(){
-        Log.d("gobblet2", "")
-        Log.d("gobblet2", "size:${size}, movingSource:${movingSource}, pickupDone:${pickupDone}")
-    }
-
     private fun setSMP(s: Int, m: String){
         size=s
         movingSource=m
@@ -581,13 +556,9 @@ open class GameBaseClass : AppCompatActivity() {
     private fun setD(location: String) {
         playSound(putSE)
         destination = location
-        Log.d("gobblet2", "destination:${destination}")
     }
 
-    private fun resetD(){
-        destination = null
-        Log.d("gobblet2", "destination:${destination}")
-    }
+    private fun resetD(){ destination = null }
 
     private fun judge(){
         judgeMap["lineA"]=A1.returnLastElement()+A2.returnLastElement()+A3.returnLastElement()+A4.returnLastElement()
@@ -630,36 +601,6 @@ open class GameBaseClass : AppCompatActivity() {
             handler.post(resultTimer)
             //showResultPopup()
         }
-
-        debJudge()
-    }
-
-    private fun debJudge(){
-        Log.d("gobblet2", "")
-
-        debLine1[0]=A1.returnLastElement()
-        debLine1[1]=B1.returnLastElement()
-        debLine1[2]=C1.returnLastElement()
-        debLine1[3]=D1.returnLastElement()
-        debLine2[0]=A2.returnLastElement()
-        debLine2[1]=B2.returnLastElement()
-        debLine2[2]=C2.returnLastElement()
-        debLine2[3]=D2.returnLastElement()
-        debLine3[0]=A3.returnLastElement()
-        debLine3[1]=B3.returnLastElement()
-        debLine3[2]=C3.returnLastElement()
-        debLine3[3]=D3.returnLastElement()
-        debLine4[0]=A4.returnLastElement()
-        debLine4[1]=B4.returnLastElement()
-        debLine4[2]=C4.returnLastElement()
-        debLine4[3]=D4.returnLastElement()
-
-        Log.d("gobblet2", "")
-        Log.d("gobblet2", "line1:${debLine1}")
-        Log.d("gobblet2", "line2:${debLine2}")
-        Log.d("gobblet2", "line3:${debLine3}")
-        Log.d("gobblet2", "line4:${debLine4}")
-        Log.d("gobblet2", "finished:${finished},winner:${winner}")
     }
 
     ////ポップアップ
@@ -707,13 +648,11 @@ open class GameBaseClass : AppCompatActivity() {
                 "1p" -> resultImage.setImageResource(R.drawable.win1p_jp)
                 "2p" -> resultImage.setImageResource(R.drawable.win2p_jp)
             }
-            Log.d("gobblet2", "lang:jp")
         } else {
             when(winner){
                 "1p" -> resultImage.setImageResource(R.drawable.win1p_en)
                 "2p" -> resultImage.setImageResource(R.drawable.win2p_en)
             }
-            Log.d("gobblet2", "lang:en")
         }
 
         //タイトルへ戻る
@@ -877,7 +816,6 @@ open class GameBaseClass : AppCompatActivity() {
             .setTitle(getString(R.string.cannotInsertDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
-        Log.d("gobblet2", "can't insert called")
         playSound(cannotDoItSE)
     }
 

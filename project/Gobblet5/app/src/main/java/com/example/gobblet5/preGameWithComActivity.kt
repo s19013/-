@@ -2,7 +2,6 @@ package com.example.gobblet5
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.RadioButton
 import android.widget.RadioGroup
 import com.google.android.gms.ads.AdRequest
@@ -56,7 +55,6 @@ class preGameWithComActivity : BaseClass() {
             playSound(radioButtonSE)
             val editor=pref!!.edit()
             editor.putInt("playFirst",playFirst!!).apply()
-            Log.d("gobblet2", "${playFirst}")
         }
     }
 

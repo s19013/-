@@ -2,7 +2,6 @@ package com.example.gobblet5
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import kotlinx.android.synthetic.main.activity_game_with_man.*
 
 
@@ -20,7 +19,6 @@ class GameWithManActivity : GameBaseClass() {
 
         //ゲームを始める
         startTurn()
-        Log.d("gobblet2", "pF:${playFirst}")
 
 
 //手持ちのボタンを触った時

@@ -2,7 +2,6 @@ package com.example.gobblet5
 
 import android.os.Bundle
 import android.graphics.Color
-import android.util.Log
 import kotlinx.android.synthetic.main.activity_game_with_com.*
 
 class GameWithComActivity : GameBaseClass() {
@@ -25,7 +24,6 @@ class GameWithComActivity : GameBaseClass() {
 
         //ゲームを始める
         startTurn()
-        Log.d("gobblet2", "pF:${playFirst}")
 
 //手持ちのボタンを触った時
         //1p手持ち
@@ -187,7 +185,6 @@ class GameWithComActivity : GameBaseClass() {
         nowDoingTimerID = insertTimerId
         if (turn != 0 && !finished) {
             handler.post(insertTimer)
-            com.debScore()
             resetCom()
         }
     }

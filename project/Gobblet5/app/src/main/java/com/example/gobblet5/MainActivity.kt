@@ -51,13 +51,8 @@ class MainActivity : BaseClass() {
 
     private fun iniLogo(){
         logo  = findViewById(R.id.logoImg)
-        if (Locale.getDefault().equals(Locale.JAPAN)){
-            logo.setImageResource(R.drawable.logo_jp)
-            Log.d("gobblet2", "lang:jp")
-        } else {
-            logo.setImageResource(R.drawable.logo_en)
-            Log.d("gobblet2", "lang:en")
-        }
+        if (Locale.getDefault().equals(Locale.JAPAN)){ logo.setImageResource(R.drawable.logo_jp) }
+        else { logo.setImageResource(R.drawable.logo_en) }
     }
 
     private fun iniAD(){
