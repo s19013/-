@@ -16,8 +16,9 @@ android {
 
     defaultConfig {
         applicationId "com.example.gobblet5"
-        minSdkVersion 21 //19 21
+        minSdkVersion 17 //19 21
         targetSdkVersion 30
+        multiDexEnabled true//古いスマホでの64k問題解決
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -41,6 +42,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.android.support:multidex:1.0.3' //古いスマホの64k問題解決
     implementation 'com.google.android.gms:play-services-ads:20.5.0'
     implementation 'androidx.preference:preference:1.0.0'
     implementation 'android.arch.lifecycle:extensions:1.1.1'// viewModelに必要
