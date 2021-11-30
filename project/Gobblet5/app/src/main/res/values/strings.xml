@@ -37,13 +37,13 @@
     <string name="player2">2P</string>
     <string name="RandomText">Random</string>
     <string name="YouText">You</string>
-    <string name="EnemyText">opponent</string>
+    <string name="EnemyText">Opponent</string>
     <string name="comText">Computer</string>
     <string name="GameStartText">GameStart</string>
     <string name="BackToGame">Back To Game</string>
     <string name="BackToTitle">Back To Title</string>
     <string name="BackToGameSetting">Back To GameSetting</string>
-    <string name="playAgain">playAgain</string>
+    <string name="playAgain">PlayAgain</string>
     <string name="HowToOperateText">How To Operate</string>
     <string name="HowToPlayText">How To Play</string>
     <!--設定    -->
@@ -62,9 +62,9 @@
     <!--操作説明    -->
 
     <!--ルール説明    -->
-    <string name="Small">small</string>
-    <string name="Middle">midium</string>
-    <string name="Big">large</string>
+    <string name="Small">Small</string>
+    <string name="Middle">Midium</string>
+    <string name="Big">Large</string>
     <string name="NextText">Next</string>
     <string name="PreText">Previous</string>
     <string name="EnemyTurn">Opponent\'s Turn </string>
@@ -100,7 +100,7 @@
     <string name="cannotPickupDialogText">You can\'t pick up of there</string>
     <string name="notYourTurnDialogText">Not your turn now</string>
     <string name="OkText">OK</string>
-    <string name="startOver">startOver</string>
+    <string name="startOver">Start Over</string>
     <string name="CheckTheBoard">Check The Board</string>
     <string name="pieceInHand">Piece In Hand</string>
     <string name="sorryText">sorry,any sound can\'t be make on this device version</string>
