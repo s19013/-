@@ -236,7 +236,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         app:adSize="MEDIUM_RECTANGLE"
-        app:adUnitId="ca-app-pub-5907776148040824/5203301236"
+        app:adUnitId="ca-app-pub-9366896828334909/7491365297"
         app:layout_constraintBottom_toTopOf="@+id/guidelineH8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
