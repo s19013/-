@@ -80,13 +80,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3" />
+            android:layout_weight="2" />
 
         <LinearLayout
             android:id="@+id/goPreGameWithComBtn"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="12"
             android:background="@drawable/emphasis_btn_style"
             android:orientation="horizontal">
 
@@ -123,13 +123,13 @@
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="3" />
+            android:layout_weight="2" />
 
     <LinearLayout
         android:id="@+id/goPreGameWithManBtn"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="10"
+        android:layout_weight="12"
         android:background="@drawable/emphasis_btn_style"
         android:orientation="horizontal">
 
