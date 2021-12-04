@@ -1,69 +1,23 @@
 package com.example.gobblet5
 
-import android.content.Intent
-import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import android.view.View
 import com.example.gobblet5.HowToPlayFragment.*
-import kotlinx.android.synthetic.main.activity_how_to_play.*
+import kotlinx.android.synthetic.main.activity_tutorial.*
 
-class HowToPlayActivity : BaseClass() {
-    private val maxPage = 12
-    private var Page:Int = 1
+class HowToPlayActivity : baseTutorial() {
+    override val actID: Int = 1
+    override val maxPage = 12
+    override var Page:Int = 1
     //タイマー関係
     private val millisecond:Long=100
     private var time = 0L
     val handler = Handler(Looper.getMainLooper())
     private var nowDoingTimerID = 0
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_how_to_play)
+    override fun iniActName() { textWhereIsHere.text = getString(R.string.HowToPlayActivity) }
 
-        maxPageText.text = maxPage.toString()
-
-        nextButton.setOnClickListener { countUpPage() }
-
-        preButton.setOnClickListener { countDownPage() }
-
-        backButton.setOnClickListener {
-            playSound(cancelSE)
-            val intent = Intent(this,SelectTutorialActivity::class.java)
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(intent)
-        }
-    }
-
-    private  fun changeElements(){
-        playSound(pageSE)
-        changeText()
-        changeImg()
-        changeCurrentPage()
-    }
-
-    private fun countUpPage() {
-        if (Page < maxPage) {
-            Page += 1
-            changeElements()
-        }
-        if (Page > maxPage) { Page = maxPage }
-
-    }
-
-    private fun countDownPage() {
-        if (Page > 1) {
-            Page -= 1
-            changeElements()
-        }
-
-        if (Page < 1) { Page = 1 }
-    }
-
-    private fun changeCurrentPage() { currentPageText.text = Page.toString() }
-
-    private fun changeText() {
+    override fun changeText() {
         when (Page) {
             1  -> tutorialText.text = getString(R.string.HowToPlayTutorialText1)
             2  -> tutorialText.text = getString(R.string.HowToPlayTutorialText2)
@@ -80,7 +34,7 @@ class HowToPlayActivity : BaseClass() {
         }
     }
 
-    private fun changeImg() {
+    override fun changeImg() {
         when (Page) {
             1 -> {
                 val fragmentTransaction = supportFragmentManager.beginTransaction()
@@ -281,23 +235,6 @@ class HowToPlayActivity : BaseClass() {
                 nowDoingTimerID = 0
             }
         }
-    }
-
-    //    全画面表示に関すること
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) hideSystemUI()
-    }
-
-    private fun hideSystemUI() {
-        window.decorView.systemUiVisibility = (
-                View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        or View.SYSTEM_UI_FLAG_FULLSCREEN
-                )
     }
 
     override fun onResume() {
