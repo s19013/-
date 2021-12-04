@@ -74,7 +74,7 @@
     <string name="HowToOperateTutorialText1_1">3種類の手持ちのコマの内動かしたいコマをタップします｡\n 例として大きいコマを動かします｡</string>
     <string name="HowToOperateTutorialText1_2">次に､コマを置きたいマスをタップします｡</string>
     <string name="HowToOperateTutorialText1_3">これで手持ちからマスへコマを置くことができました｡</string>
-    <string name="HowToOperateTutorialText2_1">自分のコマが表示されているマスをタップします｡\n例としてこのマスをタップします｡</string>
+    <string name="HowToOperateTutorialText2_1">自分のコマが表示されているマスをタップします｡</string>
     <string name="HowToOperateTutorialText2_2">次に移動先のマスをタップします｡</string>
     <string name="HowToOperateTutorialText2_3">これで置いたコマを動かすことができました｡</string>
     <!--ルール説明    -->
