@@ -107,6 +107,7 @@
     <string name="CheckTheBoard">ボードを確認する</string>
     <string name="pieceInHand">手に持ったコマ</string>
     <string name="sorryText">このスマホのバージョンでは､音を出せません</string>
+    <string name="PrivacyPolicy">プライバシーポリシー</string>
 
 
 </resources>
