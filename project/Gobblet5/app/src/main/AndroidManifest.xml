@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.gobblet5">
+    package="com.game.gobblet5">
 
     <application
         android:allowBackup="true"
@@ -10,17 +10,17 @@
         android:supportsRtl="true"
         android:screenOrientation="portrait"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".HowToOperateActivity2" />
-        <activity android:name=".SelectHowToOperateActivity" />
-        <activity android:name=".HowToPlayActivity" />
-        <activity android:name=".HowToOperateActivity1" />
-        <activity android:name=".SelectTutorialActivity" />
-        <activity android:name=".GameWithComActivity" />
-        <activity android:name=".GameWithManActivity" />
-        <activity android:name=".preGameWithComActivity" />
-        <activity android:name=".preGameWithManActivity" />
-        <activity android:name=".ConfigActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name="com.game.gobblet5.HowToOperateActivity2" />
+        <activity android:name="com.game.gobblet5.SelectHowToOperateActivity" />
+        <activity android:name="com.game.gobblet5.HowToPlayActivity" />
+        <activity android:name="com.game.gobblet5.HowToOperateActivity1" />
+        <activity android:name="com.game.gobblet5.SelectTutorialActivity" />
+        <activity android:name="com.game.gobblet5.GameWithComActivity" />
+        <activity android:name="com.game.gobblet5.GameWithManActivity" />
+        <activity android:name="com.game.gobblet5.preGameWithComActivity" />
+        <activity android:name="com.game.gobblet5.preGameWithManActivity" />
+        <activity android:name="com.game.gobblet5.ConfigActivity" />
+        <activity android:name="com.game.gobblet5.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

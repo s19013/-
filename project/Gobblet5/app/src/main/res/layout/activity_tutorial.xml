@@ -351,7 +351,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/tutorialImg"
-        android:name="com.example.gobblet5.HowToPlayFragment.HowToPlayFragment1"
+        android:name="com.game.gobblet5.HowToPlayFragment.HowToPlayFragment1"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/imageGuidelineBottom"
