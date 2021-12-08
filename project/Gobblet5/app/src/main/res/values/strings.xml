@@ -104,5 +104,5 @@
     <string name="CheckTheBoard">Check The Board</string>
     <string name="pieceInHand">Piece In Hand</string>
     <string name="sorryText">sorry,any sound can\'t be make on this device version</string>
-    <string name="PrivacyPolicy">Privacy Policy</string>
+    <string name="PrivacyPolicy">Privacy Policy (Use browser)</string>
 </resources>
