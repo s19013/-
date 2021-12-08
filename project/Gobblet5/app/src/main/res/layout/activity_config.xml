@@ -326,7 +326,7 @@
         app:layout_constraintTop_toTopOf="@+id/guidelineH4" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/privacyPolicyButton"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/btn_style"

@@ -1,15 +1,16 @@
 package com.game.gobblet5
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.widget.TextView
-import kotlinx.android.synthetic.main.activity_config.*
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
+import kotlinx.android.synthetic.main.activity_config.*
 
 class ConfigActivity : BaseClass() {
     private var seSeekBar:SeekBar? = null
@@ -28,6 +29,12 @@ class ConfigActivity : BaseClass() {
         iniTextView()
         iniSeekBar()
         iniAD()
+
+        privacyPolicyButton.setOnClickListener {
+            val uri: Uri = Uri.parse("https://docs.google.com/document/d/e/2PACX-1vSgFvW_CcThfCzhFJauIcnTIdICrCmFbNZGjIk5CivgpCbwut1fgWTv8R4tcDIu_dtKwqrd2wymmwpW/pub")
+            val intent = Intent(Intent.ACTION_VIEW, uri)
+            startActivity(intent)
+        }
 
         backButton.setOnClickListener {
             playSound(cancelSE)
