@@ -10,7 +10,7 @@ class HowToPlayActivity : baseTutorial() {
     override val maxPage = 12
     override var Page:Int = 1
     //タイマー関係
-    private val millisecond:Long=100
+    private val millisecond:Long=800
     private var time = 0L
     val handler = Handler(Looper.getMainLooper())
     private var nowDoingTimerID = 0
@@ -150,7 +150,7 @@ class HowToPlayActivity : baseTutorial() {
             }
             time += millisecond
             handler.postDelayed(this,millisecond)
-            if (time==2500L){
+            if (time>2500L){
                 handler.removeCallbacks(this)
                 time = 0L
                 nowDoingTimerID = 0
@@ -177,7 +177,7 @@ class HowToPlayActivity : baseTutorial() {
             }
             time += millisecond
             handler.postDelayed(this,millisecond)
-            if (time==1000L){
+            if (time>1000L){
                 handler.removeCallbacks(this)
                 time = 0L
                 nowDoingTimerID = 0
@@ -203,7 +203,7 @@ class HowToPlayActivity : baseTutorial() {
             }
             time += millisecond
             handler.postDelayed(this,millisecond)
-            if (time==1000L){
+            if (time>1000L){
                 handler.removeCallbacks(this)
                 time = 0L
                 nowDoingTimerID = 0
@@ -229,7 +229,7 @@ class HowToPlayActivity : baseTutorial() {
             }
             time += millisecond
             handler.postDelayed(this,millisecond)
-            if (time==1000L){
+            if (time>1000L){
                 handler.removeCallbacks(this)
                 time = 0L
                 nowDoingTimerID = 0

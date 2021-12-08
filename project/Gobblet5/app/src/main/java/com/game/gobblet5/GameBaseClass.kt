@@ -31,7 +31,7 @@ open class GameBaseClass : AppCompatActivity() {
     private val activityIdMain = 5
 
     //タイマー関係
-    protected val millisecond:Long=100
+    protected val millisecond:Long=200
     protected var time = 0L
     protected val handler = Handler(Looper.getMainLooper()) // Looper.getMainLooper()を書くとクラッシュしにくいらしい
     protected var nowDoingTimerID:String? = null
