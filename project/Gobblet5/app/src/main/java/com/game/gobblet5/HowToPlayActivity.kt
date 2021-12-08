@@ -10,7 +10,7 @@ class HowToPlayActivity : baseTutorial() {
     override val maxPage = 12
     override var Page:Int = 1
     //タイマー関係
-    private val millisecond:Long=800
+    private val millisecond:Long=400
     private var time = 0L
     val handler = Handler(Looper.getMainLooper())
     private var nowDoingTimerID = 0
