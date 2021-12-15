@@ -19,26 +19,9 @@ class HowToOperateActivity1 : baseTutorial() {
 
     override fun changeImg() {
         when(Page) {
-            1 -> {
-                val fragmentTransaction = supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg, HowToOperateFragment1_1())
-                    .addToBackStack(null)
-                    .commit()
-            }
-            2 -> {
-                val fragmentTransaction = supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg, HowToOperateFragment1_2())
-                    .addToBackStack(null)
-                    .commit()
-            }
-            3 -> {
-                val fragmentTransaction = supportFragmentManager.beginTransaction()
-                fragmentTransaction.replace(R.id.tutorialImg, HowToOperateFragment1_3())
-                    .addToBackStack(null)
-                    .commit()
-            }
-
+            1 -> { tutorialImg.setImageResource(R.drawable.temo_to_mas1) }
+            2 -> { tutorialImg.setImageResource(R.drawable.temo_to_mas2) }
+            3 -> { tutorialImg.setImageResource(R.drawable.temo_to_mas3) }
         }
-
     }
 }

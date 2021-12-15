@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ConstraintLayout"
-    android:background="@drawable/wallpaper"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="NestedWeights,ContentDescription,HardcodedText"
-    tools:context=".HowToPlayActivity">
+    android:background="@drawable/wallpaper"
+    tools:context=".HowToPlayActivity"
+    tools:ignore="NestedWeights,ContentDescription,HardcodedText">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/tutorialTextViewGuidelineStart"
@@ -138,10 +138,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="90"
-                app:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/Back"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform" />
         </LinearLayout>
 
         <Space
@@ -154,12 +154,12 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:lines="2"
-            app:autoSizeTextType="uniform"
             android:background="@drawable/act_banner"
             android:gravity="center"
+            android:lines="2"
             android:text="@string/HowToPlayText"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            app:autoSizeTextType="uniform" />
 
     </LinearLayout>
 
@@ -206,11 +206,11 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="18"
-                android:lines="1"
-                app:autoSizeTextType="uniform"
                 android:gravity="center"
+                android:lines="1"
                 android:text="@string/PreText"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform" />
 
         </LinearLayout>
 
@@ -224,33 +224,33 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="9"
-            app:autoSizeTextType="uniform"
             android:background="@color/textBackground"
             android:gravity="center"
             android:text="1"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            app:autoSizeTextType="uniform" />
 
         <TextView
             android:id="@+id/slashText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="5"
-            app:autoSizeTextType="uniform"
             android:background="@color/textBackground"
             android:gravity="center"
             android:text="/"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            app:autoSizeTextType="uniform" />
 
         <TextView
             android:id="@+id/maxPageText"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="9"
-            app:autoSizeTextType="uniform"
             android:background="@color/textBackground"
             android:gravity="center"
             android:text="10"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            app:autoSizeTextType="uniform" />
 
         <Space
             android:layout_width="0dp"
@@ -270,10 +270,10 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="18"
-                app:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="@string/NextText"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform" />
 
             <Space
                 android:layout_width="0dp"
@@ -330,12 +330,12 @@
                 android:id="@+id/tutorialText"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                app:autoSizeTextType="uniform"
-                android:lines="4"
                 android:layout_weight="10"
+                android:lines="4"
+                android:text="@string/HowToPlayTutorialText1"
                 android:textColor="@color/black"
                 android:textSize="@dimen/tutorialText"
-                android:text="@string/HowToPlayTutorialText1" />
+                app:autoSizeTextType="uniform" />
 
             <Space
                 android:layout_width="0dp"
@@ -349,17 +349,17 @@
             android:layout_weight="6" />
     </LinearLayout>
 
-    <androidx.fragment.app.FragmentContainerView
+    <ImageView
         android:id="@+id/tutorialImg"
-        android:name="com.game.gobblet5.HowToPlayFragment.HowToPlayFragment1"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/black"
+        android:padding="2dp"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/imageGuidelineBottom"
         app:layout_constraintEnd_toStartOf="@+id/imageGuidelineEnd"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/imageGuidelineStart"
         app:layout_constraintTop_toTopOf="@+id/imageGuidelineTop"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout="@layout/fragment_how_to_play1" />
+        app:srcCompat="@drawable/tu1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
