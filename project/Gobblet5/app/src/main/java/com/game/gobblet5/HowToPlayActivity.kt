@@ -1,10 +1,7 @@
 package com.game.gobblet5
 
-import android.content.res.Resources
 import android.os.Handler
 import android.os.Looper
-import android.widget.ImageView
-import com.game.gobblet5.HowToPlayFragment.*
 import kotlinx.android.synthetic.main.activity_tutorial.*
 
 class HowToPlayActivity : baseTutorial() {
@@ -33,6 +30,7 @@ class HowToPlayActivity : baseTutorial() {
             10 -> tutorialText.text = getString(R.string.HowToPlayTutorialText10)
             11 -> tutorialText.text = getString(R.string.HowToPlayTutorialText11)
             12 -> tutorialText.text = getString(R.string.HowToPlayTutorialText12)
+            13 -> tutorialText.text = getString(R.string.HowToPlayTutorialText13)
         }
     }
 
@@ -46,6 +44,7 @@ class HowToPlayActivity : baseTutorial() {
             6 -> {
                 handler.removeCallbacks(fragment7)
                 time = 0L
+                nowDoingTimerID = 0
                 tutorialImg.setImageResource(R.drawable.tu6)
             }
             7 -> {
@@ -56,6 +55,7 @@ class HowToPlayActivity : baseTutorial() {
                 handler.removeCallbacks(fragment7)
                 handler.removeCallbacks(fragment9)
                 time = 0L
+                nowDoingTimerID = 0
                 tutorialImg.setImageResource(R.drawable.tu8)
             }
             9 -> {
@@ -73,12 +73,24 @@ class HowToPlayActivity : baseTutorial() {
             }
             11 -> {
                 handler.removeCallbacks(fragment10)
+                handler.removeCallbacks(fragment12)
                 time = 0L
+                nowDoingTimerID = 0
                 tutorialImg.setImageResource(R.drawable.tu10_2)
             }
             12 -> {
-                tutorialImg.setImageResource(R.drawable.tu10_2)
+                handler.post(fragment12)
+                time = 0L
+                nowDoingTimerID = 12
+
             }
+            13 -> {
+                handler.removeCallbacks(fragment12)
+                time = 0L
+                nowDoingTimerID = 0
+                tutorialImg.setImageResource(R.drawable.tu11_2)
+            }
+
         }
 
     }
@@ -135,12 +147,33 @@ class HowToPlayActivity : baseTutorial() {
         }
     }
 
+    private val fragment12: Runnable = object : Runnable{
+        override fun run() {
+            when(time){
+                0L -> {
+                    tutorialImg.setImageResource(R.drawable.tu11_1)
+                }
+                800L -> {
+                    tutorialImg.setImageResource(R.drawable.tu11_2)
+                }
+            }
+            time += millisecond
+            handler.postDelayed(this,millisecond)
+            if (time>1000L){
+                handler.removeCallbacks(this)
+                time = 0L
+                nowDoingTimerID = 0
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         when (nowDoingTimerID){
             7 -> handler.post(fragment7)
             9 -> handler.post(fragment9)
             10 -> handler.post(fragment10)
+            12 -> handler.post(fragment12)
         }
     }
 
@@ -149,6 +182,7 @@ class HowToPlayActivity : baseTutorial() {
         handler.removeCallbacks(fragment7)
         handler.removeCallbacks(fragment9)
         handler.removeCallbacks(fragment10)
+        handler.removeCallbacks(fragment12)
     }
 
     override fun onDestroy() {
@@ -156,6 +190,7 @@ class HowToPlayActivity : baseTutorial() {
         handler.removeCallbacks(fragment7)
         handler.removeCallbacks(fragment9)
         handler.removeCallbacks(fragment10)
+        handler.removeCallbacks(fragment12)
     }
 }
 

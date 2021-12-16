@@ -89,7 +89,6 @@
     <string name="HowToPlayTutorialText9">You can cover the piece placed on the bord with it.</string>
     <string name="HowToPlayTutorialText10">You can it on your own piece or on the opponent\'s piece.</string>
     <string name="HowToPlayTutorialText11">You can\'t move piece covered with other piece without .</string>
-    <string name="HowToPlayTutorialText12">The rule explanation is over.</string>
     <string name="BackToHowToOperateMenu">Back To \nHow To OperateMenu</string>
     <string name="MovePieceFromHandToSquare">Move Piece From Hand \nTo Square</string>
     <string name="MovePieceFromSquareToSquare">Move Piece From Square \nTo Square</string>
@@ -104,5 +103,7 @@
     <string name="CheckTheBoard">Check The Board</string>
     <string name="pieceInHand">Piece In Hand</string>
     <string name="sorryText">sorry,any sound can\'t be make on this device version</string>
-    <string name="PrivacyPolicy">Privacy Policy (Use browser)</string>
+    <string name="PrivacyPolicy">"Privacy Policy "</string>
+    <string name="HowToPlayTutorialText13">The rule explanation is over.</string>
+    <string name="HowToPlayTutorialText12">If opponent lifts a piece and your piece comes out, and there are four piece in a row, you win.</string>
 </resources>
