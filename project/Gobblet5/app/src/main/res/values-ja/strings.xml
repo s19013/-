@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">gobblet5</string>
     <string name="temochiRedBig">temochiRedBig</string>
     <string name="title_activity_select_tutorial">SelectTutorialActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -111,6 +110,7 @@
     <string name="HowToPlayTutorialText12">相手がコマを持ち上げたときあなたのコマが出てきて,その時点でコマが4つ並んでいた場合もあなたの勝ちになります｡</string>
     <string name="P1">1P</string>
     <string name="P2">P2</string>
+    <string name="app_name">ゴブレット</string>
 
 
 </resources>

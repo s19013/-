@@ -19,7 +19,7 @@ android {
         minSdkVersion 23 //19 21
         targetSdkVersion 30
         multiDexEnabled true//古いスマホでの64k問題解決
-        versionCode 7
+        versionCode 9
         versionName "1.0.5"
         vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
