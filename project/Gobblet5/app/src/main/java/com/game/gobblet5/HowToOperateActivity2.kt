@@ -1,6 +1,6 @@
 package com.game.gobblet5
 
-import com.game.gobblet5.HowToOperateFragment.*
+
 import kotlinx.android.synthetic.main.activity_tutorial.*
 
 class HowToOperateActivity2 : baseTutorial() {

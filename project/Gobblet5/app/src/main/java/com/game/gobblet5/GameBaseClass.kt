@@ -663,8 +663,8 @@ open class GameBaseClass : AppCompatActivity() {
             activityIdPreGameWithCom -> intent = Intent(this, preGameWithComActivity::class.java)
         }
 
-        intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
+        intent?.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
     }
 
     //結果ポップアップ
