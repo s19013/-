@@ -310,16 +310,16 @@ open class GameBaseClass : AppCompatActivity() {
     ////マスのボタンをおした時の作業
     //一旦ここを通して分岐
     protected fun pushedMasButton(mas: Mas){
+        if (!finished){
+            //取り出し作業
+            if (!pickupDone) { return pickup(mas.nameGetter()) }
 
-        //取り出し作業
-        if (!pickupDone) { return pickup(mas.nameGetter()) }
-
-        //マスの中に入れる
-        if (pickupDone && insert(mas.nameGetter())) { //ちゃんとマスの中に入った時だけ再描画する
-            bordDisplay(destination)//コマの移動先を再描画
-            endTurn() //ターン終了作業に移る
+            //マスの中に入れる
+            if (pickupDone && insert(mas.nameGetter())) { //ちゃんとマスの中に入った時だけ再描画する
+                bordDisplay(destination)//コマの移動先を再描画
+                endTurn() //ターン終了作業に移る
+            }
         }
-
         // if(!returnValue) { } //ルール上指定した場所にコマを入れられなかった場合 特に何もしなくて良いわざわざかく必要もない
     }
 
@@ -809,6 +809,7 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //トースト関係(ホントはダイアログだけど面倒だからそのまま使う)
+    //取り出せない
     private fun toastCanNotPickup(){
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.cannotPickupDialogText))
@@ -817,6 +818,7 @@ open class GameBaseClass : AppCompatActivity() {
         playSound(cannotDoItSE)
     }
 
+    //入れられない
     private fun toastCanNotInsert(){
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.cannotInsertDialogText))
@@ -825,6 +827,7 @@ open class GameBaseClass : AppCompatActivity() {
         playSound(cannotDoItSE)
     }
 
+    //自分のターンでないのになにかしようとしている
     protected fun toastNotYourTurn(){
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.notYourTurnDialogText))

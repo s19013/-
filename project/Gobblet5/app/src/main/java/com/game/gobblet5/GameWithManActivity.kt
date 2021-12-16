@@ -31,11 +31,10 @@ class GameWithManActivity : GameBaseClass() {
                 //移動元が手持ちの場合のみコマを
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedMiddle||
-                    movingSource==stringTemochiRedSmall){
-                    pickupTemochi(temochiRedBig)
-                }
+                    movingSource==stringTemochiRedSmall){ pickupTemochi(temochiRedBig) }
             }
-            else{toastNotYourTurn()}
+            else if (finished){} //決着ついていたらなにもしない
+            else {toastNotYourTurn()}
         }
 
         buttonTemochiRedMiddle!!.setOnClickListener {
@@ -45,11 +44,10 @@ class GameWithManActivity : GameBaseClass() {
                 }
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
-                    movingSource==stringTemochiRedSmall){
-                    pickupTemochi(temochiRedMiddle)
-                }
+                    movingSource==stringTemochiRedSmall){ pickupTemochi(temochiRedMiddle) }
             }
-            else{toastNotYourTurn()}
+            else if (finished){}
+            else {toastNotYourTurn()}
         }
 
         buttonTemochiRedSmall!!.setOnClickListener {
@@ -59,11 +57,10 @@ class GameWithManActivity : GameBaseClass() {
                 }
                 else if (movingSource== null ||
                     movingSource==stringTemochiRedBig ||
-                    movingSource==stringTemochiRedMiddle){
-                    pickupTemochi(temochiRedSmall)
-                }
+                    movingSource==stringTemochiRedMiddle){ pickupTemochi(temochiRedSmall) }
             }
-            else{toastNotYourTurn()}
+            else if (finished){}
+            else {toastNotYourTurn()}
         }
 
         buttonTemochiGreenBig!!.setOnClickListener {
@@ -73,11 +70,10 @@ class GameWithManActivity : GameBaseClass() {
                 }
                 else if (movingSource== null ||
                     movingSource==stringTemochiGreenMiddle||
-                    movingSource==stringTemochiGreenSmall) {
-                    pickupTemochi(temochiGreenBig)
-                }
+                    movingSource==stringTemochiGreenSmall) { pickupTemochi(temochiGreenBig) }
             }
-            else{toastNotYourTurn()}
+            else if (finished){}
+            else {toastNotYourTurn()}
         }
 
         buttonTemochiGreenMiddle!!.setOnClickListener {
@@ -87,11 +83,10 @@ class GameWithManActivity : GameBaseClass() {
                 }
                 else if (movingSource== null ||
                     movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenSmall){
-                    pickupTemochi(temochiGreenMiddle)
-                }
+                    movingSource==stringTemochiGreenSmall){ pickupTemochi(temochiGreenMiddle) }
             }
-            else{toastNotYourTurn()}
+            else if (finished){}
+            else {toastNotYourTurn()}
         }
 
         buttonTemochiGreenSmall!!.setOnClickListener {
@@ -101,93 +96,46 @@ class GameWithManActivity : GameBaseClass() {
                 }
                 else if (movingSource==null||
                     movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenMiddle){
-                    pickupTemochi(temochiGreenSmall)
-                }
+                    movingSource==stringTemochiGreenMiddle){ pickupTemochi(temochiGreenSmall) }
             }
-            else{toastNotYourTurn()}
+            else if (finished){}
+            else {toastNotYourTurn()}
         }
       ////マスを触ったとき
         buttonA1.setOnClickListener {
-            //ゲームが終わったらさわれないようにする,相手のターン中に触れないようにするためにこんなif文を書く
-            if (turn != 0 && !finished){ pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
-            else{toastNotYourTurn()}
+            //ゲームが終わったらさわれないようにするためにこんなif文を書く
+            pushedMasButton(A1) //nameGetterを使ってマスの名前を入れる
         }
 
-        buttonA2.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(A2) }
-            else{toastNotYourTurn()}
-        }
+        buttonA2.setOnClickListener { pushedMasButton(A2) }
 
-        buttonA3.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(A3) }
-            else{toastNotYourTurn()}
-        }
+        buttonA3.setOnClickListener { pushedMasButton(A3) }
 
-        buttonA4.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(A4) }
-            else{toastNotYourTurn()}
-        }
+        buttonA4.setOnClickListener { pushedMasButton(A4) }
 
-        buttonB1.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(B1) }
-            else{toastNotYourTurn()}
-        }
+        buttonB1.setOnClickListener { pushedMasButton(B1) }
 
-        buttonB2.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(B2) }
-            else{toastNotYourTurn()}
-        }
+        buttonB2.setOnClickListener { pushedMasButton(B2) }
 
-        buttonB3.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(B3) }
-            else{toastNotYourTurn()}
-        }
+        buttonB3.setOnClickListener { pushedMasButton(B3) }
 
-        buttonB4.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(B4) }
-            else{toastNotYourTurn()}
-        }
+        buttonB4.setOnClickListener { pushedMasButton(B4) }
 
-        buttonC1.setOnClickListener {
-            if (turn != 0 && !finished){pushedMasButton(C1) }
-            else{toastNotYourTurn()}
-        }
+        buttonC1.setOnClickListener { pushedMasButton(C1) }
 
-        buttonC2.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(C2) }
-            else{toastNotYourTurn()}
-        }
+        buttonC2.setOnClickListener { pushedMasButton(C2) }
 
-        buttonC3.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(C3) }
-            else{toastNotYourTurn()}
-        }
+        buttonC3.setOnClickListener { pushedMasButton(C3) }
 
-        buttonC4.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(C4) }
-            else{toastNotYourTurn()}
-        }
+        buttonC4.setOnClickListener { pushedMasButton(C4) }
 
-        buttonD1.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(D1) }
-            else{toastNotYourTurn()}
-        }
+        buttonD1.setOnClickListener { pushedMasButton(D1) }
 
-        buttonD2.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(D2) }
-            else{toastNotYourTurn()}
-        }
+        buttonD2.setOnClickListener { pushedMasButton(D2) }
 
-        buttonD3.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(D3) }
-            else{toastNotYourTurn()}
-        }
+        buttonD3.setOnClickListener { pushedMasButton(D3) }
 
-        buttonD4.setOnClickListener {
-            if (turn != 0 && !finished){ pushedMasButton(D4) }
-            else{toastNotYourTurn()}
-        }
+        buttonD4.setOnClickListener { pushedMasButton(D4) }
 
         // その他
         configButton.setOnClickListener {
