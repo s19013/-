@@ -586,6 +586,7 @@ open class GameBaseClass : AppCompatActivity() {
 
         if (finished){
             turn = 0
+            flashBackground()
             //ジングルを鳴らす
             if (seVolume > 0){
                 if (thisAct==1){playSound(winSE)}
@@ -601,6 +602,53 @@ open class GameBaseClass : AppCompatActivity() {
             handler.post(resultTimer)
             //showResultPopup()
         }
+    }
+
+    fun flashBackground(){
+        fun commonfunc(list: List<Mas>){
+            for (d in list){
+                when (d.nameGetter()) {
+                    stringA1 -> { view = findViewById(R.id.buttonA1) }
+                    stringA2 -> { view = findViewById(R.id.buttonA2) }
+                    stringA3 -> { view = findViewById(R.id.buttonA3) }
+                    stringA4 -> { view = findViewById(R.id.buttonA4) }
+                    stringB1 -> { view = findViewById(R.id.buttonB1) }
+                    stringB2 -> { view = findViewById(R.id.buttonB2) }
+                    stringB3 -> { view = findViewById(R.id.buttonB3) }
+                    stringB4 -> { view = findViewById(R.id.buttonB4) }
+                    stringC1 -> { view = findViewById(R.id.buttonC1) }
+                    stringC2 -> { view = findViewById(R.id.buttonC2) }
+                    stringC3 -> { view = findViewById(R.id.buttonC3) }
+                    stringC4 -> { view = findViewById(R.id.buttonC4) }
+                    stringD1 -> { view = findViewById(R.id.buttonD1) }
+                    stringD2 -> { view = findViewById(R.id.buttonD2) }
+                    stringD3 -> { view = findViewById(R.id.buttonD3) }
+                    stringD4 -> { view = findViewById(R.id.buttonD4) }
+                }
+                view?.setBackgroundColor(resources.getColor(R.color.lineUP))
+            }
+        }
+
+        if (judgeMap["lineA"]==4 || judgeMap["lineA"]==-4){ commonfunc(listOf(A1,A2,A3,A4))
+            return}
+        if (judgeMap["lineB"]==4 || judgeMap["lineB"]==-4){ commonfunc(listOf(B1,B2,B3,B4))
+            return}
+        if (judgeMap["lineC"]==4 || judgeMap["lineC"]==-4){ commonfunc(listOf(C1,C2,C3,C4))
+            return}
+        if (judgeMap["lineD"]==4 || judgeMap["lineD"]==-4){ commonfunc(listOf(D1,D2,D3,D4))
+            return}
+        if (judgeMap["line1"]==4 || judgeMap["line1"]==-4){ commonfunc(listOf(A1,B1,C1,D1))
+            return}
+        if (judgeMap["line2"]==4 || judgeMap["line2"]==-4){ commonfunc(listOf(A2,B2,C2,D2))
+            return}
+        if (judgeMap["line3"]==4 || judgeMap["line3"]==-4){ commonfunc(listOf(A3,B3,C3,D3))
+            return}
+        if (judgeMap["line4"]==4 || judgeMap["line4"]==-4){ commonfunc(listOf(A4,B4,C4,D4))
+            return}
+        if (judgeMap["lineS"]==4 || judgeMap["lineS"]==-4){ commonfunc(listOf(A4,B3,C2,D1))
+            return}
+        if (judgeMap["lineBS"]==4 || judgeMap["lineBS"]==-4){ commonfunc(listOf(A1,B2,C3,D4))
+            return}
     }
 
     ////ポップアップ

@@ -25,4 +25,5 @@
     <color name="textBackground">#88FFFFFF</color>
     <color name="black">#000000</color>
     <color name="bannerText">#10002C</color>
+    <color name="lineUP">#FFAA00</color>
 </resources>
