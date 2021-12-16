@@ -58,11 +58,6 @@
                 android:background="@drawable/back_btn_style"
                 android:orientation="horizontal">
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -77,17 +72,15 @@
                     android:id="@+id/textView4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_weight="90"
-                    android:lines="1"
-                    app:autoSizeTextType="uniform"
                     android:gravity="center"
+                    android:lines="1"
                     android:text="@string/CheckTheBoard"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black"
+                    app:autoSizeTextType="uniform" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
             </LinearLayout>
 
             <Space
@@ -114,23 +107,16 @@
                     android:text="@string/QuitGame"
                     android:textColor="@android:color/holo_red_dark" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2" />
-
                 <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp"
                     android:layout_weight="10"
                     app:srcCompat="@drawable/ic_bye" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
             </LinearLayout>
 
         </LinearLayout>

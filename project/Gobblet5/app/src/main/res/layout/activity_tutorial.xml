@@ -196,11 +196,6 @@
                 android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_l_arrow" />
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
             <TextView
                 android:id="@+id/textView5"
                 android:layout_width="0dp"
@@ -274,11 +269,6 @@
                 android:text="@string/NextText"
                 android:textColor="@color/black"
                 app:autoSizeTextType="uniform" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/imageView5"

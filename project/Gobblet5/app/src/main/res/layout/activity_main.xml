@@ -94,29 +94,20 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
-                app:srcCompat="@drawable/ic_com" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                app:srcCompat="@drawable/icon_rob2" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="20"
-                android:lines="1"
-                app:autoSizeTextType="uniform"
                 android:gravity="center"
+                android:lines="1"
                 android:text="@string/PlayWithComText"
                 android:textColor="#2B0000"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+                android:textStyle="bold"
+                app:autoSizeTextType="uniform" />
 
         </LinearLayout>
 
@@ -136,13 +127,11 @@
         <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginStart="4dp"
             android:layout_weight="5"
             app:srcCompat="@drawable/ic_human" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+
 
         <LinearLayout
             android:layout_width="0dp"
@@ -150,34 +139,20 @@
             android:layout_weight="20"
             android:orientation="vertical">
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2" />
-
             <TextView
                 android:id="@+id/textView20"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_marginEnd="8dp"
                 android:layout_weight="3"
-                app:autoSizeTextType="uniform"
-                android:lines="1"
                 android:gravity="center"
+                android:lines="1"
                 android:text="@string/PlayWithManText"
                 android:textColor="#2B0000"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2" />
+                android:textStyle="bold"
+                app:autoSizeTextType="uniform" />
 
         </LinearLayout>
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -200,10 +175,7 @@
             android:layout_weight="5"
             app:srcCompat="@drawable/ic_study" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+
 
         <TextView
             android:id="@+id/textView21"
@@ -216,11 +188,6 @@
             android:text="@string/TutorialText"
             android:textColor="@android:color/black"
              />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
 
     </LinearLayout>
 
@@ -248,11 +215,6 @@
                 android:background="@drawable/btn_style"
                 android:orientation="horizontal">
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
-
                 <ImageView
                     android:id="@+id/imageView21"
                     android:layout_width="0dp"
@@ -262,26 +224,17 @@
                     android:scaleY="0.8"
                     app:srcCompat="@drawable/ic_gear" />
 
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2" />
-
                 <TextView
                     android:id="@+id/textView"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    app:autoSizeTextType="uniform"
+                    android:layout_marginEnd="4dp"
                     android:layout_weight="20"
                     android:gravity="center"
                     android:lines="1"
                     android:text="@string/configText"
-                    android:textColor="@color/black" />
-
-                <Space
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:textColor="@color/black"
+                    app:autoSizeTextType="uniform" />
 
             </LinearLayout>
 

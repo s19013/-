@@ -91,11 +91,6 @@
             android:background="@drawable/back_btn_style"
             android:orientation="horizontal">
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="0dp"
@@ -105,26 +100,19 @@
                 android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_uturn" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2" />
-
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="90"
-                app:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:lines="1"
                 android:text="@string/BackToTitle"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2" />
         </LinearLayout>
 
         <Space
@@ -137,12 +125,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            app:autoSizeTextType="uniform"
             android:background="@drawable/act_banner"
             android:gravity="center"
             android:lines="1"
+            android:paddingStart="6dp"
+            android:paddingEnd="4dp"
             android:text="@string/selectTutorialActivity"
-            android:textColor="@color/bannerText" />
+            android:textColor="@color/bannerText"
+            app:autoSizeTextType="uniform" />
     </LinearLayout>
 
 
@@ -158,74 +148,36 @@
         app:layout_constraintEnd_toEndOf="@+id/bottonsGuidelineEnd"
         >
 
-    <LinearLayout
-        android:id="@+id/howToPlayButton"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2"
-        android:background="@drawable/btn_style"
-        android:orientation="horizontal">
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
         <TextView
-            android:id="@+id/textView20"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="20"
-            app:autoSizeTextType="uniform"
-            android:gravity="center"
-            android:text="@string/HowToPlayText"
-            android:textColor="@android:color/black"
-            android:textStyle="bold" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
-
-    </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
-
-        <LinearLayout
-            android:id="@+id/howToControlButton"
+            android:id="@+id/howToPlayButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:background="@drawable/btn_style"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/HowToPlayText"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:autoSizeTextType="uniform" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
-            <TextView
-                android:id="@+id/textView21"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="20"
-                app:autoSizeTextType="uniform"
-                android:gravity="center"
-                android:text="@string/HowToOperateText"
-                android:textColor="@android:color/black"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-
-        </LinearLayout>
+        <TextView
+            android:id="@+id/howToControlButton"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:padding="8dp"
+            app:autoSizeTextType="uniform"
+            android:background="@drawable/btn_style"
+            android:gravity="center"
+            android:text="@string/HowToOperateText"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

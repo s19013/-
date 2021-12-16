@@ -26,11 +26,6 @@
             android:background="@drawable/back_btn_style"
             android:orientation="horizontal">
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="0dp"
@@ -40,25 +35,18 @@
                 android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_uturn" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2" />
-
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="90"
-                android:lines="1"
-                app:autoSizeTextType="uniform"
                 android:gravity="center"
+                android:lines="1"
                 android:text="@string/BackToTitle"
-                android:textColor="@color/black" />
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="2" />
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform" />
         </LinearLayout>
 
         <Space
@@ -90,26 +78,15 @@
         app:layout_constraintStart_toStartOf="@+id/guidelineVS"
         app:layout_constraintTop_toTopOf="@+id/SelectorGuidelineHT">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/setFirstGroup"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/setFirstGroup"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="50"
-                app:autoSizeTextType="uniform"
-                android:text="@string/FirstPlayer"
-                android:textColor="@android:color/black" />
-        </LinearLayout>
+            android:text="@string/FirstPlayer"
+            android:textColor="@android:color/black"
+            app:autoSizeTextType="uniform" />
 
         <RadioGroup
             android:id="@+id/RadioGroup"
@@ -125,7 +102,7 @@
                 android:layout_weight="20"
                 app:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
-                android:text="1P" />
+                android:text="@string/P1" />
 
             <RadioButton
                 android:id="@+id/Button2p"
@@ -134,22 +111,19 @@
                 android:layout_weight="20"
                 app:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
-                android:text="2P" />
+                android:text="@string/P2" />
 
             <RadioButton
                 android:id="@+id/ButtonRandom"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginEnd="4dp"
                 android:layout_weight="20"
-                android:lines="1"
-                app:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
-                android:text="@string/RandomText" />
+                android:lines="1"
+                android:text="@string/RandomText"
+                app:autoSizeTextType="uniform" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
         </RadioGroup>
     </LinearLayout>
 
