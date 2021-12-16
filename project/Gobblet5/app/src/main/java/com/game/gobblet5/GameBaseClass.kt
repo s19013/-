@@ -945,6 +945,7 @@ open class GameBaseClass : AppCompatActivity() {
     private fun iniMediaPlayer(){
         //mediaPlayer
         mediaPlayer=MediaPlayer.create(applicationContext,R.raw.okashi_time)
+        mediaPlayer?.setVolume(bgmVolume*0.1f,bgmVolume*0.1f)
         mediaPlayer?.isLooping=true
         playMusic()
     }
