@@ -109,6 +109,8 @@
     <string name="PrivacyPolicy">"プライバシーポリシー "</string>
     <string name="HowToPlayTutorialText13">ルール説明を終わります｡</string>
     <string name="HowToPlayTutorialText12">相手がコマを持ち上げたときあなたのコマが出てきて,その時点でコマが4つ並んでいた場合もあなたの勝ちになります｡</string>
+    <string name="P1">1P</string>
+    <string name="P2">P2</string>
 
 
 </resources>
