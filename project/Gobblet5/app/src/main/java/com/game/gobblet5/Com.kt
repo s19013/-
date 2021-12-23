@@ -83,10 +83,7 @@ class Com {
     //リーチなった列がないか調べる
     private fun reachChecker(){
         fun commonFunc(line: Line){
-            if (line.comPieceCounter()>=3){
-                comReachList.add(line)
-                return
-            }
+            if (line.comPieceCounter()>=3){ comReachList.add(line) } //なんでここでリターンしたんだろう?リターンしたら人間のリーチをしらべられない
             if (line.humanPieceCounter()>=3){ humanReachList.add(line) }
         }
 
