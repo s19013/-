@@ -231,9 +231,10 @@ class Com {
 
         //基準のマスに相手のコマが入っていた､もしくは何も入ってなかった場合
         //後で編集
-        fun standardIsP1(){
+        fun standardIsP1AndEmp(){
             if (standard!!.funcForDisplay()[0] == bigPiece) {return} //基準が大きいコマだったら飛ばす (どうやってもコマが入らないから)
             if (humanReachList.contains(line)) { standard?.addScore(300) } //ここでコマを置いたら相手のリーチを防げる場合､基準のマスに評価値を追加
+            //被せたり､空いているところに
                 for (mas in linesList){
                     val size = mas.funcForDisplay()[0] //コマの大きさ
                     val attribute = mas.funcForDisplay()[1] //人間のかコンピューターのか
@@ -256,8 +257,8 @@ class Com {
             //基準となったマスに何が入っているかによってすることが違う
             when(standard.funcForDisplay()[1]){
                 comPiece ->{standardIsM1()}
-                humanPiece ->{standardIsP1()}
-                empty ->{standardIsP1()}
+                humanPiece ->{standardIsP1AndEmp()}
+                empty ->{standardIsP1AndEmp()}
             }
         }
     }
