@@ -20,7 +20,8 @@
         <activity android:name="com.game.gobblet5.preGameWithComActivity" />
         <activity android:name="com.game.gobblet5.preGameWithManActivity" />
         <activity android:name="com.game.gobblet5.ConfigActivity" />
-        <activity android:name="com.game.gobblet5.MainActivity">
+        <activity android:name="com.game.gobblet5.MainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
