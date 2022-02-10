@@ -117,8 +117,8 @@ open class GameBaseClass : AppCompatActivity() {
     protected var turn = 0 //後でちゃんと設定する
     private var size = 0
     private var winner : String?=null
-    protected var movingSource : String? = null
-    private var destination : String? = null
+    protected var movingSource : Mas? = null
+    private var destination : Mas? = null
     protected var finished = false
     private var pickupDone= false
 
@@ -310,6 +310,7 @@ open class GameBaseClass : AppCompatActivity() {
     ////マスのボタンをおした時の作業
     //一旦ここを通して分岐
     protected fun pushedMasButton(mas: Mas){
+        //ゲームが続いていたら
         if (!finished){
             //取り出し作業
             if (!pickupDone) { return pickup(mas.nameGetter()) }
@@ -356,106 +357,112 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //駒を入れる
-    private fun insert(name: String):Boolean{
+    private fun insert(mas: Mas?):Boolean{
 //        人間の時はループ?
-        when(name){
-            stringA1 -> {
-                if (A1.mInsert(size, turn)) {
-                    setD(stringA1)
-                    return true
-                }
-            }
-            stringA2 -> {
-                if (A2.mInsert(size, turn)) {
-                    setD(stringA2)
-                    return true
-                }
-            }
-            stringA3 -> {
-                if (A3.mInsert(size, turn)) {
-                    setD(stringA3)
-                    return true
-                }
-            }
-            stringA4 -> {
-                if (A4.mInsert(size, turn)) {
-                    setD(stringA4)
-                    return true
-                }
-            }
-            stringB1 -> {
-                if (B1.mInsert(size, turn)) {
-                    setD(stringB1)
-                    return true
-                }
-            }
-            stringB2 -> {
-                if (B2.mInsert(size, turn)) {
-                    setD(stringB2)
-                    return true
-                }
-            }
-            stringB3 -> {
-                if (B3.mInsert(size, turn)) {
-                    setD(stringB3)
-                    return true
-                }
-            }
-            stringB4 -> {
-                if (B4.mInsert(size, turn)) {
-                    setD(stringB4)
-                    return true
-                }
-            }
-            stringC1 -> {
-                if (C1.mInsert(size, turn)) {
-                    setD(stringC1)
-                    return true
-                }
-            }
-            stringC2 -> {
-                if (C2.mInsert(size, turn)) {
-                    setD(stringC2)
-                    return true
-                }
-            }
-            stringC3 -> {
-                if (C3.mInsert(size, turn)) {
-                    setD(stringC3)
-                    return true
-                }
-            }
-            stringC4 -> {
-                if (C4.mInsert(size, turn)) {
-                    setD(stringC4)
-                    return true
-                }
-            }
-            stringD1 -> {
-                if (D1.mInsert(size, turn)) {
-                    setD(stringD1)
-                    return true
-                }
-            }
-            stringD2 -> {
-                if (D2.mInsert(size, turn)) {
-                    setD(stringD2)
-                    return true
-                }
-            }
-            stringD3 -> {
-                if (D3.mInsert(size, turn)) {
-                    setD(stringD3)
-                    return true
-                }
-            }
-            stringD4 -> {
-                if (D4.mInsert(size, turn)) {
-                    setD(stringD4)
-                    return true
-                }
-            }
+        if (mas?.mInsert(size, turn) == true){
+            setD(mas)
+            return true
         }
+
+
+//        when(name){
+//            stringA1 -> {
+//                if (A1.mInsert(size, turn)) {
+//                    setD(stringA1)
+//                    return true
+//                }
+//            }
+//            stringA2 -> {
+//                if (A2.mInsert(size, turn)) {
+//                    setD(stringA2)
+//                    return true
+//                }
+//            }
+//            stringA3 -> {
+//                if (A3.mInsert(size, turn)) {
+//                    setD(stringA3)
+//                    return true
+//                }
+//            }
+//            stringA4 -> {
+//                if (A4.mInsert(size, turn)) {
+//                    setD(stringA4)
+//                    return true
+//                }
+//            }
+//            stringB1 -> {
+//                if (B1.mInsert(size, turn)) {
+//                    setD(stringB1)
+//                    return true
+//                }
+//            }
+//            stringB2 -> {
+//                if (B2.mInsert(size, turn)) {
+//                    setD(stringB2)
+//                    return true
+//                }
+//            }
+//            stringB3 -> {
+//                if (B3.mInsert(size, turn)) {
+//                    setD(stringB3)
+//                    return true
+//                }
+//            }
+//            stringB4 -> {
+//                if (B4.mInsert(size, turn)) {
+//                    setD(stringB4)
+//                    return true
+//                }
+//            }
+//            stringC1 -> {
+//                if (C1.mInsert(size, turn)) {
+//                    setD(stringC1)
+//                    return true
+//                }
+//            }
+//            stringC2 -> {
+//                if (C2.mInsert(size, turn)) {
+//                    setD(stringC2)
+//                    return true
+//                }
+//            }
+//            stringC3 -> {
+//                if (C3.mInsert(size, turn)) {
+//                    setD(stringC3)
+//                    return true
+//                }
+//            }
+//            stringC4 -> {
+//                if (C4.mInsert(size, turn)) {
+//                    setD(stringC4)
+//                    return true
+//                }
+//            }
+//            stringD1 -> {
+//                if (D1.mInsert(size, turn)) {
+//                    setD(stringD1)
+//                    return true
+//                }
+//            }
+//            stringD2 -> {
+//                if (D2.mInsert(size, turn)) {
+//                    setD(stringD2)
+//                    return true
+//                }
+//            }
+//            stringD3 -> {
+//                if (D3.mInsert(size, turn)) {
+//                    setD(stringD3)
+//                    return true
+//                }
+//            }
+//            stringD4 -> {
+//                if (D4.mInsert(size, turn)) {
+//                    setD(stringD4)
+//                    return true
+//                }
+//            }
+//        }
         toastCanNotInsert()//トースト表示でおけないことを知らせる
         return false
     }
@@ -553,7 +560,7 @@ open class GameBaseClass : AppCompatActivity() {
         pickupDone=false
     }
 
-    private fun setD(location: String) {
+    private fun setD(location: Any?) {
         playSound(putSE)
         destination = location
     }
