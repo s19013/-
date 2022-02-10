@@ -1,5 +1,7 @@
 package com.game.gobblet5
 
+import android.widget.ImageView
+
 class Mas(private val name:String, ) {
     private var list= mutableListOf<Int>(0,0,0) // [小､中､大]
     private var score = 0 //コンピューターが使う評価値みたいなもの
@@ -12,10 +14,14 @@ class Mas(private val name:String, ) {
     private val middlePiece= 2
     private val smallPiece = 1
 
+    private var view: ImageView? = null //描画する場所
+
 
     fun nameGetter():String{ return name }
 
     fun scoreGetter():Int{ return score }
+
+    fun setView(v:ImageView){view=v}
 
     fun addScore(arg:Int){ score+=arg } //スコアに引数の値を足す
 
