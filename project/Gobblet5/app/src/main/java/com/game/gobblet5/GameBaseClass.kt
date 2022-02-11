@@ -105,7 +105,7 @@ open class GameBaseClass : AppCompatActivity() {
     private var seekSE = 0
     //ゲームに必要なもの
     protected var turn = 0 //後でちゃんと設定する 1p = 1,2p =-1 ,終わり=0
-    private var size = 0
+    private var havingPieceSize = 0 //今持っているコマの大きさ
     private var winner : String?=null
     protected var movingSource : Any? = null
     private var destination : Mas? = null
@@ -153,9 +153,9 @@ open class GameBaseClass : AppCompatActivity() {
 
     //共有プリファレンス
     private var pref: SharedPreferences? =null
-    private var seVolume = 0
-    private var bgmVolume = 0
-    protected var playFirst= 1
+    private   var seVolume  = 0
+    private   var bgmVolume = 0
+    protected var playFirst = 1
     //画面の大きさ
     private var width = 0
     private var height = 0
@@ -164,16 +164,17 @@ open class GameBaseClass : AppCompatActivity() {
     //持ちてにコマを表示
     private fun havingDisplay(){
         playSound(selectSE)
+
         if (turn == humanID){
             view = findViewById(R.id.having1p)
-            when (size){
+            when (havingPieceSize){
                 bigPiece    -> { view?.setImageDrawable(komaRedBigD) }
                 middlePiece -> { view?.setImageDrawable(komaRedMiddleD) }
                 smallPiece  -> { view?.setImageDrawable(komaRedSmallD) }
             }
         } else if (turn == comID){
             view = findViewById(R.id.having2p)
-            when (size){
+            when (havingPieceSize){
                 bigPiece    -> { view?.setImageDrawable(komaGreenBigD) }
                 middlePiece -> { view?.setImageDrawable(komaGreenMiddleD) }
                 smallPiece  -> { view?.setImageDrawable(komaGreenSmallD) }
@@ -197,6 +198,10 @@ open class GameBaseClass : AppCompatActivity() {
 
     //各マスの描写に関する関数
     private fun bordDisplay(location: Mas?) {
+
+        var size  = location?.funcForDisplay()?.get(0) //そのマスの内一番外側のコマの大きさを調べる
+        var color = location?.funcForDisplay()?.get(1) //色をしらべる
+
         //赤いコマを描写
         fun redSet(){
             //大きさを判断
@@ -225,7 +230,7 @@ open class GameBaseClass : AppCompatActivity() {
 
         //マスが空がどうか
         fun isMasEmpty():Boolean{
-            if (location?.funcForDisplay()?.get(1) == 0){
+            if (location!!.funcForDisplay()[1] == 0){
                 empSet()
                 return true
             } else  {return false}
@@ -233,7 +238,6 @@ open class GameBaseClass : AppCompatActivity() {
 
         //マス入っているコマの色を判断
         fun whatISColor(){
-            var color = location?.funcForDisplay()?.get(1)
             when (color) {
                 humanID -> { redSet() }
                 comID   -> { greenSet() }
@@ -270,11 +274,11 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //移動元のマスからコマを取り出す
-    private fun pickup(mas: Mas?){
+    private fun pickup(mas: Mas){
         //マスの中になにか入っていれば取り出す
         if (mas?.mPickup(turn) != empty) {
-            setSMP(mas!!.mPickup(turn), mas)
-            mas?.resetList(size)
+            setSMP(mas!!.mPickup(turn), mas) //取り出したコマの情報を保存
+            mas?.resetList(havingPieceSize) //
             havingDisplay()
             bordDisplay(mas)
             judge()//ここでしたが相手のコマで一列そろってしまったときは相手のかちにする
@@ -286,8 +290,9 @@ open class GameBaseClass : AppCompatActivity() {
 
     //駒を入れる
     private fun insert(mas: Mas?):Boolean{
+        Log.d("gobbletdeb","called insert")
 //        人間の時はループ?
-        if (mas?.mInsert(size, turn) == true){
+        if (mas?.mInsert(havingPieceSize, turn) == true){
             setD(mas)
             return true
         }
@@ -332,16 +337,16 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     private fun setSMP(s: Int, m: Any?){
-        size=s
+        havingPieceSize=s
         movingSource=m
         pickupDone=true
 
-        if (m is Temochi){ Log.d("gobbletdeb","size:${size},movingSource:${m.nameGetter()}") }
-        if (m is Mas){ Log.d("gobbletdeb","size:${size},movingSource:${m.nameGetter()}") }
+        if (m is Temochi){ Log.d("gobbletdeb","havingPieceSize:${havingPieceSize},movingSource:${m.nameGetter()}") }
+        if (m is Mas    ){ Log.d("gobbletdeb","havingPieceSize:${havingPieceSize},movingSource:${m.nameGetter()}") }
     }
 
     private fun resetSMP(){
-        size=empty
+        havingPieceSize=empty
         movingSource=null
         pickupDone=false
     }
