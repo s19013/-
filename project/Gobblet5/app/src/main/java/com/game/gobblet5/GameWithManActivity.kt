@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.activity_game_with_man.*
 
 
 class GameWithManActivity : GameBaseClass() {
-    override var thisAct: Int = 1
+    override var thisAct: Int = activityIdGameWithMan
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,13 +25,11 @@ class GameWithManActivity : GameBaseClass() {
         buttonTemochiRedBig!!.setOnClickListener {
             if (turn == 1 && !finished){
                 //movingSourceが同じときやり直しができる
-                if (movingSource == stringTemochiRedBig){
+                if (movingSource == temochiRedBig){
                     resetTemochi()
                 }
                 //移動元が手持ちの場合のみコマを
-                else if (movingSource== null ||
-                    movingSource==stringTemochiRedMiddle||
-                    movingSource==stringTemochiRedSmall){ pickupTemochi(temochiRedBig) }
+                else if (movingSource== null || movingSource is Temochi){ pickupTemochi(temochiRedBig) }
             }
             else if (finished){} //決着ついていたらなにもしない
             else {toastNotYourTurn()}
@@ -39,12 +37,10 @@ class GameWithManActivity : GameBaseClass() {
 
         buttonTemochiRedMiddle!!.setOnClickListener {
             if (turn == 1 && !finished){
-                if (movingSource==stringTemochiRedMiddle){
+                if (movingSource==temochiRedMiddle){
                     resetTemochi()
                 }
-                else if (movingSource== null ||
-                    movingSource==stringTemochiRedBig ||
-                    movingSource==stringTemochiRedSmall){ pickupTemochi(temochiRedMiddle) }
+                else if (movingSource== null || movingSource is Temochi){ pickupTemochi(temochiRedMiddle) }
             }
             else if (finished){}
             else {toastNotYourTurn()}
@@ -52,12 +48,10 @@ class GameWithManActivity : GameBaseClass() {
 
         buttonTemochiRedSmall!!.setOnClickListener {
             if (turn == 1 && !finished){
-                if (movingSource==stringTemochiRedSmall){
+                if (movingSource==temochiRedSmall){
                     resetTemochi()
                 }
-                else if (movingSource== null ||
-                    movingSource==stringTemochiRedBig ||
-                    movingSource==stringTemochiRedMiddle){ pickupTemochi(temochiRedSmall) }
+                else if (movingSource== null ||movingSource is Temochi){ pickupTemochi(temochiRedSmall) }
             }
             else if (finished){}
             else {toastNotYourTurn()}
@@ -65,12 +59,12 @@ class GameWithManActivity : GameBaseClass() {
 
         buttonTemochiGreenBig!!.setOnClickListener {
             if (turn == -1 && !finished){
-                if (movingSource==stringTemochiGreenBig){
+                if (movingSource==temochiGreenBig){
                     resetTemochi()
                 }
                 else if (movingSource== null ||
-                    movingSource==stringTemochiGreenMiddle||
-                    movingSource==stringTemochiGreenSmall) { pickupTemochi(temochiGreenBig) }
+                    movingSource==temochiGreenMiddle||
+                    movingSource==temochiGreenSmall) { pickupTemochi(temochiGreenBig) }
             }
             else if (finished){}
             else {toastNotYourTurn()}
@@ -78,12 +72,10 @@ class GameWithManActivity : GameBaseClass() {
 
         buttonTemochiGreenMiddle!!.setOnClickListener {
             if (turn == -1 && !finished){
-                if (movingSource==stringTemochiGreenMiddle){
+                if (movingSource==temochiGreenMiddle){
                     resetTemochi()
                 }
-                else if (movingSource== null ||
-                    movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenSmall){ pickupTemochi(temochiGreenMiddle) }
+                else if (movingSource== null || movingSource is Temochi){ pickupTemochi(temochiGreenMiddle) }
             }
             else if (finished){}
             else {toastNotYourTurn()}
@@ -91,12 +83,10 @@ class GameWithManActivity : GameBaseClass() {
 
         buttonTemochiGreenSmall!!.setOnClickListener {
             if (turn == -1 && !finished){
-                if (movingSource==stringTemochiGreenSmall){
+                if (movingSource==temochiGreenSmall){
                     resetTemochi()
                 }
-                else if (movingSource==null||
-                    movingSource==stringTemochiGreenBig ||
-                    movingSource==stringTemochiGreenMiddle){ pickupTemochi(temochiGreenSmall) }
+                else if (movingSource==null || movingSource is Temochi){ pickupTemochi(temochiGreenSmall) }
             }
             else if (finished){}
             else {toastNotYourTurn()}

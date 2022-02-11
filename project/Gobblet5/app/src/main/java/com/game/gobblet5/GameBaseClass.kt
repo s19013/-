@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Looper
 import android.util.DisplayMetrics
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.*
@@ -22,13 +23,20 @@ import java.util.*
 
 open class GameBaseClass : AppCompatActivity() {
     open var thisAct=0 //今のアクティビティ
-    //コンピューター対戦:-1
-    //人間対戦:1
-    private val activityIdGameWithCom = 1
-    private val activityIdGameWithMan = 2
+    protected val activityIdGameWithCom = 1
+    protected val activityIdGameWithMan = 2
     private val activityIdPreGameWithCom = 3
     private val activityIdPreGameWithMan = 4
     private val activityIdMain = 5
+
+    //マジックナンバー防止
+    private val humanID =  1
+    private val comID   = -1
+    private val empty = 0
+
+    private val bigPiece   = 3
+    private val middlePiece= 2
+    private val smallPiece = 1
 
     //タイマー関係
     protected val millisecond:Long=200
@@ -65,32 +73,14 @@ open class GameBaseClass : AppCompatActivity() {
     protected val B4 = Mas("B4")
     protected val C4 = Mas("C4")
     protected val D4 = Mas("D4")
-
-    ////文字列
-    //手持ち
-    protected val stringTemochiRedBig=temochiRedBig.nameGetter()
-    protected val stringTemochiRedMiddle=temochiRedMiddle.nameGetter()
-    protected val stringTemochiRedSmall=temochiRedSmall.nameGetter()
-    protected val stringTemochiGreenBig=temochiGreenBig.nameGetter()
-    protected val stringTemochiGreenMiddle=temochiGreenMiddle.nameGetter()
-    protected val stringTemochiGreenSmall=temochiGreenSmall.nameGetter()
-    //マス
-    private val stringA1=A1.nameGetter()
-    private val stringA2=A2.nameGetter()
-    private val stringA3=A3.nameGetter()
-    private val stringA4=A4.nameGetter()
-    private val stringB1=B1.nameGetter()
-    private val stringB2=B2.nameGetter()
-    private val stringB3=B3.nameGetter()
-    private val stringB4=B4.nameGetter()
-    private val stringC1=C1.nameGetter()
-    private val stringC2=C2.nameGetter()
-    private val stringC3=C3.nameGetter()
-    private val stringC4=C4.nameGetter()
-    private val stringD1=D1.nameGetter()
-    private val stringD2=D2.nameGetter()
-    private val stringD3=D3.nameGetter()
-    private val stringD4=D4.nameGetter()
+    
+    //文字列
+    protected val stringTemochiRedBig = temochiRedBig.nameGetter()
+    protected val stringTemochiRedMiddle = temochiRedMiddle.nameGetter()
+    protected val stringTemochiRedSmall = temochiRedSmall.nameGetter()
+    protected val stringTemochiGreenBig = temochiGreenBig.nameGetter()
+    protected val stringTemochiGreenMiddle = temochiGreenMiddle.nameGetter()
+    protected val stringTemochiGreenSmall = temochiGreenSmall.nameGetter()
 
     //popup
     private var configPopup: PopupWindow?=null
@@ -114,10 +104,10 @@ open class GameBaseClass : AppCompatActivity() {
     private var loosSE = 0
     private var seekSE = 0
     //ゲームに必要なもの
-    protected var turn = 0 //後でちゃんと設定する
+    protected var turn = 0 //後でちゃんと設定する 1p = 1,2p =-1 ,終わり=0
     private var size = 0
     private var winner : String?=null
-    protected var movingSource : Mas? = null
+    protected var movingSource : Any? = null
     private var destination : Mas? = null
     protected var finished = false
     private var pickupDone= false
@@ -165,39 +155,40 @@ open class GameBaseClass : AppCompatActivity() {
     private var pref: SharedPreferences? =null
     private var seVolume = 0
     private var bgmVolume = 0
-    protected var playFirst=1
+    protected var playFirst= 1
     //画面の大きさ
     private var width = 0
     private var height = 0
 
     ////持ちての表示に関する関数
-    //持ちてのコマを表示
+    //持ちてにコマを表示
     private fun havingDisplay(){
         playSound(selectSE)
-        if (turn == 1){
+        if (turn == humanID){
             view = findViewById(R.id.having1p)
             when (size){
-                3 -> { view?.setImageDrawable(komaRedBigD) }
-                2 -> { view?.setImageDrawable(komaRedMiddleD) }
-                1 -> { view?.setImageDrawable(komaRedSmallD) }
+                bigPiece    -> { view?.setImageDrawable(komaRedBigD) }
+                middlePiece -> { view?.setImageDrawable(komaRedMiddleD) }
+                smallPiece  -> { view?.setImageDrawable(komaRedSmallD) }
             }
-        } else if (turn ==-1){
+        } else if (turn == comID){
             view = findViewById(R.id.having2p)
             when (size){
-                3 -> { view?.setImageDrawable(komaGreenBigD) }
-                2 -> { view?.setImageDrawable(komaGreenMiddleD) }
-                1 -> { view?.setImageDrawable(komaGreenSmallD) }
+                bigPiece    -> { view?.setImageDrawable(komaGreenBigD) }
+                middlePiece -> { view?.setImageDrawable(komaGreenMiddleD) }
+                smallPiece  -> { view?.setImageDrawable(komaGreenSmallD) }
             }
         }
     }
+
     //持ちてのコマをなにも持ってない状態にもどす
     private fun resetHavingDisplay(){
         when(turn){
-            1 -> {
+            humanID -> {
                 view = findViewById(R.id.having1p)
                 view?.setImageDrawable(masImag)
             }
-            -1 -> {
+            comID -> {
                 view = findViewById(R.id.having2p)
                 view?.setImageDrawable(masImag)
             }
@@ -205,105 +196,59 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //各マスの描写に関する関数
-    private fun bordDisplay(location: String?) {
-        var box = mutableListOf(0, 0)
-        //大きさを判断
-        fun redSet(s: Int){
-            when (s) {
-                3 -> { view?.setImageDrawable(komaRedBigD) }
-                2 -> { view?.setImageDrawable(komaRedMiddleD) }
-                1 -> { view?.setImageDrawable(komaRedSmallD) }
+    private fun bordDisplay(location: Mas?) {
+        //赤いコマを描写
+        fun redSet(){
+            //大きさを判断
+            when (size) {
+                bigPiece    -> { view?.setImageDrawable(komaRedBigD) }
+                middlePiece -> { view?.setImageDrawable(komaRedMiddleD) }
+                smallPiece  -> { view?.setImageDrawable(komaRedSmallD) }
             }
         }
 
-        fun greenSet(s: Int){
-            when (s) {
-                3 -> { view?.setImageDrawable(komaGreenBigD) }
-                2 -> { view?.setImageDrawable(komaGreenMiddleD) }
-                1 -> { view?.setImageDrawable(komaGreenSmallD) }
+        //緑のコマを描写
+        fun greenSet(){
+            //大きさを判断
+            when (size) {
+                bigPiece    -> { view?.setImageDrawable(komaGreenBigD) }
+                middlePiece -> { view?.setImageDrawable(komaGreenMiddleD) }
+                smallPiece  -> { view?.setImageDrawable(komaGreenSmallD) }
             }
         }
 
+        //空マスを描写
         fun empSet(){ view?.setImageDrawable(masImag) }
 
         //場所を判断
-        when (location) {
-            stringA1 -> {
-                view = findViewById(R.id.buttonA1)
-                box = A1.funcForDisplay()
-            }
-            stringA2 -> {
-                view = findViewById(R.id.buttonA2)
-                box = A2.funcForDisplay()
-            }
-            stringA3 -> {
-                view = findViewById(R.id.buttonA3)
-                box = A3.funcForDisplay()
-            }
-            stringA4 -> {
-                view = findViewById(R.id.buttonA4)
-                box = A4.funcForDisplay()
-            }
-            stringB1 -> {
-                view = findViewById(R.id.buttonB1)
-                box = B1.funcForDisplay()
-            }
-            stringB2 -> {
-                view = findViewById(R.id.buttonB2)
-                box = B2.funcForDisplay()
-            }
-            stringB3 -> {
-                view = findViewById(R.id.buttonB3)
-                box = B3.funcForDisplay()
-            }
-            stringB4 -> {
-                view = findViewById(R.id.buttonB4)
-                box = B4.funcForDisplay()
-            }
-            stringC1 -> {
-                view = findViewById(R.id.buttonC1)
-                box = C1.funcForDisplay()
-            }
-            stringC2 -> {
-                view = findViewById(R.id.buttonC2)
-                box = C2.funcForDisplay()
-            }
-            stringC3 -> {
-                view = findViewById(R.id.buttonC3)
-                box = C3.funcForDisplay()
-            }
-            stringC4 -> {
-                view = findViewById(R.id.buttonC4)
-                box = C4.funcForDisplay()
-            }
-            stringD1 -> {
-                view = findViewById(R.id.buttonD1)
-                box = D1.funcForDisplay()
-            }
-            stringD2 -> {
-                view = findViewById(R.id.buttonD2)
-                box = D2.funcForDisplay()
-            }
-            stringD3 -> {
-                view = findViewById(R.id.buttonD3)
-                box = D3.funcForDisplay()
-            }
-            stringD4 -> {
-                view = findViewById(R.id.buttonD4)
-                box = D4.funcForDisplay()
+        fun whereISLocation(){ view = location?.getView() }
+
+        //マスが空がどうか
+        fun isMasEmpty():Boolean{
+            if (location?.funcForDisplay()?.get(1) == 0){
+                empSet()
+                return true
+            } else  {return false}
+        }
+
+        //マス入っているコマの色を判断
+        fun whatISColor(){
+            var color = location?.funcForDisplay()?.get(1)
+            when (color) {
+                humanID -> { redSet() }
+                comID   -> { greenSet() }
             }
         }
-        //色を判断
-        when (box[1]) {
-            1 -> { redSet(box[0]) }
-            0 -> { empSet() }
-            -1 -> { greenSet(box[0]) }
-        }
+
+
+        whereISLocation()
+        if (isMasEmpty()){return}
+        whatISColor()
     }
 
     //手持ちボタンを押した時の作業1
     protected fun pickupTemochi(temochi: Temochi){
-        setSMP(temochi.returnInf(), temochi.nameGetter())
+        setSMP(temochi.returnInf(), temochi)
         havingDisplay()
     }
 
@@ -313,46 +258,29 @@ open class GameBaseClass : AppCompatActivity() {
         //ゲームが続いていたら
         if (!finished){
             //取り出し作業
-            if (!pickupDone) { return pickup(mas.nameGetter()) }
+            if (!pickupDone) { return pickup(mas) }
 
             //マスの中に入れる
-            if (pickupDone && insert(mas.nameGetter())) { //ちゃんとマスの中に入った時だけ再描画する
-                bordDisplay(destination)//コマの移動先を再描画
+            if (pickupDone && insert(mas)) { //ちゃんとマスの中に入った時だけ再描画する
+                bordDisplay(destination)//コマの移動先のマスを再描画
                 endTurn() //ターン終了作業に移る
             }
         }
         // if(!returnValue) { } //ルール上指定した場所にコマを入れられなかった場合 特に何もしなくて良いわざわざかく必要もない
     }
 
-    //コマを取り出す
-    private fun pickup(name: String){
-
-        fun commonFunc(mas: Mas){
-            setSMP(mas.mPickup(turn), mas.nameGetter())
-            mas.resetList(size)
+    //移動元のマスからコマを取り出す
+    private fun pickup(mas: Mas?){
+        //マスの中になにか入っていれば取り出す
+        if (mas?.mPickup(turn) != empty) {
+            setSMP(mas!!.mPickup(turn), mas)
+            mas?.resetList(size)
             havingDisplay()
-            bordDisplay(mas.nameGetter())
+            bordDisplay(mas)
             judge()//ここでしたが相手のコマで一列そろってしまったときは相手のかちにする
+            return
         }
 
-        when(name){
-            stringA1 -> { if (A1.mPickup(turn) != 0) {return commonFunc(A1) } }
-            stringA2 -> { if (A2.mPickup(turn) != 0) {return commonFunc(A2) } }
-            stringA3 -> { if (A3.mPickup(turn) != 0) {return commonFunc(A3) } }
-            stringA4 -> { if (A4.mPickup(turn) != 0) {return commonFunc(A4) } }
-            stringB1 -> { if (B1.mPickup(turn) != 0) {return commonFunc(B1) } }
-            stringB2 -> { if (B2.mPickup(turn) != 0) {return commonFunc(B2) } }
-            stringB3 -> { if (B3.mPickup(turn) != 0) {return commonFunc(B3) } }
-            stringB4 -> { if (B4.mPickup(turn) != 0) {return commonFunc(B4) } }
-            stringC1 -> { if (C1.mPickup(turn) != 0) {return commonFunc(C1) } }
-            stringC2 -> { if (C2.mPickup(turn) != 0) {return commonFunc(C2) } }
-            stringC3 -> { if (C3.mPickup(turn) != 0) {return commonFunc(C3) } }
-            stringC4 -> { if (C4.mPickup(turn) != 0) {return commonFunc(C4) } }
-            stringD1 -> { if (D1.mPickup(turn) != 0) {return commonFunc(D1) } }
-            stringD2 -> { if (D2.mPickup(turn) != 0) {return commonFunc(D2) } }
-            stringD3 -> { if (D3.mPickup(turn) != 0) {return commonFunc(D3) } }
-            stringD4 -> { if (D4.mPickup(turn) != 0) {return commonFunc(D4) } }
-        }
         toastCanNotPickup() //取り出せるものが無い時の動き
     }
 
@@ -364,105 +292,6 @@ open class GameBaseClass : AppCompatActivity() {
             return true
         }
 
-
-//        when(name){
-//            stringA1 -> {
-//                if (A1.mInsert(size, turn)) {
-//                    setD(stringA1)
-//                    return true
-//                }
-//            }
-//            stringA2 -> {
-//                if (A2.mInsert(size, turn)) {
-//                    setD(stringA2)
-//                    return true
-//                }
-//            }
-//            stringA3 -> {
-//                if (A3.mInsert(size, turn)) {
-//                    setD(stringA3)
-//                    return true
-//                }
-//            }
-//            stringA4 -> {
-//                if (A4.mInsert(size, turn)) {
-//                    setD(stringA4)
-//                    return true
-//                }
-//            }
-//            stringB1 -> {
-//                if (B1.mInsert(size, turn)) {
-//                    setD(stringB1)
-//                    return true
-//                }
-//            }
-//            stringB2 -> {
-//                if (B2.mInsert(size, turn)) {
-//                    setD(stringB2)
-//                    return true
-//                }
-//            }
-//            stringB3 -> {
-//                if (B3.mInsert(size, turn)) {
-//                    setD(stringB3)
-//                    return true
-//                }
-//            }
-//            stringB4 -> {
-//                if (B4.mInsert(size, turn)) {
-//                    setD(stringB4)
-//                    return true
-//                }
-//            }
-//            stringC1 -> {
-//                if (C1.mInsert(size, turn)) {
-//                    setD(stringC1)
-//                    return true
-//                }
-//            }
-//            stringC2 -> {
-//                if (C2.mInsert(size, turn)) {
-//                    setD(stringC2)
-//                    return true
-//                }
-//            }
-//            stringC3 -> {
-//                if (C3.mInsert(size, turn)) {
-//                    setD(stringC3)
-//                    return true
-//                }
-//            }
-//            stringC4 -> {
-//                if (C4.mInsert(size, turn)) {
-//                    setD(stringC4)
-//                    return true
-//                }
-//            }
-//            stringD1 -> {
-//                if (D1.mInsert(size, turn)) {
-//                    setD(stringD1)
-//                    return true
-//                }
-//            }
-//            stringD2 -> {
-//                if (D2.mInsert(size, turn)) {
-//                    setD(stringD2)
-//                    return true
-//                }
-//            }
-//            stringD3 -> {
-//                if (D3.mInsert(size, turn)) {
-//                    setD(stringD3)
-//                    return true
-//                }
-//            }
-//            stringD4 -> {
-//                if (D4.mInsert(size, turn)) {
-//                    setD(stringD4)
-//                    return true
-//                }
-//            }
-//        }
         toastCanNotInsert()//トースト表示でおけないことを知らせる
         return false
     }
@@ -479,7 +308,7 @@ open class GameBaseClass : AppCompatActivity() {
 
     //ターン終了時の処理に関すること
     private fun endTurn() {
-        resetForEnd()
+        if (movingSource is Temochi){ resetForEndTemochi() } //移動元が手持ちだったら手持ちの数をへらす
         resetHavingDisplay()
         judge()
         resetSMP()
@@ -489,80 +318,39 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     //移動元が手持ちだったときのリセットしょり?
-    private fun resetForEnd() {
-        when (movingSource) {//移動元を正しく表示する
-            stringTemochiRedBig ->
-                {
-                    temochiRedBig.usePiece()
-                    textTemochiRedBig!!.text = "${temochiRedBig.returnCount()}"
-                    if (temochiRedBig.returnInf() == 0) {
-                        buttonTemochiRedBig!!.visibility = View.INVISIBLE
-                        textTemochiRedBig!!.visibility = View.INVISIBLE
-                    }
-                }
-            stringTemochiRedMiddle ->
-                {
-                    temochiRedMiddle.usePiece()
-                    textTemochiRedMiddle!!.text = "${temochiRedMiddle.returnCount()}"
-                    if (temochiRedMiddle.returnInf() == 0) {
-                        buttonTemochiRedMiddle!!.visibility = View.INVISIBLE
-                        textTemochiRedMiddle!!.visibility = View.INVISIBLE
-                    }
-                }
-            stringTemochiRedSmall ->
-                {
-                    temochiRedSmall.usePiece()
-                    textTemochiRedSmall!!.text = "${temochiRedSmall.returnCount()}"
-                    if (temochiRedSmall.returnInf() == 0) {
-                        buttonTemochiRedSmall!!.visibility = View.INVISIBLE
-                        textTemochiRedSmall!!.visibility = View.INVISIBLE
-                    }
-                }
-            stringTemochiGreenBig ->
-                {
-                    temochiGreenBig.usePiece()
-                    textTemochiGreenBig!!.text = "${temochiGreenBig.returnCount()}"
-                    if (temochiGreenBig.returnInf() == 0) {
-                        buttonTemochiGreenBig!!.visibility = View.INVISIBLE
-                        textTemochiGreenBig!!.visibility = View.INVISIBLE
-                    }
-                }
-            stringTemochiGreenMiddle ->
-                {
-                    temochiGreenMiddle.usePiece()
-                    textTemochiGreenMiddle!!.text = "${temochiGreenMiddle.returnCount()}"
-                    if (temochiGreenMiddle.returnInf() == 0) {
-                        buttonTemochiGreenMiddle!!.visibility = View.INVISIBLE
-                        textTemochiGreenMiddle!!.visibility = View.INVISIBLE
-                    }
-                }
-            stringTemochiGreenSmall ->
-                {
-                    temochiGreenSmall.usePiece()
-                    textTemochiGreenSmall!!.text = "${temochiGreenSmall.returnCount()}"
-                    if (temochiGreenSmall.returnInf() == 0) {
-                        buttonTemochiGreenSmall!!.visibility = View.INVISIBLE
-                        textTemochiGreenSmall!!.visibility = View.INVISIBLE
-                    }
-                }
+    private fun resetForEndTemochi() {
+        //移動元を正しく表示する
+        val temochi = movingSource as? Temochi
+        temochi?.usePiece()
+        temochi?.getTextView()!!.text = "${temochi.returnCount()}"
+        //0になったら消す
+        if (temochi?.returnInf() == empty) {
+            temochi?.getButtonView()!!.visibility = View.INVISIBLE
+            temochi?.getTextView()!!.visibility = View.INVISIBLE
         }
+
     }
 
-    private fun setSMP(s: Int, m: String){
+    private fun setSMP(s: Int, m: Any?){
         size=s
         movingSource=m
         pickupDone=true
+
+        if (m is Temochi){ Log.d("gobbletdeb","size:${size},movingSource:${m.nameGetter()}") }
+        if (m is Mas){ Log.d("gobbletdeb","size:${size},movingSource:${m.nameGetter()}") }
     }
 
     private fun resetSMP(){
-        size=0
+        size=empty
         movingSource=null
         pickupDone=false
     }
 
-    private fun setD(location: Any?) {
+    private fun setD(location: Mas?) {
         playSound(putSE)
         destination = location
+
+        Log.d("gobbletdeb","destination${destination?.nameGetter()}")
     }
 
     private fun resetD(){ destination = null }
@@ -596,8 +384,8 @@ open class GameBaseClass : AppCompatActivity() {
             flashBackground()
             //ジングルを鳴らす
             if (seVolume > 0){
-                if (thisAct==1){playSound(winSE)}
-                if (thisAct==-1){
+                if (thisAct == activityIdGameWithMan){playSound(winSE)}
+                if (thisAct== activityIdGameWithCom){
                     when(winner){
                         "1p" -> playSound(winSE)
                         "2p" -> playSound(loosSE)
@@ -614,24 +402,7 @@ open class GameBaseClass : AppCompatActivity() {
     fun flashBackground(){
         fun commonfunc(list: List<Mas>){
             for (d in list){
-                when (d.nameGetter()) {
-                    stringA1 -> { view = findViewById(R.id.buttonA1) }
-                    stringA2 -> { view = findViewById(R.id.buttonA2) }
-                    stringA3 -> { view = findViewById(R.id.buttonA3) }
-                    stringA4 -> { view = findViewById(R.id.buttonA4) }
-                    stringB1 -> { view = findViewById(R.id.buttonB1) }
-                    stringB2 -> { view = findViewById(R.id.buttonB2) }
-                    stringB3 -> { view = findViewById(R.id.buttonB3) }
-                    stringB4 -> { view = findViewById(R.id.buttonB4) }
-                    stringC1 -> { view = findViewById(R.id.buttonC1) }
-                    stringC2 -> { view = findViewById(R.id.buttonC2) }
-                    stringC3 -> { view = findViewById(R.id.buttonC3) }
-                    stringC4 -> { view = findViewById(R.id.buttonC4) }
-                    stringD1 -> { view = findViewById(R.id.buttonD1) }
-                    stringD2 -> { view = findViewById(R.id.buttonD2) }
-                    stringD3 -> { view = findViewById(R.id.buttonD3) }
-                    stringD4 -> { view = findViewById(R.id.buttonD4) }
-                }
+                view = d.getView()
                 view?.setBackgroundColor(resources.getColor(R.color.lineUP))
             }
         }
@@ -720,20 +491,14 @@ open class GameBaseClass : AppCompatActivity() {
         //もう一度やる
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
             playSound(gameStartSE)
-            when(thisAct){
-                -1 -> {changeActivity(activityIdGameWithCom)}
-                 1 -> {changeActivity(activityIdGameWithMan)}
-            }
+            changeActivity(thisAct)
             resultPopup!!.dismiss()
         }
 
         //設定へ
         popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
             playSound(cancelSE)
-            when(thisAct){
-                -1 -> {changeActivity(activityIdPreGameWithCom)}
-                 1 -> {changeActivity(activityIdPreGameWithMan)}
-            }
+            changeActivity(thisAct)
             resultPopup!!.dismiss()
         }
 
@@ -852,14 +617,11 @@ open class GameBaseClass : AppCompatActivity() {
             }
         }
 
-
+        //やり直し
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
             playSound(gameStartSE)
             configPopup!!.dismiss()
-            when(thisAct){
-                -1 -> {changeActivity(activityIdGameWithCom)}
-                 1 -> {changeActivity(activityIdGameWithMan)}
-            }
+            changeActivity(thisAct)
         }
     }
 
@@ -917,9 +679,9 @@ open class GameBaseClass : AppCompatActivity() {
     private fun iniPreference(){
         //共有プリファレンス
         pref = PreferenceManager.getDefaultSharedPreferences(this)
-        seVolume =pref!!.getInt("seVolume",5)
+        seVolume  =pref!!.getInt("seVolume",5)
         bgmVolume =pref!!.getInt("bgmVolume",5)
-        playFirst=pref!!.getInt("playFirst", 1)
+        playFirst =pref!!.getInt("playFirst", 1)
     }
 
     private fun iniSoundPool(){
@@ -962,8 +724,8 @@ open class GameBaseClass : AppCompatActivity() {
         if (playFirst != 0){ turn = playFirst }
         else {
             when((1..2).random()){
-                1 -> {turn = 1}
-                2 -> {turn = -1}
+                1 -> {turn = humanID}
+                2 -> {turn = comID  }
             }
         }
     }
@@ -985,7 +747,44 @@ open class GameBaseClass : AppCompatActivity() {
         komaGreenMiddleD = res?.getDrawable(R.drawable.koma_green_middle)
         komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
 
+        //各マスに描写する場所を教える?
+        A1.setView(findViewById(R.id.buttonA1))
+        A2.setView(findViewById(R.id.buttonA2))
+        A3.setView(findViewById(R.id.buttonA3))
+        A4.setView(findViewById(R.id.buttonA4))
+
+        B1.setView(findViewById(R.id.buttonB1))
+        B2.setView(findViewById(R.id.buttonB2))
+        B3.setView(findViewById(R.id.buttonB3))
+        B4.setView(findViewById(R.id.buttonB4))
+
+        C1.setView(findViewById(R.id.buttonC1))
+        C2.setView(findViewById(R.id.buttonC2))
+        C3.setView(findViewById(R.id.buttonC3))
+        C4.setView(findViewById(R.id.buttonC4))
+
+        D1.setView(findViewById(R.id.buttonD1))
+        D2.setView(findViewById(R.id.buttonD2))
+        D3.setView(findViewById(R.id.buttonD3))
+        D4.setView(findViewById(R.id.buttonD4))
+
+        //手持ちのボタンの場所を教える
+        temochiGreenBig.setButtonView(findViewById(R.id.buttonTemochiGreenBig))
+        temochiGreenMiddle.setButtonView(findViewById(R.id.buttonTemochiGreenMiddle))
+        temochiGreenSmall.setButtonView(findViewById(R.id.buttonTemochiGreenSmall))
+        temochiRedBig.setButtonView(findViewById(R.id.buttonTemochiRedBig))
+        temochiRedMiddle.setButtonView(findViewById(R.id.buttonTemochiRedMiddle))
+        temochiRedSmall.setButtonView(findViewById(R.id.buttonTemochiRedSmall))
+
+        //手持ちの文字
+        temochiGreenBig.setTextView(findViewById(R.id.textTemochiGreenBig))
+        temochiGreenMiddle.setTextView(findViewById(R.id.textTemochiGreenMiddle))
+        temochiGreenSmall.setTextView(findViewById(R.id.textTemochiGreenSmall))
+        temochiRedBig.setTextView(findViewById(R.id.textTemochiRedBig))
+        temochiRedMiddle.setTextView(findViewById(R.id.textTemochiRedMiddle))
+        temochiRedSmall.setTextView(findViewById(R.id.textTemochiRedSmall))
     }
+
 
     //viewを取得?
     open fun iniView(){}

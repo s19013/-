@@ -23,6 +23,8 @@ class Mas(private val name:String, ) {
 
     fun setView(v:ImageView){view=v}
 
+    fun getView():ImageView?{return view}
+
     fun addScore(arg:Int){ score+=arg } //スコアに引数の値を足す
 
     fun mPickup(turn:Int):Int{
