@@ -49,13 +49,9 @@ class GameWithComActivity : GameBaseClass() {
         buttonTemochiRedBig!!.setOnClickListener {
             if (turn == 1 && !finished){
                 //movingSourceが同じときやり直しができる
-                if (movingSource == stringTemochiRedBig){
-                    resetTemochi()
-                }
+                if (movingSource == stringTemochiRedBig){ resetTemochi() }
                 //移動元が手持ちの場合のみコマを
-                else if (movingSource== null ||
-                    movingSource==stringTemochiRedMiddle||
-                    movingSource==stringTemochiRedSmall){ pickupTemochi(temochiRedBig) }
+                else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(temochiRedBig) }
             }
             else if (finished){} //決着ついていたらなにもしない
             else {toastNotYourTurn()}
@@ -63,12 +59,8 @@ class GameWithComActivity : GameBaseClass() {
 
         buttonTemochiRedMiddle!!.setOnClickListener {
             if (turn == 1 && !finished){
-                if (movingSource==stringTemochiRedMiddle){
-                    resetTemochi()
-                }
-                else if (movingSource== null ||
-                    movingSource==stringTemochiRedBig ||
-                    movingSource==stringTemochiRedSmall){ pickupTemochi(temochiRedMiddle) }
+                if (movingSource==stringTemochiRedMiddle){ resetTemochi() }
+                else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(temochiRedMiddle) }
             }
             else if (finished){}
             else {toastNotYourTurn()}
@@ -76,22 +68,15 @@ class GameWithComActivity : GameBaseClass() {
 
         buttonTemochiRedSmall!!.setOnClickListener {
             if (turn == 1 && !finished){
-                if (movingSource==stringTemochiRedSmall){
-                    resetTemochi()
-                }
-                else if (movingSource== null ||
-                    movingSource==stringTemochiRedBig ||
-                    movingSource==stringTemochiRedMiddle){ pickupTemochi(temochiRedSmall) }
+                if (movingSource==stringTemochiRedSmall){ resetTemochi() }
+                else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(temochiRedSmall) }
             }
             else if (finished){}
             else {toastNotYourTurn()}
         }
 
         ////マスを触ったとき
-        buttonA1.setOnClickListener {
-            //ゲームが終わったらさわれないようにするためにこんなif文を書く
-            pushedMasButton(A1) //nameGetterを使ってマスの名前を入れる
-        }
+        buttonA1.setOnClickListener { pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
 
         buttonA2.setOnClickListener { pushedMasButton(A2) }
 

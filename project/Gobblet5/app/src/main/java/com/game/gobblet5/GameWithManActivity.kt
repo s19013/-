@@ -8,7 +8,6 @@ import kotlinx.android.synthetic.main.activity_game_with_man.*
 class GameWithManActivity : GameBaseClass() {
     override var thisAct: Int = activityIdGameWithMan
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game_with_man)
@@ -25,77 +24,62 @@ class GameWithManActivity : GameBaseClass() {
         buttonTemochiRedBig!!.setOnClickListener {
             if (turn == 1 && !finished){
                 //movingSourceが同じときやり直しができる
-                if (movingSource == temochiRedBig){
-                    resetTemochi()
-                }
+                if (movingSource == temochiRedBig){ resetTemochi() }
                 //移動元が手持ちの場合のみコマを
                 else if (movingSource== null || movingSource is Temochi){ pickupTemochi(temochiRedBig) }
             }
-            else if (finished){} //決着ついていたらなにもしない
+            else if (finished){return@setOnClickListener} //決着ついていたらなにもしない
             else {toastNotYourTurn()}
         }
 
         buttonTemochiRedMiddle!!.setOnClickListener {
             if (turn == 1 && !finished){
-                if (movingSource==temochiRedMiddle){
-                    resetTemochi()
-                }
+                if (movingSource==temochiRedMiddle){ resetTemochi() }
                 else if (movingSource== null || movingSource is Temochi){ pickupTemochi(temochiRedMiddle) }
             }
-            else if (finished){}
+            else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
         }
 
         buttonTemochiRedSmall!!.setOnClickListener {
             if (turn == 1 && !finished){
-                if (movingSource==temochiRedSmall){
-                    resetTemochi()
-                }
+                if (movingSource==temochiRedSmall){ resetTemochi() }
                 else if (movingSource== null ||movingSource is Temochi){ pickupTemochi(temochiRedSmall) }
             }
-            else if (finished){}
+            else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
         }
 
         buttonTemochiGreenBig!!.setOnClickListener {
             if (turn == -1 && !finished){
-                if (movingSource==temochiGreenBig){
-                    resetTemochi()
-                }
+                if (movingSource==temochiGreenBig){ resetTemochi() }
                 else if (movingSource== null ||
                     movingSource==temochiGreenMiddle||
                     movingSource==temochiGreenSmall) { pickupTemochi(temochiGreenBig) }
             }
-            else if (finished){}
+            else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
         }
 
         buttonTemochiGreenMiddle!!.setOnClickListener {
             if (turn == -1 && !finished){
-                if (movingSource==temochiGreenMiddle){
-                    resetTemochi()
-                }
+                if (movingSource==temochiGreenMiddle){ resetTemochi() }
                 else if (movingSource== null || movingSource is Temochi){ pickupTemochi(temochiGreenMiddle) }
             }
-            else if (finished){}
+            else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
         }
 
         buttonTemochiGreenSmall!!.setOnClickListener {
             if (turn == -1 && !finished){
-                if (movingSource==temochiGreenSmall){
-                    resetTemochi()
-                }
+                if (movingSource==temochiGreenSmall){ resetTemochi() }
                 else if (movingSource==null || movingSource is Temochi){ pickupTemochi(temochiGreenSmall) }
             }
-            else if (finished){}
+            else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
         }
       ////マスを触ったとき
-        buttonA1.setOnClickListener {
-            //ゲームが終わったらさわれないようにするためにこんなif文を書く
-            pushedMasButton(A1) //nameGetterを使ってマスの名前を入れる
-        }
+        buttonA1.setOnClickListener { pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
 
         buttonA2.setOnClickListener { pushedMasButton(A2) }
 
