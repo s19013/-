@@ -30,8 +30,8 @@ open class GameBaseClass : AppCompatActivity() {
     private val activityIdMain = 5
 
     //マジックナンバー防止
-    private val humanID =  1
-    private val comID   = -1
+    private val p1Piece =  1
+    private val p2Piece = -1
     private val empty = 0
 
     private val bigPiece   = 3
@@ -165,14 +165,14 @@ open class GameBaseClass : AppCompatActivity() {
     private fun havingDisplay(){
         playSound(selectSE)
 
-        if (turn == humanID){
+        if (turn == p1Piece){
             view = findViewById(R.id.having1p)
             when (havingPieceSize){
                 bigPiece    -> { view?.setImageDrawable(komaRedBigD) }
                 middlePiece -> { view?.setImageDrawable(komaRedMiddleD) }
                 smallPiece  -> { view?.setImageDrawable(komaRedSmallD) }
             }
-        } else if (turn == comID){
+        } else if (turn == p2Piece){
             view = findViewById(R.id.having2p)
             when (havingPieceSize){
                 bigPiece    -> { view?.setImageDrawable(komaGreenBigD) }
@@ -185,11 +185,11 @@ open class GameBaseClass : AppCompatActivity() {
     //持ちてのコマをなにも持ってない状態にもどす
     private fun resetHavingDisplay(){
         when(turn){
-            humanID -> {
+            p1Piece -> {
                 view = findViewById(R.id.having1p)
                 view?.setImageDrawable(masImag)
             }
-            comID -> {
+            p2Piece -> {
                 view = findViewById(R.id.having2p)
                 view?.setImageDrawable(masImag)
             }
@@ -239,8 +239,8 @@ open class GameBaseClass : AppCompatActivity() {
         //マス入っているコマの色を判断
         fun whatISColor(){
             when (color) {
-                humanID -> { redSet() }
-                comID   -> { greenSet() }
+                p1Piece -> { redSet() }
+                p2Piece -> { greenSet() }
             }
         }
 
@@ -729,8 +729,8 @@ open class GameBaseClass : AppCompatActivity() {
         if (playFirst != 0){ turn = playFirst }
         else {
             when((1..2).random()){
-                1 -> {turn = humanID}
-                2 -> {turn = comID  }
+                1 -> {turn = p1Piece }
+                2 -> {turn = p2Piece }
             }
         }
     }
