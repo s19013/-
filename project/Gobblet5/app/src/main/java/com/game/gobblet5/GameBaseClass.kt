@@ -3,11 +3,7 @@ package com.game.gobblet5
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.Resources
-import android.graphics.drawable.Drawable
-import android.media.AudioAttributes
 import android.media.MediaPlayer
-import android.media.SoundPool
 import android.os.Build
 import android.os.Handler
 import android.os.Looper
@@ -23,7 +19,10 @@ import java.util.*
 
 open class GameBaseClass : AppCompatActivity() {
     open var thisAct=0 //今のアクティビティ
-    val activityID=com.game.gobblet5.activityID()
+    val actID=activityID()
+
+    //
+    val sound = gameBaseSound()
 
     //マジックナンバー防止
     private val p1Piece =  1
@@ -71,20 +70,6 @@ open class GameBaseClass : AppCompatActivity() {
     private var mediaPlayer: MediaPlayer?=null
     private var bgmLooping = false
 
-    //soundPool
-    private var sp: SoundPool? = null
-    private var putSE=0
-    private var selectSE = 0
-    private var cancelSE = 0
-    private var menuSelectSE = 0
-    private var cannotDoItSE = 0
-    private var gameStartSE = 0
-    protected var openSE = 0
-    private var closeSE = 0
-    private var winSE = 0
-    private var loosSE = 0
-    private var seekSE = 0
-
     //ゲームに必要なもの
     protected var turn = 0 //後でちゃんと設定する 1p = 1,2p =-1 ,終わり=0
     private var havingPieceSize = 0 //今持っているコマの大きさ
@@ -93,22 +78,11 @@ open class GameBaseClass : AppCompatActivity() {
     private var destination : Mas? = null
     protected var finished = false
     private var pickupDone= false
-    private var alignedLine:String?= null
     
     //表示に使う物　(箱を用意している状態)
-    private var res: Resources? = null
     private var view: ImageView? = null
-    //マス
-    private var masImag: Drawable? = null
-    //駒
-    //赤
-    private var komaRedBigD: Drawable? = null
-    private var komaRedMiddleD: Drawable? = null
-    private var komaRedSmallD: Drawable? = null
-    //緑
-    private var komaGreenBigD: Drawable? = null
-    private var komaGreenMiddleD: Drawable? = null
-    private var komaGreenSmallD: Drawable? = null
+
+    private val gameImages= com.game.gobblet5.gameBaseDrawable()
 
     //テキスト
     protected var textTemochiRedBig:TextView?=null
@@ -128,32 +102,32 @@ open class GameBaseClass : AppCompatActivity() {
     protected var resultButton:View?=null
 
     //共有プリファレンス
-    private var pref: SharedPreferences? =null
+    private   var pref: SharedPreferences? =null
     private   var seVolume  = 0
     private   var bgmVolume = 0
     protected var playFirst = 1
     //画面の大きさ
-    private var width = 0
+    private var width  = 0
     private var height = 0
 
     ////持ちての表示に関する関数
     //持ちてにコマを表示
     private fun havingDisplay(){
-        playSound(selectSE)
+        sound.playSound(sound.selectSE)
 
         if (turn == p1Piece){
             view = findViewById(R.id.having1p)
             when (havingPieceSize){
-                bigPiece    -> { view?.setImageDrawable(komaRedBigD) }
-                middlePiece -> { view?.setImageDrawable(komaRedMiddleD) }
-                smallPiece  -> { view?.setImageDrawable(komaRedSmallD) }
+                bigPiece    -> { view?.setImageDrawable(gameImages.komaRedBigD) }
+                middlePiece -> { view?.setImageDrawable(gameImages.komaRedMiddleD) }
+                smallPiece  -> { view?.setImageDrawable(gameImages.komaRedSmallD) }
             }
         } else if (turn == p2Piece){
             view = findViewById(R.id.having2p)
             when (havingPieceSize){
-                bigPiece    -> { view?.setImageDrawable(komaGreenBigD) }
-                middlePiece -> { view?.setImageDrawable(komaGreenMiddleD) }
-                smallPiece  -> { view?.setImageDrawable(komaGreenSmallD) }
+                bigPiece    -> { view?.setImageDrawable(gameImages.komaGreenBigD) }
+                middlePiece -> { view?.setImageDrawable(gameImages.komaGreenMiddleD) }
+                smallPiece  -> { view?.setImageDrawable(gameImages.komaGreenSmallD) }
             }
         }
     }
@@ -163,11 +137,11 @@ open class GameBaseClass : AppCompatActivity() {
         when(turn){
             p1Piece -> {
                 view = findViewById(R.id.having1p)
-                view?.setImageDrawable(masImag)
+                view?.setImageDrawable(gameImages.masImag)
             }
             p2Piece -> {
                 view = findViewById(R.id.having2p)
-                view?.setImageDrawable(masImag)
+                view?.setImageDrawable(gameImages.masImag)
             }
         }
     }
@@ -175,16 +149,16 @@ open class GameBaseClass : AppCompatActivity() {
     //各マスの描写に関する関数
     private fun bordDisplay(location: Mas?) {
 
-        var size  = location?.funcForDisplay()?.get(0) //そのマスの内一番外側のコマの大きさを調べる
-        var color = location?.funcForDisplay()?.get(1) //色をしらべる
+        val size  = location?.funcForDisplay()?.get(0) //そのマスの内一番外側のコマの大きさを調べる
+        val color = location?.funcForDisplay()?.get(1) //色をしらべる
 
         //赤いコマを描写
         fun redSet(){
             //大きさを判断
             when (size) {
-                bigPiece    -> { view?.setImageDrawable(komaRedBigD) }
-                middlePiece -> { view?.setImageDrawable(komaRedMiddleD) }
-                smallPiece  -> { view?.setImageDrawable(komaRedSmallD) }
+                bigPiece    -> { view?.setImageDrawable(gameImages.komaRedBigD) }
+                middlePiece -> { view?.setImageDrawable(gameImages.komaRedMiddleD) }
+                smallPiece  -> { view?.setImageDrawable(gameImages.komaRedSmallD) }
             }
         }
 
@@ -192,14 +166,14 @@ open class GameBaseClass : AppCompatActivity() {
         fun greenSet(){
             //大きさを判断
             when (size) {
-                bigPiece    -> { view?.setImageDrawable(komaGreenBigD) }
-                middlePiece -> { view?.setImageDrawable(komaGreenMiddleD) }
-                smallPiece  -> { view?.setImageDrawable(komaGreenSmallD) }
+                bigPiece    -> { view?.setImageDrawable(gameImages.komaGreenBigD) }
+                middlePiece -> { view?.setImageDrawable(gameImages.komaGreenMiddleD) }
+                smallPiece  -> { view?.setImageDrawable(gameImages.komaGreenSmallD) }
             }
         }
 
         //空マスを描写
-        fun empSet(){ view?.setImageDrawable(masImag) }
+        fun empSet(){ view?.setImageDrawable(gameImages.masImag) }
 
         //場所を判断
         fun whereISLocation(){ view = location?.getView() }
@@ -252,9 +226,9 @@ open class GameBaseClass : AppCompatActivity() {
     //移動元のマスからコマを取り出す
     private fun pickup(mas: Mas){
         //マスの中になにか入っていれば取り出す
-        if (mas?.mPickup(turn) != empty) {
-            setSMP(mas!!.mPickup(turn), mas) //取り出したコマの情報を保存
-            mas?.resetList(havingPieceSize) //
+        if (mas.mPickup(turn) != empty) {
+            setSMP(mas.mPickup(turn), mas) //取り出したコマの情報を保存
+            mas.resetList(havingPieceSize) //
             havingDisplay()
             bordDisplay(mas)
             judge()//ここでしたが相手のコマで一列そろってしまったときは相手のかちにする
@@ -305,9 +279,9 @@ open class GameBaseClass : AppCompatActivity() {
         temochi?.usePiece()
         temochi?.getTextView()!!.text = "${temochi.returnCount()}"
         //0になったら消す
-        if (temochi?.returnInf() == empty) {
-            temochi?.getButtonView()!!.visibility = View.INVISIBLE
-            temochi?.getTextView()!!.visibility = View.INVISIBLE
+        if (temochi.returnInf() == empty) {
+            temochi.getButtonView()!!.visibility = View.INVISIBLE
+            temochi.getTextView()!!.visibility = View.INVISIBLE
         }
 
     }
@@ -328,7 +302,7 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     private fun setD(location: Mas?) {
-        playSound(putSE)
+        sound.playSound(sound.putSE)
         destination = location
 
         Log.d("gobbletdeb","destination${destination?.nameGetter()}")
@@ -343,11 +317,11 @@ open class GameBaseClass : AppCompatActivity() {
             flashBackground(l.listGetter())
             //ジングルを鳴らす
             if (seVolume > 0){
-                if (thisAct == activityID.gameWithMan){playSound(winSE)}
-                if (thisAct== activityID.gameWithCom){
+                if (thisAct == actID.gameWithMan){sound.playSound(sound.winSE)}
+                if (thisAct== actID.gameWithCom){
                     when(winner){
-                        "1p" -> playSound(winSE)
-                        "2p" -> playSound(loosSE)
+                        "1p" -> sound.playSound(sound.winSE)
+                        "2p" -> sound.playSound(sound.loosSE)
                     }
                 }
             }
@@ -373,7 +347,7 @@ open class GameBaseClass : AppCompatActivity() {
         }
     }
 
-    fun flashBackground(list: List<Mas>){
+    private fun flashBackground(list: List<Mas>){
         for (d in list){
             view = d.getView()
             view?.setBackgroundColor(resources.getColor(R.color.lineUP))
@@ -385,11 +359,11 @@ open class GameBaseClass : AppCompatActivity() {
     private fun changeActivity(id:Int){
         var intent:Intent?=null
         when(id){
-            activityID.main->intent = Intent(this, MainActivity::class.java)
-            activityID.gameWithMan -> intent = Intent(this, GameWithManActivity::class.java)
-            activityID.gameWithCom -> intent = Intent(this, GameWithComActivity::class.java)
-            activityID.preGameWithMan -> intent = Intent(this, preGameWithManActivity::class.java)
-            activityID.preGameWithCom -> intent = Intent(this, preGameWithComActivity::class.java)
+            actID.main->intent = Intent(this, MainActivity::class.java)
+            actID.gameWithMan -> intent = Intent(this, GameWithManActivity::class.java)
+            actID.gameWithCom -> intent = Intent(this, GameWithComActivity::class.java)
+            actID.preGameWithMan -> intent = Intent(this, preGameWithManActivity::class.java)
+            actID.preGameWithCom -> intent = Intent(this, preGameWithComActivity::class.java)
         }
 
         startActivity(intent)
@@ -434,21 +408,21 @@ open class GameBaseClass : AppCompatActivity() {
 
         //タイトルへ戻る
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
-            playSound(cancelSE)
-            changeActivity(activityID.main)
+            sound.playSound(sound.cancelSE)
+            changeActivity(actID.main)
             resultPopup!!.dismiss()
         }
 
         //もう一度やる
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
-            playSound(gameStartSE)
+            sound.playSound(sound.gameStartSE)
             changeActivity(thisAct)
             resultPopup!!.dismiss()
         }
 
         //設定へ
         popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
-            playSound(cancelSE)
+            sound.playSound(sound.cancelSE)
             changeActivity(thisAct)
             resultPopup!!.dismiss()
         }
@@ -456,7 +430,7 @@ open class GameBaseClass : AppCompatActivity() {
         //盤面を見る
         popupView.findViewById<View>(R.id.backButton).setOnClickListener {
             if (resultPopup!!.isShowing) {
-                playSound(closeSE)
+                sound.playSound(sound.closeSE)
                 resultPopup!!.dismiss()
             }
         }
@@ -517,7 +491,7 @@ open class GameBaseClass : AppCompatActivity() {
                 ) {
                     seVolumeText?.text = progress.toString()
                     seVolume=progress
-                    playSound(seekSE)
+                    sound.playSound(sound.seekSE)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -535,7 +509,7 @@ open class GameBaseClass : AppCompatActivity() {
                     progress: Int,
                     fromUser: Boolean
                 ) {
-                    playSound(seekSE)
+                    sound.playSound(sound.seekSE)
                     bgmVolumeText?.text = progress.toString()
                     bgmVolume=progress
                     mediaPlayer?.setVolume(bgmVolume*0.1f,bgmVolume*0.1f)
@@ -555,22 +529,22 @@ open class GameBaseClass : AppCompatActivity() {
 
         //タイトルへ戻るボタン
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
-            playSound(cancelSE)
+            sound.playSound(sound.cancelSE)
             configPopup!!.dismiss()
-            changeActivity(activityID.main)
+            changeActivity(actID.main)
         }
 
         //盤面へ戻るボタン
         popupView.findViewById<View>(R.id.backButton).setOnClickListener {
             if (configPopup!!.isShowing) {
-                playSound(closeSE)
+                sound.playSound(sound.closeSE)
                 configPopup!!.dismiss()
             }
         }
 
         //やり直し
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
-            playSound(gameStartSE)
+            sound.playSound(sound.gameStartSE)
             configPopup!!.dismiss()
             changeActivity(thisAct)
         }
@@ -583,7 +557,7 @@ open class GameBaseClass : AppCompatActivity() {
             .setTitle(getString(R.string.cannotPickupDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
-        playSound(cannotDoItSE)
+        sound.playSound(sound.cannotDoItSE)
     }
 
     //入れられない
@@ -592,7 +566,7 @@ open class GameBaseClass : AppCompatActivity() {
             .setTitle(getString(R.string.cannotInsertDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
-        playSound(cannotDoItSE)
+        sound.playSound(sound.cannotDoItSE)
     }
 
     //自分のターンでないのになにかしようとしている
@@ -601,7 +575,7 @@ open class GameBaseClass : AppCompatActivity() {
             .setTitle(getString(R.string.notYourTurnDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
-        playSound(cannotDoItSE)
+        sound.playSound(sound.cannotDoItSE)
     }
 
     //初期化に関する関数
@@ -637,30 +611,8 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     private fun iniSoundPool(){
-        //soundPool
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-            val audioAttributes =
-                AudioAttributes.Builder()
-                    .setUsage(AudioAttributes.USAGE_GAME)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
-                    .build()
-            sp = SoundPool.Builder()
-                .setAudioAttributes(audioAttributes)
-                .setMaxStreams(1)
-                .build()
-        }
-        //使う効果音を準備
-        cannotDoItSE= sp!!.load(this, R.raw.cannotdoit, 1)
-        putSE= sp!!.load(this, R.raw.select_se, 1)
-        selectSE = sp!!.load(this, R.raw.put, 1)
-        cancelSE = sp!!.load(this, R.raw.cancel, 1)
-        menuSelectSE = sp!!.load(this, R.raw.menu_selected, 1)
-        gameStartSE = sp!!.load(this,R.raw.game_start_se,1)
-        openSE = sp!!.load(this,R.raw.open,1)
-        closeSE = sp!!.load(this,R.raw.close,1)
-        winSE = sp!!.load(this,R.raw.win_single,1)
-        loosSE = sp!!.load(this,R.raw.loose_single,1)
-        seekSE=sp!!.load(this,R.raw.seekbar,1)
+        sound.iniSoundPool(applicationContext)
+        sound.setSeVoluem(seVolume)
     }
 
     private fun iniMediaPlayer(){
@@ -685,40 +637,31 @@ open class GameBaseClass : AppCompatActivity() {
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun iniDrawable(){
         //表示に使う物(空箱に実物を入れる)
-        res=resources
         view=findViewById(R.id.buttonA1) //適当にダミーを入れてるだけ
-        //マス
-        masImag = res?.getDrawable(R.drawable.mass)
-        //駒
-        //赤
-        komaRedBigD = res?.getDrawable(R.drawable.koma_red_big)
-        komaRedMiddleD = res?.getDrawable(R.drawable.koma_red_middle)
-        komaRedSmallD = res?.getDrawable(R.drawable.koma_red_small)
-        //緑
-        komaGreenBigD = res?.getDrawable(R.drawable.koma_green_big)
-        komaGreenMiddleD = res?.getDrawable(R.drawable.koma_green_middle)
-        komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
+        gameImages.ini(resources)
 
         //各マスに描写する場所を教える?
-        bord.A1.setView(findViewById(R.id.buttonA1))
-        bord.A2.setView(findViewById(R.id.buttonA2))
-        bord.A3.setView(findViewById(R.id.buttonA3))
-        bord.A4.setView(findViewById(R.id.buttonA4))
+        with(bord) {
+            A1.setView(findViewById(R.id.buttonA1))
+            A2.setView(findViewById(R.id.buttonA2))
+            A3.setView(findViewById(R.id.buttonA3))
+            A4.setView(findViewById(R.id.buttonA4))
 
-        bord.B1.setView(findViewById(R.id.buttonB1))
-        bord.B2.setView(findViewById(R.id.buttonB2))
-        bord.B3.setView(findViewById(R.id.buttonB3))
-        bord.B4.setView(findViewById(R.id.buttonB4))
+            B1.setView(findViewById(R.id.buttonB1))
+            B2.setView(findViewById(R.id.buttonB2))
+            B3.setView(findViewById(R.id.buttonB3))
+            B4.setView(findViewById(R.id.buttonB4))
 
-        bord.C1.setView(findViewById(R.id.buttonC1))
-        bord.C2.setView(findViewById(R.id.buttonC2))
-        bord.C3.setView(findViewById(R.id.buttonC3))
-        bord.C4.setView(findViewById(R.id.buttonC4))
+            C1.setView(findViewById(R.id.buttonC1))
+            C2.setView(findViewById(R.id.buttonC2))
+            C3.setView(findViewById(R.id.buttonC3))
+            C4.setView(findViewById(R.id.buttonC4))
 
-        bord.D1.setView(findViewById(R.id.buttonD1))
-        bord.D2.setView(findViewById(R.id.buttonD2))
-        bord.D3.setView(findViewById(R.id.buttonD3))
-        bord.D4.setView(findViewById(R.id.buttonD4))
+            D1.setView(findViewById(R.id.buttonD1))
+            D2.setView(findViewById(R.id.buttonD2))
+            D3.setView(findViewById(R.id.buttonD3))
+            D4.setView(findViewById(R.id.buttonD4))
+        }
 
         //手持ちのボタンの場所を教える
         temochiGreenBig.setButtonView(findViewById(R.id.buttonTemochiGreenBig))
@@ -740,11 +683,6 @@ open class GameBaseClass : AppCompatActivity() {
 
     //viewを取得?
     open fun iniView(){}
-
-    //音を鳴らす処理
-    protected fun playSound(status: Int){
-        if (seVolume > 0){ sp!!.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
-    }
 
     private fun playMusic(){
         if (bgmVolume > 0){
@@ -813,7 +751,7 @@ open class GameBaseClass : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-            sp!!.release()
+            sound.sp!!.release()
             mediaPlayer?.release()
             handler.removeCallbacks(resultTimer)
         }
