@@ -2,7 +2,6 @@ package com.game.gobblet5
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.content.SharedPreferences
 import android.media.MediaPlayer
 import android.os.Build
 import android.os.Handler
@@ -14,7 +13,6 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.preference.PreferenceManager
 import java.util.*
 
 open class GameBaseClass : AppCompatActivity() {
@@ -72,28 +70,11 @@ open class GameBaseClass : AppCompatActivity() {
 
     private val gameImages= com.game.gobblet5.gameBaseDrawable()
 
-    //テキスト
-    protected var textTemochiRedBig:TextView?=null
-    protected var textTemochiRedMiddle:TextView?=null
-    protected var textTemochiRedSmall:TextView?=null
-    protected var textTemochiGreenBig:TextView?=null
-    protected var textTemochiGreenMiddle:TextView?=null
-    protected var textTemochiGreenSmall:TextView?=null
-
     //一部ボタン
-    protected var buttonTemochiRedBig:View?=null
-    protected var buttonTemochiRedMiddle:View?=null
-    protected var buttonTemochiRedSmall:View?=null
-    protected var buttonTemochiGreenBig:View?=null
-    protected var buttonTemochiGreenMiddle:View?=null
-    protected var buttonTemochiGreenSmall:View?=null
     protected var resultButton:View?=null
 
     //共有プリファレンス
-    private   var pref: SharedPreferences? =null
-    private   var seVolume  = 0
-    private   var bgmVolume = 0
-    protected var playFirst = 1
+    val save = preferences()
     //画面の大きさ
     private var width  = 0
     private var height = 0
@@ -101,7 +82,7 @@ open class GameBaseClass : AppCompatActivity() {
     ////持ちての表示に関する関数
     //持ちてにコマを表示
     private fun havingDisplay(){
-        sound.playSound(sound.selectSE)
+        sound.playSound(sound.selectSE,save.seVolume)
 
         if (turn == p1Piece){
             view = findViewById(R.id.having1p)
@@ -290,7 +271,7 @@ open class GameBaseClass : AppCompatActivity() {
     }
 
     private fun setD(location: Mas?) {
-        sound.playSound(sound.putSE)
+        sound.playSound(sound.putSE,save.seVolume)
         destination = location
 
         Log.d("gobbletdeb","destination${destination?.nameGetter()}")
@@ -304,12 +285,12 @@ open class GameBaseClass : AppCompatActivity() {
             turn = 0
             flashBackground(l.listGetter())
             //ジングルを鳴らす
-            if (seVolume > 0){
-                if (thisAct == actID.gameWithMan){sound.playSound(sound.winSE)}
+            if (save.seVolume > 0){
+                if (thisAct == actID.gameWithMan){sound.playSound(sound.winSE,save.seVolume)}
                 if (thisAct== actID.gameWithCom){
                     when(winner){
-                        "1p" -> sound.playSound(sound.winSE)
-                        "2p" -> sound.playSound(sound.loosSE)
+                        "1p" -> sound.playSound(sound.winSE,save.seVolume)
+                        "2p" -> sound.playSound(sound.loosSE,save.seVolume)
                     }
                 }
             }
@@ -396,21 +377,21 @@ open class GameBaseClass : AppCompatActivity() {
 
         //タイトルへ戻る
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
-            sound.playSound(sound.cancelSE)
+            sound.playSound(sound.cancelSE,save.seVolume)
             changeActivity(actID.main)
             resultPopup!!.dismiss()
         }
 
         //もう一度やる
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
-            sound.playSound(sound.gameStartSE)
+            sound.playSound(sound.gameStartSE,save.seVolume)
             changeActivity(thisAct)
             resultPopup!!.dismiss()
         }
 
         //設定へ
         popupView.findViewById<View>(R.id.backPrebutton).setOnClickListener {
-            sound.playSound(sound.cancelSE)
+            sound.playSound(sound.cancelSE,save.seVolume)
             changeActivity(thisAct)
             resultPopup!!.dismiss()
         }
@@ -418,7 +399,7 @@ open class GameBaseClass : AppCompatActivity() {
         //盤面を見る
         popupView.findViewById<View>(R.id.backButton).setOnClickListener {
             if (resultPopup!!.isShowing) {
-                sound.playSound(sound.closeSE)
+                sound.playSound(sound.closeSE,save.seVolume)
                 resultPopup!!.dismiss()
             }
         }
@@ -453,21 +434,21 @@ open class GameBaseClass : AppCompatActivity() {
         val seVolumeText = popupView.findViewById<TextView>(R.id.seVolume)
         val bgmVolumeText = popupView.findViewById<TextView>(R.id.bgmVolume)
 
-        seVolumeText?.text = seVolume.toString() //プレファレンスの値をセット
-        bgmVolumeText?.text = bgmVolume.toString() //プレファレンスの値をセット
+        seVolumeText?.text = save.seVolume.toString() //プレファレンスの値をセット
+        bgmVolumeText?.text = save.bgmVolume.toString() //プレファレンスの値をセット
 
 
         //動かす前の値を記録
-        val recordBgmVolume = bgmVolume
+        val recordbgmVolume = save.bgmVolume
 
         //シークバー初期化
         val seSeekBar = popupView.findViewById<SeekBar>(R.id.seSeekBar)
         val bgmSeekBar = popupView.findViewById<SeekBar>(R.id.bgmSeekBar)
 
-        seSeekBar?.progress = seVolume //プレファレンスの値を初期値にセット
+        seSeekBar?.progress = save.seVolume //プレファレンスの値を初期値にセット
         seSeekBar?.max = 10
 
-        bgmSeekBar?.progress = bgmVolume //プレファレンスの値を初期値にセット
+        bgmSeekBar?.progress = save.bgmVolume //プレファレンスの値を初期値にセット
         bgmSeekBar?.max = 10
 
         seSeekBar?.setOnSeekBarChangeListener(
@@ -478,14 +459,15 @@ open class GameBaseClass : AppCompatActivity() {
                     fromUser: Boolean
                 ) {
                     seVolumeText?.text = progress.toString()
-                    seVolume=progress
-                    sound.playSound(sound.seekSE)
+                    save.seVolume=progress
+                    sound.playSound(sound.seekSE,save.seVolume)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    val editor= pref!!.edit()
-                    editor.putInt("seVolume",seVolume).apply()
+                    val editor= save.pref!!.edit()
+                    editor.putInt("seVolume",save.seVolume)
+                    editor.apply()
                 }
             }
         )
@@ -497,19 +479,18 @@ open class GameBaseClass : AppCompatActivity() {
                     progress: Int,
                     fromUser: Boolean
                 ) {
-                    sound.playSound(sound.seekSE)
+                    sound.playSound(sound.seekSE,save.seVolume)
                     bgmVolumeText?.text = progress.toString()
-                    bgmVolume=progress
-                    mediaPlayer?.setVolume(bgmVolume*0.1f,bgmVolume*0.1f)
+                    save.bgmVolume=progress
+                    mediaPlayer?.setVolume(save.bgmVolume*0.1f,save.bgmVolume*0.1f)
 
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    val editor= pref!!.edit()
-                    editor.putInt("bgmVolume",bgmVolume).apply()
-//                    if (recordBgmVolume <= 0 || bgmVolume > 0  ) {playMusic()} // 音楽再開
-//                    if (recordBgmVolume > 0 || bgmVolume <= 0  ) {stopMusic()} // 音楽停止
+                    val editor= save.pref!!.edit()
+                    editor.putInt("save.bgmVolume",save.bgmVolume)
+                    editor.apply()
                 }
             }
         )
@@ -517,7 +498,7 @@ open class GameBaseClass : AppCompatActivity() {
 
         //タイトルへ戻るボタン
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
-            sound.playSound(sound.cancelSE)
+            sound.playSound(sound.cancelSE,save.seVolume)
             configPopup!!.dismiss()
             changeActivity(actID.main)
         }
@@ -525,14 +506,14 @@ open class GameBaseClass : AppCompatActivity() {
         //盤面へ戻るボタン
         popupView.findViewById<View>(R.id.backButton).setOnClickListener {
             if (configPopup!!.isShowing) {
-                sound.playSound(sound.closeSE)
+                sound.playSound(sound.closeSE,save.seVolume)
                 configPopup!!.dismiss()
             }
         }
 
         //やり直し
         popupView.findViewById<View>(R.id.retryButtton).setOnClickListener {
-            sound.playSound(sound.gameStartSE)
+            sound.playSound(sound.gameStartSE,save.seVolume)
             configPopup!!.dismiss()
             changeActivity(thisAct)
         }
@@ -545,7 +526,7 @@ open class GameBaseClass : AppCompatActivity() {
             .setTitle(getString(R.string.cannotPickupDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
-        sound.playSound(sound.cannotDoItSE)
+        sound.playSound(sound.cannotDoItSE,save.seVolume)
     }
 
     //入れられない
@@ -554,7 +535,7 @@ open class GameBaseClass : AppCompatActivity() {
             .setTitle(getString(R.string.cannotInsertDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
-        sound.playSound(sound.cannotDoItSE)
+        sound.playSound(sound.cannotDoItSE,save.seVolume)
     }
 
     //自分のターンでないのになにかしようとしている
@@ -563,7 +544,7 @@ open class GameBaseClass : AppCompatActivity() {
             .setTitle(getString(R.string.notYourTurnDialogText))
             .setNeutralButton(getString(R.string.OkText)) { _, _ -> }
             .show()
-        sound.playSound(sound.cannotDoItSE)
+        sound.playSound(sound.cannotDoItSE,save.seVolume)
     }
 
     //初期化に関する関数
@@ -573,7 +554,7 @@ open class GameBaseClass : AppCompatActivity() {
         bord.iniLines()
         iniFullscreen()
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-            iniPreference()
+            save.iniPreference(applicationContext)
             iniSoundPool()
             iniMediaPlayer()
         }
@@ -590,30 +571,19 @@ open class GameBaseClass : AppCompatActivity() {
         height = dm.heightPixels
     }
 
-    private fun iniPreference(){
-        //共有プリファレンス
-        pref = PreferenceManager.getDefaultSharedPreferences(this)
-        seVolume  =pref!!.getInt("seVolume",5)
-        bgmVolume =pref!!.getInt("bgmVolume",5)
-        playFirst =pref!!.getInt("playFirst", 1)
-    }
-
-    private fun iniSoundPool(){
-        sound.iniSoundPool(applicationContext)
-        sound.setSeVoluem(seVolume)
-    }
+    private fun iniSoundPool(){ sound.iniSoundPool(applicationContext) }
 
     private fun iniMediaPlayer(){
         //mediaPlayer
         mediaPlayer=MediaPlayer.create(applicationContext,R.raw.okashi_time)
-        mediaPlayer?.setVolume(bgmVolume*0.1f,bgmVolume*0.1f)
+        mediaPlayer?.setVolume(save.bgmVolume*0.1f,save.bgmVolume*0.1f)
         mediaPlayer?.isLooping=true
         playMusic()
     }
 
     //先攻後攻設定
     private fun iniWhichIsFirst(){
-        if (playFirst != 0){ turn = playFirst }
+        if (save.playFirst != 0){ turn = save.playFirst }
         else {
             when((1..2).random()){
                 1 -> {turn = p1Piece }
@@ -666,6 +636,8 @@ open class GameBaseClass : AppCompatActivity() {
         p2Temochi.big.setTextView(findViewById(R.id.textTemochiGreenBig))
         p2Temochi.middle.setTextView(findViewById(R.id.textTemochiGreenMiddle))
         p2Temochi.small.setTextView(findViewById(R.id.textTemochiGreenSmall))
+
+        resultButton=findViewById(R.id.resaltButton)
     }
 
 
@@ -673,9 +645,9 @@ open class GameBaseClass : AppCompatActivity() {
     open fun iniView(){}
 
     private fun playMusic(){
-        if (bgmVolume > 0){
+        if (save.bgmVolume > 0){
             bgmLooping=true
-            mediaPlayer?.setVolume(bgmVolume*0.1f,bgmVolume*0.1f)
+            mediaPlayer?.setVolume(save.bgmVolume*0.1f,save.bgmVolume*0.1f)
             mediaPlayer?.start()
         }
     }
@@ -686,10 +658,10 @@ open class GameBaseClass : AppCompatActivity() {
         override fun run() {
             time += millisecond
             when(time){
-                200L -> mediaPlayer?.setVolume(bgmVolume*0.1f*0.8f,bgmVolume*0.1f*0.8f)
-                400L -> mediaPlayer?.setVolume(bgmVolume*0.1f*0.6f,bgmVolume*0.1f*0.6f)
-                600L -> mediaPlayer?.setVolume(bgmVolume*0.1f*0.4f,bgmVolume*0.1f*0.4f)
-                800L -> mediaPlayer?.setVolume(bgmVolume*0.1f*0.2f,bgmVolume*0.1f*0.2f)
+                200L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.8f,save.bgmVolume*0.1f*0.8f)
+                400L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.6f,save.bgmVolume*0.1f*0.6f)
+                600L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.4f,save.bgmVolume*0.1f*0.4f)
+                800L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.2f,save.bgmVolume*0.1f*0.2f)
             }
             handler.postDelayed(this,millisecond)
             if (time>1000L){
@@ -723,7 +695,7 @@ open class GameBaseClass : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-            if (bgmVolume > 0) { mediaPlayer?.start() }
+            if (save.bgmVolume > 0) { mediaPlayer?.start() }
             when (nowDoingTimerID){resultTimerId -> handler.post(resultTimer) }
         }
     }
@@ -731,7 +703,7 @@ open class GameBaseClass : AppCompatActivity() {
     override fun onPause() {
         super.onPause()
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
-            if (bgmVolume > 0){ mediaPlayer?.pause() }
+            if (save.bgmVolume > 0){ mediaPlayer?.pause() }
             handler.removeCallbacks(resultTimer)
         }
     }

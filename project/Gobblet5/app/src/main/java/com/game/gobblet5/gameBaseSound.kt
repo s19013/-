@@ -18,9 +18,6 @@ class gameBaseSound {
     var winSE = 0
     var loosSE = 0
     var seekSE = 0
-    var seVolume = 0
-
-    fun setSeVoluem(arg:Int){seVolume = arg}
 
     fun iniSoundPool(context: Context){
         //soundPool
@@ -49,7 +46,8 @@ class gameBaseSound {
         seekSE=sp!!.load(context,R.raw.seekbar,1)
     }
 
-    fun playSound(status: Int){
-        if (seVolume > 0){ sp!!.play(status,seVolume*0.1f,seVolume*0.1f,1,0,1.0f) }
+    //音の番号,音の大きさ
+    fun playSound(status: Int, volume:Int){
+        if (volume > 0){ sp!!.play(status,volume*0.1f,volume*0.1f,1,0,1.0f) }
     }
 }

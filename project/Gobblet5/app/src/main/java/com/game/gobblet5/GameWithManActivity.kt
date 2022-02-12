@@ -111,11 +111,11 @@ class GameWithManActivity : GameBaseClass() {
 
         // その他
         configButton.setOnClickListener {
-            sound.playSound(sound.openSE)
+            sound.playSound(sound.openSE,save.seVolume)
             showConfigPopup()
         }
         resultButton!!.setOnClickListener {
-            sound.playSound(sound.openSE)
+            sound.playSound(sound.openSE,save.seVolume)
             showResultPopup()
         }
 
@@ -138,24 +138,5 @@ class GameWithManActivity : GameBaseClass() {
                 telop2p.setBackgroundColor(Color.rgb(230, 230, 230))
             }
         }
-    }
-
-    override fun iniView() {
-        //テキスト
-        textTemochiRedBig=findViewById(R.id.textTemochiRedBig)
-        textTemochiRedMiddle=findViewById(R.id.textTemochiRedMiddle)
-        textTemochiRedSmall=findViewById(R.id.textTemochiRedSmall)
-        textTemochiGreenBig=findViewById(R.id.textTemochiGreenBig)
-        textTemochiGreenMiddle=findViewById(R.id.textTemochiGreenMiddle)
-        textTemochiGreenSmall=findViewById(R.id.textTemochiGreenSmall)
-
-        //一部ボタン
-        buttonTemochiRedBig=findViewById(R.id.buttonTemochiRedBig)
-        buttonTemochiRedMiddle=findViewById(R.id.buttonTemochiRedMiddle)
-        buttonTemochiRedSmall=findViewById(R.id.buttonTemochiRedSmall)
-        buttonTemochiGreenBig=findViewById(R.id.buttonTemochiGreenBig)
-        buttonTemochiGreenMiddle=findViewById(R.id.buttonTemochiGreenMiddle)
-        buttonTemochiGreenSmall=findViewById(R.id.buttonTemochiGreenSmall)
-        resultButton=findViewById(R.id.resaltButton)
     }
 }
