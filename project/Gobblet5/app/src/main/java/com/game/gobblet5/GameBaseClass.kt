@@ -43,24 +43,20 @@ open class GameBaseClass : AppCompatActivity() {
 
     ////手持ち宣言
     //赤
-    protected val temochiRedBig = Temochi(3,"TemochiRedBig")
-    protected val temochiRedMiddle = Temochi(2,"TemochiRedMiddle")
-    protected val temochiRedSmall = Temochi(1,"TemochiRedSmall")
+    val p1Temochi = P1Temochi()
     //緑
-    protected val temochiGreenBig = Temochi(3,"TemochiGreenBig")
-    protected val temochiGreenMiddle = Temochi(2,"TemochiGreenMiddle")
-    protected val temochiGreenSmall = Temochi(1,"TemochiGreenSmall")
+    val p2Temochi = P2Temochi()
     
     //ボード宣言
-    protected val bord = Bord()
+    val bord = Bord()
 
     //文字列
-    protected val stringTemochiRedBig = temochiRedBig.nameGetter()
-    protected val stringTemochiRedMiddle = temochiRedMiddle.nameGetter()
-    protected val stringTemochiRedSmall = temochiRedSmall.nameGetter()
-    protected val stringTemochiGreenBig = temochiGreenBig.nameGetter()
-    protected val stringTemochiGreenMiddle = temochiGreenMiddle.nameGetter()
-    protected val stringTemochiGreenSmall = temochiGreenSmall.nameGetter()
+//    protected val stringTemochiRedBig = temochiRedBig.nameGetter()
+//    protected val stringTemochiRedMiddle = temochiRedMiddle.nameGetter()
+//    protected val stringTemochiRedSmall = temochiRedSmall.nameGetter()
+//    protected val stringTemochiGreenBig = temochiGreenBig.nameGetter()
+//    protected val stringTemochiGreenMiddle = temochiGreenMiddle.nameGetter()
+//    protected val stringTemochiGreenSmall = temochiGreenSmall.nameGetter()
 
     //popup
     private var configPopup: PopupWindow?=null
@@ -664,20 +660,20 @@ open class GameBaseClass : AppCompatActivity() {
         }
 
         //手持ちのボタンの場所を教える
-        temochiGreenBig.setButtonView(findViewById(R.id.buttonTemochiGreenBig))
-        temochiGreenMiddle.setButtonView(findViewById(R.id.buttonTemochiGreenMiddle))
-        temochiGreenSmall.setButtonView(findViewById(R.id.buttonTemochiGreenSmall))
-        temochiRedBig.setButtonView(findViewById(R.id.buttonTemochiRedBig))
-        temochiRedMiddle.setButtonView(findViewById(R.id.buttonTemochiRedMiddle))
-        temochiRedSmall.setButtonView(findViewById(R.id.buttonTemochiRedSmall))
+        p1Temochi.big.setButtonView(findViewById(R.id.buttonTemochiRedBig))
+        p1Temochi.middle.setButtonView(findViewById(R.id.buttonTemochiRedMiddle))
+        p1Temochi.small.setButtonView(findViewById(R.id.buttonTemochiRedSmall))
+        p2Temochi.big.setButtonView(findViewById(R.id.buttonTemochiGreenBig))
+        p1Temochi.middle.setButtonView(findViewById(R.id.buttonTemochiGreenMiddle))
+        p1Temochi.small.setButtonView(findViewById(R.id.buttonTemochiGreenSmall))
 
         //手持ちの文字
-        temochiGreenBig.setTextView(findViewById(R.id.textTemochiGreenBig))
-        temochiGreenMiddle.setTextView(findViewById(R.id.textTemochiGreenMiddle))
-        temochiGreenSmall.setTextView(findViewById(R.id.textTemochiGreenSmall))
-        temochiRedBig.setTextView(findViewById(R.id.textTemochiRedBig))
-        temochiRedMiddle.setTextView(findViewById(R.id.textTemochiRedMiddle))
-        temochiRedSmall.setTextView(findViewById(R.id.textTemochiRedSmall))
+        p1Temochi.big.setTextView(findViewById(R.id.textTemochiRedBig))
+        p1Temochi.middle.setTextView(findViewById(R.id.textTemochiRedMiddle))
+        p1Temochi.small.setTextView(findViewById(R.id.textTemochiRedSmall))
+        p1Temochi.big.setTextView(findViewById(R.id.textTemochiGreenBig))
+        p1Temochi.middle.setTextView(findViewById(R.id.textTemochiGreenMiddle))
+        p1Temochi.small.setTextView(findViewById(R.id.textTemochiGreenSmall))
     }
 
 

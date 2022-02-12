@@ -24,9 +24,9 @@ class GameWithManActivity : GameBaseClass() {
         buttonTemochiRedBig!!.setOnClickListener {
             if (turn == 1 && !finished){
                 //movingSourceが同じときやり直しができる
-                if (movingSource == temochiRedBig){ resetTemochi() }
+                if (movingSource == p1Temochi.big){ resetTemochi() }
                 //移動元が手持ちの場合のみコマを
-                else if (movingSource== null || movingSource is Temochi){ pickupTemochi(temochiRedBig) }
+                else if (movingSource== null || movingSource is Temochi){ pickupTemochi(p1Temochi.big) }
             }
             else if (finished){return@setOnClickListener} //決着ついていたらなにもしない
             else {toastNotYourTurn()}
@@ -34,8 +34,8 @@ class GameWithManActivity : GameBaseClass() {
 
         buttonTemochiRedMiddle!!.setOnClickListener {
             if (turn == 1 && !finished){
-                if (movingSource==temochiRedMiddle){ resetTemochi() }
-                else if (movingSource== null || movingSource is Temochi){ pickupTemochi(temochiRedMiddle) }
+                if (movingSource==p1Temochi.middle){ resetTemochi() }
+                else if (movingSource== null || movingSource is Temochi){ pickupTemochi(p1Temochi.middle) }
             }
             else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
@@ -43,8 +43,8 @@ class GameWithManActivity : GameBaseClass() {
 
         buttonTemochiRedSmall!!.setOnClickListener {
             if (turn == 1 && !finished){
-                if (movingSource==temochiRedSmall){ resetTemochi() }
-                else if (movingSource== null ||movingSource is Temochi){ pickupTemochi(temochiRedSmall) }
+                if (movingSource==p1Temochi.small){ resetTemochi() }
+                else if (movingSource== null ||movingSource is Temochi){ pickupTemochi(p1Temochi.small) }
             }
             else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
@@ -52,10 +52,8 @@ class GameWithManActivity : GameBaseClass() {
 
         buttonTemochiGreenBig!!.setOnClickListener {
             if (turn == -1 && !finished){
-                if (movingSource==temochiGreenBig){ resetTemochi() }
-                else if (movingSource== null ||
-                    movingSource==temochiGreenMiddle||
-                    movingSource==temochiGreenSmall) { pickupTemochi(temochiGreenBig) }
+                if (movingSource==p2Temochi.big){ resetTemochi() }
+                else if (movingSource== null || movingSource is Temochi ) { pickupTemochi(p2Temochi.big) }
             }
             else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
@@ -63,8 +61,8 @@ class GameWithManActivity : GameBaseClass() {
 
         buttonTemochiGreenMiddle!!.setOnClickListener {
             if (turn == -1 && !finished){
-                if (movingSource==temochiGreenMiddle){ resetTemochi() }
-                else if (movingSource== null || movingSource is Temochi){ pickupTemochi(temochiGreenMiddle) }
+                if (movingSource==p2Temochi.middle){ resetTemochi() }
+                else if (movingSource== null || movingSource is Temochi){ pickupTemochi(p2Temochi.middle) }
             }
             else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
@@ -72,8 +70,8 @@ class GameWithManActivity : GameBaseClass() {
 
         buttonTemochiGreenSmall!!.setOnClickListener {
             if (turn == -1 && !finished){
-                if (movingSource==temochiGreenSmall){ resetTemochi() }
-                else if (movingSource==null || movingSource is Temochi){ pickupTemochi(temochiGreenSmall) }
+                if (movingSource==p2Temochi.small){ resetTemochi() }
+                else if (movingSource==null || movingSource is Temochi){ pickupTemochi(p2Temochi.small) }
             }
             else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}

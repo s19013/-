@@ -49,9 +49,9 @@ class GameWithComActivity : GameBaseClass() {
         buttonTemochiRedBig!!.setOnClickListener {
             if (turn == 1 && !finished){
                 //movingSourceが同じときやり直しができる
-                if (movingSource == stringTemochiRedBig){ resetTemochi() }
+                if (movingSource == p1Temochi.big){ resetTemochi() }
                 //移動元が手持ちの場合のみコマを
-                else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(temochiRedBig) }
+                else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(p1Temochi.big) }
             }
             else if (finished){} //決着ついていたらなにもしない
             else {toastNotYourTurn()}
@@ -59,8 +59,8 @@ class GameWithComActivity : GameBaseClass() {
 
         buttonTemochiRedMiddle!!.setOnClickListener {
             if (turn == 1 && !finished){
-                if (movingSource==stringTemochiRedMiddle){ resetTemochi() }
-                else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(temochiRedMiddle) }
+                if (movingSource==p1Temochi.middle){ resetTemochi() }
+                else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(p1Temochi.middle) }
             }
             else if (finished){}
             else {toastNotYourTurn()}
@@ -68,8 +68,8 @@ class GameWithComActivity : GameBaseClass() {
 
         buttonTemochiRedSmall!!.setOnClickListener {
             if (turn == 1 && !finished){
-                if (movingSource==stringTemochiRedSmall){ resetTemochi() }
-                else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(temochiRedSmall) }
+                if (movingSource==p1Temochi.small){ resetTemochi() }
+                else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(p1Temochi.small) }
             }
             else if (finished){}
             else {toastNotYourTurn()}
@@ -137,7 +137,7 @@ class GameWithComActivity : GameBaseClass() {
             mutableListOf(bord.A4, bord.B3, bord.C2, bord.D1),//lBS
         )
         com.iniConcatLine()
-        com.iniTemochi(temochiGreenBig,temochiGreenMiddle,temochiGreenSmall)
+        com.iniTemochi(p2Temochi.big,p2Temochi.middle,p2Temochi.small)
     }
 
     private fun startCom(){
