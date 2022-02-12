@@ -27,18 +27,19 @@ class Mas(private val name:String, ) {
 
     fun addScore(arg:Int){ score+=arg } //スコアに引数の値を足す
 
+    //取り出す
     fun mPickup(turn:Int):Int{
-
         when(list.lastIndexOf(turn)){
-            0-> if (list[1]== empty && list[2]== empty ){ return smallPiece }
-            1-> if (list[2]== empty ){return middlePiece }
+            0-> if (list[1]== empty && list[2]== empty ){ return smallPiece } //中､大コマが被せて無い時だけ小さいコマを取れる
+            1-> if (list[2]== empty ){return middlePiece } // 大きいコマが被せて無い時だけ中コマを取れる
             2-> return bigPiece
             else-> return empty
         }
         return empty
     }
 
-    fun mInsert(size:Int,turn: Int):Boolean{
+    //入れる
+    fun mInsert(size:Int?,turn: Int):Boolean{
         when(size){
             bigPiece ->
             {
