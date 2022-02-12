@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.activity_game_with_man.*
 
 
 class GameWithManActivity : GameBaseClass() {
-    override var thisAct: Int = activityIdGameWithMan
+    override var thisAct: Int = activityID.gameWithMan
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,37 +79,37 @@ class GameWithManActivity : GameBaseClass() {
             else {toastNotYourTurn()}
         }
       ////マスを触ったとき
-        buttonA1.setOnClickListener { pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
+        buttonA1.setOnClickListener { pushedMasButton(bord.A1) } //nameGetterを使ってマスの名前を入れる
 
-        buttonA2.setOnClickListener { pushedMasButton(A2) }
+        buttonA2.setOnClickListener { pushedMasButton(bord.A2) }
 
-        buttonA3.setOnClickListener { pushedMasButton(A3) }
+        buttonA3.setOnClickListener { pushedMasButton(bord.A3) }
 
-        buttonA4.setOnClickListener { pushedMasButton(A4) }
+        buttonA4.setOnClickListener { pushedMasButton(bord.A4) }
 
-        buttonB1.setOnClickListener { pushedMasButton(B1) }
+        buttonB1.setOnClickListener { pushedMasButton(bord.B1) }
 
-        buttonB2.setOnClickListener { pushedMasButton(B2) }
+        buttonB2.setOnClickListener { pushedMasButton(bord.B2) }
 
-        buttonB3.setOnClickListener { pushedMasButton(B3) }
+        buttonB3.setOnClickListener { pushedMasButton(bord.B3) }
 
-        buttonB4.setOnClickListener { pushedMasButton(B4) }
+        buttonB4.setOnClickListener { pushedMasButton(bord.B4) }
 
-        buttonC1.setOnClickListener { pushedMasButton(C1) }
+        buttonC1.setOnClickListener { pushedMasButton(bord.C1) }
 
-        buttonC2.setOnClickListener { pushedMasButton(C2) }
+        buttonC2.setOnClickListener { pushedMasButton(bord.C2) }
 
-        buttonC3.setOnClickListener { pushedMasButton(C3) }
+        buttonC3.setOnClickListener { pushedMasButton(bord.C3) }
 
-        buttonC4.setOnClickListener { pushedMasButton(C4) }
+        buttonC4.setOnClickListener { pushedMasButton(bord.C4) }
 
-        buttonD1.setOnClickListener { pushedMasButton(D1) }
+        buttonD1.setOnClickListener { pushedMasButton(bord.D1) }
 
-        buttonD2.setOnClickListener { pushedMasButton(D2) }
+        buttonD2.setOnClickListener { pushedMasButton(bord.D2) }
 
-        buttonD3.setOnClickListener { pushedMasButton(D3) }
+        buttonD3.setOnClickListener { pushedMasButton(bord.D3) }
 
-        buttonD4.setOnClickListener { pushedMasButton(D4) }
+        buttonD4.setOnClickListener { pushedMasButton(bord.D4) }
 
         // その他
         configButton.setOnClickListener {

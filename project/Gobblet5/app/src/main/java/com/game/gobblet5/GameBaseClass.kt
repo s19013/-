@@ -23,11 +23,7 @@ import java.util.*
 
 open class GameBaseClass : AppCompatActivity() {
     open var thisAct=0 //今のアクティビティ
-    protected val activityIdGameWithCom = 1
-    protected val activityIdGameWithMan = 2
-    private val activityIdPreGameWithCom = 3
-    private val activityIdPreGameWithMan = 4
-    private val activityIdMain = 5
+    val activityID=com.game.gobblet5.activityID()
 
     //マジックナンバー防止
     private val p1Piece =  1
@@ -59,40 +55,6 @@ open class GameBaseClass : AppCompatActivity() {
     //ボード宣言
     protected val bord = Bord()
 
-    //マス宣言
-    protected val A1 = bord.A1
-    protected val B1 = bord.B1
-    protected val C1 = bord.C1
-    protected val D1 = bord.D1
-    protected val A2 = bord.A2
-    protected val B2 = bord.B2
-    protected val C2 = bord.C2
-    protected val D2 = bord.D2
-    protected val A3 = bord.A3
-    protected val B3 = bord.B3
-    protected val C3 = bord.C3
-    protected val D3 = bord.D3
-    protected val A4 = bord.A4
-    protected val B4 = bord.B4
-    protected val C4 = bord.C4
-    protected val D4 = bord.D4
-    
-    //ライン
-    protected val line1:Line  = bord.line1
-    protected val line2:Line  = bord.line2
-    protected val line3:Line  = bord.line3
-    protected val line4:Line  = bord.line4
-    protected val lineA:Line  = bord.lineA
-    protected val lineB:Line  = bord.lineB
-    protected val lineC:Line  = bord.lineC
-    protected val lineD:Line  = bord.lineD
-    protected val lineS:Line  = bord.lineS
-    protected val lineBS:Line = bord.lineBS
-    private val allLine = listOf<Line>(line1, line2,line3,line4,
-        lineA,lineB,lineC,lineD,
-        lineS,lineBS)
-
-    
     //文字列
     protected val stringTemochiRedBig = temochiRedBig.nameGetter()
     protected val stringTemochiRedMiddle = temochiRedMiddle.nameGetter()
@@ -381,8 +343,8 @@ open class GameBaseClass : AppCompatActivity() {
             flashBackground(l.listGetter())
             //ジングルを鳴らす
             if (seVolume > 0){
-                if (thisAct == activityIdGameWithMan){playSound(winSE)}
-                if (thisAct== activityIdGameWithCom){
+                if (thisAct == activityID.gameWithMan){playSound(winSE)}
+                if (thisAct== activityID.gameWithCom){
                     when(winner){
                         "1p" -> playSound(winSE)
                         "2p" -> playSound(loosSE)
@@ -395,7 +357,7 @@ open class GameBaseClass : AppCompatActivity() {
         }
 
 
-        for (l in allLine){
+        for (l in bord.allLine){
             when(l.judge()){
                  4 -> {
                      winner="1p"
@@ -423,11 +385,11 @@ open class GameBaseClass : AppCompatActivity() {
     private fun changeActivity(id:Int){
         var intent:Intent?=null
         when(id){
-            activityIdMain->intent = Intent(this, MainActivity::class.java)
-            activityIdGameWithMan -> intent = Intent(this, GameWithManActivity::class.java)
-            activityIdGameWithCom -> intent = Intent(this, GameWithComActivity::class.java)
-            activityIdPreGameWithMan -> intent = Intent(this, preGameWithManActivity::class.java)
-            activityIdPreGameWithCom -> intent = Intent(this, preGameWithComActivity::class.java)
+            activityID.main->intent = Intent(this, MainActivity::class.java)
+            activityID.gameWithMan -> intent = Intent(this, GameWithManActivity::class.java)
+            activityID.gameWithCom -> intent = Intent(this, GameWithComActivity::class.java)
+            activityID.preGameWithMan -> intent = Intent(this, preGameWithManActivity::class.java)
+            activityID.preGameWithCom -> intent = Intent(this, preGameWithComActivity::class.java)
         }
 
         startActivity(intent)
@@ -473,7 +435,7 @@ open class GameBaseClass : AppCompatActivity() {
         //タイトルへ戻る
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
-            changeActivity(activityIdMain)
+            changeActivity(activityID.main)
             resultPopup!!.dismiss()
         }
 
@@ -595,7 +557,7 @@ open class GameBaseClass : AppCompatActivity() {
         popupView.findViewById<View>(R.id.BackToTitleButton).setOnClickListener {
             playSound(cancelSE)
             configPopup!!.dismiss()
-            changeActivity(activityIdMain)
+            changeActivity(activityID.main)
         }
 
         //盤面へ戻るボタン
@@ -738,25 +700,25 @@ open class GameBaseClass : AppCompatActivity() {
         komaGreenSmallD = res?.getDrawable(R.drawable.koma_green_small)
 
         //各マスに描写する場所を教える?
-        A1.setView(findViewById(R.id.buttonA1))
-        A2.setView(findViewById(R.id.buttonA2))
-        A3.setView(findViewById(R.id.buttonA3))
-        A4.setView(findViewById(R.id.buttonA4))
+        bord.A1.setView(findViewById(R.id.buttonA1))
+        bord.A2.setView(findViewById(R.id.buttonA2))
+        bord.A3.setView(findViewById(R.id.buttonA3))
+        bord.A4.setView(findViewById(R.id.buttonA4))
 
-        B1.setView(findViewById(R.id.buttonB1))
-        B2.setView(findViewById(R.id.buttonB2))
-        B3.setView(findViewById(R.id.buttonB3))
-        B4.setView(findViewById(R.id.buttonB4))
+        bord.B1.setView(findViewById(R.id.buttonB1))
+        bord.B2.setView(findViewById(R.id.buttonB2))
+        bord.B3.setView(findViewById(R.id.buttonB3))
+        bord.B4.setView(findViewById(R.id.buttonB4))
 
-        C1.setView(findViewById(R.id.buttonC1))
-        C2.setView(findViewById(R.id.buttonC2))
-        C3.setView(findViewById(R.id.buttonC3))
-        C4.setView(findViewById(R.id.buttonC4))
+        bord.C1.setView(findViewById(R.id.buttonC1))
+        bord.C2.setView(findViewById(R.id.buttonC2))
+        bord.C3.setView(findViewById(R.id.buttonC3))
+        bord.C4.setView(findViewById(R.id.buttonC4))
 
-        D1.setView(findViewById(R.id.buttonD1))
-        D2.setView(findViewById(R.id.buttonD2))
-        D3.setView(findViewById(R.id.buttonD3))
-        D4.setView(findViewById(R.id.buttonD4))
+        bord.D1.setView(findViewById(R.id.buttonD1))
+        bord.D2.setView(findViewById(R.id.buttonD2))
+        bord.D3.setView(findViewById(R.id.buttonD3))
+        bord.D4.setView(findViewById(R.id.buttonD4))
 
         //手持ちのボタンの場所を教える
         temochiGreenBig.setButtonView(findViewById(R.id.buttonTemochiGreenBig))

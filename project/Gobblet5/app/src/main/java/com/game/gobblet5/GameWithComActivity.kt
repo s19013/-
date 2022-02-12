@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_game_with_com.telop2p
 import kotlinx.android.synthetic.main.activity_game_with_man.*
 
 class GameWithComActivity : GameBaseClass() {
-    override var thisAct: Int = -1
+    override var thisAct: Int = activityID.gameWithCom
 
     private val insertTimerId = "insertTimer"
 
@@ -76,37 +76,37 @@ class GameWithComActivity : GameBaseClass() {
         }
 
         ////マスを触ったとき
-        buttonA1.setOnClickListener { pushedMasButton(A1) } //nameGetterを使ってマスの名前を入れる
+        buttonA1.setOnClickListener { pushedMasButton(bord.A1) } //nameGetterを使ってマスの名前を入れる
 
-        buttonA2.setOnClickListener { pushedMasButton(A2) }
+        buttonA2.setOnClickListener { pushedMasButton(bord.A2) }
 
-        buttonA3.setOnClickListener { pushedMasButton(A3) }
+        buttonA3.setOnClickListener { pushedMasButton(bord.A3) }
 
-        buttonA4.setOnClickListener { pushedMasButton(A4) }
+        buttonA4.setOnClickListener { pushedMasButton(bord.A4) }
 
-        buttonB1.setOnClickListener { pushedMasButton(B1) }
+        buttonB1.setOnClickListener { pushedMasButton(bord.B1) }
 
-        buttonB2.setOnClickListener { pushedMasButton(B2) }
+        buttonB2.setOnClickListener { pushedMasButton(bord.B2) }
 
-        buttonB3.setOnClickListener { pushedMasButton(B3) }
+        buttonB3.setOnClickListener { pushedMasButton(bord.B3) }
 
-        buttonB4.setOnClickListener { pushedMasButton(B4) }
+        buttonB4.setOnClickListener { pushedMasButton(bord.B4) }
 
-        buttonC1.setOnClickListener { pushedMasButton(C1) }
+        buttonC1.setOnClickListener { pushedMasButton(bord.C1) }
 
-        buttonC2.setOnClickListener { pushedMasButton(C2) }
+        buttonC2.setOnClickListener { pushedMasButton(bord.C2) }
 
-        buttonC3.setOnClickListener { pushedMasButton(C3) }
+        buttonC3.setOnClickListener { pushedMasButton(bord.C3) }
 
-        buttonC4.setOnClickListener { pushedMasButton(C4) }
+        buttonC4.setOnClickListener { pushedMasButton(bord.C4) }
 
-        buttonD1.setOnClickListener { pushedMasButton(D1) }
+        buttonD1.setOnClickListener { pushedMasButton(bord.D1) }
 
-        buttonD2.setOnClickListener { pushedMasButton(D2) }
+        buttonD2.setOnClickListener { pushedMasButton(bord.D2) }
 
-        buttonD3.setOnClickListener { pushedMasButton(D3) }
+        buttonD3.setOnClickListener { pushedMasButton(bord.D3) }
 
-        buttonD4.setOnClickListener { pushedMasButton(D4) }
+        buttonD4.setOnClickListener { pushedMasButton(bord.D4) }
 
         // その他
         configButton.setOnClickListener {
@@ -125,16 +125,16 @@ class GameWithComActivity : GameBaseClass() {
     private fun iniCom(){
         //コンピューターにわたすよう?
         com.iniLines(
-            mutableListOf(A1, B1, C1, D1),//l1
-            mutableListOf(A2, B2, C2, D2),//l2
-            mutableListOf(A3, B3, C3, D3),//l3
-            mutableListOf(A4, B4, C4, D4),//l4
-            mutableListOf(A1, A2, A3, A4),//lA
-            mutableListOf(B1, B2, B3, B4),//lB
-            mutableListOf(C1, C2, C3, C4),//lC
-            mutableListOf(D1, D2, D3, D4),//lD
-            mutableListOf(A1, B2, C3, D4),//lS
-            mutableListOf(A4, B3, C2, D1),//lBS
+            mutableListOf(bord.A1, bord.B1, bord.C1, bord.D1),//l1
+            mutableListOf(bord.A2, bord.B2, bord.C2, bord.D2),//l2
+            mutableListOf(bord.A3, bord.B3, bord.C3, bord.D3),//l3
+            mutableListOf(bord.A4, bord.B4, bord.C4, bord.D4),//l4
+            mutableListOf(bord.A1, bord.A2, bord.A3, bord.A4),//lA
+            mutableListOf(bord.B1, bord.B2, bord.B3, bord.B4),//lB
+            mutableListOf(bord.C1, bord.C2, bord.C3, bord.C4),//lC
+            mutableListOf(bord.D1, bord.D2, bord.D3, bord.D4),//lD
+            mutableListOf(bord.A1, bord.B2, bord.C3, bord.D4),//lS
+            mutableListOf(bord.A4, bord.B3, bord.C2, bord.D1),//lBS
         )
         com.iniConcatLine()
         com.iniTemochi(temochiGreenBig,temochiGreenMiddle,temochiGreenSmall)
