@@ -50,14 +50,6 @@ open class GameBaseClass : AppCompatActivity() {
     //ボード宣言
     val bord = Bord()
 
-    //文字列
-//    protected val stringTemochiRedBig = temochiRedBig.nameGetter()
-//    protected val stringTemochiRedMiddle = temochiRedMiddle.nameGetter()
-//    protected val stringTemochiRedSmall = temochiRedSmall.nameGetter()
-//    protected val stringTemochiGreenBig = temochiGreenBig.nameGetter()
-//    protected val stringTemochiGreenMiddle = temochiGreenMiddle.nameGetter()
-//    protected val stringTemochiGreenSmall = temochiGreenSmall.nameGetter()
-
     //popup
     private var configPopup: PopupWindow?=null
     private var resultPopup: PopupWindow?=null
@@ -355,7 +347,7 @@ open class GameBaseClass : AppCompatActivity() {
     private fun changeActivity(id:Int){
         var intent:Intent?=null
         when(id){
-            actID.main->intent = Intent(this, MainActivity::class.java)
+            actID.main-> intent = Intent(this, MainActivity::class.java)
             actID.gameWithMan -> intent = Intent(this, GameWithManActivity::class.java)
             actID.gameWithCom -> intent = Intent(this, GameWithComActivity::class.java)
             actID.preGameWithMan -> intent = Intent(this, preGameWithManActivity::class.java)
@@ -664,16 +656,16 @@ open class GameBaseClass : AppCompatActivity() {
         p1Temochi.middle.setButtonView(findViewById(R.id.buttonTemochiRedMiddle))
         p1Temochi.small.setButtonView(findViewById(R.id.buttonTemochiRedSmall))
         p2Temochi.big.setButtonView(findViewById(R.id.buttonTemochiGreenBig))
-        p1Temochi.middle.setButtonView(findViewById(R.id.buttonTemochiGreenMiddle))
-        p1Temochi.small.setButtonView(findViewById(R.id.buttonTemochiGreenSmall))
+        p2Temochi.middle.setButtonView(findViewById(R.id.buttonTemochiGreenMiddle))
+        p2Temochi.small.setButtonView(findViewById(R.id.buttonTemochiGreenSmall))
 
         //手持ちの文字
         p1Temochi.big.setTextView(findViewById(R.id.textTemochiRedBig))
         p1Temochi.middle.setTextView(findViewById(R.id.textTemochiRedMiddle))
         p1Temochi.small.setTextView(findViewById(R.id.textTemochiRedSmall))
-        p1Temochi.big.setTextView(findViewById(R.id.textTemochiGreenBig))
-        p1Temochi.middle.setTextView(findViewById(R.id.textTemochiGreenMiddle))
-        p1Temochi.small.setTextView(findViewById(R.id.textTemochiGreenSmall))
+        p2Temochi.big.setTextView(findViewById(R.id.textTemochiGreenBig))
+        p2Temochi.middle.setTextView(findViewById(R.id.textTemochiGreenMiddle))
+        p2Temochi.small.setTextView(findViewById(R.id.textTemochiGreenSmall))
     }
 
 
