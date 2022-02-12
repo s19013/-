@@ -55,24 +55,43 @@ open class GameBaseClass : AppCompatActivity() {
     protected val temochiGreenBig = Temochi(3,"TemochiGreenBig")
     protected val temochiGreenMiddle = Temochi(2,"TemochiGreenMiddle")
     protected val temochiGreenSmall = Temochi(1,"TemochiGreenSmall")
+    
+    //ボード宣言
+    protected val bord = Bord()
 
     //マス宣言
-    protected val A1 = Mas("A1")
-    protected val B1 = Mas("B1")
-    protected val C1 = Mas("C1")
-    protected val D1 = Mas("D1")
-    protected val A2 = Mas("A2")
-    protected val B2 = Mas("B2")
-    protected val C2 = Mas("C2")
-    protected val D2 = Mas("D2")
-    protected val A3 = Mas("A3")
-    protected val B3 = Mas("B3")
-    protected val C3 = Mas("C3")
-    protected val D3 = Mas("D3")
-    protected val A4 = Mas("A4")
-    protected val B4 = Mas("B4")
-    protected val C4 = Mas("C4")
-    protected val D4 = Mas("D4")
+    protected val A1 = bord.A1
+    protected val B1 = bord.B1
+    protected val C1 = bord.C1
+    protected val D1 = bord.D1
+    protected val A2 = bord.A2
+    protected val B2 = bord.B2
+    protected val C2 = bord.C2
+    protected val D2 = bord.D2
+    protected val A3 = bord.A3
+    protected val B3 = bord.B3
+    protected val C3 = bord.C3
+    protected val D3 = bord.D3
+    protected val A4 = bord.A4
+    protected val B4 = bord.B4
+    protected val C4 = bord.C4
+    protected val D4 = bord.D4
+    
+    //ライン
+    protected val line1:Line  = bord.line1
+    protected val line2:Line  = bord.line2
+    protected val line3:Line  = bord.line3
+    protected val line4:Line  = bord.line4
+    protected val lineA:Line  = bord.lineA
+    protected val lineB:Line  = bord.lineB
+    protected val lineC:Line  = bord.lineC
+    protected val lineD:Line  = bord.lineD
+    protected val lineS:Line  = bord.lineS
+    protected val lineBS:Line = bord.lineBS
+    private val allLine = listOf<Line>(line1, line2,line3,line4,
+        lineA,lineB,lineC,lineD,
+        lineS,lineBS)
+
     
     //文字列
     protected val stringTemochiRedBig = temochiRedBig.nameGetter()
@@ -103,6 +122,7 @@ open class GameBaseClass : AppCompatActivity() {
     private var winSE = 0
     private var loosSE = 0
     private var seekSE = 0
+
     //ゲームに必要なもの
     protected var turn = 0 //後でちゃんと設定する 1p = 1,2p =-1 ,終わり=0
     private var havingPieceSize = 0 //今持っているコマの大きさ
@@ -111,14 +131,8 @@ open class GameBaseClass : AppCompatActivity() {
     private var destination : Mas? = null
     protected var finished = false
     private var pickupDone= false
-
-    //勝敗を決めるのに使う
-    private var judgeMap = mutableMapOf(
-        "lineA" to 0, "lineB" to 0, "lineC" to 0, "lineD" to 0,
-        "line1" to 0, "line2" to 0, "line3" to 0, "line4" to 0,
-        "lineS" to 0, "lineBS" to 0
-    )
-
+    private var alignedLine:String?= null
+    
     //表示に使う物　(箱を用意している状態)
     private var res: Resources? = null
     private var view: ImageView? = null
@@ -361,32 +375,10 @@ open class GameBaseClass : AppCompatActivity() {
     private fun resetD(){ destination = null }
 
     private fun judge(){
-        judgeMap["lineA"]=A1.returnLastElement()+A2.returnLastElement()+A3.returnLastElement()+A4.returnLastElement()
-        judgeMap["lineB"]=B1.returnLastElement()+B2.returnLastElement()+B3.returnLastElement()+B4.returnLastElement()
-        judgeMap["lineC"]=C1.returnLastElement()+C2.returnLastElement()+C3.returnLastElement()+C4.returnLastElement()
-        judgeMap["lineD"]=D1.returnLastElement()+D2.returnLastElement()+D3.returnLastElement()+D4.returnLastElement()
-        judgeMap["line1"]=A1.returnLastElement()+B1.returnLastElement()+C1.returnLastElement()+D1.returnLastElement()
-        judgeMap["line2"]=A2.returnLastElement()+B2.returnLastElement()+C2.returnLastElement()+D2.returnLastElement()
-        judgeMap["line3"]=A3.returnLastElement()+B3.returnLastElement()+C3.returnLastElement()+D3.returnLastElement()
-        judgeMap["line4"]=A4.returnLastElement()+B4.returnLastElement()+C4.returnLastElement()+D4.returnLastElement()
-        judgeMap["lineS"]=A4.returnLastElement()+B3.returnLastElement()+C2.returnLastElement()+D1.returnLastElement()
-        judgeMap["lineBS"]=A1.returnLastElement()+B2.returnLastElement()+C3.returnLastElement()+D4.returnLastElement()
-
-        if (judgeMap.containsValue(4)) {
+        fun commonfunc(l:Line){
             finished=true
-            winner="1p"
-            //mapの中に4がある(1pが揃ったことを表す)場合ゲーム終了
-        }
-
-        if (judgeMap.containsValue(-4)){
-            finished=true
-            winner="2p"
-            //mapの中に-4がある(2pが揃ったことを表す)場合ゲーム終了
-        }
-
-        if (finished){
             turn = 0
-            flashBackground()
+            flashBackground(l.listGetter())
             //ジングルを鳴らす
             if (seVolume > 0){
                 if (thisAct == activityIdGameWithMan){playSound(winSE)}
@@ -400,38 +392,30 @@ open class GameBaseClass : AppCompatActivity() {
             resultButton!!.visibility= View.VISIBLE
             nowDoingTimerID = resultTimerId
             handler.post(resultTimer)
-            //showResultPopup()
+        }
+
+
+        for (l in allLine){
+            when(l.judge()){
+                 4 -> {
+                     winner="1p"
+                     commonfunc(l)
+                     break
+                    }
+                -4 -> {
+                    winner="2p"
+                    commonfunc(l)
+                    break
+                }
+            }
         }
     }
 
-    fun flashBackground(){
-        fun commonfunc(list: List<Mas>){
-            for (d in list){
-                view = d.getView()
-                view?.setBackgroundColor(resources.getColor(R.color.lineUP))
-            }
+    fun flashBackground(list: List<Mas>){
+        for (d in list){
+            view = d.getView()
+            view?.setBackgroundColor(resources.getColor(R.color.lineUP))
         }
-
-        if (judgeMap["lineA"]==4 || judgeMap["lineA"]==-4){ commonfunc(listOf(A1,A2,A3,A4))
-            return}
-        if (judgeMap["lineB"]==4 || judgeMap["lineB"]==-4){ commonfunc(listOf(B1,B2,B3,B4))
-            return}
-        if (judgeMap["lineC"]==4 || judgeMap["lineC"]==-4){ commonfunc(listOf(C1,C2,C3,C4))
-            return}
-        if (judgeMap["lineD"]==4 || judgeMap["lineD"]==-4){ commonfunc(listOf(D1,D2,D3,D4))
-            return}
-        if (judgeMap["line1"]==4 || judgeMap["line1"]==-4){ commonfunc(listOf(A1,B1,C1,D1))
-            return}
-        if (judgeMap["line2"]==4 || judgeMap["line2"]==-4){ commonfunc(listOf(A2,B2,C2,D2))
-            return}
-        if (judgeMap["line3"]==4 || judgeMap["line3"]==-4){ commonfunc(listOf(A3,B3,C3,D3))
-            return}
-        if (judgeMap["line4"]==4 || judgeMap["line4"]==-4){ commonfunc(listOf(A4,B4,C4,D4))
-            return}
-        if (judgeMap["lineS"]==4 || judgeMap["lineS"]==-4){ commonfunc(listOf(A4,B3,C2,D1))
-            return}
-        if (judgeMap["lineBS"]==4 || judgeMap["lineBS"]==-4){ commonfunc(listOf(A1,B2,C3,D4))
-            return}
     }
 
     ////ポップアップ
@@ -662,6 +646,7 @@ open class GameBaseClass : AppCompatActivity() {
 
     //標準的な初期化処理
     protected fun iniStandard(){
+        bord.iniLines()
         iniFullscreen()
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M){
             iniPreference()
