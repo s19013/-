@@ -18,6 +18,8 @@ class Line(private val name:String) {
     private var differenceScore = 0 //ラインの守るスコア
     private var offenceScore    = 0 //ラインの攻めるスコア
 
+    fun nameGetter():String{return name}
+
     //ラインを更新
     fun listSetter(mutableList: MutableList<Mas>){ this.list = mutableList }
 
@@ -61,6 +63,7 @@ class Line(private val name:String) {
     fun judge():Int{
         var rv = 0
         for (m in list){ rv += m.funcForDisplay()[1] }
+        Log.d("gobbletdeb","${name}:${rv}")
         return rv
     }
 
