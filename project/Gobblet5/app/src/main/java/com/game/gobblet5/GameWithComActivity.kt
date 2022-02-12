@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.activity_game_with_com.telop2p
 import kotlinx.android.synthetic.main.activity_game_with_man.*
 
 class GameWithComActivity : GameBaseClass() {
-    override var thisAct: Int = activityID.gameWithCom
+    override var thisAct: Int = actID.gameWithCom
 
     private val insertTimerId = "insertTimer"
 

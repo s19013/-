@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.activity_game_with_man.*
 
 
 class GameWithManActivity : GameBaseClass() {
-    override var thisAct: Int = activityID.gameWithMan
+    override var thisAct: Int = actID.gameWithMan
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
