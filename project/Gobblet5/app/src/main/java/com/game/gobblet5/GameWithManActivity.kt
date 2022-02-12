@@ -113,11 +113,11 @@ class GameWithManActivity : GameBaseClass() {
 
         // その他
         configButton.setOnClickListener {
-            playSound(openSE)
+            sound.playSound(sound.openSE)
             showConfigPopup()
         }
         resultButton!!.setOnClickListener {
-            playSound(openSE)
+            sound.playSound(sound.openSE)
             showResultPopup()
         }
 
