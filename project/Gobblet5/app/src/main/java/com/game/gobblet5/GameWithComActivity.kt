@@ -34,7 +34,7 @@ class GameWithComActivity : GameBaseClass() {
                 //移動元が手持ちの場合のみコマを
                 else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(p1Temochi.big) }
             }
-            else if (finished){} //決着ついていたらなにもしない
+            else if (finished){return@setOnClickListener} //決着ついていたらなにもしない
             else {toastNotYourTurn()}
         }
 
@@ -43,7 +43,7 @@ class GameWithComActivity : GameBaseClass() {
                 if (movingSource==p1Temochi.middle){ resetTemochi() }
                 else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(p1Temochi.middle) }
             }
-            else if (finished){}
+            else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
         }
 
@@ -52,7 +52,7 @@ class GameWithComActivity : GameBaseClass() {
                 if (movingSource==p1Temochi.small){ resetTemochi() }
                 else if (movingSource== null || movingSource is Temochi ){ pickupTemochi(p1Temochi.small) }
             }
-            else if (finished){}
+            else if (finished){return@setOnClickListener}
             else {toastNotYourTurn()}
         }
 
@@ -106,16 +106,16 @@ class GameWithComActivity : GameBaseClass() {
     private fun iniCom(){
         //コンピューターにわたすよう?
         com.iniLines(
-            mutableListOf(bord.A1, bord.B1, bord.C1, bord.D1),//l1
-            mutableListOf(bord.A2, bord.B2, bord.C2, bord.D2),//l2
-            mutableListOf(bord.A3, bord.B3, bord.C3, bord.D3),//l3
-            mutableListOf(bord.A4, bord.B4, bord.C4, bord.D4),//l4
-            mutableListOf(bord.A1, bord.A2, bord.A3, bord.A4),//lA
-            mutableListOf(bord.B1, bord.B2, bord.B3, bord.B4),//lB
-            mutableListOf(bord.C1, bord.C2, bord.C3, bord.C4),//lC
-            mutableListOf(bord.D1, bord.D2, bord.D3, bord.D4),//lD
-            mutableListOf(bord.A1, bord.B2, bord.C3, bord.D4),//lS
-            mutableListOf(bord.A4, bord.B3, bord.C2, bord.D1),//lBS
+            bord.line1,//l1
+            bord.line2,//l2
+            bord.line3,//l3
+            bord.line4,//l4
+            bord.lineA,//lA
+            bord.lineB,//lB
+            bord.lineC,//lC
+            bord.lineD,//lD
+            bord.lineS,//lS
+            bord.lineBS//lBS
         )
         com.iniConcatLine()
         com.iniTemochi(p2Temochi.big,p2Temochi.middle,p2Temochi.small)
@@ -132,9 +132,7 @@ class GameWithComActivity : GameBaseClass() {
     }
 
     private fun pickUpCom(){
-        val rv = com.movingSourceGetter()
-
-        when (rv) {
+        when (val rv = com.movingSourceGetter()) {
             is Mas -> { pushedMasButton(rv) } //移動元がマスだった場合
             is Temochi -> { pickupTemochi(rv) } //移動元が手持ちだった場合
         }

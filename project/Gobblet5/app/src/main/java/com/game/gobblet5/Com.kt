@@ -10,16 +10,16 @@ class Com {
     private val smallPiece=1
 
     //ライン
-    private val line1:Line = Line("L1")
-    private val line2:Line = Line("L2")
-    private val line3:Line = Line("L3")
-    private val line4:Line = Line("L4")
-    private val lineA:Line = Line("LA")
-    private val lineB:Line = Line("LB")
-    private val lineC:Line = Line("LC")
-    private val lineD:Line = Line("LD")
-    private val lineS:Line = Line("LS")
-    private val lineBS:Line = Line("LBS")
+    private var line1:Line?  = null
+    private var line2:Line?  = null
+    private var line3:Line?  = null
+    private var line4:Line?  = null
+    private var lineA:Line?  = null
+    private var lineB:Line?  = null
+    private var lineC:Line?  = null
+    private var lineD:Line?  = null
+    private var lineS:Line?  = null
+    private var lineBS:Line? = null
 
     //手持ち
     private var temochiBig:Temochi? = null
@@ -56,7 +56,6 @@ class Com {
     private var candidateList:MutableList<Mas> = mutableListOf() //コマを入れる候補を管理するリスト
     private var humanReachList:MutableList<Line> = mutableListOf() //敵にリーチがかかっているラインを管理するリスト
     private var comReachList:MutableList<Line> = mutableListOf() //自分にリーチがかかっているラインを管理するリスト
-    private var bord:MutableList<MutableList<Mas>> = mutableListOf() //[縦列][横列]　例:B3 -> [2][1]
     
     private var judgeList:MutableList<Int> = mutableListOf(0,0,0,0,0,0,0,0,0,0)
 
@@ -76,15 +75,16 @@ class Com {
     private var debThirdBiggestScoreList:MutableList<String> = mutableListOf() //3番目
     private var debFourthBiggestScoreList:MutableList<String> = mutableListOf() //4
     private var debFifthBiggestScoreList:MutableList<String> = mutableListOf() //5
+    //private var bord:MutableList<MutableList<Mas>> = mutableListOf() //[縦列][横列]　例:B3 -> [2][1]
 
     //アルゴリズムを少しいじる
 
 ////リーチ系=------
     //リーチなった列がないか調べる
     private fun reachChecker(){
-        fun commonFunc(line: Line){
-            if (line.comPieceCounter()>=3){ comReachList.add(line) } //なんでここでリターンしたんだろう?リターンしたら人間のリーチをしらべられない
-            if (line.humanPieceCounter()>=3){ humanReachList.add(line) }
+        fun commonFunc(line: Line?){
+            if (line!!.comPieceCounter()>=3){ comReachList.add(line) } //なんでここでリターンしたんだろう?リターンしたら人間のリーチをしらべられない
+            if (line!!.humanPieceCounter()>=3){ humanReachList.add(line) }
         }
 
         commonFunc(line1)
@@ -103,9 +103,9 @@ class Com {
     private fun checkCanICheckmate(){
 
         //最後の決めてとなる場所を探す,そしてそこに入れられるかを探す
-        fun commonFunc(line:Line){
+        fun commonFunc(line: Line?){
             //どのマスがまだ自分のマスでないかを調べる?
-            for (mas in line.listGetter()){
+            for (mas in line!!.listGetter()){
                 val size = mas.funcForDisplay()[0] //コマの大きさ
                 val attribute = mas.funcForDisplay()[1] //人間のかコンピューターのか
                 if (!mas.OccupiedByTheCom()){ //自分のマスで埋まってない場所を見つけた
@@ -116,7 +116,7 @@ class Com {
                     }
                     //大きいコマがすべて動かせない状態で
                     //なおかつ､最後のマスに相手の中コマ以上が入っている場合は諦める
-                    else if (line.use3BigPieceOnTheLine() &&
+                    else if (line!!.use3BigPieceOnTheLine() &&
                         attribute == humanPiece && size > 2){
                             comReachList.remove(line)
                             mas.addScore(-300)
@@ -141,9 +141,9 @@ class Com {
     //人間にリーチがかかってないか調べる(相手の勝利を阻止する)
     private fun checkCanIBlockCheckmate(){
         ////どこに入れれば防げるか探す
-        fun commonFunc(line:Line){
+        fun commonFunc(line: Line?){
             //そのライン上で相手のものになっていないマスを探す?
-            for (mas in line.listGetter()){
+            for (mas in line!!.listGetter()){
                 val size = mas.funcForDisplay()[0] //コマの大きさ
                 val attribute = mas.funcForDisplay()[1] //人間のかコンピューターのか
                 if (!mas.OccupiedByTheHuman()){ //相手のものになってないマスを見つけた
@@ -172,8 +172,8 @@ class Com {
     //各マスに何が入っているのかしらべて評価値をつける
     //ついでにコンピューターのコマがどこにあるかも調べる
     private fun checkWhatIsInTheMas(){
-        fun commonFunc(line: Line){
-            for (mas in line.listGetter()){
+        fun commonFunc(line: Line?){
+            for (mas in line!!.listGetter()){
                 val size = mas.funcForDisplay()[0] //コマの大きさ
                 val attribute = mas.funcForDisplay()[1] //人間のかコンピューターのか
                 when{
@@ -181,7 +181,7 @@ class Com {
                     size == bigPiece    && attribute == comPiece -> {
                         //自分の大コマが置かれている
                         masInTheGreenBigPiece.add(mas)
-//                        mas.addScore(-300)
+                        //mas.addScore(-300) //これコメントアウトしなくてもいいんじゃない(なんでコメントアウトしたんだろう)
                     }
                     size == middlePiece && attribute == comPiece -> { masInTheGreenMiddlePiece.add(mas) } //自分の中コマが置かれている
                     size == smallPiece && attribute == comPiece -> { masInTheGreenSmallPiece.add(mas) } //自分の小コマが置かれている
@@ -210,20 +210,20 @@ class Com {
     }
 
     //ラインごとに分けて各マスに評価値を入れる
-    private fun funcForCheckEachMas(line: Line){
+    private fun funcForCheckEachMas(line: Line?){
         var standard:Mas? =null
-        val linesList= line.listGetter()
+        val linesList= line!!.listGetter()
 
         //基準のマスに自分のコマが入っていた場合
         fun standardIsM1(){
-            if (line.humanPieceCounter() == 3 && !comReachList.contains(line) && standard?.funcForDisplay()!![0] == bigPiece){
+            if (line!!.humanPieceCounter() == 3 && !comReachList.contains(line) && standard?.funcForDisplay()!![0] == bigPiece){
                 //ライン上は自分以外全部敵のコマだった
                 //基準の自分のコマは大きいコマで相手のリーチをふせいでいる
                 doNotMoveListBecauseItIsBlocking.add(standard!!) //防いでるコマは動かせない
             }
 
             //基準のコマがリーチを作るのに使われていたら動かさないリストに追加
-            if (line.comPieceCounter() == 3 && comReachList.contains(line)){
+            if (line!!.comPieceCounter() == 3 && comReachList.contains(line)){
                 doNotMoveListBecauseItMakeReach.add(standard!!) //リーチを作っているから動かせない
             }
         }
@@ -252,7 +252,7 @@ class Com {
 
         for (i in 0..3){
             //ライン上で一番前のマスから順に基準のマスにしていく
-            standard=line.listGetter()[i]
+            standard=line!!.listGetter()[i]
 
             //基準となったマスに何が入っているかによってすることが違う
             when(standard.funcForDisplay()[1]){
@@ -284,8 +284,8 @@ class Com {
     private fun biggestScore(){
         val biggestScore = mutableListOf(-500,-500,-500,-500,-500) //[1番,2番､3番､4番､5番]
 
-        fun setBiggestScore(line: Line){
-            for (mas in line.listGetter()){
+        fun setBiggestScore(line: Line?){
+            for (mas in line!!.listGetter()){
                 when{
                     mas.scoreGetter() > biggestScore[0] -> //基準の一番大きい評価値よりも大きい値を見つけた
                         {
@@ -314,8 +314,8 @@ class Com {
             }
         }
 
-        fun addMas(line: Line){
-            for (mas in line.listGetter()){
+        fun addScoreToMas(line: Line?){
+            for (mas in line!!.listGetter()){
                 when{
                     mas.scoreGetter() == biggestScore[0] -> {mostBiggestScoreList.add(mas)}
                     mas.scoreGetter() == biggestScore[1] -> {secondBiggestScoreList.add(mas)}
@@ -331,10 +331,10 @@ class Com {
         setBiggestScore(line3)
         setBiggestScore(line4)
 
-        addMas(line1)
-        addMas(line2)
-        addMas(line3)
-        addMas(line4)
+        addScoreToMas(line1)
+        addScoreToMas(line2)
+        addScoreToMas(line3)
+        addScoreToMas(line4)
     }
 
     //起き場所を決める
@@ -375,6 +375,7 @@ class Com {
             smallPiece -> {
                 //小さいコマなら中コマか大コマを取り出せるかしらべる
                 //中コマ->大コマと探す
+                // ->今後2つの内ランダムにする
                 return if (pickUpPiece(middlePiece)){ true }
                 else  { pickUpPiece(bigPiece) }
             }
@@ -398,7 +399,9 @@ class Com {
                 }
                 else{
                     //空いているなら何でも入れられる
-                    //小コマ->中コマ->大きいと探す
+                    //小コマ->中コマ->大コマの順
+                    //->今後3つの内ランダムに変更
+
                     if (temochiMiddle?.returnCount()!! == 0 && temochiBig?.returnCount()!! == 0){
                         if (pickUpPiece(smallPiece)){return true}
                     }
@@ -477,29 +480,29 @@ class Com {
             when((0..3).random()){
                 0 ->{
                     //b2に置く
-                    if (lineB.listGetter()[1].returnLastElement() != 1){
-                        destination=lineB.listGetter()[1]
+                    if (lineB!!.listGetter()[1].returnLastElement() != 1){
+                        destination=lineB!!.listGetter()[1]
                         break
                     }
                 }
                 1 ->{
                     //b3に置く
-                    if (lineB.listGetter()[2].returnLastElement() != 1){
-                        destination=lineB.listGetter()[2]
+                    if (lineB!!.listGetter()[2].returnLastElement() != 1){
+                        destination=lineB!!.listGetter()[2]
                         break
                     }
                 }
                 2 ->{
                     //c2に置く
-                    if (lineC.listGetter()[1].returnLastElement() != 1){
-                        destination=lineC.listGetter()[1]
+                    if (lineC!!.listGetter()[1].returnLastElement() != 1){
+                        destination=lineC!!.listGetter()[1]
                         break
                     }
                 }
                 3 ->{
                     //c3に置く
-                    if (lineC.listGetter()[2].returnLastElement() != 1){
-                        destination=lineC.listGetter()[2]
+                    if (lineC!!.listGetter()[2].returnLastElement() != 1){
+                        destination=lineC!!.listGetter()[2]
                         break
                     }
                 }
@@ -542,10 +545,10 @@ class Com {
 //リセット関係
     fun resetScore(){
         //すべてのマスクラスの評価値を0にする
-        for (mas in line1.listGetter()){ mas.resetScore() }
-        for (mas in line2.listGetter()){ mas.resetScore() }
-        for (mas in line3.listGetter()){ mas.resetScore() }
-        for (mas in line4.listGetter()){ mas.resetScore() }
+        for (mas in line1!!.listGetter()){ mas.resetScore() }
+        for (mas in line2!!.listGetter()){ mas.resetScore() }
+        for (mas in line3!!.listGetter()){ mas.resetScore() }
+        for (mas in line4!!.listGetter()){ mas.resetScore() }
     }
 
     fun resetLists(){
@@ -570,33 +573,27 @@ class Com {
     }
 
 //初期化関係
-    fun iniLines(line1:MutableList<Mas>,line2:MutableList<Mas>,line3:MutableList<Mas>,line4:MutableList<Mas>,
-                 lineA:MutableList<Mas>,lineB:MutableList<Mas>,lineC:MutableList<Mas>,lineD:MutableList<Mas>,
-                 lineS:MutableList<Mas>,lineBS:MutableList<Mas>){
-        this.line1.listSetter(line1)
-        this.line2.listSetter(line2)
-        this.line3.listSetter(line3)
-        this.line4.listSetter(line4)
-        this.lineA.listSetter(lineA)
-        this.lineB.listSetter(lineB)
-        this.lineC.listSetter(lineC)
-        this.lineD.listSetter(lineD)
-        this.lineS.listSetter(lineS)
-        this.lineBS.listSetter(lineBS)
+    fun iniLines(arg1:Line,arg2:Line,arg3:Line,arg4:Line,
+                 argA:Line,argB:Line,argC:Line,argD:Line,
+                 argS:Line,argBS:Line)
+    {
+        line1 = arg1
+        line2 = arg2
+        line3 = arg3
+        line4 = arg4
+        lineA = argA
+        lineB = argB
+        lineC = argC
+        lineD = argD
+        lineS = argS
+        lineBS = argBS
     }
 
     fun iniConcatLine(){ //一旦関数にしないとエラーになるので関数化
-
-        bord.add(line1.listGetter())
-        bord.add(line2.listGetter())
-        bord.add(line3.listGetter())
-        bord.add(line4.listGetter())
-
-
-        for (mas in line1.listGetter()){ masList.add(mas) }
-        for (mas in line2.listGetter()){ masList.add(mas) }
-        for (mas in line3.listGetter()){ masList.add(mas) }
-        for (mas in line4.listGetter()){ masList.add(mas) }
+        for (mas in line1!!.listGetter()){ masList.add(mas) }
+        for (mas in line2!!.listGetter()){ masList.add(mas) }
+        for (mas in line3!!.listGetter()){ masList.add(mas) }
+        for (mas in line4!!.listGetter()){ masList.add(mas) }
 
 
     }
