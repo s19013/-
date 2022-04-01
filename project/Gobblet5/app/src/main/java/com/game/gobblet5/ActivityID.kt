@@ -1,6 +1,6 @@
 package com.game.gobblet5
 
-class activityID{
+class ActivityID{
     val gameWithCom = 1
     val gameWithMan = 2
     val preGameWithCom = 3

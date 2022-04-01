@@ -3,7 +3,6 @@ package com.game.gobblet5
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.SoundPool
-import android.os.Build
 
 class Sound {
     var sp: SoundPool? = null
@@ -12,7 +11,7 @@ class Sound {
     var cancelSE = 0
     var menuSelectSE = 0
     var cannotDoItSE = 0
-    var bottonSE = 0
+    var mainMenuButtonSE = 0
     var gameStartSE = 0
     var openSE  = 0
     var closeSE = 0
@@ -21,6 +20,7 @@ class Sound {
     var seekSE = 0
     var pageSE = 0
     var radioSE = 0
+    var etcButtonSE = 0
 
     fun iniSoundPool(context: Context){
         //soundPool
@@ -47,8 +47,9 @@ class Sound {
         loosSE = sp!!.load(context,R.raw.loose_single,1)
         seekSE = sp!!.load(context,R.raw.seekbar,1)
         pageSE = sp!!.load(context,R.raw.page_sound,1)
-        bottonSE = sp!!.load(context,R.raw.button,1)
+        mainMenuButtonSE = sp!!.load(context,R.raw.button,1)
         radioSE = sp!!.load(context,R.raw.radio_button,1)
+        etcButtonSE = sp!!.load(context,R.raw.etc_button,1)
     }
 
     //音を鳴らす

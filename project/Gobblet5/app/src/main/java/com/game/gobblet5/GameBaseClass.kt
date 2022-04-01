@@ -17,7 +17,7 @@ import java.util.*
 
 open class GameBaseClass : AppCompatActivity() {
     open var thisAct=0 //今のアクティビティ
-    val actID=activityID()
+    val actID=ActivityID()
 
     //効果音
     val sound = Sound()

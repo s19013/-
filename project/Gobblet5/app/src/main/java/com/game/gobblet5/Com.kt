@@ -1,7 +1,7 @@
 package com.game.gobblet5
 
 class Com {
-    private val comPiece=-1
+    private val comPiece= -1
     private val humanPiece = 1
     private val empty = 0
 
@@ -84,7 +84,7 @@ class Com {
     private fun reachChecker(){
         fun commonFunc(line: Line?){
             if (line!!.comPieceCounter()>=3){ comReachList.add(line) } //なんでここでリターンしたんだろう?リターンしたら人間のリーチをしらべられない
-            if (line!!.humanPieceCounter()>=3){ humanReachList.add(line) }
+            if (line.humanPieceCounter()>=3){ humanReachList.add(line) }
         }
 
         commonFunc(line1)
@@ -116,7 +116,7 @@ class Com {
                     }
                     //大きいコマがすべて動かせない状態で
                     //なおかつ､最後のマスに相手の中コマ以上が入っている場合は諦める
-                    else if (line!!.use3BigPieceOnTheLine() &&
+                    else if (line.use3BigPieceOnTheLine() &&
                         attribute == humanPiece && size > 2){
                             comReachList.remove(line)
                             mas.addScore(-300)
@@ -216,14 +216,14 @@ class Com {
 
         //基準のマスに自分のコマが入っていた場合
         fun standardIsM1(){
-            if (line!!.humanPieceCounter() == 3 && !comReachList.contains(line) && standard?.funcForDisplay()!![0] == bigPiece){
+            if (line.humanPieceCounter() == 3 && !comReachList.contains(line) && standard?.funcForDisplay()!![0] == bigPiece){
                 //ライン上は自分以外全部敵のコマだった
                 //基準の自分のコマは大きいコマで相手のリーチをふせいでいる
                 doNotMoveListBecauseItIsBlocking.add(standard!!) //防いでるコマは動かせない
             }
 
             //基準のコマがリーチを作るのに使われていたら動かさないリストに追加
-            if (line!!.comPieceCounter() == 3 && comReachList.contains(line)){
+            if (line.comPieceCounter() == 3 && comReachList.contains(line)){
                 doNotMoveListBecauseItMakeReach.add(standard!!) //リーチを作っているから動かせない
             }
         }
@@ -252,7 +252,7 @@ class Com {
 
         for (i in 0..3){
             //ライン上で一番前のマスから順に基準のマスにしていく
-            standard=line!!.listGetter()[i]
+            standard=line.listGetter()[i]
 
             //基準となったマスに何が入っているかによってすることが違う
             when(standard.funcForDisplay()[1]){

@@ -19,6 +19,8 @@ class MainActivity : BaseClass() {
     private lateinit var mAdView : AdView
     private lateinit var logo:ImageView
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,6 +28,7 @@ class MainActivity : BaseClass() {
         MobileAds.initialize(this) {}
         iniAD()
         iniLogo()
+
 
 
         goPreGameWithComBtn.setOnClickListener { changeActivity(activityIDPreGameWithCom) }
@@ -36,7 +39,7 @@ class MainActivity : BaseClass() {
     }
 
     private fun changeActivity(act:Int){
-        sound.playSound(sound.menuSelectSE,save.seVolume)
+        sound.playSound(sound.mainMenuButtonSE,save.seVolume)
         var intent:Intent?=null
 
         when(act){
