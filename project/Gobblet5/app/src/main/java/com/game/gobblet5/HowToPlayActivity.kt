@@ -4,10 +4,10 @@ import android.os.Handler
 import android.os.Looper
 import kotlinx.android.synthetic.main.activity_tutorial.*
 
-class HowToPlayActivity : baseTutorial() {
+class HowToPlayActivity : BaseTutorial() {
     override val actID: Int = 1
     override val maxPage = 12
-    override var Page:Int = 1
+    override var page:Int = 1
     //タイマー関係
     private val millisecond:Long=400
     private var time = 0L
@@ -17,7 +17,7 @@ class HowToPlayActivity : baseTutorial() {
     override fun iniActName() { textWhereIsHere.text = getString(R.string.HowToPlayActivity) }
 
     override fun changeText() {
-        when (Page) {
+        when (page) {
             1  -> tutorialText.text = getString(R.string.HowToPlayTutorialText1)
             2  -> tutorialText.text = getString(R.string.HowToPlayTutorialText2)
             3  -> tutorialText.text = getString(R.string.HowToPlayTutorialText3)
@@ -35,24 +35,24 @@ class HowToPlayActivity : baseTutorial() {
     }
 
     override fun changeImg() {
-        when (Page) {
+        when (page) {
             1 -> { tutorialImg.setImageResource(R.drawable.tu1) }
             2 -> { tutorialImg.setImageResource(R.drawable.tu2) }
             3 -> { tutorialImg.setImageResource(R.drawable.tu2) }
             4 -> { tutorialImg.setImageResource(R.drawable.tu4) }
             5 -> { tutorialImg.setImageResource(R.drawable.tu5) }
             6 -> {
-                handler.removeCallbacks(fragment7)
-                time = 0L
-                nowDoingTimerID = 0
+                handler.removeCallbacks(fragment7) //前のハンドラーを消す
+                time = 0L //時間リセット
+                nowDoingTimerID = 0 //IDもリセット
                 tutorialImg.setImageResource(R.drawable.tu6)
             }
             7 -> {
-                handler.post(fragment7)
-                nowDoingTimerID = 7
+                handler.post(fragment7) //タイマーセット
+                nowDoingTimerID = 7 //ID書き換え
             }
             8 -> {
-                handler.removeCallbacks(fragment7)
+                handler.removeCallbacks(fragment7) //タイマー削除
                 handler.removeCallbacks(fragment9)
                 time = 0L
                 nowDoingTimerID = 0
@@ -170,7 +170,7 @@ class HowToPlayActivity : baseTutorial() {
     override fun onResume() {
         super.onResume()
         when (nowDoingTimerID){
-            7 -> handler.post(fragment7)
+            7 -> handler.post(fragment7) //タイマー再開
             9 -> handler.post(fragment9)
             10 -> handler.post(fragment10)
             12 -> handler.post(fragment12)

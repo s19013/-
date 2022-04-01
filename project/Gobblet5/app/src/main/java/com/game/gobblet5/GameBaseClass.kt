@@ -19,8 +19,15 @@ open class GameBaseClass : AppCompatActivity() {
     open var thisAct=0 //今のアクティビティ
     val actID=activityID()
 
-    //
-    val sound = gameBaseSound()
+    //効果音
+    val sound = Sound()
+
+    //曲
+    private var mediaPlayer: MediaPlayer?=null
+    private var bgmLooping = false
+
+    //共有プリファレンス
+    val save = preferences()
 
     //マジックナンバー防止
     private val p1Piece =  1
@@ -36,6 +43,7 @@ open class GameBaseClass : AppCompatActivity() {
     protected var time = 0L
     protected val handler = Handler(Looper.getMainLooper()) // Looper.getMainLooper()を書くとクラッシュしにくいらしい
     protected var nowDoingTimerID:String? = null
+
     ////タイマーのid
     private val resultTimerId = "resultTimer"
 
@@ -52,29 +60,23 @@ open class GameBaseClass : AppCompatActivity() {
     private var configPopup: PopupWindow?=null
     private var resultPopup: PopupWindow?=null
 
-    //mp
-    private var mediaPlayer: MediaPlayer?=null
-    private var bgmLooping = false
-
     //ゲームに必要なもの
     protected var turn = 0 //後でちゃんと設定する 1p = 1,2p =-1 ,終わり=0
     private var havingPieceSize = 0 //今持っているコマの大きさ
     private var winner : String?=null
-    protected var movingSource : Any? = null
-    private var destination : Mas? = null
+    protected var movingSource : Any? = null //出発元
+    private var destination : Mas? = null //行き先
     protected var finished = false
-    private var pickupDone= false
+    private var pickupDone= false //取り上げ終わりフラグ
     
     //表示に使う物　(箱を用意している状態)
     private var view: ImageView? = null
 
-    private val gameImages= com.game.gobblet5.gameBaseDrawable()
+    private val gameImages= com.game.gobblet5.GameBaseDrawable()
 
     //一部ボタン
     protected var resultButton:View?=null
 
-    //共有プリファレンス
-    val save = preferences()
     //画面の大きさ
     private var width  = 0
     private var height = 0
@@ -342,7 +344,6 @@ open class GameBaseClass : AppCompatActivity() {
     //結果ポップアップ
     @SuppressLint("InflateParams")
     protected fun showResultPopup(){
-
         resultPopup = PopupWindow(this)
         // レイアウト設定
         val popupView: View = layoutInflater.inflate(R.layout.popup_resalt, null)
@@ -489,7 +490,7 @@ open class GameBaseClass : AppCompatActivity() {
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
                     val editor= save.pref!!.edit()
-                    editor.putInt("save.bgmVolume",save.bgmVolume)
+                    editor.putInt("bgmVolume",save.bgmVolume)
                     editor.apply()
                 }
             }

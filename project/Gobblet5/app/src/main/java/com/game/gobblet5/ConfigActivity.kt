@@ -18,13 +18,11 @@ class ConfigActivity : BaseClass() {
     private var seVolumeText:TextView? = null
     private var bgmVolumeText:TextView? = null
 
-    private lateinit var mAdView : AdView
+    private lateinit var mAdView : AdView //広告
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_config)
-
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M){ visibleSorryText() }
 
         iniTextView()
         iniSeekBar()
@@ -37,7 +35,7 @@ class ConfigActivity : BaseClass() {
         }
 
         backButton.setOnClickListener {
-            playSound(cancelSE)
+            sound.playSound(sound.cancelSE,save.seVolume)
             val intent = Intent(this,MainActivity::class.java)
             startActivity(intent)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -49,8 +47,10 @@ class ConfigActivity : BaseClass() {
         seVolumeText = findViewById(R.id.seVolume)
         bgmVolumeText = findViewById(R.id.bgmVolume)
 
-        seVolumeText?.text = seVolume.toString() //プレファレンスの値をセット
-        bgmVolumeText?.text = bgmVolume.toString() //プレファレンスの値をセット
+
+
+        seVolumeText?.text = save.seVolume.toString() //プレファレンスの値をセット
+        bgmVolumeText?.text = save.bgmVolume.toString()
 
     }
 
@@ -59,10 +59,10 @@ class ConfigActivity : BaseClass() {
         seSeekBar = findViewById(R.id.seSeekBar)
         bgmSeekBar = findViewById(R.id.bgmSeekBar)
 
-        seSeekBar?.progress = seVolume //プレファレンスの値を初期値にセット
+        seSeekBar?.progress = save.seVolume //プレファレンスの値を初期値にセット
         seSeekBar?.max = 10
 
-        bgmSeekBar?.progress = bgmVolume //プレファレンスの値を初期値にセット
+        bgmSeekBar?.progress = save.bgmVolume //プレファレンスの値を初期値にセット
         bgmSeekBar?.max = 10
 
         seSeekBar?.setOnSeekBarChangeListener(
@@ -72,15 +72,16 @@ class ConfigActivity : BaseClass() {
                     progress: Int,
                     fromUser: Boolean
                 ) {
-                    playSound(seekSE)
                     seVolumeText?.text = progress.toString()
-                    seVolume=progress
+                    save.seVolume=progress
+                    sound.playSound(sound.seekSE,save.seVolume)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    val editor= pref!!.edit()
-                    editor.putInt("seVolume",seVolume).apply()
+                    val editor= save.pref!!.edit()
+                    editor.putInt("seVolume",save.seVolume)
+                    editor.apply()
                 }
             }
         )
@@ -92,16 +93,16 @@ class ConfigActivity : BaseClass() {
                     progress: Int,
                     fromUser: Boolean
                 ) {
-                    playSound(seekSE)
+                    sound.playSound(sound.seekSE,save.seVolume)
                     bgmVolumeText?.text = progress.toString()
-                    bgmVolume=progress
-                    //mediaPlayer?.setVolume(bgmVolume*0.1f,bgmVolume*0.1f)
+                    save.bgmVolume=progress
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
                 override fun onStopTrackingTouch(seekBar: SeekBar?) {
-                    val editor= pref!!.edit()
-                    editor.putInt("bgmVolume",bgmVolume).apply()
+                    val editor= save.pref!!.edit()
+                    editor.putInt("bgmVolume",save.bgmVolume)
+                    editor.apply()
                 }
             }
         )
@@ -112,13 +113,5 @@ class ConfigActivity : BaseClass() {
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
     }
-
-    private fun visibleSorryText(){
-        findViewById<LinearLayout>(R.id.SEConfigBox).visibility= View.INVISIBLE
-        findViewById<LinearLayout>(R.id.MusicConfigBox).visibility= View.INVISIBLE
-        findViewById<TextView>(R.id.sorryText).visibility= View.VISIBLE
-    }
-
-
 
 }

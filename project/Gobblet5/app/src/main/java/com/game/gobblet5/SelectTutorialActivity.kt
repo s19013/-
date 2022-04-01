@@ -18,21 +18,21 @@ class SelectTutorialActivity : BaseClass() {
 
         // 操作説明画面に遷移する処理
         howToControlButton.setOnClickListener {
-            playSound(buttonSE)
+            sound.playSound(sound.bottonSE,save.seVolume)
             val intent = Intent(this,SelectHowToOperateActivity::class.java)
             startActivity(intent)
         }
 
         // ルール説明画面に遷移する処理
         howToPlayButton.setOnClickListener {
-            playSound(buttonSE)
+            sound.playSound(sound.bottonSE,save.seVolume)
             val intent = Intent(this, HowToPlayActivity::class.java)
             startActivity(intent)
         }
 
         // タイトル画面に戻る処理
         backButton.setOnClickListener {
-            playSound(cancelSE)
+            sound.playSound(sound.cancelSE,save.seVolume)
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP

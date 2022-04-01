@@ -3,11 +3,12 @@ package com.game.gobblet5
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_tutorial.*
 
-open class baseTutorial:BaseClass() {
+open class BaseTutorial: BaseClass() {
     open val maxPage = 0
-    open var Page:Int = 0
+    open var page:Int = 0
     open val actID = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,8 +20,9 @@ open class baseTutorial:BaseClass() {
         preButton.setOnClickListener { countDownPage() }
 
         backButton.setOnClickListener {
-            playSound(cancelSE)
+            sound.playSound(sound.cancelSE,save.seVolume)
             var intent:Intent? = null
+
             if (actID == 1){ intent = Intent(this,SelectTutorialActivity::class.java) }
             else {intent = Intent(this,SelectHowToOperateActivity::class.java)}
             startActivity(intent)
@@ -34,36 +36,35 @@ open class baseTutorial:BaseClass() {
 
     open fun iniActName(){  }
 
-    protected fun changeElements(){
-        playSound(pageSE)
+    private fun changeElements(){
+        sound.playSound(sound.pageSE,save.seVolume)
         changeText()
         changeImg()
         changeCurrentPage()
     }
 
-    protected fun countUpPage() {
-        if (Page < maxPage) {
-            Page += 1
-            changeElements()
-        }
-        if (Page > maxPage) { Page = maxPage }
-    }
-
-    protected fun countDownPage() {
-        if (Page > 1) {
-            Page -= 1
-            changeElements()
-        }
-
-        if (Page < 1) { Page = 1 }
-    }
-
-
     open fun changeText() {}
 
-    protected fun changeCurrentPage() { currentPageText.text = Page.toString() }
+    private fun changeCurrentPage() { currentPageText.text = page.toString() }
 
     open fun changeImg() {}
+
+    private fun countUpPage() {
+        if (page < maxPage) {
+            page += 1
+            changeElements()
+        }
+        if (page > maxPage) { page = maxPage }
+    }
+
+    private fun countDownPage() {
+        if (page > 1) {
+            page -= 1
+            changeElements()
+        }
+
+        if (page < 1) { page = 1 }
+    }
 
     //    全画面表示に関すること
     override fun onWindowFocusChanged(hasFocus: Boolean) {

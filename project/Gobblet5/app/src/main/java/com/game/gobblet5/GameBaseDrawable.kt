@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 
-class gameBaseDrawable {
+class GameBaseDrawable {
     //表示に使う物　(箱を用意している状態)
     private var res: Resources? = null
     //マス

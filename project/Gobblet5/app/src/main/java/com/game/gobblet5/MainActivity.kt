@@ -36,7 +36,7 @@ class MainActivity : BaseClass() {
     }
 
     private fun changeActivity(act:Int){
-        playSound(menuSelectSE)
+        sound.playSound(sound.menuSelectSE,save.seVolume)
         var intent:Intent?=null
 
         when(act){

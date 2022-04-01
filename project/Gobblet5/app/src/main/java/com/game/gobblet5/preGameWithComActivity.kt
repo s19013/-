@@ -22,21 +22,21 @@ class preGameWithComActivity : BaseClass() {
         iniAD()
 
         backButton.setOnClickListener {
-            playSound(cancelSE)
+            sound.playSound(sound.cancelSE,save.seVolume)
             val intent = Intent(this,MainActivity::class.java)
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 
         gameStartBtn.setOnClickListener {
-            playSound(gameStartSE)
+            sound.playSound(sound.gameStartSE,save.seVolume)
             val intent = Intent(this, GameWithComActivity::class.java)
             startActivity(intent)
         }
     }
 
     private fun iniPlayFirst(){
-        playFirst=pref?.getInt("playFirst", 1)
+        playFirst=save.playFirst
         when(playFirst){
             1 -> {findViewById<RadioButton>(R.id.Button1p).isChecked = true}
             -1 -> {findViewById<RadioButton>(R.id.Button2p).isChecked = true}
@@ -52,9 +52,10 @@ class preGameWithComActivity : BaseClass() {
                 R.id.Button2p->{playFirst= -1}
                 R.id.ButtonRandom->{playFirst=0}
             }
-            playSound(radioButtonSE)
-            val editor=pref!!.edit()
-            editor.putInt("playFirst",playFirst!!).apply()
+            sound.playSound(sound.radioSE,save.seVolume)
+            val editor= save.pref!!.edit()
+            editor.putInt("playFirst",playFirst!!)
+            editor.apply()
         }
     }
 
