@@ -73,8 +73,8 @@ class ConfigActivity : BaseClass() {
                     fromUser: Boolean
                 ) {
                     seVolumeText?.text = progress.toString()
+                    sound.playSound(sound.seekSE,progress)
                     save.seVolume=progress
-                    sound.playSound(sound.seekSE,save.seVolume)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}

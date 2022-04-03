@@ -297,6 +297,8 @@ open class GameBaseClass : AppCompatActivity() {
                 }
             }
             resultButton!!.visibility= View.VISIBLE
+            showResultPopup()
+            stopMusic()
             nowDoingTimerID = resultTimerId
             handler.post(resultTimer)
         }
@@ -460,8 +462,8 @@ open class GameBaseClass : AppCompatActivity() {
                     fromUser: Boolean
                 ) {
                     seVolumeText?.text = progress.toString()
+                    sound.playSound(sound.seekSE,progress)
                     save.seVolume=progress
-                    sound.playSound(sound.seekSE,save.seVolume)
                 }
 
                 override fun onStartTrackingTouch(seekBar: SeekBar?) {}
@@ -482,8 +484,8 @@ open class GameBaseClass : AppCompatActivity() {
                 ) {
                     sound.playSound(sound.seekSE,save.seVolume)
                     bgmVolumeText?.text = progress.toString()
+                    mediaPlayer?.setVolume(save.bgmVolume*0.1f,progress*0.1f)
                     save.bgmVolume=progress
-                    mediaPlayer?.setVolume(save.bgmVolume*0.1f,save.bgmVolume*0.1f)
 
                 }
 
@@ -658,15 +660,15 @@ open class GameBaseClass : AppCompatActivity() {
     private val resultTimer: Runnable = object : Runnable{
         override fun run() {
             time += millisecond
-            when(time){
-                200L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.8f,save.bgmVolume*0.1f*0.8f)
-                400L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.6f,save.bgmVolume*0.1f*0.6f)
-                600L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.4f,save.bgmVolume*0.1f*0.4f)
-                800L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.2f,save.bgmVolume*0.1f*0.2f)
-            }
+//            when(time){
+//                200L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.8f,save.bgmVolume*0.1f*0.8f)
+//                400L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.6f,save.bgmVolume*0.1f*0.6f)
+//                600L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.4f,save.bgmVolume*0.1f*0.4f)
+//                800L -> mediaPlayer?.setVolume(save.bgmVolume*0.1f*0.2f,save.bgmVolume*0.1f*0.2f)
+//            }
             handler.postDelayed(this,millisecond)
             if (time>1000L){
-                stopMusic()
+//                stopMusic()
                 showResultPopup()
                 handler.removeCallbacks(this)
                 time = 0L
