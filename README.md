@@ -9,3 +9,6 @@
 
 ### Member
 * s19013 知念英弥
+
+### ダウンロードはこちら
+https://play.google.com/store/apps/details?id=com.game.gobblet5&hl=ja&gl=US
