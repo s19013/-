@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/table"
+    android:background="@drawable/wallpaper"
     tools:context=".preGameWithComActivity">
+
+
 
     <LinearLayout
         android:id="@+id/etcBox"
@@ -14,8 +16,10 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@+id/backButtonGuidelineHB"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/backButtonGuidelineVS"
         app:layout_constraintTop_toTopOf="@+id/backButtonGuidelineHS">
+
+
 
         <LinearLayout
             android:id="@+id/backButton"
@@ -25,32 +29,28 @@
             android:background="@drawable/back_btn_style"
             android:orientation="horizontal">
 
-
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="20"
+                android:scaleX="@dimen/iconScale"
+                android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_uturn" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
-                android:autoSizeTextType="uniform"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="90"
                 android:gravity="center"
+                android:lines="1"
                 android:text="@string/BackToTitle"
-                android:textColor="@color/black" />
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2" />
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform" />
+
         </LinearLayout>
 
         <Space
@@ -63,16 +63,13 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:autoSizeTextType="uniform"
-            android:background="@color/textBackground"
+            android:lines="1"
+            app:autoSizeTextType="uniform"
+            android:background="@drawable/act_banner"
             android:gravity="center"
             android:text="@string/preGameActivity"
-            android:textColor="@color/black" />
+            android:textColor="#2B0000" />
 
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -89,10 +86,11 @@
             android:id="@+id/setFirstGroup"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_marginStart="4dp"
             android:layout_weight="1"
-            android:autoSizeTextType="uniform"
             android:text="@string/FirstPlayer"
-            android:textColor="@android:color/black" />
+            android:textColor="@android:color/black"
+            app:autoSizeTextType="uniform" />
 
         <RadioGroup
             android:id="@+id/RadioGroup"
@@ -105,18 +103,19 @@
                 android:id="@+id/Button1p"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-
-                android:layout_weight="0.9"
-                android:autoSizeTextType="uniform"
+                android:layout_weight="4"
                 android:foregroundGravity="center"
-                android:text="@string/YouText" />
+                android:lines="1"
+                android:text="@string/YouText"
+                app:autoSizeTextType="uniform" />
 
             <RadioButton
                 android:id="@+id/Button2p"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1.2"
-                android:autoSizeTextType="uniform"
+                android:layout_weight="7"
+                android:lines="1"
+                app:autoSizeTextType="uniform"
                 android:foregroundGravity="center"
                 android:text="@string/comText" />
 
@@ -124,15 +123,13 @@
                 android:id="@+id/ButtonRandom"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.9"
-                android:autoSizeTextType="uniform"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="6"
                 android:foregroundGravity="center"
-                android:text="@string/RandomText" />
+                android:lines="1"
+                android:text="@string/RandomText"
+                app:autoSizeTextType="uniform" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.05" />
         </RadioGroup>
     </LinearLayout>
 
@@ -140,21 +137,23 @@
         android:id="@+id/gameStartBtn"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeTextType="uniform"
-        android:background="@drawable/btn_style"
+        android:background="@drawable/emphasis_btn_style"
         android:text="@string/GameStartText"
         android:textStyle="bold"
+        app:autoSizeTextType="uniform"
         app:layout_constraintBottom_toTopOf="@+id/StartButtonGuidelineHE"
         app:layout_constraintEnd_toStartOf="@+id/guidelineVE"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/guidelineVS"
-        app:layout_constraintTop_toTopOf="@+id/StartButtonGuidelineHS" />
+        app:layout_constraintTop_toTopOf="@+id/StartButtonGuidelineHS"
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/backButtonGuidelineVS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.02"/>
+        app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/backButtonGuidelineHS"
@@ -168,28 +167,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.06" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineVS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineVE"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.92" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/StartButtonGuidelineHS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.90" />
+        app:layout_constraintGuide_percent="0.85" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/StartButtonGuidelineHE"
@@ -199,6 +198,13 @@
         app:layout_constraintGuide_percent="0.98" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/SelectorGuidelineHT"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.35" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/SelectorGuidelineHB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -206,10 +212,30 @@
         app:layout_constraintGuide_percent="0.5" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/SelectorGuidelineHT"
+        android:id="@+id/guidelineH7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.4" />
+        app:layout_constraintGuide_percent="0.6" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="LARGE_BANNER"
+        app:adUnitId="ca-app-pub-9366896828334909/7491365297"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH7" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

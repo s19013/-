@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">gobblet5</string>
     <string name="temochiRedBig">temochiRedBig</string>
     <string name="title_activity_select_tutorial">SelectTutorialActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -42,8 +41,7 @@
     <string name="EnemyText">相手</string>
     <string name="comText">コンピューター</string>
     <string name="GameStartText">ゲームスタート</string>
-    <string name="CheckTheBord">ボードを見る</string>
-    <string name="Retry">もう一度遊ぶ</string>
+    <string name="playAgain">もう一度遊ぶ</string>
     <string name="HowToOperateText">操作説明</string>
     <string name="HowToPlayText">ルール説明</string>
     <!--戻る系    -->
@@ -72,10 +70,10 @@
     <string name="EnemyTurn">相手のターン</string>
     <string name="YourTurn">あなたのターン</string>
     <!--操作説明-->
-    <string name="HowToOperateTutorialText1_1">3種類の手持ちのコマの内動かしたいコマをタップします｡\n 例として大きいコマを動かします｡</string>
+    <string name="HowToOperateTutorialText1_1">3種類の手持ちのコマの内\n動かしたいコマをタップします｡\n 例として大きいコマを動かします｡</string>
     <string name="HowToOperateTutorialText1_2">次に､コマを置きたいマスをタップします｡</string>
     <string name="HowToOperateTutorialText1_3">これで手持ちからマスへコマを置くことができました｡</string>
-    <string name="HowToOperateTutorialText2_1">自分のコマが表示されているマスをタップします｡\n例としてこのマスをタップします｡</string>
+    <string name="HowToOperateTutorialText2_1">自分のコマが表示されているマスをタップします｡</string>
     <string name="HowToOperateTutorialText2_2">次に移動先のマスをタップします｡</string>
     <string name="HowToOperateTutorialText2_3">これで置いたコマを動かすことができました｡</string>
     <!--ルール説明    -->
@@ -83,24 +81,36 @@
     <string name="HorizontallyText">横</string>
     <string name="DiagonallyText">斜め</string>
     <string name="HowToPlayTutorialText1">自分と相手で２人のプレイヤーで遊ぶゲームです｡</string>
-    <string name="HowToPlayTutorialText2">小,中,大の大きさの違うコマを持っています｡</string>
+    <string name="HowToPlayTutorialText2">小,中,大の大きさの違うコマを使います｡</string>
     <string name="HowToPlayTutorialText3">両方のプレイヤーがおたがいにコマをマスに置き合います｡</string>
     <string name="HowToPlayTutorialText4">縦</string>
     <string name="HowToPlayTutorialText5">横</string>
-    <string name="HowToPlayTutorialText6">ナナメの一列に自分のコマを4つ揃えたら勝ちです｡</string>
+    <string name="HowToPlayTutorialText6">ナナメの一列に,自分のコマを4つ揃えたら勝ちです｡</string>
     <string name="HowToPlayTutorialText7">ゴブレットでは､一度置いたコマを動かすことができます｡</string>
-    <string name="HowToPlayTutorialText8">自分が手に持っているコマがマスに置かれたコマより大きい場合</string>
+    <string name="HowToPlayTutorialText8">自分が手に持っているコマが,マスに置かれたコマより大きい場合</string>
     <string name="HowToPlayTutorialText9">持っているコマを置かれたコマにかぶせることができます｡</string>
-    <string name="HowToPlayTutorialText10">自分のコマにも､相手のコマにもかぶせることができます｡</string>
-    <string name="HowToPlayTutorialText11">かぶせられたコマはかぶせたコマがどかさないとと動かせません｡</string>
-    <string name="HowToPlayTutorialText12">ルール説明を終わります｡</string>
+    <string name="HowToPlayTutorialText10">自分のコマにも､相手のコマにも､かぶせることができます｡</string>
+    <string name="HowToPlayTutorialText11">かぶせられたコマは,かぶせたコマをどかさないと動かせません｡</string>
     <string name="BackToHowToOperateMenu">操作方法メニュー\nに戻る</string>
     <string name="MovePieceFromHandToSquare">手持ちからマスへ</string>
     <string name="MovePieceFromSquareToSquare">置いたコマを動かす</string>
-    <string name="Back">戻る</string>
+    <string name="Back">もどる</string>
     <string name="Oops">おけません</string>
-    <string name="dialogText">そこにはおけません</string>
+    <string name="cannotInsertDialogText">そこにはおけません</string>
     <string name="QuitGame">ゲームをやめる</string>
+    <string name="cannotPickupDialogText">そこからは取り出せません</string>
+    <string name="notYourTurnDialogText">あなたのターンではありません</string>
+    <string name="OkText">わかりました</string>
+    <string name="startOver">やり直す</string>
+    <string name="CheckTheBoard">ボードを確認する</string>
+    <string name="pieceInHand">手に持ったコマ</string>
+    <string name="sorryText">このスマホのバージョンでは､音を出せません</string>
+    <string name="PrivacyPolicy">"プライバシーポリシー "</string>
+    <string name="HowToPlayTutorialText13">ルール説明を終わります｡</string>
+    <string name="HowToPlayTutorialText12">相手がコマを持ち上げたときあなたのコマが出てきて,その時点でコマが4つ並んでいた場合もあなたの勝ちになります｡</string>
+    <string name="P1">1P</string>
+    <string name="P2">P2</string>
+    <string name="app_name">ゴブレット</string>
 
 
 </resources>

@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.01" />
+        app:layout_constraintGuide_percent="0.02" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/etcBoxGuidlineTop"
@@ -27,42 +27,58 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.06" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottonsGuidelineStart"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.1" />
+        app:layout_constraintGuide_percent="0.08" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottonsGuidelineEnd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.9" />
+        app:layout_constraintGuide_percent="0.92" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottonsGuidelineTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.16" />
+        app:layout_constraintGuide_percent="0.15" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/bottonsGuidelineBottom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineH8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.95" />
 
     <LinearLayout
         android:id="@+id/etcBox"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="horizontal"
+
         app:layout_constraintBottom_toTopOf="@+id/etcBoxGuidlineBottom"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/etcBoxGuidlineStart"
         app:layout_constraintTop_toTopOf="@+id/etcBoxGuidlineTop">
@@ -75,33 +91,28 @@
             android:background="@drawable/back_btn_style"
             android:orientation="horizontal">
 
-
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="20"
+                android:scaleX="@dimen/iconScale"
+                android:scaleY="@dimen/iconScale"
                 app:srcCompat="@drawable/ic_uturn" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2" />
 
             <TextView
                 android:id="@+id/textView4"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="9"
-                android:autoSizeTextType="uniform"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="90"
                 android:gravity="center"
+                android:lines="1"
                 android:text="@string/BackToTitle"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                app:autoSizeTextType="uniform" />
 
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="0.2" />
         </LinearLayout>
 
         <Space
@@ -114,56 +125,73 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:autoSizeTextType="uniform"
-            android:background="@color/textBackground"
+            android:background="@drawable/act_banner"
             android:gravity="center"
+            android:lines="1"
+            android:paddingStart="6dp"
+            android:paddingEnd="4dp"
             android:text="@string/selectTutorialActivity"
-            android:textColor="@color/black" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:textColor="@color/bannerText"
+            app:autoSizeTextType="uniform" />
     </LinearLayout>
+
+
 
     <LinearLayout
         android:id="@+id/bottons"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:weightSum="5"
         app:layout_constraintTop_toTopOf="@+id/bottonsGuidelineTop"
         app:layout_constraintBottom_toTopOf="@+id/bottonsGuidelineBottom"
         app:layout_constraintStart_toStartOf="@+id/bottonsGuidelineStart"
         app:layout_constraintEnd_toEndOf="@+id/bottonsGuidelineEnd"
         >
 
-        <Button
+        <TextView
             android:id="@+id/howToPlayButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:autoSizeTextType="uniform"
-            android:textColor="@color/black"
+            android:layout_weight="2"
             android:background="@drawable/btn_style"
-            android:textAllCaps="false"
-            android:text="@string/HowToPlayText" />
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/HowToPlayText"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            app:autoSizeTextType="uniform" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <Button
+        <TextView
             android:id="@+id/howToControlButton"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:autoSizeTextType="uniform"
-            android:textColor="@color/black"
+            android:layout_weight="2"
+            android:padding="8dp"
+            app:autoSizeTextType="uniform"
             android:background="@drawable/btn_style"
-            android:textAllCaps="false"
-            android:text="@string/HowToOperateText" />
+            android:gravity="center"
+            android:text="@string/HowToOperateText"
+            android:textColor="@android:color/black"
+            android:textStyle="bold" />
 
     </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        app:adSize="MEDIUM_RECTANGLE"
+        app:adUnitId="ca-app-pub-9366896828334909/7491365297"
+        app:layout_constraintBottom_toTopOf="@+id/guidelineH8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guidelineH7" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

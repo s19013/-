@@ -1,5 +1,4 @@
 <resources>
-    <string name="app_name">gobblet5</string>
     <string name="temochiRedBig">temochiRedBig</string>
     <string name="title_activity_select_tutorial">SelectTutorialActivity</string>
     <!-- Strings used for fragments for navigation -->
@@ -37,14 +36,13 @@
     <string name="player2">2P</string>
     <string name="RandomText">Random</string>
     <string name="YouText">You</string>
-    <string name="EnemyText">opponent</string>
+    <string name="EnemyText">Opponent</string>
     <string name="comText">Computer</string>
     <string name="GameStartText">GameStart</string>
     <string name="BackToGame">Back To Game</string>
     <string name="BackToTitle">Back To Title</string>
-    <string name="CheckTheBord">Check The Bord</string>
     <string name="BackToGameSetting">Back To GameSetting</string>
-    <string name="Retry">Retry</string>
+    <string name="playAgain">PlayAgain</string>
     <string name="HowToOperateText">How To Operate</string>
     <string name="HowToPlayText">How To Play</string>
     <!--設定    -->
@@ -63,9 +61,9 @@
     <!--操作説明    -->
 
     <!--ルール説明    -->
-    <string name="Small">small</string>
-    <string name="Middle">midium</string>
-    <string name="Big">large</string>
+    <string name="Small">Small</string>
+    <string name="Middle">Midium</string>
+    <string name="Big">Large</string>
     <string name="NextText">Next</string>
     <string name="PreText">Previous</string>
     <string name="EnemyTurn">Opponent\'s Turn </string>
@@ -76,11 +74,11 @@
     <string name="HowToOperateTutorialText1_1">Tap the piece you want to move \nfrom the three types of pieces you have.\nMove large piece as an example.</string>
     <string name="HowToOperateTutorialText1_2">Next, tap the square where you want put the pieces.</string>
     <string name="HowToOperateTutorialText1_3">Now you can place the pieces you have to the square.</string>
-    <string name="HowToOperateTutorialText2_1">Tap the square where your piece is displayed.\nTap this square  as an example.</string>
+    <string name="HowToOperateTutorialText2_1">Tap the square where your piece is displayed.</string>
     <string name="HowToOperateTutorialText2_2">Next, tap destination square.</string>
     <string name="HowToOperateTutorialText2_3">Now you can move the pieces .</string>
     <string name="HowToPlayTutorialText1">This game is played by two people.</string>
-    <string name="HowToPlayTutorialText2">Use small, medium, and large pieces of different sizes.</string>
+    <string name="HowToPlayTutorialText2">Use 3 types of pieces, large, medium and small</string>
     <string name="HowToPlayTutorialText3">Both players place pieces on the square with each other.</string>
     <string name="HowToPlayTutorialText4">You win if you arrange four of your pieces in a vertical,</string>
     <string name="HowToPlayTutorialText5">horizontal, </string>
@@ -90,12 +88,24 @@
     <string name="HowToPlayTutorialText9">You can cover the piece placed on the bord with it.</string>
     <string name="HowToPlayTutorialText10">You can it on your own piece or on the opponent\'s piece.</string>
     <string name="HowToPlayTutorialText11">You can\'t move piece covered with other piece without .</string>
-    <string name="HowToPlayTutorialText12">The rule explanation is over.</string>
     <string name="BackToHowToOperateMenu">Back To \nHow To OperateMenu</string>
-    <string name="MovePieceFromHandToSquare">Move Piece From Hand To Square</string>
-    <string name="MovePieceFromSquareToSquare">Move Piece From Square To Square</string>
+    <string name="MovePieceFromHandToSquare">Move Piece From Hand \nTo Square</string>
+    <string name="MovePieceFromSquareToSquare">Move Piece From Square \nTo Square</string>
     <string name="Back">Back</string>
     <string name="Oops">Oops</string>
-    <string name="dialogText">You can\'t put there</string>
+    <string name="cannotInsertDialogText">You can\'t put there</string>
     <string name="QuitGame">Quit Game</string>
+    <string name="cannotPickupDialogText">You can\'t pick up of there</string>
+    <string name="notYourTurnDialogText">Not your turn now</string>
+    <string name="OkText">OK</string>
+    <string name="startOver">Start Over</string>
+    <string name="CheckTheBoard">Check The Board</string>
+    <string name="pieceInHand">Piece In Hand</string>
+    <string name="sorryText">sorry,any sound can\'t be make on this device version</string>
+    <string name="PrivacyPolicy">Privacy Policy</string>
+    <string name="HowToPlayTutorialText13">The rule explanation is over.</string>
+    <string name="HowToPlayTutorialText12">you win If opponent lifts a piece and your piece comes out, and there are four piece in a row.</string>
+    <string name="P1">P1</string>
+    <string name="P2">P2</string>
+    <string name="app_name">GOBBLET</string>
 </resources>
