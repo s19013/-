@@ -1,5 +1,8 @@
 ﻿# ゴブレット(卒業制作物)
 
+# コードはこちら
+https://github.com/s19013/GraduationTasks/tree/main/project/Gobblet5/app/src/main
+
 # ダウンロードはこちら
 https://play.google.com/store/apps/details?id=com.game.gobblet5&hl=ja&gl=US
 
@@ -7,7 +10,7 @@ https://play.google.com/store/apps/details?id=com.game.gobblet5&hl=ja&gl=US
 * チュートリアル
 * 効果音音量調整
 * BGM音量調整
-* 対人対戦機能
+* 対人対戦機能(オフライン)
 * コンピューター対戦機能
 * 英語対応
 
