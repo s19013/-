@@ -6,6 +6,9 @@ https://github.com/s19013/GraduationTasks/tree/main/project/Gobblet5/app/src/mai
 # ダウンロードはこちら
 https://play.google.com/store/apps/details?id=com.game.gobblet5&hl=ja&gl=US
 
+# アルゴリズムの説明はこちら
+https://speakerdeck.com/s19013/goburetuto-fa-biao-suraido
+
 # 大まかな機能
 * チュートリアル
 * 効果音音量調整
